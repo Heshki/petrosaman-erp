@@ -1,0 +1,41 @@
+.breadcrumb {
+	margin-left: 6%;
+}
+.content {
+	padding-left: 6%;
+	text-align: right;
+}
+.logo-lg {
+	font-family: 'WYekan';
+}
+.item {
+	padding: 10px 0;
+}
+.item input,select {
+	margin-top: 10px;
+}
+.form-control {
+	padding-top: 0;
+}
+.hidden {
+	display: none;
+}
+#details-show * {
+	margin: 4px 0;
+}
+.btns-form input {
+	display: inline-block;
+}
+#example1 a {
+	background-color: #00a1ff;
+	padding: 2px 7px;
+	border-radius: 3px;
+	color: white;
+}
+.hidden {
+	display: none;
+}
+.bold {
+	font-style: bold;
+	font-weight: 700;
+}
