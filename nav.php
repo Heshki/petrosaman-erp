@@ -58,7 +58,6 @@
 						<li class="<?php check_active('list-category.php'); ?>"><a href="<?php get_url(); ?>category/list-category.php"><i class="fa fa-circle-o"></i>لیست دسته بندی ها</a></li>
 			  		</ul>
 				</li>
-
 		  	</ul>
 		</section>
 	</aside>
