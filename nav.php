@@ -28,7 +28,8 @@
 						<a href="<?php get_url(); ?>index.php"><i class="fa fa-circle-o"></i> پیشخوان </a>
 					</li>
 				</li>
-			
+				
+				
 				<li class="<?php check_active('reg-customer.php'); check_active('list-customer.php'); ?> treeview">
 			  		<a href="#"><i class="fa fa-files-o"></i><span> مشتریان</span></a>
 			  		<ul class="treeview-menu">
@@ -58,6 +59,15 @@
 						<li class="<?php check_active('list-category.php'); ?>"><a href="<?php get_url(); ?>category/list-category.php"><i class="fa fa-circle-o"></i>لیست دسته بندی ها</a></li>
 			  		</ul>
 				</li>
+				
+				<li class="<?php check_active('reg-factor.php'); check_active('list-factor.php'); ?> treeview">
+			  		<a href="#"><i class="fa fa-files-o"></i><span> فاکتور فروش</span></a>
+			  		<ul class="treeview-menu">
+						<li class="<?php check_active('reg-factor.php'); ?>"><a href="<?php get_url(); ?>factor/reg-factor.php"><i class="fa fa-circle-o"></i> ثبت فاکتور</a></li>
+						<li class="<?php check_active('list-factor.php'); ?>"><a href="<?php get_url(); ?>factor/list-factor.php"><i class="fa fa-circle-o"></i> لیست فاکتورها</a></li>
+			  		</ul>
+				</li>
+				
 		  	</ul>
 		</section>
 	</aside>

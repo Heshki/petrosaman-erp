@@ -1,10 +1,10 @@
 <?php
 function get_url() {
-	echo "http://localhost/petrocoke/";
+	echo "http://localhost/petrosaman-erp/";
 }
 
 function get_view($view){
-	return "http://localhost/petrocoke/" . $view . "/";
+	return "http://localhost/petrosaman-erp/" . $view . "/";
 }
 
 function check_active($current){
