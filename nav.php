@@ -65,6 +65,7 @@
 			  		<ul class="treeview-menu">
 						<li class="<?php check_active('reg-factor.php'); ?>"><a href="<?php get_url(); ?>factor/reg-factor.php"><i class="fa fa-circle-o"></i> ثبت فاکتور</a></li>
 						<li class="<?php check_active('list-factor.php'); ?>"><a href="<?php get_url(); ?>factor/list-factor.php"><i class="fa fa-circle-o"></i> لیست فاکتورها</a></li>
+						<li class="<?php check_active('log-factor.php'); ?>"><a href="<?php get_url(); ?>factor/log-factor.php"><i class="fa fa-circle-o"></i>تاریخچه فاکتور ها</a></li>
 			  		</ul>
 				</li>
 				
