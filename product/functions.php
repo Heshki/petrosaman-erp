@@ -35,4 +35,18 @@ function a_product($p_id) {
 	return $res;
 }
 
+function show_product_as_select($p_id = 0){ ?>
+	<select id="p_id" name="p_id" class="form-control select2">
+		<?php
+		$res = list_product();
+		if(count($res)>0){
+			foreach($res as $row){
+			?>
+			<option <?php if($row['p_id']==$p_id)echo "selected"; ?> value="<?php echo $row['p_id']; ?>"><?php echo $row['p_name']; ?></option>								
+			<?php
+			} 
+		} ?>
+	</select>
+	<?php
+}
 ?>

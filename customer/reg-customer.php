@@ -261,15 +261,15 @@
 							<div class="item col-md-4">
 								<button type="submit" class="btn btn-success btn-lg" id="p_submit" name="p_submit">اضافه کردن</button>
 								<?php 
-									if(isset($_POST['p_submit']) && $_POST['p_name'] != "" && $_POST['p_cat'] != "" && $_POST['p_unit'] != "") {
-										include_once"functions.php";
-										$array = array();
-										array_push($array, $_POST['p_name']);
-										array_push($array, $_POST['p_cat']);
-										array_push($array, $_POST['p_unit']);
-										insert_product($array);
-										echo "<meta http-equiv='refresh' content='0'/>";
-									}
+								if(isset($_POST['p_submit']) && $_POST['p_name'] != "" && $_POST['p_cat'] != "" && $_POST['p_unit'] != "") {
+									include_once"functions.php";
+									$array = array();
+									array_push($array, $_POST['p_name']);
+									array_push($array, $_POST['p_cat']);
+									array_push($array, $_POST['p_unit']);
+									insert_product($array);
+									echo "<meta http-equiv='refresh' content='0'/>";
+								}
 								?>
 							</div>
 						</div>
@@ -277,5 +277,5 @@
 				</form>
 			</section>
 <!-- ./wrapper -->
-<script src="<?php get_url(); ?>customer/js/customer.js"></script>
+<script src="<?php get_theme_dir(); ?>customer/js/customer.js"></script>
  <?php include"../left-nav.php"; include"../footer.php"; ?>

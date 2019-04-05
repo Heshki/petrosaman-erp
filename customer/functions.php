@@ -61,4 +61,18 @@ function a_customer($c_id) {
 	return $res;
 }
 
+function show_customer_as_select($c_id){ ?>
+	<select name="c_id" class="form-control select2">
+		<?php
+		$res = list_customer();
+		if(count($res)>0){
+			foreach($res as $row){
+			?>
+			<option <?php if($row['c_id']==$c_id)echo "selected"; ?> value="<?php echo $row['c_id']; ?>"><?php echo $row['c_name']; ?></option>								
+			<?php
+			} 
+		} ?>
+	</select>
+	<?php
+}
 ?>

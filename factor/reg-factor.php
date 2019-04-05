@@ -1,4 +1,10 @@
-<?php $title = "ثبت فاکتور جدید"; include"../header.php"; include"../nav.php"; include"functions.php"; ?>
+<?php $title = "ثبت فاکتور جدید"; include"../header.php"; include"../nav.php"; include"functions.php";
+include"back.php";
+require_once"../customer/functions.php";
+require_once"../product/functions.php";
+require_once"../category/functions.php";
+?>
+<script type="text/javascript" src="<?php get_url(); ?>/factor/js/factor.js"></script>
 <div class="wrapper">
 	<div class="content-wrapper">
 		<div class="container-fluid">
@@ -19,9 +25,29 @@
 			<section class="content">
 				<div id="details" class="col-xs-12">	
 					<?php
+					if(isset($_POST['set_fb'])){
+						$f_id = $_GET['f_id'];
+						$p_id = $_POST['p_id'];
+						$cat_id = $_POST['cat_id'];
+						$fb_quantity = $_POST['fb_quantity'];
+						$fb_price = $_POST['fb_price'];
+						$array = array();
+						array_push($array, $f_id);
+						array_push($array, $p_id);
+						array_push($array, $cat_id);						
+						array_push($array, $fb_quantity);
+						array_push($array, $fb_price);
+						insert_factor_body($array);
+						?>
+						<div class="alert alert-success">
+							ردیف کالا با موفقیت ثبت شد
+						</div>
+						<?php
+					}
+						
 					if(isset($_POST['f_submit'])){
 						$c_id = $_POST['c_id'];
-						$f_date = jdate('Y/m/d H:i');
+						$f_date = $_POST['f_date'];
 						$u_id = 1;
 						$list = array();
 						array_push($list, $c_id);
@@ -35,6 +61,16 @@
 						</script>
 					<?php
 					}
+					
+					if(isset($_GET['f_id'])){
+						$f_id = $_GET['f_id'];
+						$list = get_select_query("select * from factor where f_id = $f_id");
+						$f_date = $list[0]['f_date'];
+						$c_id = $list[0]['c_id'];
+					} else {
+						$f_date = "";
+						$c_id = "";
+					}						
 					?>
 					<form action="" method="post">
 						<div class="row">
@@ -42,14 +78,14 @@
 							<div class="item col-md-4">
 								<div class="margin-tb input-group-prepend">
 									<span class="input-group-text">نام  مشتری</span>
+									<?php show_customer_as_select($c_id); ?>
 								</div>
-								<input type="text" name="c_id" placeholder="نام  مشتری" class="form-control" required>
 							</div>
 							<div class="item col-md-4">
 								<div class="margin-tb input-group-prepend">
 									<span class="input-group-text">تاریخ صدور</span>
-								</div>
-								<input type="text" name="f_date" placeholder="تاریخ صدور" class="form-control" required>
+								</div>	
+								<input value="<?php echo $f_date; ?>" autocomplete="off" type="text" id="f_date" name="f_date" placeholder="تاریخ صدور" class="form-control" required>
 							</div>
 							<div class="col-md-12 text-center">
 								<button type="submit" class="btn btn-success btn-lg" name="f_submit">ساخت سر فاکتور</button>
@@ -57,11 +93,9 @@
 						</div><br>
 					</form>
 					
-					
 					<?php
 					if(isset($_GET['f_id'])){
-						$f_id = $_GET['f_id'];
-						?>
+						$f_id = $_GET['f_id']; ?>
 					<div class="row">
 						<div class="col-md-12">
 							<div class="box">
@@ -108,142 +142,49 @@
 							</div>
 						</div>
 					</div>
-											
+					
+					<form action="" method="post">
 					<div class="row">
 						<h3 class="col-md-12">بدنه فاکتور</h3>
 						<div class="item col-md-3">
 							<div class="margin-tb input-group-prepend">
 								<span class="input-group-text">نام  محصول</span>
 							</div>
-							<input id="p_name" type="text" name="p_name" placeholder="نام  محصول" class="form-control" required>
+							<?php show_product_as_select(); ?>
 						</div>
 						<div class="item col-md-3">
 							<div class="margin-tb input-group-prepend">
 								<span class="input-group-text">دسته بندی</span>
 							</div>
-							<select class="form-control">
-								<option>10 تا 20</option>
-								<option>20 تا 30</option>
-								<option>30 تا 40</option>
-							</select>
+							<?php show_category_as_select(); ?>
+							
+							<div id="cat_id_result"></div>
 						</div>
 						<div class="item col-md-3">
 							<div class="margin-tb input-group-prepend">
 								<span class="input-group-text">مقدار</span>
 							</div>
-							<input id="p_name" type="text" name="p_name" placeholder="مقدار" class="form-control" required>
+							<input type="text" name="fb_quantity" placeholder="مقدار" class="form-control" required>
 						</div>
 						<div class="item col-md-3">
 							<div class="margin-tb input-group-prepend">
 								<span class="input-group-text">قیمت</span>
 							</div>
-							<input id="p_name" type="text" name="p_name" placeholder="قیمت واحد محصول" class="form-control" required>
+							<input type="text" name="fb_price" placeholder="قیمت واحد محصول" class="form-control" required>
 						</div>
 						<div class="col-md-12 text-center">
-							<button type="submit" class="btn btn-success btn-lg" id="_submit" name="r_submit">ثبت ردیف</button>
+							<button type="submit" class="btn btn-success btn-lg" name="set_fb">ثبت ردیف</button>
 						</div>
 					</div>
+					</form>
+					
+					
+					
 					<?php
 					} ?>
-						
-						<div style="text-align: center; margin: 20px 0;" class="col-xs-12">
-							<?php 
-								if(isset($_POST['r_submit'])) {
-
-									if(isset($_POST['c_name'])){
-										$c_name = $_POST['c_name'];
-									}else {
-										$c_name = "ندارد";
-									}
-
-									if(isset($_POST['c_family'])){
-										$c_family = $_POST['c_family'];
-									}else {
-										$c_family = "ندارد";
-									}
-
-									if(isset($_POST['c_company'])){
-										$c_company = $_POST['c_company'];
-									}else {
-										$c_company = "ندارد";
-									}
-
-									if(isset($_POST['c_national'])){
-										$c_national = $_POST['c_national'];
-									}else {
-										$c_national = "ندارد";
-									}
-
-									if(isset($_POST['c_economic'])){
-										$c_economic = $_POST['c_economic'];
-									}else {
-										$c_economic = "ندارد";
-									}
-
-									if(isset($_POST['c_phone'])){
-										$c_phone = $_POST['c_phone'];
-									}else {
-										$c_phone = "ندارد";
-									}
-
-									if(isset($_POST['c_fax'])){
-										$c_fax = $_POST['c_fax'];
-									}else {
-										$c_fax = "ندارد";
-									}
-
-									if(isset($_POST['c_mobile'])){
-										$c_mobile = $_POST['c_mobile'];
-									}else {
-										$c_mobile = "ندارد";
-									}
-
-									if(isset($_POST['c_oaddress'])){
-										$c_oaddress = $_POST['c_oaddress'];
-									}else {
-										$c_oaddress = "ندارد";
-									}
-
-									if(isset($_POST['c_faddress'])){
-										$c_faddress = $_POST['c_faddress'];
-									}else {
-										$c_faddress = "ندارد";
-									}
-
-									if(isset($_POST['c_email'])){
-										$c_email = $_POST['c_email'];
-									}else {
-										$c_email = "ندارد";
-									}
-
-									if($_POST['c_vat'] == "yes"){
-										$c_vat = $_POST['c_vat'];
-										$c_dvat = $_POST['c_dvat'];
-										$c_mvat = $_POST['c_mvat'];
-										$c_yvat = $_POST['c_yvat'];
-									}else {
-										$c_vat = $_POST['c_vat'];
-										$c_dvat = "";
-										$c_mvat = "";
-										$c_yvat = "";
-									}
-
-									if(isset($_POST['c_customertype'])){
-										$c_customertype = $_POST['c_customertype'];
-									}else {
-										$c_customertype = "ندارد";
-									}
-
-									$sql_c = "insert into customer (c_name, c_family, c_company, c_national, c_economic, c_phone, c_fax, c_mobile, c_oaddress, c_faddress, c_email, c_vat, c_dvat, c_mvat, c_yvat, c_customertype) values ('$c_name', '$c_family', '$c_company', '$c_national', '$c_economic', '$c_phone', '$c_fax', '$c_mobile', '$c_oaddress', '$c_faddress', '$c_email', '$c_vat', '$c_dvat', '$c_mvat', '$c_yvat', '$c_customertype')";
-									ex_query($sql_c);
-								}
-							?>
-						</div>
-					</div>
-					
-			</section><!-- /.content -->
-		</div><!-- /.container -->
-	</div><!-- /.content-wrapper -->
-</div><!-- ./wrapper -->
-<script src="<?php get_url(); ?>product/js/product.js"></script>
- <?php include"../left-nav.php"; include"../footer.php"; ?>
+				</div>
+			</section>
+		</div>
+	</div>
+</div>
+<?php include"../left-nav.php"; include"../footer.php"; ?>

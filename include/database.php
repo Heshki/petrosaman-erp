@@ -27,7 +27,11 @@ function get_var_query($sql){
     $pdo_statement = $pdo_conn->prepare($sql);
     $pdo_statement->execute();
     $result = $pdo_statement->fetchAll();
-    return $result[0][0];
+    if(count($result)>0){
+		return $result[0][0];
+	}else{
+		return;
+	}
 }
 
 function check_login($u_name, $u_password){

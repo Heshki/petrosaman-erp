@@ -29,4 +29,19 @@ function a_category($cat_id) {
 	return $res;
 }
 
+function show_category_as_select($cat_id = 0){ ?>
+	<select id="cat_id" name="cat_id" class="form-control">
+		<?php
+		$res = list_category();
+		if(count($res)>0){
+			foreach($res as $row){
+			?>
+			<option <?php if($row['cat_id']==$cat_id)echo "selected"; ?> value="<?php echo $row['cat_id']; ?>"><?php echo $row['cat_name']; ?></option>
+			<?php
+			}
+		} ?>
+	</select>
+	<?php
+}
+
 ?>
