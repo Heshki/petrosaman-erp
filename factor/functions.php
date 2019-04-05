@@ -8,21 +8,17 @@ function insert_factor($array){
 	return $res;
 }
 
-function update_product($array){
-	$p_id = $array[0];
-	$p_name = $array[1];
-	$p_cat = $array[2];
-	$p_unit = $array[3];
-	$sql = "update product set p_name = '$p_name', p_cat = '$p_cat', p_unit = '$p_unit' where p_id = $p_id";
+function insert_factor_body($array){
+	$f_id = $array[0];
+	$p_id = $array[1];
+	$cat_id = $array[2];
+	$fb_quantity = $array[3];
+	$fb_price = $array[4];
+	$sql = "insert into factor_body(f_id, p_id, cat_id, fb_quantity, fb_price, fb_verify_admin1, fb_send_customer, fb_verify_customer, fb_verify_docs, fb_verify_finan, fb_verify_admin2, fb_wait_bar, fb_get_sample, fb_verify_bar, fb_exit_doc) ";
+	$sql .= "values ($f_id, $p_id, $cat_id, $fb_quantity, $fb_price, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)";
 	$res = ex_query($sql);
-	return $res;	
+	return $res;
 }
-
-function delete_product($p_id){
-	$sql = "delete from product where p_id = '$p_id'";
-	$res = ex_query($sql);
-}
-
 
 function list_factor_body() {
 	$sql = "select * from factor_body";
