@@ -60,12 +60,19 @@
 			  		</ul>
 				</li>
 				
-				<li class="<?php check_active('reg-factor.php'); check_active('list-factor.php'); ?> treeview">
+				<li class="<?php check_active('reg-factor.php'); check_active('list-factor.php'); check_active('log-factor.php'); ?> treeview">
 			  		<a href="#"><i class="fa fa-files-o"></i><span> فاکتور فروش</span></a>
 			  		<ul class="treeview-menu">
 						<li class="<?php check_active('reg-factor.php'); ?>"><a href="<?php get_url(); ?>factor/reg-factor.php"><i class="fa fa-circle-o"></i> ثبت فاکتور</a></li>
 						<li class="<?php check_active('list-factor.php'); ?>"><a href="<?php get_url(); ?>factor/list-factor.php"><i class="fa fa-circle-o"></i> لیست فاکتورها</a></li>
 						<li class="<?php check_active('log-factor.php'); ?>"><a href="<?php get_url(); ?>factor/log-factor.php"><i class="fa fa-circle-o"></i>تاریخچه فاکتور ها</a></li>
+			  		</ul>
+				</li>
+
+				<li class="<?php check_active('list-storage.php'); ?> treeview">
+			  		<a href="#"><i class="fa fa-files-o"></i><span>انبار</span></a>
+			  		<ul class="treeview-menu">
+						<li class="<?php check_active('list-storage.php'); ?>"><a href="<?php get_url(); ?>storage/list-storage.php"><i class="fa fa-circle-o"></i>لیست حواله خروج</a></li>
 			  		</ul>
 				</li>
 				

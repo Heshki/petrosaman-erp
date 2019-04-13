@@ -21,24 +21,19 @@ function insert_factor_body($array){
 	return $res;
 }
 
-function list_factor_body() {
-	$sql = "select * from factor inner join factor_body on factor.f_id = factor_body.f_id";
+function list_exit_doc() {
+	$sql = "select * from factor_body inner join product on product.p_id = factor_body.p_id inner join factor on factor.f_id = factor_body.f_id inner join customer on customer.c_id = factor.c_id where fb_exit_doc = 1";
 	$res = get_select_query($sql);
 	return $res;
 }
 
-function list_factor_log() {
-	$sql = "select * from factor inner join factor_log on factor.f_id = factor_log.f_id inner join users on users.u_id = factor.u_id";
-	$res = get_select_query($sql);
-	return $res;
-}
-
-function insert_factor_log($array){
+function insert_factor_log ($array){
 	$u_id = $array[0];
 	$l_date = $array[1];
-	$f_id = $array[2];
-	$l_details = $array[3];
-	$sql = "insert into factor_log(u_id, l_date, f_id, l_details) values($u_id, '$l_date', $f_id, '$l_details')";
+	$l_time = $array[2];
+	$f_id = $array[3];
+	$l_text = $array[4];
+	$sql = "insert into factor_log(u_id, l_date, l_time, f_id, l_text) values($u_id, '$l_date', '$l_time', $f_id, '$l_text')";
 	$res = ex_query($sql);
 	return $res;	
 }
@@ -67,9 +62,9 @@ function update_a_row_fb($verify,$fb_id_verify) {
 	return $res;
 }
 
-function update_a_row_log($l_details) {
-	$date = jdate('Y/m/d H:i');
-	$sql = "insert into factor_log(u_id, l_date, f_id, l_details) values(1, '$date', 1, '$l_details')";
+function update_a_row_log($details) {
+	$date = j_date('y/m/d H:i');
+	$sql = "insert into factor_log(u_id, l_date, f_id, l_details) values(1, '$date', 1, '$details')";
 	$res = ex_query($sql);
 	return $res;
 }

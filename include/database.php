@@ -1,7 +1,7 @@
 <?php
 include"jdf.php";
 function get_connection_string(){
-    $pdo_conn = new PDO("mysql:host=localhost;dbname=saman;charset=utf8", 'root', '',
+    $pdo_conn = new PDO("mysql:host=localhost;dbname=test;charset=utf8", 'root', '',
                     array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
     return $pdo_conn;
 }

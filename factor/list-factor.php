@@ -1,5 +1,12 @@
 <?php $title = 'لیست محصولات'; include"../header.php"; include"../nav.php"; include"functions.php";
 	$res = list_factor_body();
+	if(isset($_POST['verify_submit'])) {
+		$verify = $_POST['type_confirm'];
+		$fb_id_verify = $_POST['fb_id'];
+		$l_details = $_POST['l_details'];
+		update_a_row_fb($verify,$fb_id_verify);
+		update_a_row_log($l_details);
+	}
 ?> 
 	<div class="content-wrapper">
 		<section class="content-header">
@@ -56,77 +63,77 @@
 										<td><?php echo $row['c_id']; ?></td>
 										<td>
 											<?php if($row['fb_verify_admin1'] == '0'){?>
-												<a href="confirm-factor.php?fb_id=<?php echo $row['fb_id']; ?>&typee=verify_admin1" class="btn btn-warning">نشده</a>
+												<a href="confirm-factor.php?fb_id=<?php echo $row['fb_id']; ?>&typee=fb_verify_admin1" class="btn btn-warning">نشده</a>
 											<?php }else{ ?>
 												<button class="btn btn-success" disabled>شده</button>
 											<?php } ?>
 										</td>
 										<td>
 											<?php if($row['fb_send_customer'] == '0'){?>
-												<a href="confirm-factor.php?fb_id=<?php echo $row['fb_id']; ?>&typee=send_customer" class="btn btn-warning">نشده</a>
+												<a href="<?php if($row['fb_verify_admin1'] == '0'){ echo '#'; } else{ echo 'confirm-factor.php?fb_id=' . $row['fb_id'] . '&typee=fb_send_customer'; } ?>" class="btn btn-warning"<?php if($row['fb_verify_admin1'] == '0'){ echo ' disabled'; }?>>نشده</a>
 											<?php }else{ ?>
 												<button class="btn btn-success" disabled>شده</button>
 											<?php } ?>
 										</td>
 										<td>
 											<?php if($row['fb_verify_customer'] == '0'){?>
-												<a href="confirm-factor.php?fb_id=<?php echo $row['fb_id']; ?>&typee=verify_customer" class="btn btn-warning">نشده</a>
+												<a href="<?php if($row['fb_send_customer'] == '0'){ echo '#'; } else{ echo 'confirm-factor.php?fb_id=' . $row['fb_id'] . '&typee=fb_verify_customer'; } ?>" class="btn btn-warning"<?php if($row['fb_send_customer'] == '0'){ echo ' disabled'; }?>>نشده</a>
 											<?php }else{ ?>
 												<button class="btn btn-success" disabled>شده</button>
 											<?php } ?>
 										</td>
 										<td>
 											<?php if($row['fb_verify_docs'] == '0'){?>
-												<a href="confirm-factor.php?fb_id=<?php echo $row['fb_id']; ?>&typee=verify_docs" class="btn btn-warning">نشده</a>
+												<a href="<?php if($row['fb_verify_customer'] == '0'){ echo '#'; } else{ echo 'confirm-factor.php?fb_id=' . $row['fb_id'] . '&typee=fb_verify_docs'; } ?>" class="btn btn-warning"<?php if($row['fb_verify_customer'] == '0'){ echo ' disabled'; }?>>نشده</a>
 											<?php }else{ ?>
 												<button class="btn btn-success" disabled>شده</button>
 											<?php } ?>
 										</td>
 										<td>
 											<?php if($row['fb_verify_finan'] == '0'){?>
-												<a href="confirm-factor.php?fb_id=<?php echo $row['fb_id']; ?>&typee=verify_finan" class="btn btn-warning">نشده</a>
+												<a href="<?php if($row['fb_verify_docs'] == '0'){ echo '#'; } else{ echo 'confirm-factor.php?fb_id=' . $row['fb_id'] . '&typee=fb_verify_finan'; } ?>" class="btn btn-warning"<?php if($row['fb_verify_docs'] == '0'){ echo ' disabled'; }?>>نشده</a>
 											<?php }else{ ?>
 												<button class="btn btn-success" disabled>شده</button>
 											<?php } ?>
 										</td>
 										<td>
 											<?php if($row['fb_verify_admin2'] == '0'){?>
-												<a href="confirm-factor.php?fb_id=<?php echo $row['fb_id']; ?>&typee=verify_admin2" class="btn btn-warning">نشده</a>
+												<a href="<?php if($row['fb_verify_finan'] == '0'){ echo '#'; } else{ echo 'confirm-factor.php?fb_id=' . $row['fb_id'] . '&typee=fb_verify_admin2'; } ?>" class="btn btn-warning"<?php if($row['fb_verify_finan'] == '0'){ echo ' disabled'; }?>>نشده</a>
 											<?php }else{ ?>
 												<button class="btn btn-success" disabled>شده</button>
 											<?php } ?>
 										</td>
 										<td>
 											<?php if($row['fb_wait_bar'] == '0'){?>
-												<a href="confirm-factor.php?fb_id=<?php echo $row['fb_id']; ?>&typee=verify_wait_bar" class="btn btn-warning">نشده</a>
+												<a href="<?php if($row['fb_verify_admin2'] == '0'){ echo '#'; } else{ echo 'confirm-factor.php?fb_id=' . $row['fb_id'] . '&typee=fb_wait_bar'; } ?>" class="btn btn-warning"<?php if($row['fb_verify_admin2'] == '0'){ echo ' disabled'; }?>>نشده</a>
 											<?php }else{ ?>
 												<button class="btn btn-success" disabled>شده</button>
 											<?php } ?>
 										</td>
 										<td>
 											<?php if($row['fb_ready_bar'] == '0'){?>
-												<a href="confirm-factor.php?fb_id=<?php echo $row['fb_id']; ?>&typee=verify_ready_bar" class="btn btn-warning">نشده</a>
+												<a href="<?php if($row['fb_wait_bar'] == '0'){ echo '#'; } else{ echo 'confirm-factor.php?fb_id=' . $row['fb_id'] . '&typee=fb_ready_bar'; } ?>" class="btn btn-warning"<?php if($row['fb_wait_bar'] == '0'){ echo ' disabled'; }?>>نشده</a>
 											<?php }else{ ?>
 												<button class="btn btn-success" disabled>شده</button>
 											<?php } ?>
 										</td>
 										<td>
 											<?php if($row['fb_get_sample'] == '0'){?>
-												<a href="confirm-factor.php?fb_id=<?php echo $row['fb_id']; ?>&typee=verify_get-sample" class="btn btn-warning">نشده</a>
+												<a href="<?php if($row['fb_ready_bar'] == '0'){ echo '#'; } else{ echo 'confirm-factor.php?fb_id=' . $row['fb_id'] . '&typee=fb_get_sample'; } ?>" class="btn btn-warning"<?php if($row['fb_ready_bar'] == '0'){ echo ' disabled'; }?>>نشده</a>
 											<?php }else{ ?>
 												<button class="btn btn-success" disabled>شده</button>
 											<?php } ?>
 										</td>
 										<td>
 											<?php if($row['fb_verify_bar'] == '0'){?>
-												<a href="confirm-factor.php?fb_id=<?php echo $row['fb_id']; ?>&typee=verify_bar1" class="btn btn-warning">نشده</a>
+												<a href="<?php if($row['fb_get_sample'] == '0'){ echo '#'; } else{ echo 'confirm-factor.php?fb_id=' . $row['fb_id'] . '&typee=fb_verify_bar'; } ?>" class="btn btn-warning"<?php if($row['fb_get_sample'] == '0'){ echo ' disabled'; }?>>نشده</a>
 											<?php }else{ ?>
 												<button class="btn btn-success" disabled>شده</button>
 											<?php } ?>
 										</td>
 										<td>
-											<?php if($row['fb_verify_bar'] == '0'){?>
-												<a href="confirm-factor.php?fb_id=<?php echo $row['fb_id']; ?>&typee=verify_bar2" class="btn btn-warning">نشده</a>
+											<?php if($row['fb_exit_doc'] == '0'){?>
+												<a href="<?php if($row['fb_verify_bar'] == '0'){ echo '#'; } else{ echo 'confirm-factor.php?fb_id=' . $row['fb_id'] . '&typee=fb_exit_doc'; } ?>" class="btn btn-warning"<?php if($row['fb_verify_bar'] == '0'){ echo ' disabled'; }?>>نشده</a>
 											<?php }else{ ?>
 												<button class="btn btn-success" disabled>شده</button>
 											<?php } ?>

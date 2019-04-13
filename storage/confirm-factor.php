@@ -22,7 +22,7 @@
 						$fb_id = $_GET['fb_id'];
 						$type_confirm = $_GET['typee'];
 						$res = get_factor_body_confirm($fb_id);
-						if ($type_confirm == 'fb_verify_admin1') {
+						if ($type_confirm == 'verify_admin1') {
 						?>
 						<div>
 							<div class="box">
@@ -71,18 +71,16 @@
 						</div>
 						<form action="list-factor.php" method="post">
 							<div class="col-xs-12">
-								<textarea name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50" required></textarea>
-								<input type="text" name="fb_id" id="fb_id" value="<?php echo $fb_id; ?>">
-								<input type="text" name="type_confirm" id="type_confirm" value="<?php echo $type_confirm; ?>">
+								<textarea name="details" id="details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50" required></textarea>
 							</div>
 							<div class="col-xs-12">
 								<p>جناب مدیر در صورتی که فاکتور مورد تایید شما میباشد کلید تایید را بزنید.</p>
-								<button type="submit" class="btn btn-success" name="verify_submit" id="verify_submit">تایید</button>
+								<button type="submit" class="btn btn-success" name="verift_admin1_submit" id="verift_admin1_submit">تایید</button>
 								<a href="list-factor.php" class="btn btn-danger">خیر</a>
 							</div>
 						</form>
 						<?php
-						}elseif ($type_confirm == 'fb_send_customer') {
+						}elseif ($type_confirm == 'send_customer') {
 						?>
 						<div>
 							<div class="box">
@@ -131,18 +129,16 @@
 						</div>
 						<form action="list-factor.php" method="post">
 							<div class="col-xs-12">
-								<textarea name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50" required></textarea>
-								<input type="text" name="fb_id" id="fb_id" value="<?php echo $fb_id; ?>">
-								<input type="text" name="type_confirm" id="type_confirm" value="<?php echo $type_confirm; ?>">
+								<textarea name="details" id="details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50" required></textarea>
 							</div>
 							<div class="col-xs-12">
 								<p>مشتری عزیز در صورتی که فاکتور مورد تایید شما میباشد کلید تایید را بزنید.</p>
-								<button type="submit" class="btn btn-success" name="verify_submit" id="verify_submit">تایید</button>
+								<button type="submit" class="btn btn-success" name="verift_admin1_submit" id="verift_admin1_submit">تایید</button>
 								<a href="list-factor.php" class="btn btn-danger">خیر</a>
 							</div>
 						</form>
 						<?php
-						}elseif ($type_confirm == 'fb_verify_customer') {
+						}elseif ($type_confirm == 'verify_customer') {
 						?>
 						<div>
 							<div class="box">
@@ -191,18 +187,16 @@
 						</div>
 						<form action="list-factor.php" method="post">
 							<div class="col-xs-12">
-								<textarea name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50" required></textarea>
-								<input type="text" name="fb_id" id="fb_id" value="<?php echo $fb_id; ?>">
-								<input type="text" name="type_confirm" id="type_confirm" value="<?php echo $type_confirm; ?>">
+								<textarea name="details" id="details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50" required></textarea>
 							</div>
 							<div class="col-xs-12">
 								<p>مسيول بازرگانی عزیز صورتی که فاکتور مورد تایید شما میباشد کلید تایید را بزنید.</p>
-								<button type="submit" class="btn btn-success" name="verify_submit" id="verify_submit">تایید</button>
+								<button type="submit" class="btn btn-success" name="verift_admin1_submit" id="verift_admin1_submit">تایید</button>
 								<a href="list-factor.php" class="btn btn-danger">خیر</a>
 							</div>
 						</form>
 						<?php
-						}elseif ($type_confirm == 'fb_verify_docs') {
+						}elseif ($type_confirm == 'verify_docs') {
 						?>
 						<div>
 							<div class="box">
@@ -251,18 +245,16 @@
 						</div>
 						<form action="list-factor.php" method="post">
 							<div class="col-xs-12">
-								<textarea name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50" required></textarea>
-								<input type="text" name="fb_id" id="fb_id" value="<?php echo $fb_id; ?>">
-								<input type="text" name="type_confirm" id="type_confirm" value="<?php echo $type_confirm; ?>">
+								<textarea name="details" id="details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50" required></textarea>
 							</div>
 							<div class="col-xs-12">
 								<p>ثبت اسناد عزیز صورتی که فاکتور مورد تایید شما میباشد کلید تایید را بزنید.</p>
-								<button type="submit" class="btn btn-success" name="verify_submit" id="verify_submit">تایید</button>
+								<button type="submit" class="btn btn-success" name="verift_admin1_submit" id="verift_admin1_submit">تایید</button>
 								<a href="list-factor.php" class="btn btn-danger">خیر</a>
 							</div>
 						</form>
 						<?php
-						}elseif ($type_confirm == 'fb_verify_finan') {
+						}elseif ($type_confirm == 'verify_finan') {
 						?>
 						<div>
 							<div class="box">
@@ -311,18 +303,16 @@
 						</div>
 						<form action="list-factor.php" method="post">
 							<div class="col-xs-12">
-								<textarea name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50" required></textarea>
-								<input type="text" name="fb_id" id="fb_id" value="<?php echo $fb_id; ?>">
-								<input type="text" name="type_confirm" id="type_confirm" value="<?php echo $type_confirm; ?>">
+								<textarea name="details" id="details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50" required></textarea>
 							</div>
 							<div class="col-xs-12">
 								<p>مسيول مالی عزیز در صورتی که فاکتور مورد تایید شما میباشد کلید تایید را بزنید.</p>
-								<button type="submit" class="btn btn-success" name="verify_submit" id="verify_submit">تایید</button>
+								<button type="submit" class="btn btn-success" name="verift_admin1_submit" id="verift_admin1_submit">تایید</button>
 								<a href="list-factor.php" class="btn btn-danger">خیر</a>
 							</div>
 						</form>
 						<?php
-						}elseif ($type_confirm == 'fb_verify_admin2') {
+						}elseif ($type_confirm == 'verify_admin2') {
 						?>
 						<div>
 							<div class="box">
@@ -371,18 +361,16 @@
 						</div>
 						<form action="list-factor.php" method="post">
 							<div class="col-xs-12">
-								<textarea name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50" required></textarea>
-								<input type="text" name="fb_id" id="fb_id" value="<?php echo $fb_id; ?>">
-								<input type="text" name="type_confirm" id="type_confirm" value="<?php echo $type_confirm; ?>">
+								<textarea name="details" id="details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50" required></textarea>
 							</div>
 							<div class="col-xs-12">
 								<p>جناب مدیر در صورتی که فاکتور مورد تایید شما میباشد کلید تایید را بزنید.</p>
-								<button type="submit" class="btn btn-success" name="verify_submit" id="verify_submit">تایید</button>
+								<button type="submit" class="btn btn-success" name="verift_admin1_submit" id="verift_admin1_submit">تایید</button>
 								<a href="list-factor.php" class="btn btn-danger">خیر</a>
 							</div>
 						</form>
 						<?php
-						}elseif ($type_confirm == 'fb_wait_bar') {
+						}elseif ($type_confirm == 'verify_wait_bar') {
 						?>
 						<div>
 							<div class="box">
@@ -431,18 +419,16 @@
 						</div>
 						<form action="list-factor.php" method="post">
 							<div class="col-xs-12">
-								<textarea name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50" required></textarea>
-								<input type="text" name="fb_id" id="fb_id" value="<?php echo $fb_id; ?>">
-								<input type="text" name="type_confirm" id="type_confirm" value="<?php echo $type_confirm; ?>">
+								<textarea name="details" id="details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50" required></textarea>
 							</div>
 							<div class="col-xs-12">
 								<p>مسيول انبار عزیز در صورتی که فاکتور مورد تایید شما میباشد کلید تایید را بزنید.</p>
-								<button type="submit" class="btn btn-success" name="verify_submit" id="verify_submit">تایید</button>
+								<button type="submit" class="btn btn-success" name="verift_admin1_submit" id="verift_admin1_submit">تایید</button>
 								<a href="list-factor.php" class="btn btn-danger">خیر</a>
 							</div>
 						</form>
 						<?php
-						}elseif ($type_confirm == 'fb_ready_bar') {
+						}elseif ($type_confirm == 'verify_ready_bar') {
 						?>
 						<div>
 							<div class="box">
@@ -491,19 +477,17 @@
 						</div>
 						<form action="list-factor.php" method="post">
 							<div class="col-xs-12">
-								<textarea name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50" required></textarea>
-								<input type="text" name="fb_id" id="fb_id" value="<?php echo $fb_id; ?>">
-								<input type="text" name="type_confirm" id="type_confirm" value="<?php echo $type_confirm; ?>">
+								<textarea name="details" id="details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50" required></textarea>
 							</div>
 							<div class="col-xs-12">
 								<p>مسيول انبار عزیز در صورتی که فاکتور مورد تایید شما میباشد کلید تایید را بزنید.</p>
 								<input type="text" name="verify"  id="verify" class="hidden">
-								<button type="submit" class="btn btn-success" name="verify_submit" id="verify_submit">تایید</button>
+								<button type="submit" class="btn btn-success" name="verift_admin1_submit" id="verift_admin1_submit">تایید</button>
 								<a href="list-factor.php" class="btn btn-danger">خیر</a>
 							</div>
 						</form>
 						<?php
-						}elseif ($type_confirm == 'fb_get_sample') {
+						}elseif ($type_confirm == 'verify_get_sample') {
 						?>
 						<div>
 							<div class="box">
@@ -552,18 +536,16 @@
 						</div>
 						<form action="list-factor.php" method="post">
 							<div class="col-xs-12">
-								<textarea name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50" required></textarea>
-								<input type="text" name="fb_id" id="fb_id" value="<?php echo $fb_id; ?>">
-								<input type="text" name="type_confirm" id="type_confirm" value="<?php echo $type_confirm; ?>">
+								<textarea name="details" id="details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50" required></textarea>
 							</div>
 							<div class="col-xs-12">
 								<p>مسيول آزمایشگاه عزیز در صورتی که فاکتور مورد تایید شما میباشد کلید تایید را بزنید.</p>
-								<button type="submit" class="btn btn-success" name="verify_submit" id="verify_submit">تایید</button>
+								<button type="submit" class="btn btn-success" name="verift_admin1_submit" id="verift_admin1_submit">تایید</button>
 								<a href="list-factor.php" class="btn btn-danger">خیر</a>
 							</div>
 						</form>
 						<?php
-						}elseif ($type_confirm == 'fb_verify_bar') {
+						}elseif ($type_confirm == 'verify_bar1') {
 						?>
 						<div>
 							<div class="box">
@@ -612,18 +594,16 @@
 						</div>
 						<form action="list-factor.php" method="post">
 							<div class="col-xs-12">
-								<textarea name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50" required></textarea>
-								<input type="text" name="fb_id" id="fb_id" value="<?php echo $fb_id; ?>">
-								<input type="text" name="type_confirm" id="type_confirm" value="<?php echo $type_confirm; ?>">
+								<textarea name="details" id="details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50" required></textarea>
 							</div>
 							<div class="col-xs-12">
 								<p>مسيول انبار عزیز در صورتی که فاکتور مورد تایید شما میباشد کلید تایید را بزنید.</p>
-								<button type="submit" class="btn btn-success" name="verify_submit" id="verify_submit">تایید</button>
+								<button type="submit" class="btn btn-success" name="verift_admin1_submit" id="verift_admin1_submit">تایید</button>
 								<a href="list-factor.php" class="btn btn-danger">خیر</a>
 							</div>
 						</form>
 						<?php
-						}elseif ($type_confirm == 'fb_exit_doc') {
+						}elseif ($type_confirm == 'verify_bar2') {
 						?>
 						<div>
 							<div class="box">
@@ -672,15 +652,13 @@
 						</div>
 						<form action="list-factor.php" method="post">
 							<div class="col-xs-12">
-								<textarea name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50" required></textarea>
-								<input type="text" name="fb_id" id="fb_id" value="<?php echo $fb_id; ?>">
-								<input type="text" name="type_confirm" id="type_confirm" value="<?php echo $type_confirm; ?>">
+								<textarea name="details" id="details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50" required></textarea>
 							</div>
 							<input type="text" name="verify" id="verify" class="hidden" value="<?php echo $type_confirm; ?>">
 							<input type="text" name="fb_id" id="fb_id" class="hidden" value="<?php echo $fb_id; ?>">
 							<div class="col-xs-12">
 								<p>نگهبانی عزیز در صورتی که فاکتور مورد تایید شما میباشد کلید تایید را بزنید.</p>
-								<button type="submit" class="btn btn-success" name="verify_submit" id="verify_submit">تایید</button>
+								<button type="submit" class="btn btn-success" name="verift_submit" id="verift_submit">تایید</button>
 								<a href="list-factor.php" class="btn btn-danger">خیر</a>
 							</div>
 						</form>
