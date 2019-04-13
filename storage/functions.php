@@ -9,14 +9,15 @@ function insert_factor($array){
 	return $res;
 }
 
-function insert_factor_body($array){
-	$f_id = $array[0];
-	$p_id = $array[1];
-	$cat_id = $array[2];
-	$fb_quantity = $array[3];
-	$fb_price = $array[4];
-	$sql = "insert into factor_body(f_id, p_id, cat_id, fb_quantity, fb_price, fb_verify_admin1, fb_send_customer, fb_verify_customer, fb_verify_docs, fb_verify_finan, fb_verify_admin2, fb_wait_bar, fb_get_sample, fb_verify_bar, fb_exit_doc) ";
-	$sql .= "values ($f_id, $p_id, $cat_id, $fb_quantity, $fb_price, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)";
+function insert_transfer_list($array){
+	$u_id = $array[0];
+	$fb_id = $array[1];
+	$dr_name = $array[2];
+	$dr_national = $array[3];
+	$dr_mobile = $array[4];
+	$dr_plaque = $array[5];
+	$sql = "insert into transfer_list(u_id, fb_id, dr_name, dr_national, dr_mobile, dr_plaque) ";
+	$sql .= "values ($u_id, $fb_id, '$dr_name', '$dr_national', '$dr_mobile', '$dr_plaque')";
 	$res = ex_query($sql);
 	return $res;
 }
