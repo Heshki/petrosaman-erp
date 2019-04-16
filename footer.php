@@ -1,8 +1,8 @@
 		<footer class="main-footer">
 			<div class="pull-right hidden-xs">
-				<b>Version</b> 2.2.0
+				<b>نسخه</b> 1
 			</div>
-			<strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
+			<strong>Copyright &copy; 2019 </strong> All rights reserved.
 		</footer>
 		<script>
 			$.widget.bridge('uibutton', $.ui.button);
@@ -23,12 +23,14 @@
 		<script src="<?php get_url(); ?>plugins/fastclick/fastclick.min.js"></script>
 		<script src="<?php get_url(); ?>dist/js/app.min.js"></script>
 		<script src="<?php get_url(); ?>dist/js/pages/dashboard.js"></script>
+		<script src="<?php get_url(); ?>dist/js/pages/dashboard2.js"></script>
 		<script src="<?php get_url(); ?>dist/js/demo.js"></script>
 		<script src="<?php get_url(); ?>bootstrap/js/bootstrap.min.js"></script>
 		<script src="<?php get_url(); ?>plugins/datatables/jquery.dataTables.min.js"></script>
 		<script src="<?php get_url(); ?>plugins/datatables/dataTables.bootstrap.min.js"></script>
 		<script src="<?php get_url(); ?>plugins/fastclick/fastclick.min.js"></script>
 		<script src="<?php get_url(); ?>dist/js/persianDatepicker.min.js"></script>
+
 		<script type="text/javascript">
 			$(".select2").select2();
 			$("#f_date, #simpleLabel").persianDatepicker();

@@ -193,7 +193,7 @@
 				<li class="dropdown user user-menu">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						<img src="<?php get_url(); ?>dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-						<span class="hidden-xs">محمد شریفی</span>
+						<span class="hidden-xs"><?php echo $_SESSION['name'] . " " . $_SESSION['family']; ?></span>
 					</a>
 					<ul class="dropdown-menu">
 						<li class="user-header">
@@ -225,7 +225,7 @@
 					</ul>
 				</li>
 				<li>
-					<a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+					<a href="<?php get_url(); ?>index.php?logout=yes"><i class="fa fa-power-off"></i></a>
 				</li>
 			</ul>
 		</div>

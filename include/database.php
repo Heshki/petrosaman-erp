@@ -34,9 +34,8 @@ function get_var_query($sql){
 	}
 }
 
-function check_login($u_name, $u_password){
-	$res = get_select_query("select * from users where u_name='$u_name' and u_password='$u_password'");
+function check_login($u_username, $u_password){
+	$res = get_select_query("select * from user where u_username='$u_username' and u_password='$u_password'");
 	return count($res);
 }
-
 ?>

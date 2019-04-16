@@ -1,4 +1,25 @@
-<?php include"include/theme-function.php"; include"include/database.php"; include"include/functions.php"; ?>
+<?php
+session_start();
+include"include/theme-function.php"; include"include/database.php"; include"include/functions.php";
+if((isset($_GET['login']) && $_GET['login']=="ok")){
+    $_SESSION['user_id'] = $_GET['id'];
+    $id = $_GET['id'];
+    $user_info = get_select_query("select * from user where u_id=$id");
+    $_SESSION['name'] = $user_info[0]['u_name'];
+    $_SESSION['family'] = $user_info[0]['u_family'];
+    $_SESSION['username'] = $user_info[0]['u_username'];
+    $_SESSION['level'] = $user_info[0]['u_level'];
+}
+
+if(isset($_GET['logout']) || !isset($_SESSION['user_id'])){
+    $_SESSION = [];
+    $url = get_url() . "login.php";
+    ?>
+    <script type="text/javascript">
+        window.location.href = "<?php echo $url; ?>";
+    </script>
+    <?php
+} ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -18,7 +39,7 @@
     <link rel="stylesheet" href="<?php get_url(); ?>plugins/daterangepicker/daterangepicker-bs3.css">
     <link rel="stylesheet" href="<?php get_url(); ?>plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 	<link rel="stylesheet" href="<?php get_url(); ?>plugins/select2/select2.min.css">
-    <link rel="stylesheet" href="<?php get_url(); ?>dist/fonts/fonts-fa.css">
+    <link rel="stylesheet" type="text/css" href="<?php get_url(); ?>dist/fonts/fontiran.css">
     <link rel="stylesheet" href="<?php get_url(); ?>dist/css/bootstrap-rtl.min.css">
     <link rel="stylesheet" href="<?php get_url(); ?>dist/css/rtl.css">
     <link rel="stylesheet" href="<?php get_url(); ?>plugins/datatables/dataTables.bootstrap.css">

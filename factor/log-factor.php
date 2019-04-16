@@ -92,22 +92,9 @@
 	</div>
 	<div class="control-sidebar-bg"></div>
 
-	<!-- jQuery 2.1.4 -->
-	<script src="<?php get_url(); ?>/plugins/jQuery/jQuery-2.1.4.min.js"></script>
-	<!-- Bootstrap 3.3.4 -->
-	<script src="<?php get_url(); ?>/bootstrap/js/bootstrap.min.js"></script>
-	<!-- DataTables -->
 	<script src="<?php get_url(); ?>/plugins/datatables/jquery.dataTables.min.js"></script>
 	<script src="<?php get_url(); ?>/plugins/datatables/dataTables.bootstrap.min.js"></script>
-	<!-- SlimScroll -->
-	<script src="<?php get_url(); ?>/plugins/slimScroll/jquery.slimscroll.min.js"></script>
-	<!-- FastClick -->
-	<script src="<?php get_url(); ?>/plugins/fastclick/fastclick.min.js"></script>
-	<!-- AdminLTE App -->
-	<script src="<?php get_url(); ?>/dist/js/app.min.js"></script>
-	<!-- AdminLTE for demo purposes -->
-	<script src="<?php get_url(); ?>/dist/js/demo.js"></script>
-	<!-- page script -->
+	
 	<script>
 		$(function () {
 			$("#example1").DataTable();

@@ -1,15 +1,13 @@
 <?php $title = 'لیست موجودی ها'; include"../header.php"; include"../nav.php"; include"functions.php";
-	$asb = list_stock();
-?>
-	  <!-- Content Wrapper. Contains page content -->
-	  <div class="content-wrapper">
-		<!-- Content Header (Page header) -->
+$asb = list_stock(); ?>  
+	<div class="content-wrapper">
+		
 		<section class="content-header">
-		  <ol class="breadcrumb">
-			<li><a href="<?php get_url(); ?>index.php"><i class="fa fa-dashboard"></i> خانه</a></li>
-			<li><a href="#">موجودی</a></li>
-			<li class="active">لیست موجودی</li>
-		  </ol>
+		  	<ol class="breadcrumb">
+				<li><a href="<?php get_url(); ?>index.php"><i class="fa fa-dashboard"></i> خانه</a></li>
+				<li><a href="#">موجودی</a></li>
+				<li class="active">لیست موجودی</li>
+		  	</ol>
 		</section>
 
 		<section class="content-header">
@@ -23,34 +21,34 @@
 		</section>
 
 		<section class="content">
-				<form action="" method="post">
-					<div id="details" class="col-xs-12">
-						<div class="row">
-							<div class="item col-md-4">
-								<div class="margin-tb input-group-prepend">
-									<span class="input-group-text">کد محصول</span>
-								</div>
-								<input id="s_product" type="text" name="s_product" placeholder="کد محصول" class="form-control">
+			<form action="" method="post">
+				<div id="details" class="col-xs-12">
+					<div class="row">
+						<div class="item col-md-4">
+							<div class="margin-tb input-group-prepend">
+								<span class="input-group-text">کد محصول</span>
 							</div>
-							<div class="item col-md-4">
-								<div class="margin-tb input-group-prepend">
-									<span class="input-group-text">مقدار</span>
-								</div>
-								<input id="s_amount" type="text" name="s_amount" placeholder="مقدار" class="form-control">
+							<input id="s_product" type="text" name="s_product" placeholder="کد محصول" class="form-control">
+						</div>
+						<div class="item col-md-4">
+							<div class="margin-tb input-group-prepend">
+								<span class="input-group-text">مقدار</span>
 							</div>
-							<div class="item col-md-4">
-								<button type="submit" class="btn btn-success btn-lg" id="s_submit" name="s_submit">اضافه کردن</button>
-								<?php 
-									if(isset($_POST['s_submit']) && $_POST['s_product'] != "" && $_POST['s_amount'] != "") {
-										include_once"functions.php";
-										$array = array();
-										if(isset($_POST['s_product']) && isset($_POST['s_amount'])){
-											array_push($array, $_POST['s_product']);
-											array_push($array, $_POST['s_amount']);
-											insert_stock($array);
-											echo "<meta http-equiv='refresh' content='0'/>";
-										}
-									}
+							<input id="s_amount" type="text" name="s_amount" placeholder="مقدار" class="form-control">
+						</div>
+						<div class="item col-md-4">
+							<button type="submit" class="btn btn-success btn-lg" id="s_submit" name="s_submit">اضافه کردن</button>
+							<?php 
+							if(isset($_POST['s_submit']) && $_POST['s_product'] != "" && $_POST['s_amount'] != "") {
+								include_once"functions.php";
+								$array = array();
+								if(isset($_POST['s_product']) && isset($_POST['s_amount'])){
+									array_push($array, $_POST['s_product']);
+									array_push($array, $_POST['s_amount']);
+									insert_stock($array);
+									echo "<meta http-equiv='refresh' content='0'/>";
+								}
+								}
 								?>
 							</div>
 						</div>
@@ -122,22 +120,9 @@
 	  </div><!-- /.content-wrapper -->
 	  <div class="control-sidebar-bg"></div>
 	</div><!-- ./wrapper -->
-	<!-- jQuery 2.1.4 -->
-	<script src="../plugins/jQuery/jQuery-2.1.4.min.js"></script>
-	<!-- Bootstrap 3.3.4 -->
-	<script src="../bootstrap/js/bootstrap.min.js"></script>
-	<!-- DataTables -->
+	
 	<script src="../plugins/datatables/jquery.dataTables.min.js"></script>
 	<script src="../plugins/datatables/dataTables.bootstrap.min.js"></script>
-	<!-- SlimScroll -->
-	<script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
-	<!-- FastClick -->
-	<script src="../plugins/fastclick/fastclick.min.js"></script>
-	<!-- AdminLTE App -->
-	<script src="../dist/js/app.min.js"></script>
-	<!-- AdminLTE for demo purposes -->
-	<script src="../dist/js/demo.js"></script>
-	<!-- page script -->
 	<script>
 	  $(function () {
 		$("#example1").DataTable();
