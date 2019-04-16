@@ -37,3 +37,16 @@
 	font-style: bold;
 	font-weight: 700;
 }
+#trasfer-form {
+	text-align: center;
+}
+#trasfer-form th {
+	border: 1px solid black;
+	text-align: center;
+}
+#trasfer-form td {
+	border: 1px solid black;
+}
+#trasfer-form table {
+	border: 1px solid black;
+}
