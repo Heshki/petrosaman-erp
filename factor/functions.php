@@ -74,4 +74,10 @@ function update_a_row_log($l_details) {
 	return $res;
 }
 
+function exe_result_analyze($fb_id, $fb_result_analyze){
+	$sql = "update factor_body set fb_result_analyze = $fb_result_analyze where fb_id = $fb_id";
+	$res = ex_query($sql);
+	return $res;
+}
+
 ?>

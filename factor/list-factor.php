@@ -49,6 +49,7 @@
 										<th>نمونه برداری</th>
 										<th>تایید بارگیری</th>
 										<th>حواله خروج</th>
+										<th>نتیجه آنالیز</th>
 										<th>عملیات</th>
 									</tr>
 								</thead>
@@ -139,6 +140,36 @@
 											<?php } ?>
 										</td>
 										<td>
+											<button type="button" data-toggle="modal" data-target="#result<?php echo $i; ?>" class="btn btn-primary">نتیجه</button>
+											<div class="modal" id="result<?php echo $i; ?>">
+												<div class="modal-dialog">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h4 class="modal-title"><?php echo $row['fb_id'] ?></h4>
+															<button type="button" class="close" data-dismiss="modal">&times;</button>
+														</div>
+														<div class="modal-body">
+															<form action="" method="post">
+																<textarea name="fb_result_analyze" id="fb_result_analyze" cols="20" rows="5"><?php echo $row['fb_result_analyze']; ?></textarea>
+																<input type="text" class="text" name="fb_id" id="fb_id">
+																<button type="submit" name="result_submit" id="result_submit" class="btn btn-warning">ثبت</button>
+															</form>
+															<?php
+																if(isset($_POST['result_submit'])){
+																	$fb_result_analyze = $_POST['fb_result_analyze'];
+																	$fb_id = $_POST['fb_id'];
+																	exe_result_analyze($fb_id, $fb_result_analyze);
+																}
+															?>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-danger" data-dismiss="modal">بستن</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</td>
+										<td>
 											<form action="" method="post" onSubmit="if(!confirm('آیا از انجام این عملیات اطمینان دارید؟')){return false;}">
 												<a href="edit-product.php?id=<?php echo $row['fb_id']; ?>">ویرایش</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 												<button class="btn btn-danger" type="submit" name="delete-list" id="delete-list">حذف</button>
@@ -174,6 +205,7 @@
 										<th>نمونه برداری</th>
 										<th>تایید بارگیری</th>
 										<th>حواله خروج</th>
+										<th>نتیجه آنالیز</th>
 										<th>عملیات</th>
 									</tr>
 								</tfoot>

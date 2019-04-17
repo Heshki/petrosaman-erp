@@ -28,8 +28,8 @@ function list_exit_doc() {
 	return $res;
 }
 
-function form_exit_doc($tl_id) {
-	$sql = "select * from factor_body inner join product on product.p_id = factor_body.p_id inner join factor on factor.f_id = factor_body.f_id inner join customer on customer.c_id = factor.c_id inner join transfer_list on factor_body.fb_id = transfer_list.fb_id where tl_id = $tl_id";
+function form_exit_doc($f_id) {
+	$sql = "select * from factor_body inner join product on product.p_id = factor_body.p_id inner join factor on factor.f_id = factor_body.f_id inner join customer on customer.c_id = factor.c_id inner join transfer_list on factor_body.fb_id = transfer_list.fb_id where f_id = $f_id";
 	$res = get_select_query($sql);
 	return $res;
 }

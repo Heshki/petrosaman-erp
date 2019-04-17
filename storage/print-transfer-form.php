@@ -1,6 +1,6 @@
 <?php $title = 'چاپ فرم حواله خروج'; include"../header.php"; include"../nav.php"; include"functions.php";
-$tl_id = $_GET['tl_id']; 
-$res = form_exit_doc($tl_id);
+$f_id = $_GET['f_id']; 
+$res = form_exit_doc($f_id);
 ?> 
 	<div class="content-wrapper">
 		<section class="content-header">
@@ -31,11 +31,11 @@ $res = form_exit_doc($tl_id);
 					<table class="table table-condensed">
 						<tr>
 							<th colspan="2" class="bold">مجوز ترخیص بار</th>
-							<th colspan="2" class="bold">شماره: ۲۲۲۲</th>
+							<th colspan="2" class="bold">شماره: <?php echo $res[0]['f_id']; ?></th>
 						</tr>
 						<tr>
 							<td class="bold">مشتری</td>
-							<td class="bold">امیرعلی</td>
+							<td class="bold"><?php echo $res[0]['fb_id']; ?></td>
 							<td class="bold">تاریخ</td>
 							<td class="bold">۱۳۹۷/۰۸/۱۲</td>
 						</tr>

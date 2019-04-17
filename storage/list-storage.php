@@ -55,7 +55,7 @@
 										</td>
 										<td>petro saman</td>
 										<td><?php echo $row['c_faddress']; ?></td>
-										<td><a href="print-transfer-form.php?tl_id=<?php echo $row['tl_id']; ?>"></a></td>
+										<td><a href="print-transfer-form.php?f_id=<?php echo $row['f_id']; ?>"></a></td>
 									</tr>
 										<div class="modal" id="selectdriver<?php echo $i; ?>">
 											<div class="modal-dialog">
