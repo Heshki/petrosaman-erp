@@ -1,4 +1,4 @@
-<?php $title = 'لیست مشتریان'; include"../header.php"; include"../nav.php"; include"functions.php";
+<?php $title = 'لیست کاربران'; include"../header.php"; include"../nav.php"; include"functions.php";
 	$asb = list_user();
 ?>  
 	<div class="content-wrapper">
@@ -6,8 +6,8 @@
 		<section class="content-header">
 		  <ol class="breadcrumb">
 			<li><a href="<?php get_url(); ?>index.php"><i class="fa fa-dashboard"></i> خانه</a></li>
-			<li><a href="#">مشتریان</a></li>
-			<li class="active">لیست مشتریان</li>
+			<li><a href="#">کاربران</a></li>
+			<li class="active">لیست کاربران</li>
 		  </ol>
 		</section>
 
@@ -20,7 +20,7 @@
 				<div class="col-xs-12">
 			  		<div class="box">
 						<div class="box-header">
-				  			<h3 class="box-title">لیست مشتریان</h3>
+				  			<h3 class="box-title">لیست کاربران</h3>
 						</div>
 						<div class="box-body">
 							<form action="" method="post">
