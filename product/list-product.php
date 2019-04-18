@@ -1,5 +1,14 @@
 <?php $title = 'لیست محصولات'; include"../header.php"; include"../nav.php"; include"functions.php";
 	$asb = list_product();
+	if(isset($_POST['p_update'])) {
+		$array = array();
+		array_push($array, $_POST['p_id']);
+		array_push($array, $_POST['p_name']);
+		array_push($array, $_POST['cat_id']);
+		array_push($array, $_POST['p_unit']);
+		update_product($array);
+		echo "<meta http-equiv='refresh' content='0'/>";
+	}
 ?>
 	  <div class="content-wrapper">
 		<!-- Content Header (Page header) -->
@@ -91,7 +100,7 @@
 					  <tr>
 						<td><?php echo $a['p_id']; ?></td>
 						<td><?php echo $a['p_name']; ?></td>
-						<td><?php echo $a['p_cat']; ?></td>
+						<td><?php echo $a['cat_id']; ?></td>
 						<td><?php echo $a['p_unit']; ?></td>
 						<td>
 							<form action="" method="post" onSubmit="if(!confirm('آیا از انجام این عملیات اطمینان دارید؟')){return false;}">

@@ -75,6 +75,12 @@
 						<li class="<?php check_active('list-storage.php'); ?>"><a href="<?php get_url(); ?>storage/list-storage.php"><i class="fa fa-circle-o"></i>لیست حواله خروج</a></li>
 			  		</ul>
 				</li>
+				<li class="<?php check_active('list-user.php'); ?> treeview">
+			  		<a href="#"><i class="fa fa-files-o"></i><span>کاربران</span></a>
+			  		<ul class="treeview-menu">
+						<li class="<?php check_active('list-user.php'); ?>"><a href="<?php get_url(); ?>user/list-user.php"><i class="fa fa-circle-o"></i>لیست کاربران</a></li>
+			  		</ul>
+				</li>
 				
 		  	</ul>
 		</section>

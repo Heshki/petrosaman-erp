@@ -1,4 +1,4 @@
-<?php
+<?php 
 function insert_user($array){
 	$u_name = $array[0];
 	$u_family = $array[1];
@@ -17,7 +17,7 @@ function update_user($array){
 	$u_level = $array[3];
 	$u_username = $array[4];
 	$u_password = $array[5];
-	$sql = "update user set u_name = '$u_name', u_family = '$u_family', u_level = '$u_level', u_username = '$u_username', u_password = '$u_password'";
+	$sql = "update user set u_name = '$u_name', u_family = '$u_family', u_level = '$u_level', u_username = '$u_username', u_password = '$u_password' where u_id = $u_id";
 	$res = ex_query($sql);
 	return $res;	
 }
@@ -25,6 +25,12 @@ function update_user($array){
 function delete_user($u_id){
 	$sql = "delete from user where u_id = $u_id";
 	$res = ex_query($sql);
+}
+
+function select_a_user($u_id){
+	$sql = "select * from user where u_id = $u_id";
+	$res = get_select_query($sql);
+	return $res;
 }
 
 function list_user() {

@@ -49,6 +49,12 @@ function delete_customer($c_id){
 	$res = ex_query($sql);
 }
 
+function a_customer($c_id){
+	$sql = "select * from customer where c_id = $c_id";
+	$res = get_select_query($sql);
+	return $res;
+}
+
 function list_customer() {
 	$sql = "select * from customer";
 	$res = get_select_query($sql);

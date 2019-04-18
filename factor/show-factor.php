@@ -1,4 +1,5 @@
-<?php $title = "نمایش مشتری"; include"../header.php"; include"../nav.php"; ?>
+<?php $title = "نمایش مشتری"; include"../header.php"; include"../nav.php";
+?>
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -17,7 +18,7 @@
             <div class="row">
               <div class="item col-md-4">
                 <div class="margin-tb input-group-prepend">
-                  <span class="input-group-text">نام </span>
+                  <span class="input-group-text">نام : </span><span>
                 </div>
               </div>
               <div class="item col-md-4">

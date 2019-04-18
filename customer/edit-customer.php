@@ -15,7 +15,7 @@
 		</section>
 
 		<!-- Main content -->
-<form action="" method="post">
+<form action="list-customer.php" method="post">
 	<section class="content">
 		<div id="details" class="col-xs-12">
 			<div class="row">
@@ -203,38 +203,11 @@
 						<option value="تامین کننده">تامین کننده</option>
 					</select>
 				</div>
+				<input class="hidden" type="text" id="c_id" name="c_id" value="<?php echo $c_id; ?>">
 				<div style="text-align: center; margin: 20px 0;" class="col-xs-12">
 					<button type="submit" class="btn btn-success btn-lg" id="edit_customer" name="edit_customer">ذخیره</button>
-					<?php 
-						if(isset($_POST['edit_customer'])) {
-							include_once"functions.php";
-							$array = array();
-							if(isset($_POST['c_name']) && isset($_POST['c_family']) && isset($_POST['c_company']) && isset($_POST['c_national']) && isset($_POST['c_economic']) && isset($_POST['c_phone']) && isset($_POST['c_fax']) && isset($_POST['c_mobile']) && isset($_POST['c_oaddress']) && isset($_POST['c_faddress'])&& isset($_POST['c_email']) && isset($_POST['c_vat']) && isset($_POST['c_dvat']) && isset($_POST['c_mvat']) && isset($_POST['c_yvat']) && isset($_POST['c_customertype'])){
-								array_push($array, $c_id);
-								array_push($array, $_POST['c_name']);
-								array_push($array, $_POST['c_family']);
-								array_push($array, $_POST['c_company']);
-								array_push($array, $_POST['c_national']);
-								array_push($array, $_POST['c_economic']);
-								array_push($array, $_POST['c_phone']);
-								array_push($array, $_POST['c_fax']);
-								array_push($array, $_POST['c_mobile']);
-								array_push($array, $_POST['c_oaddress']);
-								array_push($array, $_POST['c_faddress']);
-								array_push($array, $_POST['c_email']);
-								array_push($array, $_POST['c_vat']);
-								array_push($array, $_POST['c_dvat']);
-								array_push($array, $_POST['c_mvat']);
-								array_push($array, $_POST['c_yvat']);
-								array_push($array, $_POST['c_customertype']);
-								update_customer($array);
-								echo "<meta http-equiv='refresh' content='0'/>";
-							}
-						}
-					?>
 				</div>
 			</div>
-			<?php var_dump($array); ?>
 		</div><!-- /.box -->
 	</section>
 </form><!-- /.content -->
@@ -243,5 +216,6 @@
 	  <!-- /.control-sidebar -->
 	  <!-- Add the sidebar's background. This div must be placed immediately after the control sidebar -->
 	  <div class="control-sidebar-bg"></div>
+	  <script type="text/javascript" src="js/customer.js"></script>
 	</div><!-- ./wrapper -->
 <?php include"../left-nav.php"; include"../footer.php"; ?>

@@ -1,5 +1,28 @@
 <?php $title = 'لیست مشتریان'; include"../header.php"; include"../nav.php"; include"functions.php";
 	$asb = list_customer();
+	if(isset($_POST['edit_customer'])) {
+		include_once"functions.php";
+		$array = array();
+		array_push($array, $_POST['c_id']);
+		array_push($array, $_POST['c_name']);
+		array_push($array, $_POST['c_family']);
+		array_push($array, $_POST['c_company']);
+		array_push($array, $_POST['c_national']);
+		array_push($array, $_POST['c_economic']);
+		array_push($array, $_POST['c_phone']);
+		array_push($array, $_POST['c_fax']);
+		array_push($array, $_POST['c_mobile']);
+		array_push($array, $_POST['c_oaddress']);
+		array_push($array, $_POST['c_faddress']);
+		array_push($array, $_POST['c_email']);
+		array_push($array, $_POST['c_vat']);
+		array_push($array, $_POST['c_dvat']);
+		array_push($array, $_POST['c_mvat']);
+		array_push($array, $_POST['c_yvat']);
+		array_push($array, $_POST['c_customertype']);
+		update_customer($array);
+		echo "<meta http-equiv='refresh' content='0'/>";
+	}
 ?>
 	  <!-- Content Wrapper. Contains page content -->
 	  <div class="content-wrapper">

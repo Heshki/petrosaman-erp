@@ -23,7 +23,7 @@
 			</section>
 			<!-- Main content -->
 			<section class="content">
-				<form action="" method="post">
+				<form action="list-product.php" method="post">
 					<div id="details" class="col-xs-12">
 						<div class="row">
 							<div class="item col-md-4">
@@ -36,13 +36,14 @@
 								<div class="margin-tb input-group-prepend">
 									<span class="input-group-text">نام محصول</span>
 								</div>
+								<input type="text" name="p_id" id="p_id" class="hidden" value="<?php echo $p_id; ?>">
 								<input id="p_name" type="text" name="p_name" placeholder="نام محصول" class="form-control" value="<?php echo $product_name[0]['p_name']; ?>">
 							</div>
 							<div class="item col-md-4">
 								<div class="margin-tb input-group-prepend">
 									<span class="input-group-text">کد دسته بندی</span>
 								</div>
-								<input id="p_cat" type="text" name="p_cat" placeholder="کد دسته بندی" class="form-control" value="<?php echo $product_name[0]['p_cat']; ?>">
+								<input id="p_cat" type="text" name="p_cat" placeholder="کد دسته بندی" class="form-control" value="<?php echo $product_name[0]['cat_id']; ?>">
 							</div>
 							<div class="item col-md-4">
 								<div class="margin-tb input-group-prepend">
@@ -53,20 +54,6 @@
 							<div class="item col-md-4">
 								<form action="" method="post">
 									<button type="submit" class="btn btn-success btn-lg" id="p_update" name="p_update">ذخیره</button>
-									<?php 
-										if(isset($_POST['p_update'])) {
-											include_once"functions.php";
-											$array = array();
-											if(isset($_POST['p_name']) && isset($_POST['p_cat']) && isset($_POST['p_unit'])){
-												array_push($array, $p_id);
-												array_push($array, $_POST['p_name']);
-												array_push($array, $_POST['p_cat']);
-												array_push($array, $_POST['p_unit']);
-												update_product($array);
-												echo "<meta http-equiv='refresh' content='0'/>";
-											}
-										}
-									?>
 								</form>
 							</div>
 						</div>

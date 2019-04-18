@@ -23,7 +23,7 @@
 			</section>
 			<!-- Main content -->
 			<section class="content">
-				<form action="" method="post">
+				<form action="list-stock.php" method="post">
 					<div id="details" class="col-xs-12">
 						<div class="row">
 							<div class="item col-md-4">
@@ -32,11 +32,12 @@
 									<span>  <?php echo $s_id; ?></span>
 								</div>
 							</div>
+							<input type="text" name="s_id" id="s_id" class="hidden" value="<?php echo $s_id; ?>">
 							<div class="item col-md-4">
 								<div class="margin-tb input-group-prepend">
 									<span class="input-group-text">کد محصول</span>
 								</div>
-								<input id="s_product" type="text" name="s_product" placeholder="کد محصول" class="form-control" value="<?php echo $stock_name[0]['s_product']; ?>">
+								<input id="p_id" type="text" name="p_id" placeholder="کد محصول" class="form-control" value="<?php echo $stock_name[0]['p_id']; ?>">
 							</div>
 							<div class="item col-md-4">
 								<div class="margin-tb input-group-prepend">
@@ -48,17 +49,7 @@
 								<form action="" method="post">
 									<button type="submit" class="btn btn-success btn-lg" id="s_update" name="s_update">ذخیره</button>
 									<?php 
-										if(isset($_POST['s_update'])) {
-											include_once"functions.php";
-											$array = array();
-											if(isset($_POST['s_product']) && isset($_POST['s_amount'])){
-												array_push($array, $s_id);
-												array_push($array, $_POST['s_product']);
-												array_push($array, $_POST['s_amount']);
-												update_stock($array);
-												echo "<meta http-equiv='refresh' content='0'/>";
-											}
-										}
+										
 									?>
 								</form>
 							</div>

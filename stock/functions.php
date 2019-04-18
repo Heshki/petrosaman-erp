@@ -9,9 +9,9 @@ function insert_stock($array){
 
 function update_stock($array){
 	$s_id = $array[0];
-	$s_product = $array[1];
+	$p_id = $array[1];
 	$s_amount = $array[2];
-	$sql = "update stock set s_product = '$s_product', s_amount = '$s_amount' where s_id = $s_id";
+	$sql = "update stock set p_id = '$p_id', s_amount = '$s_amount' where s_id = $s_id";
 	$res = ex_query($sql);
 	return $res;	
 }

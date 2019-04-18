@@ -88,6 +88,12 @@ function exe_result_analyze($fb_id, $fb_result_analyze){
 	return $res;
 }
 
+function select_a_factor($fb_id){
+	$sql = "select * from factor_body inner join factor on factor.f_id = factor_body.f_id inner join product on product.p_id = factor_body.p_id inner join category on category.cat_id = factor_body.cat_id inner join customer on customer.c_id = factor.c_id where fb_id = $fb_id";
+	$res = get_select_query($sql);
+	return $res;
+}
+
 function show_btn_list($st, $url){
 	if($st==0){ ?>
 		<a href="<?php echo $url; ?>" class="btn btn-warning btn-xs">خیر</a>

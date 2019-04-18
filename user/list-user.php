@@ -1,5 +1,9 @@
 <?php $title = 'لیست کاربران'; include"../header.php"; include"../nav.php"; include"functions.php";
 	$asb = list_user();
+	if(isset($_GET['u_id'])){
+		$u_id = $_GET['u_id'];
+		$asd = select_a_user($u_id);
+	}
 ?>  
 	<div class="content-wrapper">
 
@@ -30,19 +34,20 @@
 											<div class="margin-tb input-group-prepend">
 												<span class="input-group-text">نام</span>
 											</div>
-											<input type="text" name="u_name" placeholder="نام" class="form-control">
+											<input type="text" name="u_name" placeholder="نام" class="form-control" value="<?php if(isset($_GET['u_id'])) { echo $asd[0]['u_name'];}else{ echo ''; } ?>">
 										</div>
 										<div class="item col-md-4">
 											<div class="margin-tb input-group-prepend">
 												<span class="input-group-text">نام خانوادگی</span>
 											</div>
-											<input type="text" name="u_family" placeholder="نام خانوادگی" class="form-control">
+											<input type="text" name="u_family" placeholder="نام خانوادگی" class="form-control" value="<?php if(isset($_GET['u_id'])) { echo $asd[0]['u_family'];}else{ echo ''; } ?>">
 										</div>
 										<div class="item col-md-4">
 											<div class="margin-tb input-group-prepend">
 												<span class="input-group-text">سطح دسترسی</span>
 											</div>
 											<select name="u_level" class="form-control">
+												<option><?php if(isset($_GET['u_id'])) { echo $asd[0]['u_level'];}else{ echo ''; } ?></option>
 												<option>مدیر</option>
 												<option>فروش</option>
 												<option>مالی</option>
@@ -51,18 +56,25 @@
 										</div>
 										<div class="item col-md-6">
 											<div class="margin-tb input-group-prepend">
-												<span class="input-group-text">نام خانوادگی</span>
+												<span class="input-group-text">نام کاربری</span>
 											</div>
-											<input type="text" name="u_username" placeholder="نام کاربری" class="form-control">
+											<input type="text" name="u_username" placeholder="نام کاربری" class="form-control" value="<?php if(isset($_GET['u_id'])) { echo $asd[0]['u_username'];}else{ echo ''; } ?>">
 										</div>
 										<div class="item col-md-6">
 											<div class="margin-tb input-group-prepend">
-												<span class="input-group-text">نام خانوادگی</span>
+												<span class="input-group-text">رمز ورود</span>
 											</div>
-											<input type="text" name="u_password" placeholder="رمز ورود" class="form-control">
+											<input type="text" name="u_password" placeholder="رمز ورود" class="form-control" value="<?php if(isset($_GET['u_id'])) { echo $asd[0]['u_password'];}else{ echo ''; } ?>">
+											<input type="text" class="hidden" name="u_id" value="<?php echo $_GET['u_id']; ?>"
 										</div>
 										<div class="item col-md-4">
+											<?php if(isset($_GET['u_id'])){
+												?>
+												<button type="submit" class="btn btn-warning btn-lg" name="u_edit">ویرایش</button>
+												<?php
+											}else{ ?>
 											<button type="submit" class="btn btn-success btn-lg" name="u_submit">اضافه کردن</button>
+											 <?php } ?>
 										<?php 
 										if(isset($_POST['u_submit'])) {
 											include_once"functions.php";
@@ -73,6 +85,18 @@
 											array_push($array, $_POST['u_username']);
 											array_push($array, $_POST['u_password']);
 											insert_user($array);
+											echo "<meta http-equiv='refresh' content='0'/>";
+										}
+										if(isset($_POST['u_edit'])) {
+											include_once"functions.php";
+											$array = array();
+											array_push($array, $_POST['u_id']);
+											array_push($array, $_POST['u_name']);
+											array_push($array, $_POST['u_family']);
+											array_push($array, $_POST['u_level']);
+											array_push($array, $_POST['u_username']);
+											array_push($array, $_POST['u_password']);
+											update_user($array);
 											echo "<meta http-equiv='refresh' content='0'/>";
 										}
 										?>
@@ -101,7 +125,7 @@
 										<td><?php echo $a['u_password']; ?></td>
 										<td>
 											<form action="" method="post" onSubmit="if(!confirm('آیا از انجام این عملیات اطمینان دارید؟')){return false;}">
-												<a href="show-customer.php?id=<?php echo $a['c_id']; ?>">مشاهده</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												<a href="list-user.php?u_id=<?php echo $a['u_id']; ?>">مشاهده</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 												<button class="btn btn-danger" type="submit" name="delete-user">حذف</button>
 												<input class="hidden" type="text" name="delete-text" value="<?php echo $a['u_id']; ?>">
 												<?php

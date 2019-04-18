@@ -1,5 +1,14 @@
 <?php $title = 'لیست موجودی ها'; include"../header.php"; include"../nav.php"; include"functions.php";
-$asb = list_stock(); ?>  
+$asb = list_stock();
+if(isset($_POST['s_update'])) {
+	$array = array();
+	array_push($array, $_POST['s_id']);
+	array_push($array, $_POST['p_id']);
+	array_push($array, $_POST['s_amount']);
+	update_stock($array);
+	echo "<meta http-equiv='refresh' content='0'/>";
+}
+?>  
 	<div class="content-wrapper">
 		
 		<section class="content-header">
@@ -83,7 +92,7 @@ $asb = list_stock(); ?>
 						?>
 					  <tr>
 						<td><?php echo $a['s_id']; ?></td>
-						<td><?php echo $a['s_product']; ?></td>
+						<td><?php echo $a['p_id']; ?></td>
 						<td><?php echo $a['s_amount']; ?></td>
 						<td>
 							<form action="" method="post" onSubmit="if(!confirm('آیا از انجام این عملیات اطمینان دارید؟')){return false;}">

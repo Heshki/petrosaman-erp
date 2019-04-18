@@ -9,6 +9,15 @@ require_once"../customer/functions.php";
 		update_a_row_fb($verify,$fb_id_verify);
 		update_a_row_log($l_details);
 	}
+	if(isset($_POST['f_update'])) {
+		$array = array();
+		array_push($array, $_POST['p_id']);
+		array_push($array, $_POST['p_name']);
+		array_push($array, $_POST['p_cat']);
+		array_push($array, $_POST['p_unit']);
+		update_factor($array);
+		echo "<meta http-equiv='refresh' content='0'/>";
+	}
 ?> 
 <div class="content-wrapper">
 	
@@ -129,7 +138,7 @@ require_once"../customer/functions.php";
 									</td>
 									<td>
 										<form action="" method="post" onSubmit="if(!confirm('آیا از انجام این عملیات اطمینان دارید؟')){return false;}">
-											<a class="btn btn-info btn-xs" href="edit-product.php?id=<?php echo $row['fb_id']; ?>">ویرایش</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											<a class="btn btn-info btn-xs" href="edit-factor.php?id=<?php echo $row['fb_id']; ?>">ویرایش</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											<button class="btn btn-danger btn-xs" type="submit" name="delete-list" id="delete-list">حذف</button>
 											<input class="hidden" type="text" name="delete-text" id="delete-text" value="<?php echo $row['fb_id']; ?>">
 											<?php
