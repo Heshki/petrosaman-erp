@@ -31,6 +31,7 @@ function a_category($cat_id) {
 
 function show_category_as_select($cat_id = 0){ ?>
 	<select id="cat_id" name="cat_id" class="form-control">
+		<option>-</option>
 		<?php
 		$res = list_category();
 		if(count($res)>0){
@@ -44,4 +45,14 @@ function show_category_as_select($cat_id = 0){ ?>
 	<?php
 }
 
+function get_category_name($c_id) {
+	$sql = "select cat_name from category where cat_id = $c_id";
+	$res = get_var_query($sql);
+	if($res!=""){
+		return $res;
+	}else
+	{
+		return 0;
+	}
+}
 ?>

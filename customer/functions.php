@@ -55,10 +55,10 @@ function list_customer() {
 	return $res;
 }
 
-function a_customer($c_id) {
-	$sql = "select * from customer where c_id = '$c_id'";
+function get_customer_name($c_id) {
+	$sql = "select c_name, c_family from customer where c_id = $c_id";
 	$res = get_select_query($sql);
-	return $res;
+	return $res[0]['c_name'] . " " . $res[0]['c_family'];
 }
 
 function show_customer_as_select($c_id){ ?>

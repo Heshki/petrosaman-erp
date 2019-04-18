@@ -123,6 +123,7 @@ body {
     min-height: 250px;
     padding: 15px;
     margin-right: auto;
+    overflow: hidden;
     margin-left: auto;
     padding-left: 15px;
     padding-right: 15px
@@ -156,7 +157,7 @@ a:focus {
 }
 
 .page-header {
-    margin: 10px 0 20px 0;
+    margin: 0;
     font-size: 22px
 }
 

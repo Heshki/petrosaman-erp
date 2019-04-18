@@ -24,12 +24,6 @@
 .btns-form input {
 	display: inline-block;
 }
-#example1 a {
-	background-color: #00a1ff;
-	padding: 2px 7px;
-	border-radius: 3px;
-	color: white;
-}
 .hidden {
 	display: none;
 }

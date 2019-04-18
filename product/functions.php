@@ -49,4 +49,15 @@ function show_product_as_select($p_id = 0){ ?>
 	</select>
 	<?php
 }
+
+function get_product_name($p_id) {
+	$sql = "select p_name from product where p_id = $p_id";
+	$res = get_var_query($sql);
+	if($res!=""){
+		return $res;
+	}else
+	{
+		return 0;
+	}
+}
 ?>
