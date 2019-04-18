@@ -1,5 +1,4 @@
 $(document).ready(function(){
-	alert('salam');
 	$('#c_vat').on('change', function() {
 	  	var boolian = $('#c_vat').find(":selected").val();
 		if(boolian=='no'){

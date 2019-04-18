@@ -2,28 +2,25 @@
 	$c_id = $_GET['id'];
 	$customer = a_customer($c_id);
 ?>
-	  <!-- Content Wrapper. Contains page content -->
-	  <div class="content-wrapper">
-		<!-- Content Header (Page header) -->
-		<section class="content-header">
-		  <h1>نمایش مشتری</h1>
-		  <ol class="breadcrumb">
+<div class="content-wrapper">
+	<section class="content-header">
+		<h1>نمایش مشتری</h1>
+		<ol class="breadcrumb">
 			<li><a href="<?php get_url(); ?>index.php"><i class="fa fa-dashboard"></i> خانه</a></li>
 			<li><a href="#">مشتریان</a></li>
 			<li class="active">نمایش مشتری</li>
-		  </ol>
-		</section>
+		</ol>
+	</section>
 
-		<!-- Main content -->
-		<section class="content">
-		  <div id="details-show" class="col-xs-12">
+	<section class="content">
+		<div id="details-show" class="col-xs-12">
 			<div class="row">
-			  <div class="item col-md-4">
-				<div class="margin-tb input-group-prepend">
-				  <span class="input-group-text">شماره مشتری: </span>
-				  <span class="bold"><?php echo $customer[0]['c_id']; ?></span>
-				</div>
-			  </div>
+			  	<div class="item col-md-4">
+					<div class="margin-tb input-group-prepend">
+				  		<span class="input-group-text">شماره مشتری: </span>
+				  		<span class="bold"><?php echo $customer[0]['c_id']; ?></span>
+					</div>
+			  	</div>
 			  <div class="item col-md-4">
 				<div class="margin-tb input-group-prepend">
 				  <span class="input-group-text">نام : </span>
@@ -123,12 +120,9 @@
 				<a href="edit-customer.php?id=<?php echo $customer[0]['c_id']; ?>" class="btn btn-success btn-lg" id="editc_submit">ویرایش</a>
 				</div>
 			  </div>
-			</div><!-- /.box -->
-		</section><!-- /.content -->
-	  </div><!-- /.content-wrapper -->
-	  <!-- Control Sidebar -->
-	  <!-- /.control-sidebar -->
-	  <!-- Add the sidebar's background. This div must be placed immediately after the control sidebar -->
+			</div>
+		</section>
+	  </div>
 	  <div class="control-sidebar-bg"></div>
 	</div><!-- ./wrapper -->
 <?php include"../left-nav.php"; include"../footer.php"; ?>

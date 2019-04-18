@@ -1,25 +1,26 @@
 <?php $title = 'لیست حواله خروج ها'; include"../header.php"; include"../nav.php"; include"functions.php"; ?> 
-	<div class="content-wrapper">
-		<section class="content-header">
-			<ol class="breadcrumb">
-				<li><a href="<?php get_url(); ?>index.php"><i class="fa fa-dashboard"></i> خانه</a></li>
-				<li><a href="#">انبار</a></li>
-				<li class="active">لیست حواله خروج ها</li>
-			</ol>
-		</section>
+
+<div class="content-wrapper">
+	
+	<section class="content-header">
+		<ol class="breadcrumb">
+			<li><a href="<?php get_url(); ?>index.php"><i class="fa fa-dashboard"></i> خانه</a></li>
+			<li><a href="#">انبار</a></li>
+			<li class="active">لیست حواله خروج ها</li>
+		</ol>
+	</section>
 		
-		<section class="content-header">
-			<div id="page-wrapper">
-				<div class="row">
-					<div class="col-lg-12">
-						<h1 class="page-header">لیست حواله خروج ها</h1>
-					</div>
+	<section class="content-header">
+		<div id="page-wrapper">
+			<div class="row">
+				<div class="col-lg-12">
+					<h1 class="page-header">لیست حواله خروج ها</h1>
 				</div>
 			</div>
-		</section>
+		</div>
+	</section>
 
-									<form action="" method="post">
-
+	
 		<section class="content">
 			<div class="row">
 				<div class="col-xs-12">
@@ -65,6 +66,7 @@
 														<button type="button" class="close" data-dismiss="modal">&times;</button>
 													</div>
 													<div class="modal-body">
+														<form action="" method="post">
 														<span>نام و نام خانوادگی</span>
 														<input type="text" name="dr_name" id="dr_name" placeholder="نام و نام خانوادگی" required/><br/>
 														<span>کد ملی</span>
@@ -74,6 +76,8 @@
 														<span>شماره پلاک</span>
 														<input type="text" name="dr_plaque" id="dr_plaque" placeholder="شماره پلاک" required/><br/>
 														<input class="hidden" type="text" name="fb_id" id="fb_id" value="<?php echo $row['fb_id']; ?>"/>
+															<input type="submit" class="btn btn-success" name="tl_submit" value="ثبت">
+														</form>
 													</div>
 													<div class="modal-footer">
 														<button type="submit" id="close-sub" class="btn btn-success" name="tl_submit">ثبت</button>
@@ -81,8 +85,6 @@
 												</div>
 											</div>
 										</div>
-								
-
 										<?php
 										$i++;
 									}
@@ -105,11 +107,8 @@
 					</div>
 				</div>
 			</div>
-		</section>		
-			</form>
-	</div>
-
-
+		</section>
+</div>
 	<?php
 	if(isset($_POST['tl_submit'])) {
 		$user_id = 1;
@@ -132,23 +131,8 @@
 
 
 	<div class="control-sidebar-bg"></div>
-
-	<!-- jQuery 2.1.4 -->
-	<script src="<?php get_url(); ?>/plugins/jQuery/jQuery-2.1.4.min.js"></script>
-	<!-- Bootstrap 3.3.4 -->
-	<script src="<?php get_url(); ?>/bootstrap/js/bootstrap.min.js"></script>
-	<!-- DataTables -->
 	<script src="<?php get_url(); ?>/plugins/datatables/jquery.dataTables.min.js"></script>
 	<script src="<?php get_url(); ?>/plugins/datatables/dataTables.bootstrap.min.js"></script>
-	<!-- SlimScroll -->
-	<script src="<?php get_url(); ?>/plugins/slimScroll/jquery.slimscroll.min.js"></script>
-	<!-- FastClick -->
-	<script src="<?php get_url(); ?>/plugins/fastclick/fastclick.min.js"></script>
-	<!-- AdminLTE App -->
-	<script src="<?php get_url(); ?>/dist/js/app.min.js"></script>
-	<!-- AdminLTE for demo purposes -->
-	<script src="<?php get_url(); ?>/dist/js/demo.js"></script>
-	<!-- page script -->
 	<script>
 		$(function () {
 			$("#example1").DataTable();

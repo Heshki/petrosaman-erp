@@ -686,7 +686,43 @@
 						</form>
 						<?php
 						}
-					?>
+					
+
+
+					if($type_confirm=="fb_result_analyze"){ ?>
+					<button type="button" data-toggle="modal" data-target="#result<?php echo $i; ?>" class="btn btn-primary btn-xs">ثبت نتیجه</button>
+					<div class="modal" id="result<?php echo $i; ?>">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h4 class="modal-title"><?php echo $row['fb_id'] ?></h4>
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+								</div>
+								<div class="modal-body">
+									<form action="" method="post">
+										<textarea name="fb_result_analyze" id="fb_result_analyze" cols="20" rows="5"><?php echo $row['fb_result_analyze']; ?></textarea>
+										<input type="text" class="text" name="fb_id" id="fb_id">
+										<button type="submit" name="result_submit" id="result_submit" class="btn btn-warning">ثبت</button>
+									</form>
+									<?php
+									if(isset($_POST['result_submit'])){
+										$fb_result_analyze = $_POST['fb_result_analyze'];
+										$fb_id = $_POST['fb_id'];
+										exe_result_analyze($fb_id, $fb_result_analyze);
+									}
+									?>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-danger" data-dismiss="modal">بستن</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<?php
+					} ?>
+
+
+
 				</div>
 			</section>
 		</div>

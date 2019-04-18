@@ -21,12 +21,6 @@ function insert_factor_body($array){
 	return $res;
 }
 
-function list_factor_body() {
-	$sql = "select * from factor inner join factor_body on factor.f_id = factor_body.f_id";
-	$res = get_select_query($sql);
-	return $res;
-}
-
 function list_factor_log() {
 	$sql = "select * from factor inner join factor_log on factor.f_id = factor_log.f_id inner join users on users.u_id = factor.u_id";
 	$res = get_select_query($sql);
@@ -49,8 +43,22 @@ function delete_factor_log ($l_id){
 	return $res;	
 }
 
+function delete_factor_body ($fb_id){
+	$sql = "delete from factor_body where fb_id = $fb_id";
+	$res = ex_query($sql);
+	return $res;	
+}
+
+
+//factor_body
+function list_factor_body() {
+	$sql = "select * from factor_body inner join factor on factor_body.f_id = factor.f_id";
+	$res = get_select_query($sql);
+	return $res;
+}
+
 function get_factor_body($f_id) {
-	$sql = "select * from factor_body inner join factor on factor.f_id = factor_body.f_id where f_id = $f_id";
+	$sql = "select * from factor_body inner join factor on factor_body.f_id = factor.f_id where factor_body.f_id = $f_id";
 	$res = get_select_query($sql);
 	return $res;
 }
@@ -78,6 +86,16 @@ function exe_result_analyze($fb_id, $fb_result_analyze){
 	$sql = "update factor_body set fb_result_analyze = $fb_result_analyze where fb_id = $fb_id";
 	$res = ex_query($sql);
 	return $res;
+}
+
+function show_btn_list($st, $url){
+	if($st==0){ ?>
+		<a href="<?php echo $url; ?>" class="btn btn-warning btn-xs">خیر</a>
+	<?php
+	} else { ?>
+		<a href="<?php echo $url; ?>" class="btn btn-success btn-xs">بله</a>
+	<?php
+	}
 }
 
 ?>
