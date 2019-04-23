@@ -64,7 +64,7 @@ function get_factor_body($f_id) {
 }
 
 function get_factor_body_confirm($fb_id) {
-	$sql = "select * from factor_body inner join factor on factor.f_id = factor_body.f_id inner join customer on customer.c_id = factor.c_id inner join category on category.cat_id = factor_body.cat_id inner join product on product.p_id = factor_body.p_id inner stock on product.p_id = stock.p_id where fb_id = $fb_id";
+	$sql = "select * from factor_body inner join factor on factor.f_id = factor_body.f_id inner join customer on customer.c_id = factor.c_id inner join category on category.cat_id = factor_body.cat_id inner join product on product.p_id = factor_body.p_id where fb_id = $fb_id";
 	$res = get_select_query($sql);
 	return $res;
 }

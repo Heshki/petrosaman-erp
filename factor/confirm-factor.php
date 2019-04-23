@@ -46,10 +46,9 @@
 												<td><?php echo $i; ?></td>
 												<td><?php echo $row['p_name']; ?></td>
 												<td><?php echo $row['cat_name']; ?></td>
-												<td><?php echo $row['p_amount']; ?></td>
-												<td><?php echo $row['s_sprice']; ?></td>
-												<td><?php echo $row['p_amount'] * $row['s_sprice']; ?></td>
-												<td><?php echo $row['c_name'] . '   *   ' . $row['f_date']; ?></td>
+												<td><?php echo $row['fb_quantity']; ?></td>
+												<td><?php echo $row['fb_price']; ?></td>
+												<td><?php echo $row['fb_quantity'] * $row['fb_price']; ?></td>
 											</tr>
 											<?php
 												$i++;
@@ -106,10 +105,9 @@
 												<td><?php echo $i; ?></td>
 												<td><?php echo $row['p_name']; ?></td>
 												<td><?php echo $row['cat_name']; ?></td>
-												<td><?php echo $row['p_amount']; ?></td>
-												<td><?php echo $row['s_sprice']; ?></td>
-												<td><?php echo $row['p_amount'] * $row['s_sprice']; ?></td>
-												<td><?php echo $row['c_name'] . '   *   ' . $row['f_date']; ?></td>
+												<td><?php echo $row['fb_quantity']; ?></td>
+												<td><?php echo $row['fb_price']; ?></td>
+												<td><?php echo $row['fb_quantity'] * $row['fb_price']; ?></td>
 											</tr>
 											<?php
 												$i++;
@@ -166,10 +164,9 @@
 												<td><?php echo $i; ?></td>
 												<td><?php echo $row['p_name']; ?></td>
 												<td><?php echo $row['cat_name']; ?></td>
-												<td><?php echo $row['p_amount']; ?></td>
-												<td><?php echo $row['s_sprice']; ?></td>
-												<td><?php echo $row['p_amount'] * $row['s_sprice']; ?></td>
-												<td><?php echo $row['c_name'] . '   *   ' . $row['f_date']; ?></td>
+												<td><?php echo $row['fb_quantity']; ?></td>
+												<td><?php echo $row['fb_price']; ?></td>
+												<td><?php echo $row['fb_quantity'] * $row['fb_price']; ?></td>
 											</tr>
 											<?php
 												$i++;
@@ -226,10 +223,9 @@
 												<td><?php echo $i; ?></td>
 												<td><?php echo $row['p_name']; ?></td>
 												<td><?php echo $row['cat_name']; ?></td>
-												<td><?php echo $row['p_amount']; ?></td>
-												<td><?php echo $row['s_sprice']; ?></td>
-												<td><?php echo $row['p_amount'] * $row['s_sprice']; ?></td>
-												<td><?php echo $row['c_name'] . '   *   ' . $row['f_date']; ?></td>
+												<td><?php echo $row['fb_quantity']; ?></td>
+												<td><?php echo $row['fb_price']; ?></td>
+												<td><?php echo $row['fb_quantity'] * $row['fb_price']; ?></td>
 											</tr>
 											<?php
 												$i++;
@@ -286,10 +282,9 @@
 												<td><?php echo $i; ?></td>
 												<td><?php echo $row['p_name']; ?></td>
 												<td><?php echo $row['cat_name']; ?></td>
-												<td><?php echo $row['p_amount']; ?></td>
-												<td><?php echo $row['s_sprice']; ?></td>
-												<td><?php echo $row['p_amount'] * $row['s_sprice']; ?></td>
-												<td><?php echo $row['c_name'] . '   *   ' . $row['f_date']; ?></td>
+												<td><?php echo $row['fb_quantity']; ?></td>
+												<td><?php echo $row['fb_price']; ?></td>
+												<td><?php echo $row['fb_quantity'] * $row['fb_price']; ?></td>
 											</tr>
 											<?php
 												$i++;
@@ -346,10 +341,9 @@
 												<td><?php echo $i; ?></td>
 												<td><?php echo $row['p_name']; ?></td>
 												<td><?php echo $row['cat_name']; ?></td>
-												<td><?php echo $row['p_amount']; ?></td>
-												<td><?php echo $row['s_sprice']; ?></td>
-												<td><?php echo $row['p_amount'] * $row['s_sprice']; ?></td>
-												<td><?php echo $row['c_name'] . '   *   ' . $row['f_date']; ?></td>
+												<td><?php echo $row['fb_quantity']; ?></td>
+												<td><?php echo $row['fb_price']; ?></td>
+												<td><?php echo $row['fb_quantity'] * $row['fb_price']; ?></td>
 											</tr>
 											<?php
 												$i++;
@@ -406,10 +400,9 @@
 												<td><?php echo $i; ?></td>
 												<td><?php echo $row['p_name']; ?></td>
 												<td><?php echo $row['cat_name']; ?></td>
-												<td><?php echo $row['p_amount']; ?></td>
-												<td><?php echo $row['s_sprice']; ?></td>
-												<td><?php echo $row['p_amount'] * $row['s_sprice']; ?></td>
-												<td><?php echo $row['c_name'] . '   *   ' . $row['f_date']; ?></td>
+												<td><?php echo $row['fb_quantity']; ?></td>
+												<td><?php echo $row['fb_price']; ?></td>
+												<td><?php echo $row['fb_quantity'] * $row['fb_price']; ?></td>
 											</tr>
 											<?php
 												$i++;
@@ -466,10 +459,9 @@
 												<td><?php echo $i; ?></td>
 												<td><?php echo $row['p_name']; ?></td>
 												<td><?php echo $row['cat_name']; ?></td>
-												<td><?php echo $row['p_amount']; ?></td>
-												<td><?php echo $row['s_sprice']; ?></td>
-												<td><?php echo $row['p_amount'] * $row['s_sprice']; ?></td>
-												<td><?php echo $row['c_name'] . '   *   ' . $row['f_date']; ?></td>
+												<td><?php echo $row['fb_quantity']; ?></td>
+												<td><?php echo $row['fb_price']; ?></td>
+												<td><?php echo $row['fb_quantity'] * $row['fb_price']; ?></td>
 											</tr>
 											<?php
 												$i++;
@@ -527,10 +519,9 @@
 												<td><?php echo $i; ?></td>
 												<td><?php echo $row['p_name']; ?></td>
 												<td><?php echo $row['cat_name']; ?></td>
-												<td><?php echo $row['p_amount']; ?></td>
-												<td><?php echo $row['s_sprice']; ?></td>
-												<td><?php echo $row['p_amount'] * $row['s_sprice']; ?></td>
-												<td><?php echo $row['c_name'] . '   *   ' . $row['f_date']; ?></td>
+												<td><?php echo $row['fb_quantity']; ?></td>
+												<td><?php echo $row['fb_price']; ?></td>
+												<td><?php echo $row['fb_quantity'] * $row['fb_price']; ?></td>
 											</tr>
 											<?php
 												$i++;
@@ -587,10 +578,9 @@
 												<td><?php echo $i; ?></td>
 												<td><?php echo $row['p_name']; ?></td>
 												<td><?php echo $row['cat_name']; ?></td>
-												<td><?php echo $row['p_amount']; ?></td>
-												<td><?php echo $row['s_sprice']; ?></td>
-												<td><?php echo $row['p_amount'] * $row['s_sprice']; ?></td>
-												<td><?php echo $row['c_name'] . '   *   ' . $row['f_date']; ?></td>
+												<td><?php echo $row['fb_quantity']; ?></td>
+												<td><?php echo $row['fb_price']; ?></td>
+												<td><?php echo $row['fb_quantity'] * $row['fb_price']; ?></td>
 											</tr>
 											<?php
 												$i++;
@@ -647,10 +637,9 @@
 												<td><?php echo $i; ?></td>
 												<td><?php echo $row['p_name']; ?></td>
 												<td><?php echo $row['cat_name']; ?></td>
-												<td><?php echo $row['p_amount']; ?></td>
-												<td><?php echo $row['s_sprice']; ?></td>
-												<td><?php echo $row['p_amount'] * $row['s_sprice']; ?></td>
-												<td><?php echo $row['c_name'] . '   *   ' . $row['f_date']; ?></td>
+												<td><?php echo $row['fb_quantity']; ?></td>
+												<td><?php echo $row['fb_price']; ?></td>
+												<td><?php echo $row['fb_quantity'] * $row['fb_price']; ?></td>
 											</tr>
 											<?php
 												$i++;
