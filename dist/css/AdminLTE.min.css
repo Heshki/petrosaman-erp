@@ -120,7 +120,7 @@ body {
 }
 
 .content {
-    min-height: 250px;
+    min-height: auto;
     padding: 15px;
     margin-right: auto;
     overflow: hidden;

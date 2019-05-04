@@ -1,7 +1,4 @@
-<?php $title = 'چاپ فرم حواله خروج'; include"../header.php"; include"../nav.php"; include"functions.php";
-$f_id = $_GET['f_id']; 
-$res = form_exit_doc($f_id);
-?> 
+<?php include"../header.php"; include"../nav.php"; include"functions.php"; ?> 
 	<div class="content-wrapper">
 		<section class="content-header">
 			<ol class="breadcrumb">
@@ -10,7 +7,13 @@ $res = form_exit_doc($f_id);
 				<li class="active">چاپ فرم حواله خروج</li>
 			</ol>
 		</section>
-		
+		<?php 
+		require_once"../customer/functions.php";
+		require_once"../product/functions.php";
+		$fb_id = $_GET['fb_id']; 
+		$sql = "select * from factor_body inner join factor on factor_body.f_id = factor.f_id where factor_body.fb_id = $fb_id";
+		$res = get_select_query($sql);
+		?>
 		<section class="content-header">
 			<div id="page-wrapper">
 				<div class="row">
@@ -25,40 +28,81 @@ $res = form_exit_doc($f_id);
 			
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">پترو سامان</h3>
+					<h3 class="box-title">
+						<img src="<?php get_url(); ?>/dist/img/azar-logo.png">
+					</h3>
 				</div>
 				<div class="box-body no-padding">
 					<table class="table table-condensed">
 						<tr>
-							<th colspan="2" class="bold">مجوز ترخیص بار</th>
-							<th colspan="2" class="bold">شماره: <?php echo $res[0]['f_id']; ?></th>
+							<th style="background: #f9f9f9" colspan="2" class="bold">مجوز ترخیص بار</th>
+							<th style="background: #f9f9f9" colspan="2" class="bold">شماره: <?php echo per_number($res[0]['fb_id']); ?></th>
 						</tr>
 						<tr>
-							<td class="bold">مشتری</td>
-							<td class="bold"><?php echo $res[0]['fb_id']; ?></td>
-							<td class="bold">تاریخ</td>
-							<td class="bold">۱۳۹۷/۰۸/۱۲</td>
+							<td class="bold" colspan="2">مشتری: <?php echo get_customer_name($res[0]['c_id']); ?></td>
+							<td class="bold" colspan="2">تاریخ: <?php echo per_number(jdate('Y/m/d H:i')); ?></td>
 						</tr>
 						<tr>
-							<td class="bold">ردیف</td>
-							<td class="bold">شرح کالا</td>
-							<td class="bold">وزن</td>
-							<td class="bold">بسته بندی</td>
+							<th class="bold">ردیف</th>
+							<th class="bold">شرح کالا</th>
+							<th class="bold">وزن</th>
+							<th class="bold">بسته بندی</th>
 						</tr>
 						<?php
 						$i=1;
 						foreach ($res as $row) {
 						?>
 						<tr>
-							<td><?php echo $i; ?></td>
-							<td>شرح کالا</td>
-							<td>وزن</td>
-							<td>بسته بندی</td>
+							<td><?php echo per_number($i); ?></td>
+							<td><?php echo get_product_name($row['p_id']); ?></td>
+							<td><?php echo per_number(number_format($row['fb_quantity'])); ?></td>
+							<td><?php echo get_product_unit($row['p_id']); ?></td>
+						</tr>
+						<tr>
+							<th style="background: #f9f9f9" colspan="4">مشخصات تحویل گیرنده</th>
+						</tr>
+						<tr>
+							<th>نام:</th>
+							<td><?php echo $row['fb_dname']; ?></td>
+							<th>نام خانوادگی:</th>
+							<td><?php echo $row['fb_dfamily']; ?></td>
+						</tr>
+						<tr>
+							<th>خودرو:</th>
+							<td><?php echo per_number($row['fb_car']); ?></td>
+							<th>پلاک:</th>
+							<td><?php echo per_number($row['fb_plaque']); ?></td>
+						</tr>
+						<tr>
+							<th>کد ملی:</th>
+							<td><?php echo per_number($row['fb_mellicode']); ?></td>
+							<th>تلفن:</th>
+							<td><?php echo per_number($row['fb_mobile']); ?></td>
 						</tr>
 						<?php
-						$i++;
-						}
-						?>
+							$i++;
+						} ?>
+						<tr>
+							<td colspan="4">کالاهای فوق صحیح و سالم و به صورت کامل تحویل داده شد.</td>
+						</tr>
+					</table>
+					<br>
+					<table class="table">
+						<tr>
+							<td>
+								تایید بازرگانی 
+								<br><br><br><br>
+							</td>
+							<td>
+								تایید مالی 
+								<br><br><br><br>
+							</td>
+							<td>
+								تایید مدیریت 
+								<br><br><br><br>
+							</td>
+						</tr>
+						
 					</table>
 				</div>
 			</div>
@@ -67,24 +111,6 @@ $res = form_exit_doc($f_id);
 		<div class="col-xs-3"></div>
 	</div>
 
-	<div class="control-sidebar-bg"></div>
-
-	<!-- jQuery 2.1.4 -->
-	<script src="<?php get_url(); ?>/plugins/jQuery/jQuery-2.1.4.min.js"></script>
-	<!-- Bootstrap 3.3.4 -->
-	<script src="<?php get_url(); ?>/bootstrap/js/bootstrap.min.js"></script>
-	<!-- DataTables -->
-	<script src="<?php get_url(); ?>/plugins/datatables/jquery.dataTables.min.js"></script>
-	<script src="<?php get_url(); ?>/plugins/datatables/dataTables.bootstrap.min.js"></script>
-	<!-- SlimScroll -->
-	<script src="<?php get_url(); ?>/plugins/slimScroll/jquery.slimscroll.min.js"></script>
-	<!-- FastClick -->
-	<script src="<?php get_url(); ?>/plugins/fastclick/fastclick.min.js"></script>
-	<!-- AdminLTE App -->
-	<script src="<?php get_url(); ?>/dist/js/app.min.js"></script>
-	<!-- AdminLTE for demo purposes -->
-	<script src="<?php get_url(); ?>/dist/js/demo.js"></script>
-	<!-- page script -->
 	<script>
 		$(function () {
 			$("#example1").DataTable();

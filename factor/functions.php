@@ -1,5 +1,40 @@
 <?php
 require_once"../include/database.php";
+
+function load_factor_body($fb_id){
+	$res = get_factor_body_confirm($fb_id);
+	?>
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>ردیف</th>
+				<th>نام محصول</th>
+				<th>دسته بندی</th>
+				<th>مقدار</th>
+				<th>قیمت واحد</th>
+				<th>قیمت کل</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php
+			$i = 1;
+			foreach($res as $row){ ?>
+				<tr>
+					<td><?php echo per_number($i); ?></td>
+					<td><?php echo per_number($row['p_name']); ?></td>
+					<td><?php echo per_number($row['cat_name']); ?></td>
+					<td><?php echo per_number(number_format($row['fb_quantity'])); ?></td>
+					<td><?php echo per_number(number_format($row['fb_price'])); ?></td>
+					<td><?php echo per_number(number_format($row['fb_quantity'] * $row['fb_price'])); ?></td>
+				</tr>
+			<?php
+			$i++;
+			} ?>
+		</tbody>
+	</table>
+<?php
+}
+
 function insert_factor($array){
 	$c_id = $array[0];
 	$f_date = $array[1];
@@ -52,13 +87,19 @@ function delete_factor_body ($fb_id){
 
 //factor_body
 function list_factor_body() {
-	$sql = "select * from factor_body inner join factor on factor_body.f_id = factor.f_id";
+	$sql = "select * from factor_body inner join factor on factor_body.f_id = factor.f_id order by factor_body.fb_id desc";
 	$res = get_select_query($sql);
 	return $res;
 }
 
 function get_factor_body($f_id) {
 	$sql = "select * from factor_body inner join factor on factor_body.f_id = factor.f_id where factor_body.f_id = $f_id";
+	$res = get_select_query($sql);
+	return $res;
+}
+
+function get_factor_log($fb_id) {
+	$sql = "select * from factor_log where fb_id = $fb_id";
 	$res = get_select_query($sql);
 	return $res;
 }
@@ -75,9 +116,10 @@ function update_a_row_fb($verify,$fb_id_verify) {
 	return $res;
 }
 
-function update_a_row_log($l_details) {
+function update_a_row_log($fb_id, $l_details) {
 	$date = jdate('Y/m/d H:i');
-	$sql = "insert into factor_log(u_id, l_date, f_id, l_details) values(1, '$date', 1, '$l_details')";
+	$u_id = $_SESSION['user_id'];
+	$sql = "insert into factor_log(u_id, l_date, fb_id, l_details) values($u_id, '$date', $fb_id, '$l_details')";
 	$res = ex_query($sql);
 	return $res;
 }

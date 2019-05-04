@@ -1,18 +1,18 @@
-<?php $title = 'لیست کاربران'; include"../header.php"; include"../nav.php"; include"functions.php";
+<?php include"../header.php"; include"../nav.php"; include"functions.php";
 	$asb = list_user();
 	if(isset($_GET['u_id'])){
 		$u_id = $_GET['u_id'];
 		$asd = select_a_user($u_id);
 	}
-?>  
+?>
 	<div class="content-wrapper">
-
+	
 		<section class="content-header">
-		  <ol class="breadcrumb">
-			<li><a href="<?php get_url(); ?>index.php"><i class="fa fa-dashboard"></i> خانه</a></li>
-			<li><a href="#">کاربران</a></li>
-			<li class="active">لیست کاربران</li>
-		  </ol>
+			<ol class="breadcrumb">
+				<li><a href="<?php get_url(); ?>index.php"><i class="fa fa-dashboard"></i> خانه</a></li>
+				<li><a href="#">کاربران</a></li>
+				<li class="active">لیست کاربران</li>
+			</ol>
 		</section>
 
 		<section class="content-header">
@@ -151,29 +151,10 @@
 					  				</tr>
 								</tfoot>
 				  			</table>
-						</div><!-- /.box-body -->
-			  		</div><!-- /.box -->
-				</div><!-- /.col -->
-		  	</div><!-- /.row -->
-		</section><!-- /.content -->
-	</div><!-- /.content-wrapper -->
-	<div class="control-sidebar-bg"></div>
-	</div><!-- ./wrapper -->
-
-	<script src="../plugins/datatables/jquery.dataTables.min.js"></script>
-	<script src="../plugins/datatables/dataTables.bootstrap.min.js"></script>
-	
-	<script>
-		$(function () {
-			$("#example1").DataTable();
-			$('#example2').DataTable({
-		  		"paging": true,
-		  		"lengthChange": false,
-		  		"searching": false,
-		  		"ordering": true,
-		  		"info": true,
-		  		"autoWidth": false
-			});
-	  	});
-	</script>
+						</div>
+			  		</div>
+				</div>
+		  	</div>
+		</section>
+	</div>
 <?php include"../left-nav.php"; include"../footer.php"; ?>

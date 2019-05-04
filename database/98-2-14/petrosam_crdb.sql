@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Apr 16, 2019 at 08:15 PM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 7.3.0
+-- Host: localhost:3306
+-- Generation Time: May 04, 2019 at 06:10 PM
+-- Server version: 5.7.26
+-- PHP Version: 7.2.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `test`
+-- Database: `petrosam_crdb`
 --
 
 -- --------------------------------------------------------
@@ -38,8 +38,9 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`cat_id`, `cat_name`) VALUES
-(351, 'دانه بندی 0 تا 100'),
-(352, 'دانه بندی 100 تا 120');
+(351, 'دانه بندی 01 تا 100'),
+(352, 'دانه بندی 100 تا 120'),
+(353, 'دانه بندی 120 تا 140');
 
 -- --------------------------------------------------------
 
@@ -61,9 +62,7 @@ CREATE TABLE `customer` (
   `c_faddress` text,
   `c_email` text,
   `c_vat` varchar(5) DEFAULT NULL,
-  `c_dvat` varchar(2) DEFAULT NULL,
-  `c_mvat` varchar(2) DEFAULT NULL,
-  `c_yvat` varchar(4) DEFAULT NULL,
+  `c_expire_vat` varchar(10) DEFAULT NULL,
   `c_customertype` varchar(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -71,9 +70,13 @@ CREATE TABLE `customer` (
 -- Dumping data for table `customer`
 --
 
-INSERT INTO `customer` (`c_id`, `c_name`, `c_family`, `c_company`, `c_national`, `c_economic`, `c_phone`, `c_fax`, `c_mobile`, `c_oaddress`, `c_faddress`, `c_email`, `c_vat`, `c_dvat`, `c_mvat`, `c_yvat`, `c_customertype`) VALUES
-(52, 'امیرعلی', 'شبانی', 'هشکی', '3040338323', '214452533652', '03434234145', '03434234145', '09136522305', 'رفسنجان خیابان طالقانی کوچه 62', 'داوران شهرک صنعتی', 'amirali.heshki@gmail.com', 'yes', '26', '11', '1398', 'مشتری'),
-(54, 'امام ', 'اسماعیلیا', 'گراتک', '3020525120', '54215525', '03434264167', '03434234145', '09134933739', 'رفسنجان خیابان طالقانی کوچه 62', 'معراج', 'amirali.heshki@gmail.com', 'yes', '18', '11', '1397', 'تامین کننده');
+INSERT INTO `customer` (`c_id`, `c_name`, `c_family`, `c_company`, `c_national`, `c_economic`, `c_phone`, `c_fax`, `c_mobile`, `c_oaddress`, `c_faddress`, `c_email`, `c_vat`, `c_expire_vat`, `c_customertype`) VALUES
+(52, 'امیرعلی', 'شبانی', 'هشکی', '3040338323', '214452533652', '03434234145', '03434234145', '09136522305', 'رفسنجان خیابان طالقانی کوچه 62', 'داوران شهرک صنعتی', 'amirali.heshki@gmail.com', 'yes', '1398/2/31', 'مشتری'),
+(54, 'محمد', 'اسماعیلی', 'گراتک', '3020525120', '54215525', '03434264167', '03434234145', '09134933739', 'رفسنجان خیابان طالقانی کوچه 62', 'معراج', 'amirali.heshki@gmail.com', 'yes', '1397/5/10', 'تامین کننده'),
+(55, 'سید مرتضی', 'مهدوی', 'گراتک', '3040307193', '7714656848', '03434254167', '03434256363', '09138630341', 'کرمان', 'ی', 'asdas@yahoo.com', 'yes', '1398/7/21', 'مشتری'),
+(57, 'ندارد', 'ندارد', 'ندارد', 'ندارد', 'ندارد', 'ندارد', 'ندارد', 'ندارد', 'ندارد', 'ندارد', 'ندارد', 'yes', '1398/2/10', 'ندارد'),
+(58, 'مرتضی', 'مهدوی', 'گراتک', '3040307193', '', '09138630341', '', '09138630341', 'ی', 'ص', 'asda@yahoo.com', 'yes', '1398/6/20', 'مشتری'),
+(59, 'حبیب', 'پیله وری', 'پتروسامان آذر', '3040307193', '3052', '034353636', '', '09123729651', 'س', 'ی', 'dasd@yahoo.com', 'yes', '1398/10/20', 'مشتری');
 
 -- --------------------------------------------------------
 
@@ -115,7 +118,12 @@ INSERT INTO `factor` (`f_id`, `c_id`, `f_date`, `u_id`) VALUES
 (20, 52, '1398/1/16', 1),
 (21, 52, '1398/1/20', 1),
 (22, 52, '1398/1/21', 1),
-(23, 54, '1398/1/21', 1);
+(23, 54, '1398/1/21', 1),
+(24, 55, '1398/2/7', 1),
+(25, 52, '1398/2/7', 1),
+(26, 52, '1398/2/16', 1),
+(27, 55, '1398/2/9', 1),
+(28, 54, '1398/2/14', 1);
 
 -- --------------------------------------------------------
 
@@ -140,20 +148,31 @@ CREATE TABLE `factor_body` (
   `fb_ready_bar` tinyint(1) DEFAULT '0' COMMENT 'آماده تحویل',
   `fb_get_sample` tinyint(1) DEFAULT '0' COMMENT 'نمونه برداری',
   `fb_verify_bar` tinyint(1) DEFAULT '0' COMMENT 'تایید بارگیری',
-  `fb_exit_doc` tinyint(1) DEFAULT '0' COMMENT 'حواله خروج'
+  `fb_exit_doc` tinyint(1) DEFAULT '0' COMMENT 'حواله خروج',
+  `fb_exit_bar` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'تایید خروج بار',
+  `fb_dname` varchar(50) NOT NULL COMMENT 'نام راننده',
+  `fb_dfamily` varchar(15) NOT NULL COMMENT 'نام خانوادگی راننده',
+  `fb_mellicode` varchar(15) NOT NULL COMMENT 'کد ملی راننده',
+  `fb_car` varchar(15) NOT NULL COMMENT 'ماشین',
+  `fb_plaque` varchar(25) NOT NULL COMMENT 'پلاک',
+  `fb_mobile` varchar(11) NOT NULL COMMENT 'موبایل'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `factor_body`
 --
 
-INSERT INTO `factor_body` (`fb_id`, `f_id`, `p_id`, `cat_id`, `fb_quantity`, `fb_price`, `fb_verify_admin1`, `fb_send_customer`, `fb_verify_customer`, `fb_verify_docs`, `fb_verify_finan`, `fb_verify_admin2`, `fb_wait_bar`, `fb_ready_bar`, `fb_get_sample`, `fb_verify_bar`, `fb_exit_doc`) VALUES
-(14, 22, 1, 351, 8, 2500, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(15, 22, 1, 351, 8, 2500, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(16, 22, 1, 351, 8, 2500, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(17, 23, 1, 351, 2522, 2511, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(18, 23, 1, 351, 2522, 2511, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(19, 23, 1, 351, 2522, 2511, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+INSERT INTO `factor_body` (`fb_id`, `f_id`, `p_id`, `cat_id`, `fb_quantity`, `fb_price`, `fb_verify_admin1`, `fb_send_customer`, `fb_verify_customer`, `fb_verify_docs`, `fb_verify_finan`, `fb_verify_admin2`, `fb_wait_bar`, `fb_ready_bar`, `fb_get_sample`, `fb_verify_bar`, `fb_exit_doc`, `fb_exit_bar`, `fb_dname`, `fb_dfamily`, `fb_mellicode`, `fb_car`, `fb_plaque`, `fb_mobile`) VALUES
+(14, 22, 1, 351, 8, 2500, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 'امیر', 'علی بیگی', '3052305418', 'بنز', 'الف 51 ی ایران 65', '09138630341'),
+(15, 22, 1, 351, 8, 2500, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 'سعید', 'سلطانی', '3052305415', 'سمند', 'الف 25 ی', '09125556565'),
+(16, 22, 1, 351, 8, 2500, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', '', '', ''),
+(17, 23, 1, 351, 2522, 2511, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', '', '', ''),
+(18, 23, 1, 351, 2522, 2511, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', '', '', ''),
+(19, 23, 1, 351, 2522, 2511, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', '', '', ''),
+(20, 24, 1, 352, 250000, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 'رضا', 'حمیدی', '3052306363', 'مرسدس', 'الف س', '091125236'),
+(21, 26, 5, 353, 350000, 2100, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 'مصطفی', 'عرب', '3040188828', 'بنز', 'الف 51 ی ایران 65', '09132920360'),
+(23, 27, 5, 353, 1250, 1950, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', '', '', ''),
+(24, 28, 5, 353, 300000, 2700, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 'امیر', 'حمیدی', '305230517', 'بنز', 'الف 51 ی ایران 65', '09138630341');
 
 -- --------------------------------------------------------
 
@@ -165,7 +184,7 @@ CREATE TABLE `factor_log` (
   `l_id` int(11) NOT NULL,
   `u_id` int(11) DEFAULT NULL,
   `l_date` varchar(16) CHARACTER SET utf8 DEFAULT NULL,
-  `f_id` int(11) DEFAULT NULL,
+  `fb_id` int(11) DEFAULT NULL,
   `l_details` text CHARACTER SET utf8
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -173,47 +192,20 @@ CREATE TABLE `factor_log` (
 -- Dumping data for table `factor_log`
 --
 
-INSERT INTO `factor_log` (`l_id`, `u_id`, `l_date`, `f_id`, `l_details`) VALUES
-(1, 1, '$l_date', 1, ''),
-(2, 1, '1398/01/22 18:45', 1, ''),
-(3, 1, '1398/01/22 18:46', 1, ''),
-(4, 1, '1398/01/22 18:46', 1, ''),
-(5, 1, '1398/01/22 18:47', 1, ''),
-(6, 1, '1398/01/22 18:47', 1, 'test'),
-(7, 1, '1398/01/22 19:46', 1, 'dsadasda'),
-(8, 1, '1398/01/22 19:46', 1, 'dsadasda'),
-(9, 1, '1398/01/22 19:48', 1, 'salam'),
-(10, 1, '1398/01/23 02:02', 1, 'salam'),
-(11, 1, '1398/01/23 02:10', 1, ''),
-(12, 1, '1398/01/23 02:10', 1, ''),
-(13, 1, '1398/01/23 02:11', 1, ''),
-(14, 1, '1398/01/23 02:11', 1, ''),
-(15, 1, '1398/01/23 02:11', 1, ''),
-(16, 1, '1398/01/23 02:11', 1, ''),
-(17, 1, '1398/01/23 02:11', 1, ''),
-(18, 1, '1398/01/23 02:12', 1, ''),
-(19, 1, '1398/01/23 02:13', 1, ''),
-(20, 1, '1398/01/23 02:17', 1, ''),
-(21, 1, '1398/01/23 02:17', 1, ''),
-(22, 1, '1398/01/23 02:17', 1, ''),
-(23, 1, '1398/01/23 02:18', 1, ''),
-(24, 1, '1398/01/23 02:18', 1, ''),
-(25, 1, '1398/01/23 02:21', 1, ''),
-(26, 1, '1398/01/23 02:21', 1, 'سشسشس'),
-(27, 1, '1398/01/23 02:23', 1, 'سشسشس'),
-(28, 1, '1398/01/23 02:23', 1, 'سشسشسش'),
-(29, 1, '1398/01/24 09:55', 1, 'سشسشسش'),
-(30, 1, '1398/01/24 10:00', 1, 'سشسشسش'),
-(31, 1, '1398/01/24 10:14', 1, 'سشسشسش'),
-(32, 1, '1398/01/24 10:14', 1, 'سش'),
-(33, 1, '1398/01/24 10:14', 1, 'شس'),
-(34, 1, '1398/01/24 10:14', 1, 'یشسیشس'),
-(35, 1, '1398/01/24 10:14', 1, 'سشسی'),
-(36, 1, '1398/01/24 10:14', 1, 'یشیش'),
-(37, 1, '1398/01/24 10:15', 1, 'یشیسشس'),
-(38, 1, '1398/01/24 10:15', 1, 'یسشیش'),
-(39, 1, '1398/01/24 16:26', 1, 'یفیبل'),
-(40, 1, '1398/01/24 20:30', 1, 'لنتل');
+INSERT INTO `factor_log` (`l_id`, `u_id`, `l_date`, `fb_id`, `l_details`) VALUES
+(1, 1, '1398/02/10 15:39', 19, 'hhh'),
+(2, 1, '1398/02/10 15:43', 19, 'مشکلی ندارد'),
+(3, 1, '1398/02/14 13:15', 24, 'تایید'),
+(4, 1, '1398/02/14 13:17', 24, 'h'),
+(5, 1, '1398/02/14 13:19', 24, 'ر'),
+(6, 1, '1398/02/14 13:21', 24, '0'),
+(7, 1, '1398/02/14 13:21', 24, '3'),
+(8, 1, '1398/02/14 13:22', 24, 'اا'),
+(9, 1, '1398/02/14 13:24', 24, 'بیب'),
+(10, 1, '1398/02/14 13:24', 24, 'ببب'),
+(11, 1, '1398/02/14 13:25', 24, 'ب'),
+(12, 1, '1398/02/14 13:25', 24, 'ل'),
+(13, 1, '1398/02/14 13:25', 24, 'ف');
 
 -- --------------------------------------------------------
 
@@ -224,7 +216,6 @@ INSERT INTO `factor_log` (`l_id`, `u_id`, `l_date`, `f_id`, `l_details`) VALUES
 CREATE TABLE `product` (
   `p_id` int(11) NOT NULL,
   `p_name` varchar(35) DEFAULT NULL,
-  `cat_id` varchar(20) DEFAULT NULL,
   `p_unit` varchar(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -232,9 +223,10 @@ CREATE TABLE `product` (
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`p_id`, `p_name`, `cat_id`, `p_unit`) VALUES
-(1, 'کک صنعتی', '351', 'کیلوگرم'),
-(4, 'کک صنعتی dfsdf', '352', 'کیلوگرم');
+INSERT INTO `product` (`p_id`, `p_name`, `p_unit`) VALUES
+(1, 'کک صنعتی', 'کیلوگرم'),
+(4, 'کک صنعتی dfsdf', 'کیلوگرم'),
+(5, 'گرافیت', '100');
 
 -- --------------------------------------------------------
 
@@ -246,7 +238,7 @@ CREATE TABLE `stock` (
   `s_id` int(11) NOT NULL COMMENT 'کد ردیف',
   `p_id` int(11) DEFAULT NULL COMMENT 'کد محصول',
   `cat_id` int(11) NOT NULL COMMENT 'کد دسته بندی',
-  `s_amount` varchar(35) DEFAULT NULL COMMENT 'مقدار',
+  `s_amount` int(11) DEFAULT NULL COMMENT 'مقدار',
   `s_eprice` double NOT NULL COMMENT 'قیمت تمام شده',
   `s_sprice` double NOT NULL COMMENT 'قیمت فروش'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -256,8 +248,8 @@ CREATE TABLE `stock` (
 --
 
 INSERT INTO `stock` (`s_id`, `p_id`, `cat_id`, `s_amount`, `s_eprice`, `s_sprice`) VALUES
-(2, 1, 352, '1500', 12500000, 1400000),
-(6, 10, 0, '15450', 0, 0);
+(2, 1, 352, 3500, 12500000, 1400000),
+(7, 5, 353, 360000, 2500, 2650);
 
 -- --------------------------------------------------------
 
@@ -270,8 +262,10 @@ CREATE TABLE `transfer_list` (
   `u_id` int(11) DEFAULT NULL,
   `fb_id` int(11) DEFAULT NULL,
   `dr_name` varchar(40) CHARACTER SET utf8 DEFAULT NULL,
+  `dr_family` varchar(25) CHARACTER SET utf8 NOT NULL,
   `dr_national` varchar(10) CHARACTER SET utf8 DEFAULT NULL,
   `dr_mobile` varchar(11) CHARACTER SET utf8 DEFAULT NULL,
+  `dr_car` varchar(25) CHARACTER SET utf8 NOT NULL,
   `dr_plaque` varchar(9) CHARACTER SET utf8 DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -279,10 +273,23 @@ CREATE TABLE `transfer_list` (
 -- Dumping data for table `transfer_list`
 --
 
-INSERT INTO `transfer_list` (`tl_id`, `u_id`, `fb_id`, `dr_name`, `dr_national`, `dr_mobile`, `dr_plaque`) VALUES
-(1, 1, 1, 'امام راننده ها', '3255352633', '09136522541', '96ی296-65'),
-(2, 1, 14, 'یشس', 'یشسیش', 'یشس', 'یشیسش'),
-(3, 1, 14, 'امام راننده ها', '3255352633', '09136522541', '96ی296-65');
+INSERT INTO `transfer_list` (`tl_id`, `u_id`, `fb_id`, `dr_name`, `dr_family`, `dr_national`, `dr_mobile`, `dr_car`, `dr_plaque`) VALUES
+(1, 1, 1, 'امام راننده ها', '', '3255352633', '09136522541', '', '96ی296-65'),
+(2, 1, 14, 'یشس', '', 'یشسیش', 'یشس', '', 'یشیسش'),
+(3, 1, 14, 'امام راننده ها', '', '3255352633', '09136522541', '', '96ی296-65'),
+(4, 1, 14, 'علی رضایی', '', '3052305417', '09138630341', '', 'الف ی 256'),
+(5, 1, 14, 'علی رضایی', '', '3052305417', '09138630341', '', 'الف ی 256'),
+(6, 1, 14, 'علی رضایی', '', '3052305417', '09138630341', '', 'الف ی 256'),
+(7, 1, 14, 'علی رضایی', '', '3052305417', '09138630341', '', 'الف ی 256'),
+(8, 1, 14, 'علی رضایی', '', '3052305417', '09138630341', '', 'الف ی 256'),
+(9, 1, 14, 'علی رضایی', '', '3052305417', '09138630341', '', 'الف ی 256'),
+(10, 1, 14, 'علی رضایی', '', '3052305417', '09138630341', '', 'الف ی 256'),
+(11, 1, 14, 'علی رضایی', '', '3052305417', '09138630341', '', 'الف ی 256'),
+(12, 1, 14, 'علی رضایی', '', '3052305417', '09138630341', '', 'الف ی 256'),
+(13, 1, 14, 'علی رضایی', '', '3052305417', '09138630341', '', 'الف ی 256'),
+(14, 1, 14, 'علی رضایی', '', '3052305417', '09138630341', '', 'الف ی 256'),
+(15, 1, 14, 'سید علی مجیدی', '', '3052305417', '09138885252', '', 'الف ایران'),
+(16, 1, 20, 'مجید', 'مجیدی', '3052305417', '09138630341', 'بنز', 'الف ی 256');
 
 -- --------------------------------------------------------
 
@@ -294,7 +301,7 @@ CREATE TABLE `user` (
   `u_id` int(11) NOT NULL,
   `u_name` varchar(35) CHARACTER SET utf8 DEFAULT NULL,
   `u_family` varchar(35) CHARACTER SET utf8 DEFAULT NULL,
-  `u_post` varchar(20) CHARACTER SET utf8 DEFAULT NULL,
+  `u_level` varchar(20) CHARACTER SET utf8 DEFAULT NULL,
   `u_username` varchar(30) CHARACTER SET utf8 DEFAULT NULL,
   `u_password` varchar(35) CHARACTER SET utf8 DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -303,8 +310,9 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`u_id`, `u_name`, `u_family`, `u_post`, `u_username`, `u_password`) VALUES
-(1, 'امیرعلی', 'شبانی', 'مدیر کل', 'heshki', '2305');
+INSERT INTO `user` (`u_id`, `u_name`, `u_family`, `u_level`, `u_username`, `u_password`) VALUES
+(1, 'امیرعلی', 'شبانی', 'مدیر کل', 'admin', 'admin'),
+(2, 'سید مرتضی', 'مهدوی', 'مدیر', 'mori', 'mori');
 
 --
 -- Indexes for dumped tables
@@ -372,55 +380,55 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=353;
+  MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=354;
 
 --
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `factor`
 --
 ALTER TABLE `factor`
-  MODIFY `f_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `f_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `factor_body`
 --
 ALTER TABLE `factor_body`
-  MODIFY `fb_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'کد ردیف', AUTO_INCREMENT=20;
+  MODIFY `fb_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'کد ردیف', AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `factor_log`
 --
 ALTER TABLE `factor_log`
-  MODIFY `l_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `l_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `stock`
 --
 ALTER TABLE `stock`
-  MODIFY `s_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'کد ردیف', AUTO_INCREMENT=7;
+  MODIFY `s_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'کد ردیف', AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `transfer_list`
 --
 ALTER TABLE `transfer_list`
-  MODIFY `tl_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `tl_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `u_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `u_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

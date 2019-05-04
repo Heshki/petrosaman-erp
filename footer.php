@@ -1,3 +1,4 @@
+		<div class="control-sidebar-bg"></div>
 		<footer class="main-footer">
 			<div class="pull-right hidden-xs">
 				<b>نسخه</b> 1
@@ -7,7 +8,6 @@
 		<script>
 			$.widget.bridge('uibutton', $.ui.button);
 		</script>
-		
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 		<script src="<?php get_url(); ?>plugins/morris/morris.min.js"></script>
 		<script src="<?php get_url(); ?>plugins/sparkline/jquery.sparkline.min.js"></script>
@@ -25,15 +25,16 @@
 		<script src="<?php get_url(); ?>dist/js/pages/dashboard.js"></script>
 		<script src="<?php get_url(); ?>dist/js/pages/dashboard2.js"></script>
 		<script src="<?php get_url(); ?>dist/js/demo.js"></script>
-		<script src="<?php get_url(); ?>bootstrap/js/bootstrap.min.js"></script>
+		<!--script src="<?php get_url(); ?>bootstrap/js/bootstrap.min.js"></script-->
 		<script src="<?php get_url(); ?>plugins/datatables/jquery.dataTables.min.js"></script>
 		<script src="<?php get_url(); ?>plugins/datatables/dataTables.bootstrap.min.js"></script>
 		<script src="<?php get_url(); ?>plugins/fastclick/fastclick.min.js"></script>
 		<script src="<?php get_url(); ?>dist/js/persianDatepicker.min.js"></script>
-
+		
 		<script type="text/javascript">
 			$(".select2").select2();
 			$("#f_date, #simpleLabel").persianDatepicker();
+			$("#c_date, #simpleLabel").persianDatepicker();
 		</script>
 	</body>
 </html>

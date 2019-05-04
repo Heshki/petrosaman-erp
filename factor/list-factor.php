@@ -1,14 +1,15 @@
-<?php
-$title = 'لیست محصولات'; include"../header.php"; include"../nav.php"; include"functions.php";
-require_once"../customer/functions.php";
+<?php include"../header.php"; include"../nav.php"; include"functions.php";
+	require_once"../customer/functions.php";
 	$res = list_factor_body();
+	
 	if(isset($_POST['verify_submit'])) {
 		$verify = $_POST['type_confirm'];
 		$fb_id_verify = $_POST['fb_id'];
 		$l_details = $_POST['l_details'];
-		update_a_row_fb($verify,$fb_id_verify);
-		update_a_row_log($l_details);
+		update_a_row_fb($verify, $fb_id_verify);
+		update_a_row_log($fb_id_verify, $l_details);
 	}
+	
 	if(isset($_POST['f_update'])) {
 		$array = array();
 		array_push($array, $_POST['p_id']);
@@ -21,23 +22,7 @@ require_once"../customer/functions.php";
 ?> 
 <div class="content-wrapper">
 	
-	<section class="content-header">
-		<ol class="breadcrumb">
-			<li><a href="<?php get_url(); ?>index.php"><i class="fa fa-dashboard"></i> خانه</a></li>
-			<li><a href="#">محصولات</a></li>
-			<li class="active">لیست محصولات</li>
-		</ol>
-	</section>
-		
-	<section class="content-header">
-		<div id="page-wrapper">
-			<div class="row">
-				<div class="col-lg-12">
-					<h1 class="page-header">لیست فاکتورها</h1>
-				</div>
-			</div>
-		</div>
-	</section>
+	<?php breadcrumb("لیست پیشنهادات فروش"); ?>
 
 	<section class="content">
 		<div class="row">
@@ -138,7 +123,8 @@ require_once"../customer/functions.php";
 									</td>
 									<td>
 										<form action="" method="post" onSubmit="if(!confirm('آیا از انجام این عملیات اطمینان دارید؟')){return false;}">
-											<a class="btn btn-info btn-xs" href="edit-factor.php?id=<?php echo $row['fb_id']; ?>">ویرایش</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											<!--a class="btn btn-info btn-xs" href="edit-factor.php?id=<?php //echo $row['fb_id']; ?>">ویرایش</a-->
+											<a class="btn btn-info btn-xs" href="log-factor.php?id=<?php echo $row['fb_id']; ?>">تاریخچه</a>
 											<button class="btn btn-danger btn-xs" type="submit" name="delete-list" id="delete-list">حذف</button>
 											<input class="hidden" type="text" name="delete-text" id="delete-text" value="<?php echo $row['fb_id']; ?>">
 											<?php
@@ -161,12 +147,12 @@ require_once"../customer/functions.php";
 									<th>#</th>
 									<th>فاکتور</th>
 									<th>مشتری</th>
-									<th>تایید 1 مدیر</th>
+									<th>تایید ۱ مدیر</th>
 									<th>ارسال مشتری</th>
 									<th>تایید مشتری</th>
 									<th>اسناد تایید</th>
 									<th>تایید مالی</th>
-									<th>تایید 2 مدیر</th>
+									<th>تایید ۲ مدیر</th>
 									<th>منتظر بارگیری</th>
 									<th>آماده تحویل</th>
 									<th>نمونه برداری</th>
@@ -181,7 +167,7 @@ require_once"../customer/functions.php";
 				</div>
 			</div>
 		</div>
-	s</section>
+	</section>
 </div>
 <div class="control-sidebar-bg"></div>
 

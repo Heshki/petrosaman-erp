@@ -29,7 +29,7 @@
 							<div class="item col-md-4">
 								<div class="margin-tb input-group-prepend">
 									<span class="input-group-text">شماره محصول</span>
-									<span>  <?php echo $p_id; ?></span>
+									<span><?php echo $p_id; ?></span>
 								</div>
 							</div>
 							<div class="item col-md-4">

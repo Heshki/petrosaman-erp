@@ -4,22 +4,11 @@ require_once"../customer/functions.php";
 require_once"../product/functions.php";
 require_once"../category/functions.php";
 ?>
-<script type="text/javascript" src="<?php get_url(); ?>factor/js/factor.js"></script>
+	<script type="text/javascript" src="<?php get_url(); ?>factor/js/factor.js"></script>
 	<div class="content-wrapper">
-		<section class="content-header">
-			<div id="page-wrapper">
-				<div class="row">
-					<div class="col-lg-12">
-						<h1 class="page-header">ثبت فاکتور جدید</h1>
-					</div>
-				</div>
-			</div>
-			<ol class="breadcrumb">
-				<li><a href="<?php get_url(); ?>index.php"><i class="fa fa-dashboard"></i> خانه</a></li>
-				<li><a href="#">محصولات</a></li>
-				<li class="active">ثبت محصول</li>
-			</ol>
-		</section>
+		
+		<?php breadcrumb("پیشنهاد فروش"); ?>
+		
 		<section class="content">
 			<div id="details" class="col-xs-12">	
 				<?php
@@ -32,7 +21,7 @@ require_once"../category/functions.php";
 					</div>
 					<?php
 				}
-
+				
 				if(isset($_POST['set_fb'])){
 					$f_id = $_GET['f_id'];
 					$p_id = $_POST['p_id'];
@@ -52,7 +41,7 @@ require_once"../category/functions.php";
 					</div>
 					<?php
 				}
-						
+				
 				if(isset($_POST['f_submit'])){
 					$c_id = $_POST['c_id'];
 					$f_date = $_POST['f_date'];
@@ -108,7 +97,7 @@ require_once"../category/functions.php";
 					<div class="col-md-12">
 						<div class="box">
 							<div class="box-header">
-								<h3 class="box-title">جدول بدنه فاکتور</h3>
+								<h3 class="box-title">بدنه فاکتور</h3>
 							</div>
 							<div class="box-body table-responsive no-padding">
 								<table class="table table-hover">
@@ -117,47 +106,45 @@ require_once"../category/functions.php";
 											<th>#</th>
 											<th>نام محصول</th>
 											<th>دسته بندی</th>
-												<th>مقدار</th>
-												<th>قیمت</th>
-												<th>حذف</th>
+											<th>مقدار</th>
+											<th>قیمت</th>
+											<th>حذف</th>
+										</tr>
+										<?php
+										$i = 1;
+										$list = get_factor_body($f_id);
+										if(count($list)){
+											foreach($list as $l){ ?>
+											<tr>                   
+												<td><?php echo per_number($i); ?></td>
+												<td><?php echo get_product_name($l['p_id']); ?></td>
+												<td><?php echo per_number(get_category_name($l['cat_id'])); ?></td>
+												<td><?php echo per_number(number_format($l['fb_quantity'])); ?></td>
+												<td><?php echo per_number(number_format($l['fb_price'])); ?></td>
+												<td>
+													<form onSubmit="if(!confirm('آیا از انجام این عملیات اطمینان دارید؟')){return false;}" action="" method="post">
+														<button name="del-fb" value="<?php echo $l['fb_id']; ?>" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></button>
+													</form>
+												</td>
 											</tr>
 											<?php
-											$i = 1;
-											$list = get_factor_body($f_id);
-											if(count($list)){
-												foreach($list as $l){
-													?>
-													<tr>                   
-														<td><?php echo per_number($i); ?></td>
-														<td><?php echo get_product_name($l['p_id']); ?></td>
-														<td><?php echo per_number(get_category_name($l['cat_id'])); ?></td>
-														<td><span class="label label-warning"><?php echo per_number($l['fb_quantity']); ?></span></td>
-														<td><?php echo per_number(number_format($l['fb_price'])); ?></td>
-														<td>
-															<form onSubmit="if(!confirm('آیا از انجام این عملیات اطمینان دارید؟')){return false;}" action="" method="post">
-																<button name="del-fb" value="<?php echo $l['fb_id']; ?>" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></button>
-															</form>
-														</td>
-													</tr>
-													<?php
-													$i++;
-												}
-											} else {
-												?>
-												<tr>                   
-													<td colspan="5" class="text-center">موردی جهت نمایش موجود نیست</td>
-												</tr>
-												<?php												
+											$i++;
 											}
-											?>
-										</tbody>
-									</table>
-								</div>
+										} else { ?>
+											<tr>                   
+												<td colspan="6" class="text-center">موردی جهت نمایش موجود نیست</td>
+											</tr>
+										<?php												
+										}
+										?>
+									</tbody>
+								</table>
 							</div>
 						</div>
 					</div>
+				</div>
 					
-					<form action="" method="post">
+				<form action="" method="post">
 					<div class="row">
 						<h3 class="col-md-12">بدنه فاکتور</h3>
 						<div class="item col-md-3">
@@ -189,13 +176,10 @@ require_once"../category/functions.php";
 							<button type="submit" class="btn btn-success btn-lg" name="set_fb">ثبت ردیف</button>
 						</div>
 					</div>
-					</form>
-					
-					
-					
-					<?php
-					} ?>
-				</div>
+				</form>	
+				<?php
+				} ?>
+			</div>
 		</section>
 	</div>
 <?php include"../left-nav.php"; include"../footer.php"; ?>

@@ -13,23 +13,25 @@ function insert_transfer_list($array){
 	$u_id = $array[0];
 	$fb_id = $array[1];
 	$dr_name = $array[2];
-	$dr_national = $array[3];
-	$dr_mobile = $array[4];
-	$dr_plaque = $array[5];
-	$sql = "insert into transfer_list(u_id, fb_id, dr_name, dr_national, dr_mobile, dr_plaque) ";
-	$sql .= "values ($u_id, $fb_id, '$dr_name', '$dr_national', '$dr_mobile', '$dr_plaque')";
+	$dr_family = $array[3];
+	$dr_national = $array[4];
+	$dr_mobile = $array[5];
+	$dr_car = $array[6];
+	$dr_plaque = $array[7];
+	$sql = "insert into transfer_list(u_id, fb_id, dr_name, dr_family, dr_national, dr_mobile, dr_car, dr_plaque) ";
+	$sql .= "values ($u_id, $fb_id, '$dr_name', '$dr_family', '$dr_national', '$dr_mobile', '$dr_car', '$dr_plaque')";
 	$res = ex_query($sql);
 	return $res;
 }
 
 function list_exit_doc() {
-	$sql = "select * from factor_body inner join product on product.p_id = factor_body.p_id inner join factor on factor.f_id = factor_body.f_id inner join customer on customer.c_id = factor.c_id where fb_exit_doc = 1";
+	$sql = "select * from factor_body inner join transfer_list on factor_body.fb_id = transfer_list.fb_id where factor_body.fb_exit_doc = 1";
 	$res = get_select_query($sql);
 	return $res;
 }
 
-function form_exit_doc($f_id) {
-	$sql = "select * from factor_body inner join product on product.p_id = factor_body.p_id inner join factor on factor.f_id = factor_body.f_id inner join customer on customer.c_id = factor.c_id inner join transfer_list on factor_body.fb_id = transfer_list.fb_id where f_id = $f_id";
+function form_exit_doc($fb_id) {
+	$sql = "select * from factor_body inner join product on product.p_id = factor_body.p_id inner join factor on factor.f_id = factor_body.f_id inner join customer on customer.c_id = factor.c_id inner join transfer_list on factor_body.fb_id = transfer_list.fb_id where fb_id = $fb_id";
 	$res = get_select_query($sql);
 	return $res;
 }

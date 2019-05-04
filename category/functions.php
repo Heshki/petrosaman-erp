@@ -37,7 +37,7 @@ function show_category_as_select($cat_id = 0){ ?>
 		if(count($res)>0){
 			foreach($res as $row){
 			?>
-			<option <?php if($row['cat_id']==$cat_id)echo "selected"; ?> value="<?php echo $row['cat_id']; ?>"><?php echo $row['cat_name']; ?></option>
+			<option <?php if($row['cat_id']==$cat_id)echo "selected"; ?> value="<?php echo $row['cat_id']; ?>"><?php echo per_number($row['cat_name']); ?></option>
 			<?php
 			}
 		} ?>

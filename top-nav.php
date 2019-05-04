@@ -199,27 +199,16 @@
 						<li class="user-header">
 							<img src="<?php get_url(); ?>dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 							<p>
-								محمد شریفی - توسعه دهنده سمت کاربر
-								<small>Member since Nov. 2012</small>
+								<?php echo $_SESSION['name'] . " " . $_SESSION['family']; ?>
+								<small><?php echo $_SESSION['level']; ?></small>
 							</p>
-						</li>
-						<li class="user-body">
-							<div class="col-xs-4 text-center">
-								<a href="#">Followers</a>
-							</div>
-							<div class="col-xs-4 text-center">
-								<a href="#">Sales</a>
-							</div>
-							<div class="col-xs-4 text-center">
-								<a href="#">Friends</a>
-							</div>
 						</li>
 						<li class="user-footer">
 							<div class="pull-right">
 								<a href="#" class="btn btn-default btn-flat">پروفایل</a>
 							</div>
 							<div class="pull-left">
-								<a href="#" class="btn btn-default btn-flat">خروج</a>
+								<a href="<?php get_url(); ?>index.php?logout=yes" class="btn btn-default btn-flat">خروج</a>
 							</div>
 						</li>
 					</ul>

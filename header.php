@@ -21,7 +21,7 @@ if(isset($_GET['logout']) || !isset($_SESSION['user_id'])){
     <?php
 } ?>
 <!DOCTYPE html>
-<html>
+<html lang="fa">
     <head>
         <meta charset="utf-8">
         <title>پترو سامان | <?php echo $title ?></title>
@@ -54,4 +54,4 @@ if(isset($_GET['logout']) || !isset($_SESSION['user_id'])){
 	    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
         <script src="<?php get_url(); ?>bootstrap/js/bootstrap.min.js"></script>
     </head>
-<body class="skin-blue sidebar-mini">
+	<body class="skin-blue sidebar-mini">

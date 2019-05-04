@@ -1,4 +1,13 @@
 <?php
+function timeDiff($time2, $time1){
+	$list2 = explode('/', $time2);
+    $time2 = jalali_to_gregorian($list2[0], $list2[1], $list2[2], '-');
+    $list1 = explode('/', $time1);
+    $time1 = jalali_to_gregorian($list1[0], $list1[1], $list1[2], '-');
+    $diff = strtotime($time2) - strtotime($time1);
+	return ($diff / 3600) / 24;
+}
+
 function alert($type, $msg){ ?>
 	<div class="alert alert-<?php echo $type; ?> alert-dismissible">
         <button type="button" class="close pull-left" data-dismiss="alert" aria-hidden="true">×</button>
@@ -40,4 +49,25 @@ function is_admin($level){
         return false;
 }
 
+function send_sms($number, $msg){
+	$url = "37.130.202.188/services.jspd";	
+	$rcpt_nm = array($number);
+	$param = array(
+		'uname' => 'mahdavi1456',
+		'pass' => 'm54692764o',
+		'from' => '+985000125475',
+		'message' => $msg,
+		'to' => json_encode($rcpt_nm),
+		'op' => 'send'
+	);				
+	$handler = curl_init($url);             
+	curl_setopt($handler, CURLOPT_CUSTOMREQUEST, "POST");
+	curl_setopt($handler, CURLOPT_POSTFIELDS, $param);                       
+	curl_setopt($handler, CURLOPT_RETURNTRANSFER, true);
+	$response2 = curl_exec($handler);
+		
+	$response2 = json_decode($response2);
+	$res_code = $response2[0];
+	$res_data = $response2[1];	
+}
 ?>
