@@ -66,6 +66,14 @@
 						<li class="<?php check_active('list-factor.php'); ?>"><a href="<?php get_url(); ?>factor/list-factor.php"><i class="fa fa-circle-o"></i>لیست فاکتورها</a></li>
 			  		</ul>
 				</li>
+				
+				<li class="<?php check_active('reg-factor.php'); check_active('list-factor.php'); check_active('log-factor.php'); ?> treeview">
+			  		<a href="#"><i class="fa fa-files-o"></i><span>فاکتور خرید</span></a>
+			  		<ul class="treeview-menu">
+						<li class="<?php check_active('reg-buy.php'); ?>"><a href="<?php get_url(); ?>buy/reg-buy.php"><i class="fa fa-circle-o"></i>ثبت فاکتور</a></li>
+						<li class="<?php check_active('list-buy.php'); ?>"><a href="<?php get_url(); ?>buy/list-buy.php"><i class="fa fa-circle-o"></i>لیست فاکتورها</a></li>
+			  		</ul>
+				</li>
 
 				<li class="<?php check_active('list-storage.php'); ?> treeview">
 			  		<a href="#"><i class="fa fa-files-o"></i><span>انبار</span></a>
@@ -77,6 +85,12 @@
 			  		<a href="#"><i class="fa fa-files-o"></i><span>کاربران</span></a>
 			  		<ul class="treeview-menu">
 						<li class="<?php check_active('list-user.php'); ?>"><a href="<?php get_url(); ?>user/list-user.php"><i class="fa fa-circle-o"></i>لیست کاربران</a></li>
+			  		</ul>
+				</li>
+				<li class="<?php check_active('list-driver.php'); ?> treeview">
+			  		<a href="#"><i class="fa fa-files-o"></i><span>راننده ها</span></a>
+			  		<ul class="treeview-menu">
+						<li class="<?php check_active('list-driver.php'); ?>"><a href="<?php get_url(); ?>driver/list-driver.php"><i class="fa fa-circle-o"></i>لیست راننده ها</a></li>
 			  		</ul>
 				</li>
 				
