@@ -1,4 +1,10 @@
-<?php include"../header.php"; include"../nav.php"; include"functions.php";?>
+<?php $title = "لیست راننده ها"; include"../header.php"; include"../nav.php"; include"functions.php";
+	$asb = list_driver();
+	if(isset($_GET['dr_id'])){
+		$dr_id = $_GET['dr_id'];
+		$asd = select_a_driver($dr_id);
+	}
+?>
 	<div class="content-wrapper">
 	
 		<section class="content-header">
@@ -89,7 +95,7 @@
 											array_push($array, $_POST['dr_plate']);
 											array_push($array, $_POST['dr_mobile']);
 											array_push($array, $_POST['dr_status']);
-											insert_user($array);
+											insert_driver($array);
 											echo "<meta http-equiv='refresh' content='0'/>";
 										}
 										if(isset($_POST['dr_edit'])) {
@@ -103,7 +109,7 @@
 											array_push($array, $_POST['dr_plate']);
 											array_push($array, $_POST['dr_mobile']);
 											array_push($array, $_POST['dr_status']);
-											update_user($array);
+											update_driver($array);
 											echo "<meta http-equiv='refresh' content='0'/>";
 										}
 										?>
@@ -138,13 +144,13 @@
 										<td><?php echo $a['dr_status']; ?></td>
 										<td>
 											<form action="" method="post" onSubmit="if(!confirm('آیا از انجام این عملیات اطمینان دارید؟')){return false;}">
-												<a href="list-user.php?dr_id=<?php echo $a['dr_id']; ?>">مشاهده</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												<button class="btn btn-danger" type="submit" name="delete-user">حذف</button>
+												<a href="list-driver.php?dr_id=<?php echo $a['dr_id']; ?>">مشاهده</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												<button class="btn btn-danger" type="submit" name="delete-driver">حذف</button>
 												<input class="hidden" type="text" name="delete-text" value="<?php echo $a['dr_id']; ?>">
 												<?php
-												if(isset($_POST['delete-user'])){
+												if(isset($_POST['delete-driver'])){
 													$u_id = $_POST['delete-text'];
-													delete_user($u_id);
+													delete_driver($u_id);
 													echo "<meta http-equiv='refresh' content='0'/>";
 													exit();
 												}
