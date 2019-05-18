@@ -50,28 +50,6 @@ function insert_factor_buy($array){
 	return $res;
 }
 
-function list_factor_log() {
-	$sql = "select * from factor inner join factor_log on factor.f_id = factor_log.f_id inner join users on users.u_id = factor.u_id";
-	$res = get_select_query($sql);
-	return $res;
-}
-
-function insert_factor_log($array){
-	$u_id = $array[0];
-	$l_date = $array[1];
-	$f_id = $array[2];
-	$l_details = $array[3];
-	$sql = "insert into factor_log(u_id, l_date, f_id, l_details) values($u_id, '$l_date', $f_id, '$l_details')";
-	$res = ex_query($sql);
-	return $res;	
-}
-
-function delete_factor_log ($l_id){
-	$sql = "delete from factor_log where l_id = $l_id";
-	$res = ex_query($sql);
-	return $res;	
-}
-
 function delete_factor_buy ($fb_id){
 	$sql = "delete from factor_buy where bu_id = $bu_id";
 	$res = ex_query($sql);
@@ -92,17 +70,6 @@ function get_factor_buy($f_id) {
 	return $res;
 }
 
-function get_factor_log($fb_id) {
-	$sql = "select * from factor_log where fb_id = $fb_id";
-	$res = get_select_query($sql);
-	return $res;
-}
-
-function get_factor_body_confirm($fb_id) {
-	$sql = "select * from factor_body inner join factor on factor.f_id = factor_body.f_id inner join customer on customer.c_id = factor.c_id inner join category on category.cat_id = factor_body.cat_id inner join product on product.p_id = factor_body.p_id where fb_id = $fb_id";
-	$res = get_select_query($sql);
-	return $res;
-}
 
 function update_a_row_bu($verify,$bu_id_verify) {
 	$sql = "update factor_buy set $verify = '1' where bu_id = $bu_id_verify";
@@ -110,25 +77,7 @@ function update_a_row_bu($verify,$bu_id_verify) {
 	return $res;
 }
 
-function update_a_row_log($bu_id, $l_details) {
-	$date = jdate('Y/m/d H:i');
-	$u_id = $_SESSION['user_id'];
-	$sql = "insert into factor_log(u_id, l_date, bu_id, l_details) values($u_id, '$date', $bu_id, '$l_details')";
-	$res = ex_query($sql);
-	return $res;
-}
 
-function exe_result_analyze($fb_id, $fb_result_analyze){
-	$sql = "update factor_body set fb_result_analyze = $fb_result_analyze where fb_id = $fb_id";
-	$res = ex_query($sql);
-	return $res;
-}
-
-function select_a_factor($fb_id){
-	$sql = "select * from factor_buy inner join factor on factor.f_id = factor_buy.f_id inner join product on product.p_id = factor_buy.p_id inner join category on category.cat_id = factor_body.cat_id inner join customer on customer.c_id = factor.c_id where fb_id = $fb_id";
-	$res = get_select_query($sql);
-	return $res;
-}
 
 function show_btn_list($st, $url){
 	if($st==0){ ?>
@@ -140,4 +89,11 @@ function show_btn_list($st, $url){
 	}
 }
 
+function get_up_file($bu_id, $type){
+	$sql = "select m_name from media where bu_id = $bu_id and m_name_file = '$type'";
+	$out = get_var_query($sql);
+	$name = $out;
+	$src = get_the_url() . "buy/uploads/" . $name;
+	return $src;
+}	
 ?>
