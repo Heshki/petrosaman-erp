@@ -44,3 +44,7 @@
 #trasfer-form table {
 	border: 1px solid black;
 }
+.label{
+	background-color: #8dca0d;
+	font-size: 14px;
+}
