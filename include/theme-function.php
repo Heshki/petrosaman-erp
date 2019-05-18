@@ -1,4 +1,8 @@
 <?php
+function get_the_url() {
+	return "http://localhost/petrosaman-erp/";
+}
+
 function get_url() {
 	echo "http://localhost/petrosaman-erp/";
 }
