@@ -1,40 +1,44 @@
 <?php 
-function insert_user($array){
-	$u_name = $array[0];
-	$u_family = $array[1];
-	$u_level = $array[2];
-	$u_username = $array[3];
-	$u_password = $array[4];
-	$sql = "insert into user(u_name, u_family, u_level, u_username, u_password) values('$u_name', '$u_family', '$u_level', '$u_username', '$u_password')";
+function insert_driver($array){
+	$dr_name = $array[0];
+	$dr_family = $array[1];
+	$dr_kmeli = $array[2];
+	$dr_car = $array[3];
+	$dr_plate = $array[4];
+	$dr_mobile = $array[5];
+	$dr_status = $array[6];
+	$sql = "insert into driver(dr_name, dr_family, dr_kmeli, dr_car, dr_plate ,dr_mobile , dr_status) values('$dr_name', '$dr_family', '$dr_kmeli', '$dr_car', '$dr_plate' ,'$dr_mobile' ,'$dr_status')";
 	$res = ex_query($sql);
 	return $res;
 }
 
-function update_user($array){
-	$u_id = $array[0];
-	$u_name = $array[1];
-	$u_family = $array[2];
-	$u_level = $array[3];
-	$u_username = $array[4];
-	$u_password = $array[5];
-	$sql = "update user set u_name = '$u_name', u_family = '$u_family', u_level = '$u_level', u_username = '$u_username', u_password = '$u_password' where u_id = $u_id";
+function update_driver($array){
+	$dr_id = $array[0];
+	$dr_name = $array[1];
+	$dr_family = $array[2];
+	$dr_kmeli = $array[3];
+	$dr_car = $array[4];
+	$dr_plate = $array[5];
+	$dr_mobile = $array[6];
+	$dr_status = $array[7];
+	$sql = "update driver set dr_name = '$dr_name', dr_family = '$dr_family', dr_kmeli = '$dr_kmeli', dr_car = '$dr_car', dr_plate = '$dr_plate' , dr_mobile = '$dr_mobile' , dr_status = '$dr_status' where dr_id = $dr_id";
 	$res = ex_query($sql);
 	return $res;	
 }
 
-function delete_user($u_id){
-	$sql = "delete from user where u_id = $u_id";
+function delete_driver($dr_id){
+	$sql = "delete from driver where dr_id = $dr_id";
 	$res = ex_query($sql);
 }
 
-function select_a_user($u_id){
-	$sql = "select * from user where u_id = $u_id";
+function select_a_driver($dr_id){
+	$sql = "select * from driver where dr_id = $dr_id";
 	$res = get_select_query($sql);
 	return $res;
 }
 
-function list_user() {
-	$sql = "select * from user";
+function list_driver() {
+	$sql = "select * from driver";
 	$res = get_select_query($sql);
 	return $res;
 }
