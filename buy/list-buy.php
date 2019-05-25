@@ -39,7 +39,7 @@
 									$bu_id = $res[$i]['bu_id'];
 									?>
 								<tr>
-									<td><?php echo $res[$i][0]; ?></td>
+									<td><?php echo per_number($res[$i][0]); ?></td>
 									<td><?php echo per_number($res[$i]['f_id']); ?></td>
 									<td><?php echo get_product_name('p_id'); ?></td>
 									<td><?php echo per_number($res[$i]['bu_quantity']); ?></td>
