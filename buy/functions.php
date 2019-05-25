@@ -56,10 +56,8 @@ function delete_factor_buy ($fb_id){
 	return $res;	
 }
 
-
-//factor_body
 function list_factor_buy() {
-	$sql = "select * from factor_buy inner join factor on factor_buy.f_id = factor.f_id order by factor_buy.bu_id desc";
+	$sql = "select * from factor_buy inner join factor on factor_buy.f_id = factor.f_id order by factor.f_id desc";
 	$res = get_select_query($sql);
 	return $res;
 }
@@ -70,14 +68,11 @@ function get_factor_buy($f_id) {
 	return $res;
 }
 
-
 function update_a_row_bu($verify,$bu_id_verify) {
 	$sql = "update factor_buy set $verify = '1' where bu_id = $bu_id_verify";
 	$res = ex_query($sql);
 	return $res;
 }
-
-
 
 function show_btn_list($st, $url){
 	if($st==0){ ?>
@@ -89,11 +84,60 @@ function show_btn_list($st, $url){
 	}
 }
 
-function get_up_file($bu_id, $type){
-	$sql = "select m_name from media where bu_id = $bu_id and m_name_file = '$type'";
-	$out = get_var_query($sql);
-	$name = $out;
-	$src = get_the_url() . "buy/uploads/" . $name;
-	return $src;
-}	
+
+function get_invoice_files($bu_id){
+	$sql = "select m_id, m_name from media where bu_id = $bu_id and m_name_file = 'invoice'";
+	$out = get_select_query($sql);
+	$c = count($out);
+	if($c>0){
+	foreach($out as $o){
+		if($o!=""){
+			$src = get_the_url() . "buy/uploads/" . $o['m_name'];
+		}else{
+			$src = get_the_url() . "dist/img/no-img.jpg";
+		}
+		?>
+		<form action="" method="post">
+			<div style="border: 1px dashed #eee; border-radius: 4px; padding: 10px; text-align: center; background: #f9f9f9">
+				<img class="img-responsive" src="<?php echo $src; ?>"><br>
+				<input type="hidden" name="filename" value="<?php echo $o['m_name']; ?>">
+				<input type="hidden" name="image_id" value="<?php echo $o['m_id']; ?>">
+				<button name="delete-img" class="btn btn-danger btn-sm">حذف</button>
+			</div>
+		</form>
+		<br>
+		<?php
+	}
+	}else{
+		echo "<div class='alert alert-danger'>هیچ پیش فاکتوری در سیستم بارگزاری نشده است</div>";
+	}
+}
+
+function get_receipt_files($bu_id){
+	$sql = "select m_id, m_name from media where bu_id = $bu_id and m_name_file = 'receipt'";
+	$out = get_select_query($sql);
+	$c = count($out);
+	if($c>0){
+		foreach($out as $o){
+			if($o!=""){
+				$src = get_the_url() . "buy/uploads/" . $o['m_name'];
+			}else{
+				$src = get_the_url() . "dist/img/no-img.jpg";
+			}
+			?>
+			<form action="" method="post">
+				<div style="border: 1px dashed #eee; border-radius: 4px; padding: 10px; text-align: center; background: #f9f9f9">
+					<img class="img-responsive" src="<?php echo $src; ?>"><br>
+					<input type="hidden" name="filename" value="<?php echo $o['m_name']; ?>">
+					<input type="hidden" name="image_id" value="<?php echo $o['m_id']; ?>">
+					<button name="delete-img" class="btn btn-danger btn-sm">حذف</button>
+				</div>
+			</form>
+			<br>
+			<?php
+		}
+	}else{
+		echo "<div class='alert alert-danger'>هیچ پیش فاکتوری در سیستم بارگزاری نشده است</div>";
+	}
+}
 ?>
