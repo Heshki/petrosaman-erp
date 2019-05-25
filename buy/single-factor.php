@@ -16,7 +16,6 @@
 					<li class="active">ثبت محصول</li>
 				</ol>
 			</section>
-			<!-- Main content -->
 			<section class="content">
 				<form action="" method="post">
 					<div id="details" class="col-xs-12">
@@ -38,7 +37,6 @@
 								<button type="submit" class="btn btn-success btn-lg" id="_submit" name="r_submit">ساخت سر فاکتور</button>
 							</div>
 						</div><br>
-			
 						<div class="row">		
 							<div class="col-md-12">
 								<div class="box">
