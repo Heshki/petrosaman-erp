@@ -48,3 +48,68 @@
 	background-color: #8dca0d;
 	font-size: 14px;
 }
+.no-padd{
+	padding: 0 !important;
+}
+#user_edit .modal-header{
+	height: 55px !important;
+}
+#user_edit .modal-body{
+    height: fit-content;
+    overflow: hidden;
+}
+#user_edit .modal-footer{
+	height: 65px !important;
+}
+#user_edit textarea{
+	margin-top: 10px;
+    padding-top: 5px;
+    resize: none;
+  	overflow: auto; 
+}
+#user_view .modal-body{
+	height: fit-content;
+    overflow: hidden;
+}
+.pdp-default{
+	z-index: 1050;
+}
+.sch_submit_c{
+	height: 85px;
+    padding: 40px 15px;
+}
+.sch_save_table{
+	background: #fff;
+}
+.sch_save_table input{
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+.sch_save_c {
+	padding: 0px 15px;
+	height: 40px;
+}
+.sch_save_c_red{
+	color: red;
+}
+.sch_submit_c_green{
+	color: green;
+}
+.sch_save_table th, .sch_save_table td {
+    border: 1px solid #dbdbdb;
+    padding: 6px;
+}
+.sc_table_center th, .sc_table_center td {
+	text-align: center;
+    vertical-align: middle;
+}
+.sch_save_table th {
+    background: #f8f8f87a;
+}
+.sch_save_table tr{
+	border: none;
+}
+.list-user-up-img{
+	padding: 10px;
+}
