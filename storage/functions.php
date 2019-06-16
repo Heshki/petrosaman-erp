@@ -1,13 +1,5 @@
 <?php
 require_once"../include/database.php";
-function insert_factor($array){
-	$c_id = $array[0];
-	$f_date = $array[1];
-	$u_id = $array[2];
-	$sql = "insert into factor(c_id, f_date, u_id) values($c_id, '$f_date', $u_id)";
-	$res = ex_query($sql);
-	return $res;
-}
 
 function insert_transfer_list($array){
 	$u_id = $array[0];
@@ -78,4 +70,133 @@ function update_a_row_log($details) {
 	return $res;
 }
 
+//inpute store
+function insert_store($array){
+	$s_type = $array[0];
+	$s_weight = $array[1];
+	$s_date = $array[2];
+	$s_time = $array[3];
+	$dr_name = $array[4];
+	$sql = "insert into store(s_type, s_weight, s_date, s_time, dr_name) values('$s_type', '$s_weight', '$s_date', '$s_time', '$dr_name')";
+	$res = ex_query($sql);
+	return $res;
+}
+
+function update_store($array){
+	$s_id = $array[0];
+	$s_type = $array[1];
+	$s_weight = $array[2];
+	$s_date = $array[3];
+	$s_time = $array[4];
+	$dr_name = $array[5];
+	$sql = "update store set s_type = '$s_type', s_weight = '$s_weight', s_date = '$s_date', s_time = '$s_time', dr_name = '$dr_name' where s_id = $s_id";
+	$res = ex_query($sql);
+	return $res;	
+}
+
+function delete_store($s_id){
+	$sql = "delete from store where s_id = $s_id";
+	$res = ex_query($sql);
+}
+
+function select_a_store($s_id){
+	$sql = "select * from store where s_id = $s_id";
+	$res = get_select_query($sql);
+	return $res;
+}
+
+function list_store() {
+	$sql = "select * from store";
+	$res = get_select_query($sql);
+	return $res;
+}
+
+function get_waybill_files($s_id){
+	$sql = "select m_id, m_name from media where s_id = $s_id and m_name_file = 'waybill'";
+	$out = get_select_query($sql);
+	$c = count($out);
+	if($c>0){
+	foreach($out as $o){
+		if($o!=""){
+			$src = get_the_url() . "buy/uploads/" . $o['m_name'];
+		}else{
+			$src = get_the_url() . "dist/img/no-img.jpg";
+		}
+		?>
+		<form action="" method="post">
+			<div style="border: 1px dashed #eee; border-radius: 4px; padding: 10px; text-align: center; background: #f9f9f9">
+				<img class="img-responsive" src="<?php echo $src; ?>"><br>
+				<input type="hidden" name="filename" value="<?php echo $o['m_name']; ?>">
+				<input type="hidden" name="image_id" value="<?php echo $o['m_id']; ?>">
+				<button name="delete-img" class="btn btn-danger btn-sm">حذف</button>
+			</div>
+		</form>
+		<br>
+		<?php
+	}
+	}else{
+		echo "<div class='alert alert-danger'>هیچ بارنامه ای در سیستم بارگذاری نشده</div>";
+	}
+}
+function get_bill_files($s_id){
+	$sql = "select m_id, m_name from media where s_id = $s_id and m_name_file = 'bill'";
+	$out = get_select_query($sql);
+	$c = count($out);
+	if($c>0){
+	foreach($out as $o){
+		if($o!=""){
+			$src = get_the_url() . "buy/uploads/" . $o['m_name'];
+		}else{
+			$src = get_the_url() . "dist/img/no-img.jpg";
+		}
+		?>
+		<form action="" method="post">
+			<div style="border: 1px dashed #eee; border-radius: 4px; padding: 10px; text-align: center; background: #f9f9f9">
+				<img class="img-responsive" src="<?php echo $src; ?>"><br>
+				<input type="hidden" name="filename" value="<?php echo $o['m_name']; ?>">
+				<input type="hidden" name="image_id" value="<?php echo $o['m_id']; ?>">
+				<button name="delete-img" class="btn btn-danger btn-sm">حذف</button>
+			</div>
+		</form>
+		<br>
+		<?php
+	}
+	}else{
+		echo "<div class='alert alert-danger'>هیچ بارنامه ای در سیستم بارگذاری نشده</div>";
+	}
+}
+
+
+function load_store($s_id){
+	$sql = "select * from store where s_id = $s_id";
+	$res = get_select_query($sql); ?>
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>ردیف</th>
+				<th>نوع بار</th>
+				<th>وزن</th>
+				<th>تاریخ ورود</th>
+				<th>زمان ورود</th>
+				<th>راننده</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php
+			$c = count($res);
+			for($i=0 ; $i<$c ; $i++){ ?>
+				<tr>
+					<td><?php echo per_number($i); ?></td>
+					<td><?php echo per_number($res[$i]['s_type']); ?></td>
+					<td><?php echo per_number($res[$i]['s_weight']); ?></td>
+					<td><?php echo per_number($res[$i]['s_date']); ?></td>
+					<td><?php echo per_number($res[$i]['s_time']); ?></td>
+					<td><?php echo per_number($res[$i]['dr_id']); ?></td>
+				</tr>
+			<?php
+			} ?>
+		</tbody>
+	</table>
+<?php
+}
 ?>

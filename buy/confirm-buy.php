@@ -1,7 +1,7 @@
 <?php $title = "فاکتور خرید"; include"../header.php"; include"../nav.php"; include"functions.php"; ?>
 <div class="content-wrapper">
 	<?php
-	breadcrumb("تایید پیشنهاد فروش");
+	breadcrumb("تایید پیشنهاد خرید");
 	$bu_id = $_GET['bu_id'];
 	$type_confirm = $_GET['typee'];
 	$typee = "";

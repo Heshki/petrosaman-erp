@@ -43,4 +43,24 @@ function list_driver() {
 	return $res;
 }
 
+function get_driver_name($dr_id) {
+	$sql = "select dr_name, dr_family from driver where dr_id = $dr_id";
+	$res = get_select_query($sql);
+	return $res[0]['dr_name'] . " " . $res[0]['dr_family'];
+}
+
+function show_store_as_select($dr_id){ ?>
+	<select name="dr_id" class="form-control select2">
+		<?php
+		$res = list_driver();
+		if(count($res)>0){
+			foreach($res as $row){
+			?>
+			<option <?php if($row['dr_id']==$s_id)echo "selected"; ?> value="<?php echo $row['dr_id']; ?>"><?php echo $row['dr_name'] . " " . $row['dr_family']; ?></option>								
+			<?php
+			} 
+		} ?>
+	</select>
+	<?php
+}
 ?>

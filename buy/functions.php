@@ -140,4 +140,5 @@ function get_receipt_files($bu_id){
 		echo "<div class='alert alert-danger'>هیچ پیش فاکتوری در سیستم بارگزاری نشده است</div>";
 	}
 }
+
 ?>
