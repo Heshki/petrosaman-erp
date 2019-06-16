@@ -17,8 +17,20 @@ function update_user($array){
 	$u_level = $array[3];
 	$u_username = $array[4];
 	$u_password = $array[5];
-	$sql = "update user set u_name = '$u_name', u_family = '$u_family', u_level = '$u_level', u_username = '$u_username', u_password = '$u_password' where u_id = $u_id";
+	$u_father = $array[6];
+	$u_meli = $array[7];
+	$u_birth = $array[8];
+	$u_live_city = $array[9];
+	$u_destination = $array[10];
+	$u_mobile = $array[11];
+	$u_tell = $array[12];
+	$u_address = $array[13];
+	$u_pre = $array[14];
+	$u_description = $array[15];
+	$u_group = $array[16];
+	$sql = "update user set u_name = '$u_name', u_family = '$u_family', u_level = '$u_level', u_username = '$u_username', u_password = '$u_password', u_father = '$u_father', u_meli = '$u_meli', u_birth = '$u_birth', u_live_city = '$u_live_city', u_destination = '$u_destination', u_mobile = '$u_mobile', u_tell = '$u_tell', u_address = '$u_address', u_pre = '$u_pre', u_group = '$u_group', u_description = '$u_description' where u_id = $u_id";
 	$res = ex_query($sql);
+	
 	return $res;	
 }
 
