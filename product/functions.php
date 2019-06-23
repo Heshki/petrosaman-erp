@@ -58,7 +58,16 @@ function get_product_name($p_id) {
 		return 0;
 	}
 }
-
+function get_product_type($p_id) {
+	$sql = "select p_type from product where p_id = $p_id";
+	$res = get_var_query($sql);
+	if($res!=""){
+		return $res;
+	}else
+	{
+		return 0;
+	}
+}
 function get_product_unit($p_id) {
 	$sql = "select p_unit from product where p_id = $p_id";
 	$res = get_var_query($sql);

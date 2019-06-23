@@ -100,7 +100,7 @@ require_once"../category/functions.php";
 									<tbody>
 										<tr>
 											<th>#</th>
-											<th>نام محصول</th>
+											<th>نام ماده اولیه</th>
 											<th>وزن</th>
 										</tr>
 										<?php
@@ -110,7 +110,9 @@ require_once"../category/functions.php";
 											foreach($list as $l){ ?>
 											<tr>                   
 												<td><?php echo per_number($i); ?></td>
-												<td><?php echo get_product_name($l['p_id']); ?></td>
+												<td>
+												<?php echo get_product_type($l['p_id']); ?>
+												</td>
 												<td></td>
 												<td><?php echo per_number(number_format($l['bu_quantity'])); ?></td>
 												
@@ -142,9 +144,20 @@ require_once"../category/functions.php";
 						<h3 class="col-md-12">بدنه فاکتور</h3>
 						<div class="item col-md-3">
 							<div class="margin-tb input-group-prepend">
-								<span class="input-group-text">نام  محصول</span>
+								<span class="input-group-text">ماده اولیه</span>
 							</div>
-							<?php show_product_as_select(); ?>
+							<?php 
+								$res = list_product();?>
+								<select class="form-control">
+							<?php
+								foreach($res as $row){
+									$typee = $row['p_type'];
+									if($typee=="Material"){?>
+										<option><?php echo $row['p_name']; ?></option>
+							<?php 
+									}
+								}?>
+								</select>
 						</div>
 						<div class="item col-md-3">
 							<div class="margin-tb input-group-prepend">

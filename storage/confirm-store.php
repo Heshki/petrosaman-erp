@@ -105,7 +105,7 @@
 								<form action="" method="post">
 									<div class="col-md-12"><h4>تاییدیه ورودی انبار توسط واحد مالی</h4></div>
 									<div class="col-md-6">
-										<textarea class="form-control" name="l_details" placeholder="در صورتی که توضیح خاصی نیاز است وارد کنید..." rows="4" cols="50" required></textarea>
+										<textarea class="form-control" name="l_details" placeholder="در صورتی که توضیح خاصی نیاز است وارد کنید..." rows="4" cols="50"></textarea>
 										<input type="hidden" name="s_id" value="<?php echo $s_id; ?>">
 										<input type="hidden" name="type_confirm" value="<?php echo $type_confirm; ?>">
 									</div>
@@ -135,7 +135,7 @@
 								<form action="" method="post">
 									<div class="col-md-12"><h4>تایید بارنامه توسط مدیر</h4></div>
 									<div class="col-md-6">
-										<textarea class="form-control" name="l_details" placeholder="در صورتی که توضیح خاصی نیاز است وارد کنید..." rows="4" cols="50" required></textarea>
+										<textarea class="form-control" name="l_details" placeholder="در صورتی که توضیح خاصی نیاز است وارد کنید..." rows="4" cols="50"></textarea>
 										<input type="hidden" name="s_id" value="<?php echo $s_id; ?>">
 										<input type="hidden" name="type_confirm" value="<?php echo $type_confirm; ?>">
 									</div>
@@ -166,7 +166,7 @@
 								<form action="" method="post">
 									<div class="col-md-12"><h4>تایید بارنامه توسط مدیر کیفی</h4></div>
 									<div class="col-md-6">
-										<textarea class="form-control" name="l_details" placeholder="در صورتی که توضیح خاصی نیاز است وارد کنید..." rows="4" cols="50" required></textarea>
+										<textarea class="form-control" name="l_details" placeholder="در صورتی که توضیح خاصی نیاز است وارد کنید..." rows="4" cols="50"></textarea>
 										<input type="hidden" name="s_id" value="<?php echo $s_id; ?>">
 										<input type="hidden" name="type_confirm" value="<?php echo $type_confirm; ?>">
 									</div>

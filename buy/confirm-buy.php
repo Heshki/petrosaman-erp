@@ -1,4 +1,6 @@
-<?php $title = "فاکتور خرید"; include"../header.php"; include"../nav.php"; include"functions.php"; ?>
+<?php $title = "فاکتور خرید"; include"../header.php"; include"../nav.php"; include"functions.php";
+require_once"../partner/functions.php";
+ ?>
 <div class="content-wrapper">
 	<?php
 	breadcrumb("تایید پیشنهاد خرید");
@@ -101,7 +103,7 @@
 								<form action="" method="post">
 									<div class="col-md-12"><h4>تایید پیش فاکتور خرید توسط مدیر</h4></div>
 									<div class="col-md-6">
-										<textarea class="form-control" name="l_details" placeholder="در صورتی که توضیح خاصی نیاز است وارد کنید..." rows="4" cols="50" required></textarea>
+										<textarea class="form-control" name="l_details" placeholder="در صورتی که توضیح خاصی نیاز است وارد کنید..." rows="4" cols="50" ></textarea>
 										<input type="hidden" name="bu_id" value="<?php echo $bu_id; ?>">
 										<input type="hidden" name="type_confirm" value="<?php echo $type_confirm; ?>">
 									</div>
@@ -151,7 +153,7 @@
 								<form action="" method="post">
 									<div class="col-md-12"><h4>تایید پرداخت توسط واحد مالی</h4></div>
 									<div class="col-md-6">
-										<textarea class="form-control" name="l_details" placeholder="در صورتی که توضیح خاصی نیاز است وارد کنید..." rows="4" cols="50" required></textarea>
+										<textarea class="form-control" name="l_details" placeholder="در صورتی که توضیح خاصی نیاز است وارد کنید..." rows="4" cols="50"></textarea>
 										<input type="hidden" name="bu_id" value="<?php echo $bu_id; ?>">
 										<input type="hidden" name="type_confirm" value="<?php echo $type_confirm; ?>">
 									</div>
@@ -189,6 +191,32 @@
 								<button type="submit" class="btn btn-success" name="verify_submit" id="verify_submit">تایید</button>
 								<a href="list-buy.php" class="btn btn-danger">خیر</a>
 							</div>
+						</form>
+						<script>
+				  			var loadFile = function(event) {
+						    	var output4 = document.getElementById('output4');
+					    		output4.src = URL.createObjectURL(event.target.files[0]);
+				  			};
+						</script>
+					<?php
+					}else if($type_confirm == 'bu_out') { ?>
+						<form action="" method="post" enctype="multipart/form-data">
+							<br>
+							<div class="col-md-12">
+								<h4>انتخاب همکار مورد نظر</h4>	
+							</div>
+							<br>
+							<div class="col-md-6">
+								<?php 
+								$res = list_partner();?>
+								<select class="form-control">
+								<?php
+								foreach($res as $row){?>
+									<option><?php echo $row['pa_company']; ?></option>
+								<?php 
+								}?>
+								</select>
+							<div>
 						</form>
 						<script>
 				  			var loadFile = function(event) {

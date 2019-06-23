@@ -17,7 +17,7 @@
 			if($type_confirm == 'fb_verify_admin1') { ?>
 				<form action="list-factor.php" method="post">
 					<div class="col-xs-12">
-						<textarea class="form-control" name="l_details" placeholder="توضیحات لازم را اینجا بنویسید..." rows="4" cols="50" required></textarea>
+						<textarea class="form-control" name="l_details" placeholder="توضیحات لازم را اینجا بنویسید..." rows="4" cols="50"></textarea>
 						<input type="hidden" name="fb_id" value="<?php echo $fb_id; ?>">
 						<input type="hidden" name="type_confirm" value="<?php echo $type_confirm; ?>">
 					</div>
@@ -31,7 +31,7 @@
 			}else if($type_confirm=='fb_send_customer') { ?>
 				<form action="list-factor.php" method="post">
 					<div class="col-xs-12">
-						<textarea class="form-control" name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50" required></textarea>
+						<textarea class="form-control" name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50"></textarea>
 						<input type="hidden" name="fb_id" value="<?php echo $fb_id; ?>">
 						<input type="hidden" name="type_confirm" id="type_confirm" value="<?php echo $type_confirm; ?>">
 					</div>
@@ -45,7 +45,7 @@
 			}else if($type_confirm == 'fb_verify_customer') { ?>
 				<form action="list-factor.php" method="post">
 					<div class="col-xs-12">
-						<textarea class="form-control" name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50" required></textarea>
+						<textarea class="form-control" name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50"></textarea>
 						<input type="hidden" name="fb_id" value="<?php echo $fb_id; ?>">
 						<input type="hidden" name="type_confirm" id="type_confirm" value="<?php echo $type_confirm; ?>">
 					</div>
@@ -59,7 +59,7 @@
 			}else if($type_confirm == 'fb_verify_docs') { ?>
 				<form action="list-factor.php" method="post">
 					<div class="col-xs-12">
-						<textarea class="form-control" name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50" required></textarea>
+						<textarea class="form-control" name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50"></textarea>
 						<input type="hidden" name="fb_id" value="<?php echo $fb_id; ?>">
 						<input type="hidden" name="type_confirm" id="type_confirm" value="<?php echo $type_confirm; ?>">
 					</div>
@@ -73,7 +73,7 @@
 			}elseif ($type_confirm == 'fb_verify_finan') { ?>
 				<form action="list-factor.php" method="post">
 					<div class="col-xs-12">
-						<textarea class="form-control" name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50" required></textarea>
+						<textarea class="form-control" name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50"></textarea>
 						<input type="hidden" name="fb_id" value="<?php echo $fb_id; ?>">
 						<input type="hidden" name="type_confirm" id="type_confirm" value="<?php echo $type_confirm; ?>">
 					</div>
@@ -87,7 +87,7 @@
 			}elseif ($type_confirm == 'fb_verify_admin2') { ?>
 				<form action="list-factor.php" method="post">
 					<div class="col-xs-12">
-						<textarea class="form-control" name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50" required></textarea>
+						<textarea class="form-control" name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50"></textarea>
 						<input type="hidden" name="fb_id" value="<?php echo $fb_id; ?>">
 						<input type="hidden" name="type_confirm" id="type_confirm" value="<?php echo $type_confirm; ?>">
 					</div>
@@ -101,7 +101,7 @@
 			}else if($type_confirm=='fb_wait_bar'){ ?>
 				<form action="list-factor.php" method="post">
 					<div class="col-xs-12">
-						<textarea class="form-control" name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50" required></textarea>
+						<textarea class="form-control" name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50"></textarea>
 						<input type="hidden" name="fb_id" value="<?php echo $fb_id; ?>">
 						<input type="hidden" name="type_confirm" id="type_confirm" value="<?php echo $type_confirm; ?>">
 					</div>
@@ -115,7 +115,7 @@
 			}elseif ($type_confirm == 'fb_ready_bar') { ?>
 				<form action="list-factor.php" method="post">
 					<div class="col-xs-12">
-						<textarea class="form-control" name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50" required></textarea>
+						<textarea class="form-control" name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50"></textarea>
 						<input type="hidden" name="fb_id" value="<?php echo $fb_id; ?>">
 						<input type="hidden" name="type_confirm" id="type_confirm" value="<?php echo $type_confirm; ?>">
 					</div>
@@ -130,7 +130,7 @@
 			}elseif ($type_confirm == 'fb_get_sample') { ?>
 				<form action="list-factor.php" method="post">
 					<div class="col-xs-12">
-						<textarea class="form-control" name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50" required></textarea>
+						<textarea class="form-control" name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50"></textarea>
 						<input type="hidden" name="fb_id" value="<?php echo $fb_id; ?>">
 						<input type="hidden" name="type_confirm" id="type_confirm" value="<?php echo $type_confirm; ?>">
 					</div>
@@ -144,7 +144,7 @@
 			}elseif ($type_confirm == 'fb_verify_bar') { ?>
 				<form action="list-factor.php" method="post">
 					<div class="col-xs-12">
-						<textarea class="form-control" name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50" required></textarea>
+						<textarea class="form-control" name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50"></textarea>
 						<input type="hidden" name="fb_id" value="<?php echo $fb_id; ?>">
 						<input type="hidden" name="type_confirm" id="type_confirm" value="<?php echo $type_confirm; ?>">
 					</div>
@@ -158,7 +158,7 @@
 			}elseif ($type_confirm == 'fb_exit_doc') { ?>
 				<form action="list-factor.php" method="post">
 					<div class="col-xs-12">
-						<textarea class="form-control" name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50" required></textarea>
+						<textarea class="form-control" name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50"></textarea>
 						<input type="hidden" name="fb_id" value="<?php echo $fb_id; ?>">
 						<input type="hidden" name="type_confirm" id="type_confirm" value="<?php echo $type_confirm; ?>">
 					</div>

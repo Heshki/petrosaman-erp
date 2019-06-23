@@ -35,13 +35,13 @@ require_once"../buy/functions.php";
 											<span class="input-group-text">فاکتور خرید</span>
 										</div>
 										<?php
-										$res = list_factor_buy();
+											$res = list_factor_buy();
 										?>
 										<select class="form-control">
 											<?php
-											foreach($res as $row){
+												foreach($res as $row){
 											?>
-											<option><?php echo $row['f_id'] . "-" . $row['f_date']; ?></option>
+												<option><?php echo $row['f_id'] . "-" . $row['f_date']; ?></option>
 											<?php 
 											} ?>
 										</select>
@@ -58,9 +58,12 @@ require_once"../buy/functions.php";
 										<select class="form-control">
 											<?php
 											foreach($res as $row){
+												$typee = $row['p_type'];
+												if($typee=="Material"){
 											?>
-											<option><?php echo $row['p_name']; ?></option>
+												<option><?php echo $row['p_name']; ?></option>
 											<?php 
+												}
 											} ?>
 										</select>
 									</div>

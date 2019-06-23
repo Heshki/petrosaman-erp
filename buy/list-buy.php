@@ -25,10 +25,12 @@
 									<th>شماره فاکتور</th>
 									<th>نام محصول</th>
 									<th>وزن بار</th>
+									<th>وزن بار رسیده</th>
 									<th>اسکن پیش فاکتور</th>
 									<th>تایید مدیریت</th>
 									<th>تایید واحد مالی</th>
 									<th>ارسال رسید به مشتری</th>
+									<th>برون سپاری</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -43,6 +45,7 @@
 									<td><?php echo per_number($res[$i]['f_id']); ?></td>
 									<td><?php echo get_product_name('p_id'); ?></td>
 									<td><?php echo per_number($res[$i]['bu_quantity']); ?></td>
+									<td><?php echo per_number($res[$i]['bu_quantity_r']); ?></td>
 									<td>
 									<?php
 									show_btn_list($res[$i]['bu_scan_invoice'], "confirm-buy.php?bu_id=" . $bu_id . "&typee=bu_scan_invoice");
@@ -63,6 +66,11 @@
 										show_btn_list($res[$i]['bu_send_customer'], "confirm-buy.php?bu_id=" . $bu_id . "&typee=bu_send_customer");
 										?>	
 									</td>
+									<td>
+										<?php
+										show_btn_list($res[$i]['bu_out'], "confirm-buy.php?bu_id=" . $bu_id . "&typee=bu_out");
+										?>	
+									</td>
 								</tr>
 								<?php
 								} ?>
@@ -74,9 +82,11 @@
 									<th>نام محصول</th>
 									<th>اسکن پیش فاکتور</th>
 									<th>وزن بار</th>
+									<th>وزن بار رسیده</th>
 									<th>تایید مدیریت</th>
 									<th>ارسال به واحد مالی</th>
 									<th>ارسال رسید به مشتری</th>
+									<th>برون سپاری</th>
 								</tr>
 							</tfoot>
 						</table>
