@@ -1,6 +1,110 @@
 <?php
 require_once"../include/database.php";
 
+function singed_pre_invoice_scan($fb_id) {
+	$sql = "select m_id, m_name from media where bu_id = $fb_id and m_type = 'pre_invoice_sale' and m_name_file = 'signed'";
+	$out = get_select_query($sql);
+	$c = count($out);
+	if($c>0){
+	foreach($out as $o){
+		if($o!=""){
+			$src = get_the_url() . "uploads/" . $o['m_name'];
+		}else{
+			$src = get_the_url() . "dist/img/no-img.jpg";
+		}
+		?>
+		<form action="" method="post" onclick="if(!confirm('آیا از انجام این عملیات اطمینان دارید؟')){return false;}">
+			<div style="border: 1px dashed #eee; border-radius: 4px; padding: 10px; text-align: center; background: #f9f9f9">
+				<span id="signed">امضا شده</span>
+				<img class="img-responsive" src="<?php echo $src; ?>"><br>
+				<input type="hidden" name="filename" value="<?php echo $o['m_name']; ?>">
+				<input type="hidden" name="image_id" value="<?php echo $o['m_id']; ?>">
+				<button name="delete-img" class="btn btn-danger btn-sm">حذف</button>
+			</div>
+		</form>
+		<br>
+		<?php
+	}
+	}else{
+		echo "<div class='alert alert-danger'>هیچ پیش فاکتوری در سیستم بارگزاری نشده است</div>";
+	}
+}
+
+function show_singed_pre_invoice_scan($fb_id) {
+	$sql = "select m_id, m_name from media where bu_id = $fb_id and m_type = 'pre_invoice_sale' and m_name_file = 'signed'";
+	$out = get_select_query($sql);
+	$c = count($out);
+	if($c>0){
+		foreach($out as $o){
+			if($o!=""){
+				$src = get_the_url() . "uploads/" . $o['m_name'];
+			}else{
+				$src = get_the_url() . "dist/img/no-img.jpg";
+			}
+			?>
+			<div style="border: 1px dashed #eee; border-radius: 4px; padding: 10px; text-align: center; background: #f9f9f9">
+				<span id="signed">امضا شده</span>
+				<img class="img-responsive" src="<?php echo $src; ?>"><br>
+			</div>
+			<br>
+			<?php
+		}
+	}else{
+		echo "<div class='alert alert-danger'>هیچ پیش فاکتوری در سیستم بارگزاری نشده است</div>";
+	}
+}
+
+function show_pre_invoice_scan($fb_id) {
+	$sql = "select m_id, m_name from media where bu_id = $fb_id and m_type = 'pre_invoice_sale' and m_name_file = 'no_signed'";
+	$out = get_select_query($sql);
+	$c = count($out);
+	if($c>0){
+	foreach($out as $o){
+		if($o!=""){
+			$src = get_the_url() . "uploads/" . $o['m_name'];
+		}else{
+			$src = get_the_url() . "dist/img/no-img.jpg";
+		}
+		?>
+		<div style="border: 1px dashed #eee; border-radius: 4px; padding: 10px; text-align: center; background: #f9f9f9">
+			<img class="img-responsive" src="<?php echo $src; ?>"><br>
+		</div>
+		<br>
+		<?php
+	}
+	}else{
+		echo "<div class='alert alert-danger'>هیچ پیش فاکتوری در سیستم بارگزاری نشده است</div>";
+	}
+}
+
+function pre_invoice_scan($fb_id){
+	$sql = "select m_id, m_name from media where bu_id = $fb_id and m_type = 'pre_invoice_sale' and m_name_file = 'no_signed'";
+	$out = get_select_query($sql);
+	$c = count($out);
+	if($c>0){
+	foreach($out as $o){
+		if($o!=""){
+			$src = get_the_url() . "uploads/" . $o['m_name'];
+		}else{
+			$src = get_the_url() . "dist/img/no-img.jpg";
+		}
+		?>
+		<form action="" method="post" onclick="if(!confirm('آیا از انجام این عملیات اطمینان دارید؟')){return false;}">
+			<div style="border: 1px dashed #eee; border-radius: 4px; padding: 10px; text-align: center; background: #f9f9f9">
+				<img class="img-responsive" src="<?php echo $src; ?>"><br>
+				<input type="hidden" name="filename" value="<?php echo $o['m_name']; ?>">
+				<input type="hidden" name="image_id" value="<?php echo $o['m_id']; ?>">
+				<button name="delete-img" class="btn btn-danger btn-sm">حذف</button>
+			</div>
+		</form>
+		<br>
+		<?php
+	}
+	}else{
+		echo "<div class='alert alert-danger'>هیچ پیش فاکتوری در سیستم بارگزاری نشده است</div>";
+	}
+}
+
 function load_factor_body($fb_id){
 	$res = get_factor_body_confirm($fb_id);
 	?>

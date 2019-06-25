@@ -35,13 +35,13 @@
 									<th>#</th>
 									<th>فاکتور</th>
 									<th>مشتری</th>
+									<th>اسکن پیش فاکتور</th>
 									<th>تایید ۱ مدیر</th>
 									<th>ارسال مشتری</th>
 									<th>تایید مشتری</th>
 									<th>اسناد تایید</th>
 									<th>تایید مالی</th>
 									<th>تایید ۲ مدیر</th>
-									<th>منتظر بارگیری</th>
 									<th>آماده تحویل</th>
 									<th>نمونه برداری</th>
 									<th>تایید بارگیری</th>
@@ -63,62 +63,126 @@
 									<td><?php echo get_customer_name($row['c_id']); ?></td>
 									<td>
 									<?php
-									show_btn_list($row['fb_verify_admin1'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_verify_admin1");
+									show_btn_list($row['fb_pre_invoice_scan'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_pre_invoice_scan");
 									?>
 									</td>
 									<td>
 									<?php
-									show_btn_list($row['fb_send_customer'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_send_customer");
+									if($row['fb_pre_invoice_scan'] == 1){
+										show_btn_list($row['fb_verify_admin1'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_verify_admin1");
+									}else { ?>
+										<button class="btn btn-sm btn-dark" disabled>منتظر</button>
+									<?php
+									}
 									?>
 									</td>
 									<td>
 									<?php
-									show_btn_list($row['fb_verify_customer'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_verify_customer");
+									if($row['fb_verify_admin1'] == 1) {
+										show_btn_list($row['fb_send_customer'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_send_customer");
+									} else { ?>
+										<button class="btn btn-sm btn-dark" disabled>منتظر</button>
+									<?php
+									}
+									
 									?>
 									</td>
 									<td>
 									<?php
-									show_btn_list($row['fb_verify_docs'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_verify_docs");
+									if($row['fb_send_customer'] == 1) {
+										show_btn_list($row['fb_verify_customer'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_verify_customer");
+									} else { ?>
+										<button class="btn btn-sm btn-dark" disabled>منتظر</button>
+									<?php
+									}
 									?>
 									</td>
 									<td>
 									<?php
-									show_btn_list($row['fb_verify_finan'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_verify_finan");
+									if($row['fb_verify_customer'] == 1) {
+										show_btn_list($row['fb_verify_docs'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_verify_docs");
+									} else { ?>
+										<button class="btn btn-sm btn-dark" disabled>منتظر</button>
+									<?php
+									}
 									?>
 									</td>
 									<td>
 									<?php
-									show_btn_list($row['fb_verify_admin2'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_verify_admin2");
+									$fb_id = $row['fb_id'];
+									$m_type = "pre_invoice_sale";
+									$m_name_file = "signed";
+									$sql = "select * from media where bu_id = $fb_id and m_type = '$m_type' and m_name_file = '$m_name_file'";
+									$ok = count(get_select_query($sql));
+									if($row['fb_verify_docs'] == 1 && $ok >= 1) {
+										show_btn_list($row['fb_verify_finan'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_verify_finan");
+									}elseif($ok == 0) { ?>
+										<button class="btn btn-sm btn-dark" disabled>اسکن</button>
+									<?php
+									}else{ ?>
+										<button class="btn btn-sm btn-dark" disabled>منتظر</button>
+									<?php
+									}
 									?>
 									</td>
 									<td>
 									<?php
-									show_btn_list($row['fb_wait_bar'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_wait_bar");
+									if($row['fb_verify_finan'] == 1) {
+										show_btn_list($row['fb_verify_admin2'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_verify_admin2");
+									} else { ?>
+										<button class="btn btn-sm btn-dark" disabled>منتظر</button>
+									<?php
+									}
 									?>
 									</td>
 									<td>
 									<?php
-									show_btn_list($row['fb_ready_bar'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_ready_bar");
+									if($row['fb_verify_admin2'] == 1) {
+										show_btn_list($row['fb_ready_bar'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_ready_bar");
+									} else { ?>
+										<button class="btn btn-sm btn-dark" disabled>منتظر</button>
+									<?php
+									}
 									?>	
 									</td>
 									<td>
 									<?php
-									show_btn_list($row['fb_get_sample'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_get_sample");
+									if($row['fb_ready_bar'] == 1) {
+										show_btn_list($row['fb_get_sample'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_get_sample");
+									} else { ?>
+										<button class="btn btn-sm btn-dark" disabled>منتظر</button>
+									<?php
+									}
 									?>
 									</td>
 									<td>
 									<?php
-									show_btn_list($row['fb_verify_bar'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_verify_bar");
+									if($row['fb_get_sample'] == 1) {
+										show_btn_list($row['fb_verify_bar'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_verify_bar");
+									} else { ?>
+										<button class="btn btn-sm btn-dark" disabled>منتظر</button>
+									<?php
+									}
 									?>	
 									</td>
 									<td>
 									<?php
-									show_btn_list($row['fb_exit_doc'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_exit_doc");
+									if($row['fb_verify_bar'] == 1) {
+										show_btn_list($row['fb_exit_doc'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_exit_doc");
+									} else { ?>
+										<button class="btn btn-sm btn-dark" disabled>منتظر</button>
+									<?php
+									}
 									?>
 									</td>
 									<td>	
 									<?php
-									show_btn_list($row['fb_result_analyze'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_result_analyze");
+									if($row['fb_exit_doc'] == 1) {
+										show_btn_list($row['fb_result_analyze'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_result_analyze");
+									} else { ?>
+										<button class="btn btn-sm btn-dark" disabled>منتظر</button>
+									<?php
+									}
 									?>	
 									</td>
 									<td>
@@ -147,13 +211,13 @@
 									<th>#</th>
 									<th>فاکتور</th>
 									<th>مشتری</th>
+									<th>اسکن پیش فاکتور</th>
 									<th>تایید ۱ مدیر</th>
 									<th>ارسال مشتری</th>
 									<th>تایید مشتری</th>
 									<th>اسناد تایید</th>
 									<th>تایید مالی</th>
 									<th>تایید ۲ مدیر</th>
-									<th>منتظر بارگیری</th>
 									<th>آماده تحویل</th>
 									<th>نمونه برداری</th>
 									<th>تایید بارگیری</th>

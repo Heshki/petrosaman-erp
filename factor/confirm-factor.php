@@ -5,6 +5,51 @@
 	
 	$fb_id = $_GET['fb_id'];
 	$type_confirm = $_GET['typee'];
+	if(isset($_POST['up_file'])){
+		$type = $_POST['typee'];
+		$fb_id = $_POST['fb_id'];
+		$filename = $_FILES['fileToUpload']['name'];
+		$tmp_name = $_FILES['fileToUpload']['tmp_name'];
+		$size = $_FILES['fileToUpload']['size'];
+		$m_name = upload_file($filename, $tmp_name, $size, $type, $fb_id);
+		$m_type = "pre_invoice_sale";
+		$m_name_file = "no_signed";
+		$sql = "insert into media (m_name, m_type, m_name_file, bu_id) values ('$m_name', '$m_type', '$m_name_file', $fb_id)";
+		echo $sql;
+		ex_query($sql);
+		$sql1 = "update factor_body set fb_pre_invoice_scan = 1 where fb_id = $fb_id";
+		ex_query($sql1);
+	}
+	if(isset($_POST['up_file_singed'])){
+		$type = $_POST['typee'];
+		$fb_id = $_POST['fb_id'];
+		$filename = $_FILES['fileToUpload']['name'];
+		$tmp_name = $_FILES['fileToUpload']['tmp_name'];
+		$size = $_FILES['fileToUpload']['size'];
+		$m_name = upload_file($filename, $tmp_name, $size, $type, $fb_id);
+		$m_type = "pre_invoice_sale";
+		$m_name_file = "signed";
+		$sql = "insert into media (m_name, m_type, m_name_file, bu_id) values ('$m_name', '$m_type', '$m_name_file', $fb_id)";
+		ex_query($sql);
+	}
+	if(isset($_POST['delete-img'])){
+		$filename1 = $_POST['filename'];
+		$image_id = $_POST['image_id'];
+		
+		$path = str_replace($_SERVER['DOCUMENT_ROOT'], '', "../uploads/" . $filename1);
+		
+		if(unlink($path)){
+			$sql = "delete from media where m_id = $image_id";
+			ex_query($sql);
+		}
+		$url = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+		echo $url;
+		?>
+		<script type="text/javascript">
+			window.location.href = "<?php echo $url; ?>";
+		</script>
+		<?php
+	}
 	?>
 	<section class="content">
 		<div id="details" class="col-xs-12">		
@@ -14,8 +59,46 @@
 				</div>
 			</div>
 			<?php
-			if($type_confirm == 'fb_verify_admin1') { ?>
+			if($type_confirm == 'fb_pre_invoice_scan') { ?>
+				<form action="" method="post" enctype="multipart/form-data">
+					<br>
+					<div class="row">
+						<div class="col-md-6">
+							<h4>بارگزاری پیش فاکتور اسکن شده</h4><br>
+							<input type="file" accept="image/*" onchange="loadFile(event)" name="fileToUpload" id="verify_file"><br>
+							<input type="hidden" name="typee" value="invoice">
+							<input type="hidden" name="fb_id" value="<?php echo $_GET['fb_id']; ?>">
+							<button type="submit" class="btn btn-success" name="up_file">بارگزاری فایل</button>
+						</div>
+						<div class="col-md-6">
+							<img class="img-responsive" id="output">
+						</div>
+					</div>
+				</form>
+				<hr>
+				<div class="row">
+					<div class="col-md-12">
+						<h4>نمایش پیش  فاکتور اسکن شده</h4>
+						<?php pre_invoice_scan($fb_id); ?>
+					</div>
+				</div>
+				<script>
+		  			var loadFile = function(event) {
+				    	var output = document.getElementById('output');
+			    		output.src = URL.createObjectURL(event.target.files[0]);
+		  			};
+				</script>
+				<a href="<?php get_view("factor"); ?>list-factor.php" class="btn btn-primary">بازگشت</a>
+				<?php
+			}
+			elseif($type_confirm == 'fb_verify_admin1') { ?>
 				<form action="list-factor.php" method="post">
+					<div class="row">
+						<div class="col-md-12">
+							<h4>نمایش پیش  فاکتور اسکن شده</h4>
+							<?php show_pre_invoice_scan($fb_id); ?>
+						</div>
+					</div>
 					<div class="col-xs-12">
 						<textarea class="form-control" name="l_details" placeholder="توضیحات لازم را اینجا بنویسید..." rows="4" cols="50"></textarea>
 						<input type="hidden" name="fb_id" value="<?php echo $fb_id; ?>">
@@ -30,6 +113,12 @@
 			<?php
 			}else if($type_confirm=='fb_send_customer') { ?>
 				<form action="list-factor.php" method="post">
+					<div class="row">
+						<div class="col-md-12">
+							<h4>نمایش پیش  فاکتور اسکن شده</h4>
+							<?php show_pre_invoice_scan($fb_id); ?>
+						</div>
+					</div>
 					<div class="col-xs-12">
 						<textarea class="form-control" name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50"></textarea>
 						<input type="hidden" name="fb_id" value="<?php echo $fb_id; ?>">
@@ -44,6 +133,12 @@
 			<?php
 			}else if($type_confirm == 'fb_verify_customer') { ?>
 				<form action="list-factor.php" method="post">
+					<div class="row">
+						<div class="col-md-12">
+							<h4>نمایش پیش  فاکتور اسکن شده</h4>
+							<?php show_pre_invoice_scan($fb_id); ?>
+						</div>
+					</div>
 					<div class="col-xs-12">
 						<textarea class="form-control" name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50"></textarea>
 						<input type="hidden" name="fb_id" value="<?php echo $fb_id; ?>">
@@ -57,6 +152,40 @@
 				</form>
 			<?php
 			}else if($type_confirm == 'fb_verify_docs') { ?>
+				<form action="" method="post" enctype="multipart/form-data">
+					<div class="row">
+						<div class="col-md-12">
+							<h4>نمایش پیش  فاکتور اسکن شده</h4>
+							<?php show_pre_invoice_scan($fb_id); ?>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-md-6">
+							<h4>بارگزاری پیش فاکتور اسکن شده (امضا شده توسط مشتری و تایید شده توسط واحد اسناد)</h4><br>
+							<input type="file" accept="image/*" onchange="loadFile(event)" name="fileToUpload" id="verify_file"><br>
+							<input type="hidden" name="typee" value="invoice">
+							<input type="hidden" name="fb_id" value="<?php echo $_GET['fb_id']; ?>">
+							<button type="submit" class="btn btn-success" name="up_file_singed">بارگزاری فایل</button>
+						</div>
+						<div class="col-md-6">
+							<img class="img-responsive" id="output">
+						</div>
+					</div>
+				</form>
+				<hr>
+				<div class="row">
+					<div class="col-md-12">
+						<h4>نمایش پیش  فاکتور اسکن شده (امضا شده توسط مشتری وتایید شده توسط واحد اسناد)</h4>
+						<?php singed_pre_invoice_scan($fb_id); ?>
+					</div>
+				</div>
+				<script>
+		  			var loadFile = function(event) {
+				    	var output = document.getElementById('output');
+			    		output.src = URL.createObjectURL(event.target.files[0]);
+		  			};
+				</script>
 				<form action="list-factor.php" method="post">
 					<div class="col-xs-12">
 						<textarea class="form-control" name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50"></textarea>
@@ -72,6 +201,12 @@
 			<?php
 			}elseif ($type_confirm == 'fb_verify_finan') { ?>
 				<form action="list-factor.php" method="post">
+					<div class="row">
+						<div class="col-md-12">
+							<h4>نمایش پیش  فاکتور اسکن شده</h4>
+							<?php show_singed_pre_invoice_scan($fb_id); ?>
+						</div>
+					</div>
 					<div class="col-xs-12">
 						<textarea class="form-control" name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50"></textarea>
 						<input type="hidden" name="fb_id" value="<?php echo $fb_id; ?>">
@@ -86,6 +221,12 @@
 			<?php
 			}elseif ($type_confirm == 'fb_verify_admin2') { ?>
 				<form action="list-factor.php" method="post">
+					<div class="row">
+						<div class="col-md-12">
+							<h4>نمایش پیش  فاکتور اسکن شده</h4>
+							<?php show_singed_pre_invoice_scan($fb_id); ?>
+						</div>
+					</div>
 					<div class="col-xs-12">
 						<textarea class="form-control" name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50"></textarea>
 						<input type="hidden" name="fb_id" value="<?php echo $fb_id; ?>">
@@ -100,6 +241,12 @@
 			<?php
 			}else if($type_confirm=='fb_wait_bar'){ ?>
 				<form action="list-factor.php" method="post">
+					<div class="row">
+						<div class="col-md-12">
+							<h4>نمایش پیش  فاکتور اسکن شده</h4>
+							<?php show_singed_pre_invoice_scan($fb_id); ?>
+						</div>
+					</div>
 					<div class="col-xs-12">
 						<textarea class="form-control" name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50"></textarea>
 						<input type="hidden" name="fb_id" value="<?php echo $fb_id; ?>">
@@ -114,6 +261,12 @@
 			<?php
 			}elseif ($type_confirm == 'fb_ready_bar') { ?>
 				<form action="list-factor.php" method="post">
+					<div class="row">
+						<div class="col-md-12">
+							<h4>نمایش پیش  فاکتور اسکن شده</h4>
+							<?php show_singed_pre_invoice_scan($fb_id); ?>
+						</div>
+					</div>
 					<div class="col-xs-12">
 						<textarea class="form-control" name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50"></textarea>
 						<input type="hidden" name="fb_id" value="<?php echo $fb_id; ?>">
@@ -129,6 +282,12 @@
 			<?php
 			}elseif ($type_confirm == 'fb_get_sample') { ?>
 				<form action="list-factor.php" method="post">
+					<div class="row">
+						<div class="col-md-12">
+							<h4>نمایش پیش  فاکتور اسکن شده</h4>
+							<?php show_singed_pre_invoice_scan($fb_id); ?>
+						</div>
+					</div>
 					<div class="col-xs-12">
 						<textarea class="form-control" name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50"></textarea>
 						<input type="hidden" name="fb_id" value="<?php echo $fb_id; ?>">
@@ -143,6 +302,12 @@
 			<?php
 			}elseif ($type_confirm == 'fb_verify_bar') { ?>
 				<form action="list-factor.php" method="post">
+					<div class="row">
+						<div class="col-md-12">
+							<h4>نمایش پیش  فاکتور اسکن شده</h4>
+							<?php show_singed_pre_invoice_scan($fb_id); ?>
+						</div>
+					</div>
 					<div class="col-xs-12">
 						<textarea class="form-control" name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50"></textarea>
 						<input type="hidden" name="fb_id" value="<?php echo $fb_id; ?>">
@@ -157,6 +322,12 @@
 			<?php
 			}elseif ($type_confirm == 'fb_exit_doc') { ?>
 				<form action="list-factor.php" method="post">
+					<div class="row">
+						<div class="col-md-12">
+							<h4>نمایش پیش  فاکتور اسکن شده</h4>
+							<?php show_singed_pre_invoice_scan($fb_id); ?>
+						</div>
+					</div>
 					<div class="col-xs-12">
 						<textarea class="form-control" name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50"></textarea>
 						<input type="hidden" name="fb_id" value="<?php echo $fb_id; ?>">

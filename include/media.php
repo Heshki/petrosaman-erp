@@ -5,7 +5,7 @@ function upload_file($filename, $tmp_name, $size, $type, $bu_id){
 	$ext = end($ext);
 	$filename = time() . "." . $ext;
 	
-	$target_dir = "uploads/";
+	$target_dir = "../uploads/";
     $target_file = $target_dir . basename($filename);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -43,6 +43,7 @@ function upload_file($filename, $tmp_name, $size, $type, $bu_id){
             echo "Sorry, there was an error uploading your file.";
         }
     }
+    return $filename;
 }
 
 function user_upload_file($filename, $tmp_name, $size, $type, $bu_id){
