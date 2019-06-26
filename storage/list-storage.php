@@ -24,13 +24,8 @@
 	if(isset($_POST['tl_submit'])) {
 		$user_id = $_SESSION['user_id'];
 		$fb_id = $_POST['fb_id'];
-		$fb_dname = $_POST['fb_dname'];
-		$fb_dfamily = $_POST['fb_dfamily'];
-		$fb_mellicode = $_POST['fb_mellicode'];
-		$fb_mobile = $_POST['fb_mobile'];
-		$fb_car = $_POST['fb_car'];
-		$fb_plaque = $_POST['fb_plaque'];
-		$sql = "update factor_body set fb_dname = '$fb_dname', fb_dfamily = '$fb_dfamily', fb_mellicode = '$fb_mellicode', fb_car = '$fb_car', fb_plaque = '$fb_plaque', fb_mobile = '$fb_mobile' where fb_id = $fb_id";
+		$dr_id = $_POST['dr_id'];
+		$sql = "update factor_body set dr_id = $dr_id where fb_id = $fb_id";
 		ex_query($sql);
 	}
 	
@@ -98,20 +93,22 @@
 											</div>
 											<div class="modal-body">
 												<form action="" method="post">
-													<label>نام</label>
-													<input class="form-control" value="<?php echo $row['fb_dname']; ?>" type="text" name="fb_dname" placeholder="نام" required/><br/>
-													<label>نام خانوادگی</label>
-													<input class="form-control" value="<?php echo $row['fb_dfamily']; ?>" type="text" name="fb_dfamily" placeholder="نام خانوادگی" required/><br/>
-													<label>کد ملی</label>
-													<input class="form-control" value="<?php echo $row['fb_mellicode']; ?>" type="text" name="fb_mellicode" placeholder="کد ملی" required/><br/>
-													<label>شماره موبایل</label>
-													<input class="form-control" value="<?php echo $row['fb_mobile']; ?>" type="text" name="fb_mobile" placeholder="شماره موبایل" required/><br/>
-													<label>خودرو</label>
-													<input class="form-control" value="<?php echo $row['fb_car']; ?>" type="text" name="fb_car" placeholder="خودرو" required/><br/>
-													<label>شماره پلاک</label>
-													<input class="form-control" value="<?php echo $row['fb_plaque']; ?>" type="text" name="fb_plaque" placeholder="شماره پلاک" required/><br/>
-													
-													<input class="hidden" type="text" name="fb_id" id="fb_id" value="<?php echo $row['fb_id']; ?>"/>
+													<label> مشخصات راننده</label>
+													<select name="dr_id">
+														<?php
+														$res1 = drivers();
+														if(count($res1) > 0){
+															foreach ($res1 as $row1) { ?>
+																<option value="<?php echo $row1['dr_id']; ?>"><?php echo $row1['dr_name'] . " " . $row1['dr_family'] . " (" . $row1['dr_car'] . " (" . $row1['dr_plaque'] . ")) "; ?></option>
+															<?php
+															}
+														} else { ?>
+															<option class="bg-danger">راننده ای در لیست وجود ندارد</option>
+														<?php
+														}
+														?>
+													</select>
+													<input type="hidden" name="fb_id" id="fb_id" value="<?php echo $row['fb_id']; ?>"/>
 													<input type="submit" class="btn btn-success" name="tl_submit" value="ثبت">
 												</form>
 											</div>

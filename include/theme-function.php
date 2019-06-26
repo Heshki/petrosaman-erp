@@ -26,10 +26,13 @@ function breadcrumb($title){ ?>
 				</div>
 			</div>
 		</div>
+		<?php
+			$_SESSION['user_interactions'][] = $_SERVER['HTTP_REFERER'];
+			$previous_page = end($_SESSION['user_interactions']);
+		?>
 		<ol class="breadcrumb">
-			<li><a href="<?php get_url(); ?>index.php"><i class="fa fa-dashboard"></i> خانه</a></li>
-			<li><a href="#">مشتریان</a></li>
-			<li class="active">ثبت مشتری</li>
+			<li><a href="<?php get_url(); ?>index.php" class="btn btn-success" style="color:white;"><i class="fa fa-dashboard"></i> خانه</a></li>
+			<li><a href="<?php echo $previous_page; ?>" class="btn btn-primary" style="color:white;">بازگشت</a></li>
 		</ol>
 	</section>
 <?php

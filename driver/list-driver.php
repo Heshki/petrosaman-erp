@@ -46,35 +46,41 @@
 											<div class="margin-tb input-group-prepend">
 												<span class="input-group-text">کد ملی</span>
 											</div>
-											<input type="text" name="dr_kmeli" class="form-control" value="<?php if(isset($_GET['dr_id'])) { echo $asd[0]['dr_kmeli'];}else{ echo ''; } ?>">
+											<input type="text" name="dr_national" class="form-control" value="<?php if(isset($_GET['dr_id'])) { echo $asd[0]['dr_national'];}else{ echo ''; } ?>">
 										</div>
 										<div class="item col-md-4">
 											<div class="margin-tb input-group-prepend">
 												<span class="input-group-text">نوع ماشین</span>
 											</div>
 											<input type="text" name="dr_car"  class="form-control" value="<?php if(isset($_GET['dr_id'])) { echo $asd[0]['dr_car'];}else{ echo ''; } ?>">
-											<input type="text" class="hidden" name="dr_id" value="<?php echo $_GET['dr_id']; ?>">
 										</div>
 										<div class="item col-md-6">
 											<div class="margin-tb input-group-prepend">
 												<span class="input-group-text">پلاک ماشین</span>
 											</div>
-											<input type="text" name="dr_plate"  class="form-control" value="<?php if(isset($_GET['dr_id'])) { echo $asd[0]['dr_plate'];}else{ echo ''; } ?>">
-											<input type="text" class="hidden" name="dr_id" value="<?php echo $_GET['dr_id']; ?>">
+											<input type="text" name="dr_plaque" class="form-control" value="<?php if(isset($_GET['dr_id'])) { echo $asd[0]['dr_plaque'];}else{ echo ''; } ?>">
 										</div>
 										<div class="item col-md-6">
 											<div class="margin-tb input-group-prepend">
 												<span class="input-group-text">موبایل</span>
 											</div>
 											<input type="text" name="dr_mobile"  class="form-control" value="<?php if(isset($_GET['dr_id'])) { echo $asd[0]['dr_mobile'];}else{ echo ''; } ?>">
-											<input type="text" class="hidden" name="dr_id" value="<?php echo $_GET['dr_id']; ?>">
+											<input type="hidden" name="dr_id" class="form-control" value="<?php if(isset($_GET['dr_id'])) { echo $asd[0]['dr_id'];}else{ echo ''; } ?>">
 										</div>
 										<div class="item col-md-6">
 											<div class="margin-tb input-group-prepend">
 												<span class="input-group-text">وضعیت</span>
 											</div>
-											<input type="text" name="dr_status"  class="form-control" value="<?php if(isset($_GET['dr_id'])) { echo $asd[0]['dr_status'];}else{ echo ''; } ?>">
-											<input type="text" class="hidden" name="dr_id" value="<?php echo $_GET['dr_id']; ?>">
+											<select name="dr_status" class="form-control">
+												<?php
+												if(isset($_GET['dr_id'])) { ?>
+													<option value="<?php echo $asd[0]['dr_status']; ?>"><?php if($asd[0]['dr_status'] == 1) { echo "فعال"; } else { echo "غیر فعال"; } ?></option>
+												<?php
+												}
+												?>
+												<option value="1" class="bg-success">فعال</option>
+												<option value="0" class="bg-danger">غیر فعال</option>
+											</select>
 										</div>
 										<div class="item col-md-4">
 											<?php if(isset($_GET['dr_id'])){
@@ -90,9 +96,9 @@
 											$array = array();
 											array_push($array, $_POST['dr_name']);
 											array_push($array, $_POST['dr_family']);
-											array_push($array, $_POST['dr_kmeli']);
+											array_push($array, $_POST['dr_national']);
 											array_push($array, $_POST['dr_car']);
-											array_push($array, $_POST['dr_plate']);
+											array_push($array, $_POST['dr_plaque']);
 											array_push($array, $_POST['dr_mobile']);
 											array_push($array, $_POST['dr_status']);
 											insert_driver($array);
@@ -104,11 +110,12 @@
 											array_push($array, $_POST['dr_id']);
 											array_push($array, $_POST['dr_name']);
 											array_push($array, $_POST['dr_family']);
-											array_push($array, $_POST['dr_kmeli']);
+											array_push($array, $_POST['dr_national']);
 											array_push($array, $_POST['dr_car']);
-											array_push($array, $_POST['dr_plate']);
+											array_push($array, $_POST['dr_plaque']);
 											array_push($array, $_POST['dr_mobile']);
 											array_push($array, $_POST['dr_status']);
+											echo $_POST['dr_status'];
 											update_driver($array);
 											echo "<meta http-equiv='refresh' content='0'/>";
 										}
@@ -137,11 +144,11 @@
 						  			<tr>
 										<td><?php echo $a['dr_name']; ?></td>
 										<td><?php echo $a['dr_family']; ?></td>
-										<td><?php echo $a['dr_kmeli']; ?></td>
+										<td><?php echo $a['dr_national']; ?></td>
 										<td><?php echo $a['dr_car']; ?></td>
-										<td><?php echo $a['dr_plate']; ?></td>
+										<td><?php echo $a['dr_plaque']; ?></td>
 										<td><?php echo $a['dr_mobile']; ?></td>
-										<td><?php echo $a['dr_status']; ?></td>
+										<td><?php if($a['dr_status'] == 1) { echo "فعال"; } else { echo "غیر فعال"; } ?></td>
 										<td>
 											<form action="" method="post" onSubmit="if(!confirm('آیا از انجام این عملیات اطمینان دارید؟')){return false;}">
 												<a href="list-driver.php?dr_id=<?php echo $a['dr_id']; ?>">مشاهده</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -149,8 +156,8 @@
 												<input class="hidden" type="text" name="delete-text" value="<?php echo $a['dr_id']; ?>">
 												<?php
 												if(isset($_POST['delete-driver'])){
-													$u_id = $_POST['delete-text'];
-													delete_driver($u_id);
+													$dr_id = $_POST['delete-text'];
+													delete_driver($dr_id);
 													echo "<meta http-equiv='refresh' content='0'/>";
 													exit();
 												}

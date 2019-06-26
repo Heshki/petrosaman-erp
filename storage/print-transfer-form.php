@@ -11,7 +11,7 @@
 		require_once"../customer/functions.php";
 		require_once"../product/functions.php";
 		$fb_id = $_GET['fb_id']; 
-		$sql = "select * from factor_body inner join factor on factor_body.f_id = factor.f_id where factor_body.fb_id = $fb_id";
+		$sql = "select * from factor_body inner join factor on factor_body.f_id = factor.f_id inner join driver on driver.dr_id = factor_body.dr_id where factor_body.fb_id = $fb_id";
 		$res = get_select_query($sql);
 		?>
 		<section class="content-header">
@@ -63,21 +63,21 @@
 						</tr>
 						<tr>
 							<th>نام:</th>
-							<td><?php echo $row['fb_dname']; ?></td>
+							<td><?php echo $row['dr_name']; ?></td>
 							<th>نام خانوادگی:</th>
-							<td><?php echo $row['fb_dfamily']; ?></td>
+							<td><?php echo $row['dr_family']; ?></td>
 						</tr>
 						<tr>
 							<th>خودرو:</th>
-							<td><?php echo per_number($row['fb_car']); ?></td>
+							<td><?php echo per_number($row['dr_car']); ?></td>
 							<th>پلاک:</th>
-							<td><?php echo per_number($row['fb_plaque']); ?></td>
+							<td><?php echo per_number($row['dr_plaque']); ?></td>
 						</tr>
 						<tr>
 							<th>کد ملی:</th>
-							<td><?php echo per_number($row['fb_mellicode']); ?></td>
+							<td><?php echo per_number($row['dr_national']); ?></td>
 							<th>تلفن:</th>
-							<td><?php echo per_number($row['fb_mobile']); ?></td>
+							<td><?php echo per_number($row['dr_mobile']); ?></td>
 						</tr>
 						<?php
 							$i++;

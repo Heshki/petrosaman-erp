@@ -1,7 +1,24 @@
-<?php $title = 'تاریخچه فاکتور ها'; include"../header.php"; include"../nav.php"; include"functions.php"; ?> 
+<?php $title = 'تاریخچه فاکتور ها'; include"../header.php"; include"../nav.php"; include"functions.php";
+	
+?> 
 	<div class="content-wrapper">
+		<section class="content-header">
+			<ol class="breadcrumb">
+				<li><a href="<?php get_url(); ?>index.php"><i class="fa fa-dashboard"></i> خانه</a></li>
+				<li><a href="#">فاکتور </a></li>
+				<li class="active">تاریخچه فاکتور ها</li>
+			</ol>
+		</section>
 		
-		<?php breadcrumb("تاریخچه فاکتور"); ?>
+		<section class="content-header">
+			<div id="page-wrapper">
+				<div class="row">
+					<div class="col-lg-12">
+						<h1 class="page-header">لیست تاریخچه فاکتور ها</h1>
+					</div>
+				</div>
+			</div>
+		</section>
 
 		<section class="content">
 			<div class="row">
@@ -13,35 +30,29 @@
 									<tr>
 										<th>#</th>
 										<th>کد تاریخچه</th>
-										<th>کاربر</th>
-										<th>تاریخ و ساعت انجام</th>
-										<th>کد بدنه فاکتور</th>
+										<th>نام و نام خانوادگی کاربر</th>
+										<th>زمان انجام عملیات</th>
+										<th>شماره فاکتور</th>
 										<th>توضیحات تاریخچه</th>
 										<th>عملیات</th>
 									</tr>
 								</thead>
 								<tbody>
 									<?php
-									if(isset($_GET['id'])){
-										$fb_id = $_GET['id'];
-										$res = get_factor_log($fb_id);
-									}
 									$i = 1;
-									foreach ($res as $row) {
-										$u_id = $row['u_id'];
-										$name = get_var_query("select u_name from user where u_id = $u_id");
-										$family = get_var_query("select u_family from user where u_id = $u_id");
-										?>
+									$res = list_factor_log();
+									foreach ($res as $row) { ?>
 									<tr>
-										<td><?php echo per_number($i); ?></td>
-										<td><?php echo per_number($row['l_id']); ?></td>
-										<td><?php echo $name . " " . $family; ?></td>
-										<td><?php echo per_number($row['l_date']); ?></td>
-										<td><?php echo per_number($row['fb_id']); ?></td>
-										<td><?php echo per_number($row['l_details']); ?></td>
+										<td><?php echo $i; ?></td>
+										<td><?php echo $row['l_id']; ?></td>
+										<td><?php echo $row['u_name'] . " " . $row['u_family']; ?></td>
+										<td><?php echo $row['l_date']; ?></td>
+										<td><?php echo $row['f_id']; ?></td>
+										<td><?php if($row['l_details'] == "") { echo "(بدون توضیح)"; } else { echo $row['l_details']; } ; ?></td>
 										<td>
 											<form action="" method="post" onSubmit="if(!confirm('آیا از انجام این عملیات اطمینان دارید؟')){return false;}">
-												<button class="btn btn-danger btn-sm" type="submit" name="delete-list" id="delete-list">حذف</button>
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												<button class="btn btn-danger" type="submit" name="delete-list" id="delete-list">حذف</button>
 												<input class="hidden" type="text" name="delete-text" id="delete-text" value="<?php echo $row['l_id']; ?>">
 												<?php
 												if(isset($_POST['delete-list'])){
@@ -62,9 +73,10 @@
 									<tr>
 										<th>#</th>
 										<th>کد تاریخچه</th>
-										<th>کاربر</th>
-										<th>تاریخ و ساعت انجام</th>
-										<th>کد بدنه فاکتور</th>
+										<th>کد کاربر</th>
+										<th>تاریخ انجام عملیات</th>
+										<th>ساعت انجام عملیات</th>
+										<th>شماره فاکتور</th>
 										<th>توضیحات تاریخچه</th>
 										<th>عملیات</th>
 									</tr>
@@ -78,9 +90,22 @@
 	</div>
 	<div class="control-sidebar-bg"></div>
 
+	<!-- jQuery 2.1.4 -->
+	<script src="<?php get_url(); ?>/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+	<!-- Bootstrap 3.3.4 -->
+	<script src="<?php get_url(); ?>/bootstrap/js/bootstrap.min.js"></script>
+	<!-- DataTables -->
 	<script src="<?php get_url(); ?>/plugins/datatables/jquery.dataTables.min.js"></script>
 	<script src="<?php get_url(); ?>/plugins/datatables/dataTables.bootstrap.min.js"></script>
-	
+	<!-- SlimScroll -->
+	<script src="<?php get_url(); ?>/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+	<!-- FastClick -->
+	<script src="<?php get_url(); ?>/plugins/fastclick/fastclick.min.js"></script>
+	<!-- AdminLTE App -->
+	<script src="<?php get_url(); ?>/dist/js/app.min.js"></script>
+	<!-- AdminLTE for demo purposes -->
+	<script src="<?php get_url(); ?>/dist/js/demo.js"></script>
+	<!-- page script -->
 	<script>
 		$(function () {
 			$("#example1").DataTable();

@@ -15,7 +15,6 @@ function singed_pre_invoice_scan($fb_id) {
 		?>
 		<form action="" method="post" onclick="if(!confirm('آیا از انجام این عملیات اطمینان دارید؟')){return false;}">
 			<div style="border: 1px dashed #eee; border-radius: 4px; padding: 10px; text-align: center; background: #f9f9f9">
-				<span id="signed">امضا شده</span>
 				<img class="img-responsive" src="<?php echo $src; ?>"><br>
 				<input type="hidden" name="filename" value="<?php echo $o['m_name']; ?>">
 				<input type="hidden" name="image_id" value="<?php echo $o['m_id']; ?>">
@@ -43,7 +42,6 @@ function show_singed_pre_invoice_scan($fb_id) {
 			}
 			?>
 			<div style="border: 1px dashed #eee; border-radius: 4px; padding: 10px; text-align: center; background: #f9f9f9">
-				<span id="signed">امضا شده</span>
 				<img class="img-responsive" src="<?php echo $src; ?>"><br>
 			</div>
 			<br>
@@ -161,7 +159,7 @@ function insert_factor_body($array){
 }
 
 function list_factor_log() {
-	$sql = "select * from factor inner join factor_log on factor.f_id = factor_log.f_id inner join users on users.u_id = factor.u_id";
+	$sql = "select * from factor_log inner join factor_body on factor_body.fb_id = factor_log.fb_id inner join user on user.u_id = factor_log.u_id order by factor_log.l_id desc";
 	$res = get_select_query($sql);
 	return $res;
 }

@@ -1,5 +1,5 @@
 <?php $title = 'تاریخچه فاکتور ها'; include"../header.php"; include"../nav.php"; include"functions.php";
-	$res = list_factor_body();
+	
 ?> 
 	<div class="content-wrapper">
 		<section class="content-header">
@@ -30,9 +30,8 @@
 									<tr>
 										<th>#</th>
 										<th>کد تاریخچه</th>
-										<th>کد کاربر</th>
-										<th>تاریخ انجام عملیات</th>
-										<th>ساعت انجام عملیات</th>
+										<th>نام و نام خانوادگی کاربر</th>
+										<th>زمان انجام عملیات</th>
 										<th>شماره فاکتور</th>
 										<th>توضیحات تاریخچه</th>
 										<th>عملیات</th>
@@ -46,14 +45,13 @@
 									<tr>
 										<td><?php echo $i; ?></td>
 										<td><?php echo $row['l_id']; ?></td>
-										<td><?php echo $row['u_id']; ?></td>
+										<td><?php echo $row['u_name'] . " " . $row['u_family']; ?></td>
 										<td><?php echo $row['l_date']; ?></td>
-										<td><?php echo $row['l_time']; ?></td>
 										<td><?php echo $row['f_id']; ?></td>
-										<td><?php echo $row['l_text']; ?></td>
+										<td><?php if($row['l_details'] == "") { echo "(بدون توضیح)"; } else { echo $row['l_details']; } ; ?></td>
 										<td>
 											<form action="" method="post" onSubmit="if(!confirm('آیا از انجام این عملیات اطمینان دارید؟')){return false;}">
-												<a href="edit-product.php?id=<?php echo $row['fb_id']; ?>">ویرایش</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 												<button class="btn btn-danger" type="submit" name="delete-list" id="delete-list">حذف</button>
 												<input class="hidden" type="text" name="delete-text" id="delete-text" value="<?php echo $row['l_id']; ?>">
 												<?php

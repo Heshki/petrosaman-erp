@@ -1,6 +1,12 @@
 <?php
 require_once"../include/database.php";
 
+function drivers() {
+	$sql = "select * from driver where dr_status = 1 order by dr_id desc";
+	$res = get_select_query($sql);
+	return $res;
+}
+
 function insert_transfer_list($array){
 	$u_id = $array[0];
 	$fb_id = $array[1];
@@ -199,4 +205,11 @@ function load_store($s_id){
 	</table>
 <?php
 }
+
+function list_factor_log() {
+	$sql = "select * from factor_log inner join factor_body on factor_body.fb_id = factor_log.l_id inner join user on user.u_id = factor_log.u_id order by factor_log.l_id desc";
+	$res = get_select_query($sql);
+	return $res;
+}
+
 ?>

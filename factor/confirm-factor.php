@@ -1,7 +1,37 @@
-<?php include"../header.php"; include"../nav.php"; include"functions.php"; ?>
+<?php $title = "تایید فاکتور"; include"../header.php"; include"../nav.php"; include"functions.php"; ?>
 <div class="content-wrapper">
 	<?php
-	breadcrumb("تایید پیشنهاد فروش");
+	$fb_id = $_GET['fb_id'];
+	$type_confirm = $_GET['typee'];
+	if($type_confirm == 'fb_pre_invoice_scan') {
+		$echo_type = "اسکن پیش فاکتور";
+	}elseif($type_confirm == 'fb_verify_admin1') {
+		$echo_type = "تایید مدیر 1";
+	}elseif($type_confirm == 'fb_send_customer') {
+		$echo_type = "ارسال برای مشتری";
+	}elseif($type_confirm == 'fb_verify_customer') {
+		$echo_type = "تایید مشتری";
+	}elseif($type_confirm == 'fb_verify_docs') {
+		$echo_type = "تایید اسناد";
+	}elseif($type_confirm == 'fb_verify_finan') {
+		$echo_type = "تایید مالی";
+	}elseif($type_confirm == 'fb_verify_admin2') {
+		$echo_type = "تایید مدیر 2";
+	}elseif($type_confirm == 'fb_wait_bar') {
+		$echo_type = "تایید انبار";
+	}elseif($type_confirm == 'fb_ready_bar') {
+		$echo_type = "آماده بارگیری";
+	}elseif($type_confirm == 'fb_get_sample') {
+		$echo_type = "نمونه برداری";
+	}elseif($type_confirm == 'fb_verify_bar') {
+		$echo_type = "تایی بارگیری";
+	}elseif($type_confirm == 'fb_exit_doc') {
+		$echo_type = "حواله خروج";
+	}elseif($type_confirm == 'fb_result_analyze') {
+		$echo_type = "نتیجه آنالیز";
+	}
+	
+	breadcrumb("تایید پیشنهاد فروش" . " (" . $echo_type . ")");
 	
 	$fb_id = $_GET['fb_id'];
 	$type_confirm = $_GET['typee'];
