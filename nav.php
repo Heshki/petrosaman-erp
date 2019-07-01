@@ -89,10 +89,11 @@
 				$myDataArray = explode('/', $myDate);
 				$myMonth = $myDataArray[1];
 				?>
-				<li class="<?php check_active('list-user.php'); check_active('set_schedule.php'); check_active('get_schedule.php'); ?> treeview">
+				<li class="<?php check_active('list-user.php'); check_active('set_schedule.php'); check_active('get_schedule.php'); check_active('add_group.php'); check_active('edit_group.php'); ?> treeview">
 			  		<a href="#"><i class="fa fa-files-o"></i><span>کاربران</span></a>
 			  		<ul class="treeview-menu">
 						<li class="<?php check_active('list-user.php'); ?>"><a href="<?php get_url(); ?>user/list-user.php"><i class="fa fa-circle-o"></i>لیست کاربران</a></li>
+						<li class="<?php check_active('add_group.php'); ?>"><a href="<?php get_url(); ?>group/add_group.php"><i class="fa fa-circle-o"></i>تعریف گروه</a></li>
 						<li class="<?php check_active('set_schedule.php'); ?>"><a href="<?php get_url(); ?>group/set_schedule.php/?group=A&month=<?php echo $myMonth; ?>&sch_submit=1"><i class="fa fa-circle-o"></i>برنامه ریزی شیفت ها</a></li>
 						<li class="<?php check_active('get_schedule.php'); ?>"><a href="<?php get_url(); ?>group/get_schedule.php/?group=A&sch_submit=1"><i class="fa fa-circle-o"></i>مشاهده گروه ها</a></li>
 			  		</ul>

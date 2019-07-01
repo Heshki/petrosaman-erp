@@ -11,10 +11,14 @@
 							<div class="margin-tb input-group-prepend">
 								<span class="input-group-text">انتخاب گروه</span>
 								<select name="group" class="form-control">
-									<option <?php if(isset($_GET['group']) && $_GET['group']=="A"){echo "selected";} ?> value="A">A</option>
-									<option <?php if(isset($_GET['group']) && $_GET['group']=="B"){echo "selected";} ?> value="B">B</option>
-									<option <?php if(isset($_GET['group']) && $_GET['group']=="C"){echo "selected";} ?> value="C">C</option>
-									<option <?php if(isset($_GET['group']) && $_GET['group']=="D"){echo "selected";} ?> value="D">D</option>
+									<?php
+									$all_groups = list_group();
+									foreach ($all_groups as $a_group) {
+										?>
+										<option <?php if(isset($_GET['group']) && $_GET['group']==$a_group['g_name']){echo "selected";} ?>><?php echo $a_group['g_name']; ?></option>
+										<?php
+									}
+									?>
 								</select>
 							</div>
 						</div>

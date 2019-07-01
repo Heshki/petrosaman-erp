@@ -11,10 +11,14 @@
 							<div class="margin-tb input-group-prepend">
 								<span class="input-group-text">انتخاب گروه</span>
 								<select name="group" class="form-control">
-									<option <?php if(isset($_GET['group']) && $_GET['group']=="A"){echo "selected";} ?> value="A">A</option>
-									<option <?php if(isset($_GET['group']) && $_GET['group']=="B"){echo "selected";} ?> value="B">B</option>
-									<option <?php if(isset($_GET['group']) && $_GET['group']=="C"){echo "selected";} ?> value="C">C</option>
-									<option <?php if(isset($_GET['group']) && $_GET['group']=="D"){echo "selected";} ?> value="D">D</option>
+									<?php
+									$all_groups = list_group();
+									foreach ($all_groups as $a_group) {
+										?>
+										<option <?php if(isset($_GET['group']) && $_GET['group']==$a_group['g_name']){echo "selected";} ?>><?php echo $a_group['g_name']; ?></option>
+										<?php
+									}
+									?>
 								</select>
 							</div>
 						</div>
@@ -47,9 +51,16 @@
 										     		</tr>
 										     		<tr>
 														<th>گروه</th>
-														<th>A</th>
+														<th><?php echo $_GET["group"]; ?></th>
 														<th>ماه</th>
-														<th>خرداد</th>
+														<th><?php echo name_month($myMonth); ?></th>
+										     		</tr>
+										     		<tr>
+										     			<?php $group_name = $_GET['group']; ?>
+														<th>سرپرست کوره</th>
+														<th><?php echo get_var_query("SELECT g_fur_sup FROM group_info WHERE g_name = '$group_name'"); ?></th>
+														<th>سرپرست دانه بندی</th>
+														<th><?php echo get_var_query("SELECT g_gra_sup FROM group_info WHERE g_name = '$group_name'"); ?></th>
 										     		</tr>
 										     		<tr>
 														<th>تاریخ / شیفت</th>
@@ -148,7 +159,7 @@
 								<td><?php echo $a['u_family']; ?></td>
 								<td><?php echo $a['u_level']; ?></td>
 								<td><?php echo $a['u_username']; ?></td>
-								<td><?php echo per_number ($a['u_password']); ?></td>
+								<td>***</td>
 								<td><?php echo $a['u_group']; ?></td>
 								<td>
 									<button class="btn btn-info btn-sm" type="button" data-toggle="modal" data-keyboard="false" data-target="#view_modal<?php echo $u_id; ?>">مشاهده</button>
@@ -183,7 +194,7 @@
 															</tr>
 															<tr>
 																<td>رمز ورود</td>
-																<td><?php echo per_number ($asd[0]['u_password']); ?></td>
+																<td>***</td>
 															</tr>
 															<tr>
 																<td>نام پدر</td>
@@ -228,6 +239,14 @@
 															<tr>
 																<td>کد گروه</td>
 																<td><?php echo $asd[0]['u_group']; ?></td>
+															</tr>
+															<tr>
+																<td>کد پرسنلی</td>
+																<td><?php echo $asd[0]['u_pcode']; ?></td>
+															</tr>
+															<tr>
+																<td>منصب</td>
+																<td><?php echo $asd[0]['u_wtype']; ?></td>
 															</tr>
 															<tr>
 																<td>کارت ملی</td>

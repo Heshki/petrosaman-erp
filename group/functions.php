@@ -51,4 +51,35 @@ function select_a_user($u_id){
 	$res = get_select_query($sql);
 	return $res;
 }
+
+function insert_group($array){
+	$g_name = $array[0];
+	$g_fur_sup = $array[1];
+	$g_gra_sup = $array[2];
+	$sql = "insert into group_info(g_name, g_fur_sup, g_gra_sup) values('$g_name', '$g_fur_sup', '$g_gra_sup')";
+	$res = ex_query($sql);
+	return $res;
+}
+
+function update_group($array){
+	$g_id = $array[0];
+	$g_name = $array[1];
+	$g_fur_sup = $array[2];
+	$g_gra_sup = $array[3];
+	$sql = "update group_info set g_name = '$g_name', g_fur_sup = '$g_fur_sup', g_gra_sup = '$g_gra_sup' where g_id = $g_id";
+	$res = ex_query($sql);
+	
+	return $res;	
+}
+
+function list_group() {
+	$sql = "SELECT * FROM group_info";
+	$res = get_select_query($sql);
+	return $res;
+}
+
+function delete_group($g_id){
+	$sql = "delete from group_info where g_id = $g_id";
+	$res = ex_query($sql);
+}
 ?>

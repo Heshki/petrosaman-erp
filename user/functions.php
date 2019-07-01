@@ -28,7 +28,9 @@ function update_user($array){
 	$u_pre = $array[14];
 	$u_description = $array[15];
 	$u_group = $array[16];
-	$sql = "update user set u_name = '$u_name', u_family = '$u_family', u_level = '$u_level', u_username = '$u_username', u_password = '$u_password', u_father = '$u_father', u_meli = '$u_meli', u_birth = '$u_birth', u_live_city = '$u_live_city', u_destination = '$u_destination', u_mobile = '$u_mobile', u_tell = '$u_tell', u_address = '$u_address', u_pre = '$u_pre', u_group = '$u_group', u_description = '$u_description' where u_id = $u_id";
+	$u_pcode = $array[17];
+	$u_wtype = $array[18];
+	$sql = "update user set u_name = '$u_name', u_family = '$u_family', u_level = '$u_level', u_username = '$u_username', u_password = '$u_password', u_father = '$u_father', u_meli = '$u_meli', u_birth = '$u_birth', u_live_city = '$u_live_city', u_destination = '$u_destination', u_mobile = '$u_mobile', u_tell = '$u_tell', u_address = '$u_address', u_pre = '$u_pre', u_group = '$u_group', u_description = '$u_description', u_pcode = '$u_pcode', u_wtype = '$u_wtype' where u_id = $u_id";
 	$res = ex_query($sql);
 	
 	return $res;	
@@ -47,6 +49,12 @@ function select_a_user($u_id){
 
 function list_user() {
 	$sql = "select * from user";
+	$res = get_select_query($sql);
+	return $res;
+}
+
+function list_group() {
+	$sql = "SELECT * FROM group_info";
 	$res = get_select_query($sql);
 	return $res;
 }
