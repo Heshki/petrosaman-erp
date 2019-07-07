@@ -1,4 +1,44 @@
 <?php
 require_once "../database.php";
-include "user.php";
+
+function migrate_create($table_name, $field_names, $field_types){
+    $c = count($field_names);
+    $sql = "CREATE TABLE " . $table_name . " (";
+    for($i = 0; $i < $c; $i++){
+        $sql .= $field_names[$i] . "  " . $field_types[$i];
+        if($i != $c - 1){
+            $sql .= ", ";
+        }
+    }
+    $sql .= ")";
+    ex_query($sql);
+    echo "Table " . $table_name . " Created! <br>";
+}
+
+function migrate_remove($table_name, $field_names){
+    $sql_remove = "SHOW COLUMNS  FROM " . $table_name;
+    $res_remove = get_select_query($sql_remove);
+    foreach($res_remove as $row){
+        if(!in_array($row['Field'], $field_names)){
+            ex_query("ALTER TABLE " . $table_name . " DROP COLUMN " . $row['Field']);
+            echo $row['Field'] . " Removed!";
+        }
+    }
+}
+
+function migrate_add($table_name, $field_names, $field_types){
+    $c = count($field_names);
+    for($i = 0; $i < $c; $i++){
+        $sql_check_c = "SHOW COLUMNS FROM " . $table_name . " LIKE '" . $field_names[$i] . "'";
+        if(count(get_select_query($sql_check_c)) == 0){
+            $sql_alter = "ALTER TABLE " . $table_name . " ";
+            $sql_alter .= "ADD COLUMN " . $field_names[$i] . "  " . $field_types[$i];
+            ex_query($sql_alter);
+            echo $field_names[$i] . " added <br>";
+        }
+    }
+}
+
+//include "user.php";
+include "stock_log.php";
 ?>
