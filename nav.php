@@ -87,15 +87,18 @@
 				include_once"include/jdf.php";
 				$myDate = jdate('Y/n/j');
 				$myDataArray = explode('/', $myDate);
+				$myYear = $myDataArray[0];
 				$myMonth = $myDataArray[1];
 				?>
-				<li class="<?php check_active('list-user.php'); check_active('set_schedule.php'); check_active('get_schedule.php'); check_active('add_group.php'); check_active('edit_group.php'); ?> treeview">
+				<li class="<?php check_active('list-user.php'); check_active('set_schedule.php'); check_active('get_schedule.php'); check_active('add_group.php'); check_active('edit_group.php'); check_active('raw_rights.php'); check_active('payroll.php'); ?> treeview">
 			  		<a href="#"><i class="fa fa-files-o"></i><span>کاربران</span></a>
 			  		<ul class="treeview-menu">
 						<li class="<?php check_active('list-user.php'); ?>"><a href="<?php get_url(); ?>user/list-user.php"><i class="fa fa-circle-o"></i>لیست کاربران</a></li>
 						<li class="<?php check_active('add_group.php'); ?>"><a href="<?php get_url(); ?>group/add_group.php"><i class="fa fa-circle-o"></i>تعریف گروه</a></li>
-						<li class="<?php check_active('set_schedule.php'); ?>"><a href="<?php get_url(); ?>group/set_schedule.php/?group=A&month=<?php echo $myMonth; ?>&sch_submit=1"><i class="fa fa-circle-o"></i>برنامه ریزی شیفت ها</a></li>
+						<li class="<?php check_active('set_schedule.php'); ?>"><a href="<?php get_url(); ?>group/set_schedule.php/?group=<?php echo get_select_query("SELECT * FROM group_info")[0]['g_name']; ?>&month=<?php echo $myYear . "_" . $myMonth; ?>&sch_submit=1"><i class="fa fa-circle-o"></i>برنامه ریزی شیفت ها</a></li>
 						<li class="<?php check_active('get_schedule.php'); ?>"><a href="<?php get_url(); ?>group/get_schedule.php/?group=A&sch_submit=1"><i class="fa fa-circle-o"></i>مشاهده گروه ها</a></li>
+						<li class="<?php check_active('raw_rights.php'); ?>"><a href="<?php get_url(); ?>user/raw_rights.php/?month=<?php echo $myYear . "_" . $myMonth; ?>"><i class="fa fa-circle-o"></i>محاسبه حقوق</a></li>
+						<li class="<?php check_active('payroll.php'); ?>"><a href="<?php get_url(); ?>user/payroll.php?month=<?php echo $myYear . "_" . $myMonth; ?>"><i class="fa fa-circle-o"></i>فیش حقوق</a></li>
 			  		</ul>
 				</li>
 				<li class="<?php check_active('list-driver.php'); ?> treeview">

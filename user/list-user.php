@@ -94,6 +94,7 @@
 										<th>ویرایش</th>
 										<th>حذف</th>
 										<th>مشاهده</th>
+										<th>محاسبه حقوق</th>
 					  				</tr>
 								</thead>
 								<tbody>
@@ -122,6 +123,11 @@
 									array_push($array, $_POST['u_group']);
 									array_push($array, $_POST['u_pcode']);
 									array_push($array, $_POST['u_wtype']);
+									array_push($array, $_POST['u_marital']);
+									array_push($array, $_POST['u_evidence']);
+									array_push($array, $_POST['u_child_count']);
+									array_push($array, $_POST['u_daily_wage']);
+									array_push($array, $_POST['u_fix_right']);
 
 									update_user($array);
 
@@ -284,12 +290,11 @@
 																			<span class="input-group-text">گروه</span>
 																		</div>
 																		<select name="u_group" class="form-control">
-																			<option><?php echo $asd[0]['u_group']; ?></option>
 																			<?php
 																			$all_groups = list_group();
 																			foreach ($all_groups as $a_group) {
 																				?>
-																				<option><?php echo $a_group['g_name']; ?></option>
+																				<option <?php if($asd[0]['u_group']==$a_group['g_name']) echo "selected"; ?>><?php echo $a_group['g_name']; ?></option>
 																				<?php
 																			}
 																			?>
@@ -297,15 +302,52 @@
 																	</div>
 																	<div class="item col-md-4">
 																		<div class="margin-tb input-group-prepend">
-																			<span class="input-group-text">کد پرسنلی</span>
+																			<span class="input-group-text">شماره پرسنل</span>
 																		</div>
-																		<input type="text" name="u_pcode" placeholder="کد پرسنلی" class="form-control" value="<?php echo $asd[0]['u_pcode']; ?>">
+																		<input type="text" name="u_pcode" placeholder="شماره پرسنل" class="form-control" value="<?php echo $asd[0]['u_pcode']; ?>">
 																	</div>
 																	<div class="item col-md-4">
 																		<div class="margin-tb input-group-prepend">
-																			<span class="input-group-text">منصب</span>
+																			<span class="input-group-text">سمت</span>
 																		</div>
-																		<input type="text" name="u_wtype" placeholder="منصب" class="form-control" value="<?php echo $asd[0]['u_wtype']; ?>">
+																		<input type="text" name="u_wtype" placeholder="سمت" class="form-control" value="<?php echo $asd[0]['u_wtype']; ?>">
+																	</div>
+																</div>
+																<div class="row">
+																	<div class="item col-md-4">
+																		<div class="margin-tb input-group-prepend">
+																			<span class="input-group-text">وضعیت تاهل</span>
+																		</div>
+																		<select name="u_marital" class="form-control">
+																			<option <?php if($asd[0]['u_marital']=="مجرد") echo "selected"; ?>>مجرد</option>
+																			<option <?php if($asd[0]['u_marital']=="متاهل") echo "selected"; ?>>متاهل</option>
+																		</select>
+																	</div>
+																	<div class="item col-md-4">
+																		<div class="margin-tb input-group-prepend">
+																			<span class="input-group-text">تعداد فرزند</span>
+																		</div>
+																		<input type="text" name="u_child_count" placeholder="تعداد فرزند" class="form-control" value="<?php echo $asd[0]['u_child_count']; ?>">
+																	</div>
+																	<div class="item col-md-4">
+																		<div class="margin-tb input-group-prepend">
+																			<span class="input-group-text">مدرک</span>
+																		</div>
+																		<input type="text" name="u_evidence" placeholder="مدرک" class="form-control" value="<?php echo $asd[0]['u_evidence']; ?>">
+																	</div>
+																</div>
+																<div class="row">
+																	<div class="item col-md-4">
+																		<div class="margin-tb input-group-prepend">
+																			<span class="input-group-text">دستمزد روزانه</span>
+																		</div>
+																		<input type="text" name="u_daily_wage" placeholder="دستمزد روزانه" class="form-control" value="<?php echo $asd[0]['u_daily_wage']; ?>">
+																	</div>
+																	<div class="item col-md-4">
+																		<div class="margin-tb input-group-prepend">
+																			<span class="input-group-text">اضافه ثابت حقوق</span>
+																		</div>
+																		<input type="text" name="u_fix_right" placeholder="اضافه ثابت حقوق" class="form-control" value="<?php echo $asd[0]['u_fix_right']; ?>">
 																	</div>
 																</div>
 																<div class="row">
@@ -435,12 +477,32 @@
 																		<td><?php echo $asd[0]['u_group']; ?></td>
 																	</tr>
 																	<tr>
-																		<td>کد پرسنلی</td>
-																		<td><?php echo $asd[0]['u_pcode']; ?></td>
+																		<td>شماره پرسنل</td>
+																		<td><?php echo per_number($asd[0]['u_pcode']); ?></td>
 																	</tr>
 																	<tr>
-																		<td>منصب</td>
+																		<td>سمت</td>
 																		<td><?php echo $asd[0]['u_wtype']; ?></td>
+																	</tr>
+																	<tr>
+																		<td>وضعیت تاهل</td>
+																		<td><?php echo $asd[0]['u_marital']; ?></td>
+																	</tr>
+																	<tr>
+																		<td>تعداد فرزند</td>
+																		<td><?php echo per_number($asd[0]['u_child_count']); ?></td>
+																	</tr>
+																	<tr>
+																		<td>مدرک</td>
+																		<td><?php echo $asd[0]['u_evidence']; ?></td>
+																	</tr>
+																	<tr>
+																		<td>دستمزد روزانه</td>
+																		<td><?php echo per_number(number_format($asd[0]['u_daily_wage'])); ?></td>
+																	</tr>
+																	<tr>
+																		<td>اضافه ثابت حقوق</td>
+																		<td><?php echo per_number(number_format($asd[0]['u_fix_right'])); ?></td>
 																	</tr>
 																	<tr>
 																		<td>کارت ملی</td>
@@ -461,6 +523,9 @@
 													</form>
 												</div>
 											</div>
+										</td>
+										<td>
+											<a href="<?php echo get_url(); ?>user/raw_rights.php/?uid=<?php echo $u_id; ?>&month=<?php echo $myYear . "_" . $myMonth; ?>"><button class="btn btn-warning btn-sm" type="submit" name="delete-user">محاسبه حقوق</button></a>
 										</td>
 						  			</tr>
 								<?php } ?>

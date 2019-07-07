@@ -24,28 +24,40 @@
 						</div>
 						<div class="item col-md-4">
 							<div class="margin-tb input-group-prepend">
-								<span class="input-group-text">انتخاب گروه</span>
+								<span class="input-group-text">انتخاب ماه</span>
 								<select name="month" class="form-control">
 									<?php
 									$myDate = jdate('Y/n/j');
 									$myDataArray = explode('/', $myDate);
+									$myYear = $myDataArray[0];
 									$myMonth = $myDataArray[1];
 
+									$y1 = $myYear;
+									$y2 = $myYear;
+									$y3 = $myYear;
 									$m1 = $myMonth;
 
+									$scm1 = $y1 . "_" . $m1;
+
 									$m2 = $myMonth +1;
+									$scm2 = $y2 . "_" . $m2;
 									if( $m2 > 12 ){
 										$m2 = $m2 - 12;
+										$y2 = $y2 + 1;
+										$scm2 = $y2 . "_" . $m2;
 									}
 
 									$m3 = $myMonth +2;
+									$scm3 = $y3 . "_" . $m3;
 									if( $m3 > 12 ){
 										$m3 = $m3 - 12;
+										$y3 = $y3 + 1;
+										$scm3 = $y3 . "_" . $m3;
 									}
 									?>
-									<option <?php if(isset($_GET['month']) && $_GET['month']==$m1){echo "selected";} ?> value="<?php echo $m1; ?>"><?php echo name_month($m1); ?></option>
-									<option <?php if(isset($_GET['month']) && $_GET['month']==$m2){echo "selected";} ?> value="<?php echo $m2; ?>"><?php echo name_month($m2); ?></option>
-									<option <?php if(isset($_GET['month']) && $_GET['month']==$m3){echo "selected";} ?> value="<?php echo $m3; ?>"><?php echo name_month($m3); ?></option>
+									<option <?php if(isset($_GET['month']) && $_GET['month']==$scm1){echo "selected";} ?> value="<?php echo $scm1; ?>"><?php echo name_month($m1); ?></option>
+									<option <?php if(isset($_GET['month']) && $_GET['month']==$scm2){echo "selected";} ?> value="<?php echo $scm2; ?>"><?php echo name_month($m2); ?></option>
+									<option <?php if(isset($_GET['month']) && $_GET['month']==$scm3){echo "selected";} ?> value="<?php echo $scm3; ?>"><?php echo name_month($m3); ?></option>
 								</select>
 							</div>
 						</div>
@@ -58,11 +70,12 @@
 				<?php
 				if ( isset ( $_GET["sch_submit"] ) ) {
 					if ( ( isset( $_GET["group"] ) && $_GET["group"] != ""  ) && ( isset( $_GET["month"] ) && $_GET["month"] != ""  ) ) {
-						if ( $_GET["month"] == 1 || $_GET["month"] == 2 || $_GET["month"] == 3 || $_GET["month"] == 4 || $_GET["month"] == 5 || $_GET["month"] == 6 ) {
+						$lmonth = explode('_', $_GET["month"])[1];
+						if ( $lmonth == 1 || $lmonth == 2 || $lmonth == 3 || $lmonth == 4 || $lmonth == 5 || $lmonth == 6 ) {
 							$limit = 31;
-						} else if ( $_GET["month"] == 7 || $_GET["month"] == 8 || $_GET["month"] == 9 || $_GET["month"] == 10 || $_GET["month"] == 11 ) {
+						} else if ( $lmonth == 7 || $lmonth == 8 || $lmonth == 9 || $lmonth == 10 || $lmonth == 11 ) {
 							$limit = 30;
-						} else if ( $_GET["month"] == 12 ) {
+						} else if ( $lmonth == 12 ) {
 							$limit = 29;
 						}
 						$myYear = $myDataArray[0];
@@ -81,7 +94,7 @@
 									    </thead>
 									    <tbody>
 									    	<?php
-									    	$sc_month = $_GET["month"];
+									    	$sc_month = $lmonth;
 											$sc_group = $_GET["group"];
 									    	$sql3 = "SELECT sc_schedule FROM schedule WHERE sc_month = '$sc_month' AND sc_group = '$sc_group'";
 											$mySchedule = get_var_query($sql3);
@@ -90,7 +103,7 @@
 									    		$j = $i-1;
 									    		?>
 									    		<tr>
-													<td><?php echo per_number( $myYear . "/" . $_GET["month"] . "/" . $i ); ?></td>
+													<td><?php echo per_number( $myYear . "/" . $lmonth . "/" . $i ); ?></td>
 													<td><input type="radio" name="type<?php echo $i; ?>" value="day" <?php if ( !is_null( $mySchedule ) ) { if( $myScheduleArray[$j] == "day" ) { echo "checked"; } } ?>></td>
 													<td><input type="radio" name="type<?php echo $i; ?>" value="night" <?php if ( !is_null( $mySchedule ) ) { if( $myScheduleArray[$j] == "night" ) { echo "checked"; } } ?>></td>
 													<td><input type="radio" name="type<?php echo $i; ?>" value="rest" <?php if ( !is_null( $mySchedule ) ) { if( $myScheduleArray[$j] == "rest" ) { echo "checked"; } } ?>></td>
