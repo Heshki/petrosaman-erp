@@ -66,62 +66,38 @@
 								<li class="<?php check_active('list-buy.php'); ?>"><a href="<?php get_url(); ?>buy/list-buy.php"><i class="fa fa-circle-o"></i>لیست فاکتورها</a></li>
 				  		</ul>
 					</li>
-
-					<li class="<?php check_active('list-storage.php'); ?> treeview">
-				  		<a href="#"><i class="fa fa-files-o"></i><span>انبار</span></a>
-				  		<ul class="treeview-menu">
-								<li class="<?php check_active('input-store.php'); ?>"><a href="<?php get_url(); ?>storage/input-store.php"><i class="fa fa-circle-o"></i>ورودی انبار</a></li>
-								<li class="<?php check_active('list-storage.php'); ?>"><a href="<?php get_url(); ?>storage/list-storage.php"><i class="fa fa-circle-o"></i>لیست حواله خروج</a></li>
-				  		</ul>
-					</li>
+				
 					<?php
 					include_once"include/jdf.php";
 					$myDate = jdate('Y/n/j');
 					$myDataArray = explode('/', $myDate);
+					$myYear = $myDataArray[0];
 					$myMonth = $myDataArray[1];
 					?>
-					<li class="<?php check_active('list-user.php'); check_active('set_schedule.php'); check_active('get_schedule.php'); check_active('add_group.php'); check_active('edit_group.php'); ?> treeview">
+					<li class="<?php check_active('list-user.php'); check_active('set_schedule.php'); check_active('get_schedule.php'); check_active('add_group.php'); check_active('edit_group.php'); check_active('raw_rights.php'); check_active('payroll.php'); ?> treeview">
 				  		<a href="#"><i class="fa fa-files-o"></i><span>کاربران</span></a>
 				  		<ul class="treeview-menu">
-								<li class="<?php check_active('set_schedule.php'); ?>"><a href="<?php get_url(); ?>group/set_schedule.php/?group=A&month=<?php echo $myMonth; ?>&sch_submit=1"><i class="fa fa-circle-o"></i>برنامه ریزی شیفت ها</a></li>
+							<li class="<?php check_active('list-user.php'); ?>"><a href="<?php get_url(); ?>user/list-user.php"><i class="fa fa-circle-o"></i>لیست کاربران</a></li>
+							<li class="<?php check_active('add_group.php'); ?>"><a href="<?php get_url(); ?>group/add_group.php"><i class="fa fa-circle-o"></i>تعریف گروه</a></li>
+							<li class="<?php check_active('set_schedule.php'); ?>"><a href="<?php get_url(); ?>group/set_schedule.php/?group=<?php echo get_select_query("SELECT * FROM group_info")[0]['g_name']; ?>&month=<?php echo $myYear . "_" . $myMonth; ?>&sch_submit=1"><i class="fa fa-circle-o"></i>برنامه ریزی شیفت ها</a></li>
+							<li class="<?php check_active('get_schedule.php'); ?>"><a href="<?php get_url(); ?>group/get_schedule.php/?group=A&sch_submit=1"><i class="fa fa-circle-o"></i>مشاهده گروه ها</a></li>
+							<li class="<?php check_active('raw_rights.php'); ?>"><a href="<?php get_url(); ?>user/raw_rights.php/?month=<?php echo $myYear . "_" . $myMonth; ?>"><i class="fa fa-circle-o"></i>محاسبه حقوق</a></li>
+							<li class="<?php check_active('payroll.php'); ?>"><a href="<?php get_url(); ?>user/payroll.php?month=<?php echo $myYear . "_" . $myMonth; ?>"><i class="fa fa-circle-o"></i>فیش حقوق</a></li>
 				  		</ul>
 					</li>
-
-<<<<<<< HEAD
-				<li class="<?php check_active('list-storage.php'); ?> treeview">
-			  		<a href="#"><i class="fa fa-files-o"></i><span>انبار</span></a>
-			  		<ul class="treeview-menu">
-						<li class="<?php check_active('input-store.php'); ?>"><a href="<?php get_url(); ?>storage/input-store.php"><i class="fa fa-circle-o"></i>ورودی انبار</a></li>
-						<li class="<?php check_active('list-storage.php'); ?>"><a href="<?php get_url(); ?>storage/list-storage.php"><i class="fa fa-circle-o"></i>لیست حواله خروج</a></li>
-			  		</ul>
-				</li>
-				<?php
-				include_once"include/jdf.php";
-				$myDate = jdate('Y/n/j');
-				$myDataArray = explode('/', $myDate);
-				$myYear = $myDataArray[0];
-				$myMonth = $myDataArray[1];
-				?>
-				<li class="<?php check_active('list-user.php'); check_active('set_schedule.php'); check_active('get_schedule.php'); check_active('add_group.php'); check_active('edit_group.php'); check_active('raw_rights.php'); check_active('payroll.php'); ?> treeview">
-			  		<a href="#"><i class="fa fa-files-o"></i><span>کاربران</span></a>
-			  		<ul class="treeview-menu">
-						<li class="<?php check_active('list-user.php'); ?>"><a href="<?php get_url(); ?>user/list-user.php"><i class="fa fa-circle-o"></i>لیست کاربران</a></li>
-						<li class="<?php check_active('add_group.php'); ?>"><a href="<?php get_url(); ?>group/add_group.php"><i class="fa fa-circle-o"></i>تعریف گروه</a></li>
-						<li class="<?php check_active('set_schedule.php'); ?>"><a href="<?php get_url(); ?>group/set_schedule.php/?group=<?php echo get_select_query("SELECT * FROM group_info")[0]['g_name']; ?>&month=<?php echo $myYear . "_" . $myMonth; ?>&sch_submit=1"><i class="fa fa-circle-o"></i>برنامه ریزی شیفت ها</a></li>
-						<li class="<?php check_active('get_schedule.php'); ?>"><a href="<?php get_url(); ?>group/get_schedule.php/?group=A&sch_submit=1"><i class="fa fa-circle-o"></i>مشاهده گروه ها</a></li>
-						<li class="<?php check_active('raw_rights.php'); ?>"><a href="<?php get_url(); ?>user/raw_rights.php/?month=<?php echo $myYear . "_" . $myMonth; ?>"><i class="fa fa-circle-o"></i>محاسبه حقوق</a></li>
-						<li class="<?php check_active('payroll.php'); ?>"><a href="<?php get_url(); ?>user/payroll.php?month=<?php echo $myYear . "_" . $myMonth; ?>"><i class="fa fa-circle-o"></i>فیش حقوق</a></li>
-			  		</ul>
-				</li>
-				<li class="<?php check_active('list-driver.php'); ?> treeview">
-			  		<a href="#"><i class="fa fa-files-o"></i><span>راننده ها</span></a>
-			  		<ul class="treeview-menu">
-						<li class="<?php check_active('list-driver.php'); ?>"><a href="<?php get_url(); ?>driver/list-driver.php"><i class="fa fa-circle-o"></i>لیست راننده ها</a></li>
-			  		</ul>
-				</li>
-				
-=======
->>>>>>> 26680614a2db448d84f74602c3b07178aea12a6b
+					<li class="<?php check_active('list-storage.php'); ?> treeview">
+				  		<a href="#"><i class="fa fa-files-o"></i><span>انبار</span></a>
+				  		<ul class="treeview-menu">
+							<li class="<?php check_active('input-store.php'); ?>"><a href="<?php get_url(); ?>storage/input-store.php"><i class="fa fa-circle-o"></i>ورودی انبار</a></li>
+							<li class="<?php check_active('list-storage.php'); ?>"><a href="<?php get_url(); ?>storage/list-storage.php"><i class="fa fa-circle-o"></i>لیست حواله خروج</a></li>
+				  		</ul>
+					</li>
+					<li class="<?php check_active('list-driver.php'); ?> treeview">
+				  		<a href="#"><i class="fa fa-files-o"></i><span>راننده ها</span></a>
+				  		<ul class="treeview-menu">
+							<li class="<?php check_active('list-driver.php'); ?>"><a href="<?php get_url(); ?>driver/list-driver.php"><i class="fa fa-circle-o"></i>لیست راننده ها</a></li>
+				  		</ul>
+					</li>
 		  	</ul>
 		</section>
 	</aside>
