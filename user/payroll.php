@@ -63,13 +63,13 @@
 							</div>
 						</div>
 						<div class="sch_submit_c item col-md-2">
-							<button type="submit" class="btn btn-success btn-sm" name="sch_submit" value="1">انتخاب</button>
+							<button type="submit" class="btn btn-success btn-sm">انتخاب</button>
 						</div>
 					</div>
 				</form>
 				<div class="row">
 					<?php
-					if( isset($_GET['month']) && isset($_GET['pcode']) ) {
+					if( isset($_GET['month']) && $_GET['month'] !="" && isset($_GET['pcode']) && $_GET['pcode'] !="" ) {
 						$uid = get_uid_with_pcode($_GET['pcode']);
 						$month = $_GET['month'];
 
