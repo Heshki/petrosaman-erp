@@ -148,6 +148,38 @@
 										$type = "identify";
 										user_upload_file($filename, $tmp_name, $size, $type, $bu_id);
 									}
+
+									if(isset($_FILES['u_contract_img']) && $_FILES['u_contract_img']['size']>0){
+										$filename = $_FILES['u_contract_img']['name'];
+										$tmp_name = $_FILES['u_contract_img']['tmp_name'];
+										$size = $_FILES['u_contract_img']['size'];
+										$type = "u_contract";
+										user_upload_file($filename, $tmp_name, $size, $type, $bu_id);
+									}
+
+									if(isset($_FILES['u_insurance_img']) && $_FILES['u_insurance_img']['size']>0){
+										$filename = $_FILES['u_insurance_img']['name'];
+										$tmp_name = $_FILES['u_insurance_img']['tmp_name'];
+										$size = $_FILES['u_insurance_img']['size'];
+										$type = "u_insurance";
+										user_upload_file($filename, $tmp_name, $size, $type, $bu_id);
+									}
+
+									if(isset($_FILES['u_guarantee_img']) && $_FILES['u_guarantee_img']['size']>0){
+										$filename = $_FILES['u_guarantee_img']['name'];
+										$tmp_name = $_FILES['u_guarantee_img']['tmp_name'];
+										$size = $_FILES['u_guarantee_img']['size'];
+										$type = "u_guarantee";
+										user_upload_file($filename, $tmp_name, $size, $type, $bu_id);
+									}
+
+									if(isset($_FILES['u_recognizance_img']) && $_FILES['u_recognizance_img']['size']>0){
+										$filename = $_FILES['u_recognizance_img']['name'];
+										$tmp_name = $_FILES['u_recognizance_img']['tmp_name'];
+										$size = $_FILES['u_recognizance_img']['size'];
+										$type = "u_recognizance";
+										user_upload_file($filename, $tmp_name, $size, $type, $bu_id);
+									}
 									
 									echo "<meta http-equiv='refresh' content='0'/>";
 								}
@@ -353,25 +385,41 @@
 																<div class="row">
 																	<div class="item col-md-6">
 																		<label>کارت ملی</label>
-																		<input type="file" name="melicart_img" accept="image/*" onchange="loadFile1(event)">
-																		<img src="<?php echo user_get_media($u_id, 'melicart'); ?>" class="img-responsive list-user-up-img" id="output1">
+																		<input type="file" name="melicart_img" accept="image/*">
+																		<img src="<?php echo user_get_media($u_id, 'melicart'); ?>" class="img-responsive list-user-up-img">
 																	</div>
 																	<div class="item col-md-6">
 																		<label>شناسنامه</label>
-																		<input type="file" name="identify_img" accept="image/*" onchange="loadFile2(event)">
-																		<img src="<?php echo user_get_media($u_id, 'identify'); ?>" class="img-responsive list-user-up-img" id="output2">
+																		<input type="file" name="identify_img" accept="image/*">
+																		<img src="<?php echo user_get_media($u_id, 'identify'); ?>" class="img-responsive list-user-up-img">
+																	</div>
+
+																	<div class="item col-md-6">
+																		<label>تصویر برگ قرارداد</label>
+																		<input type="file" name="u_contract_img" accept="image/*">
+																		<img src="<?php echo user_get_media($u_id, 'u_contract'); ?>" class="img-responsive list-user-up-img">
+																	</div>
+																	<div class="item col-md-6">
+																		<label>تصویر دفترچه بیمه</label>
+																		<input type="file" name="u_insurance_img" accept="image/*">
+																		<img src="<?php echo user_get_media($u_id, 'u_insurance'); ?>" class="img-responsive list-user-up-img">
+																	</div>
+																	<div class="item col-md-6">
+																		<label>تصویر صفحه ضمانت انجام کار</label>
+																		<input type="file" name="u_guarantee_img" accept="image/*">
+																		<img src="<?php echo user_get_media($u_id, 'u_guarantee'); ?>" class="img-responsive list-user-up-img">
+																	</div>
+																	<div class="item col-md-6">
+																		<label>برگ تعهدنامه حسن انجام کار</label>
+																		<input type="file" name="u_recognizance_img" accept="image/*">
+																		<img src="<?php echo user_get_media($u_id, 'u_recognizance'); ?>" class="img-responsive list-user-up-img">
 																	</div>
 																</div>
 																<script type="text/javascript">
-																	var loadFile1 = function(event) {
-																		var output1 = document.getElementById('output1');
-																		output1.src = URL.createObjectURL(event.target.files[0]);
-																	};
-
-																	var loadFile2 = function(event) {
-																		var output2 = document.getElementById('output2');
-																		output2.src = URL.createObjectURL(event.target.files[0]);
-																	};
+																	$('input[type="file"]').on('change', function () {
+																		var file = this.files[0];
+																		$(this).parent().find('img').attr("src",URL.createObjectURL(file));
+																	});
 																</script>
 															</div>
 														</div>
