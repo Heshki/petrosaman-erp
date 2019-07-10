@@ -35,7 +35,8 @@ function update_user($array){
 	$u_child_count = $array[21];
 	$u_daily_wage = $array[22];
 	$u_fix_right = $array[23];
-	$sql = "update user set u_name = '$u_name', u_family = '$u_family', u_level = '$u_level', u_username = '$u_username', u_password = '$u_password', u_father = '$u_father', u_meli = '$u_meli', u_birth = '$u_birth', u_live_city = '$u_live_city', u_destination = '$u_destination', u_mobile = '$u_mobile', u_tell = '$u_tell', u_address = '$u_address', u_pre = '$u_pre', u_group = '$u_group', u_description = '$u_description', u_pcode = '$u_pcode', u_wtype = '$u_wtype', u_marital = '$u_marital', u_evidence = '$u_evidence', u_child_count = '$u_child_count', u_daily_wage = '$u_daily_wage', u_fix_right = '$u_fix_right' where u_id = $u_id";
+	$u_fin_contract = $array[24];
+	$sql = "update user set u_name = '$u_name', u_family = '$u_family', u_level = '$u_level', u_username = '$u_username', u_password = '$u_password', u_father = '$u_father', u_meli = '$u_meli', u_birth = '$u_birth', u_live_city = '$u_live_city', u_destination = '$u_destination', u_mobile = '$u_mobile', u_tell = '$u_tell', u_address = '$u_address', u_pre = '$u_pre', u_group = '$u_group', u_description = '$u_description', u_pcode = '$u_pcode', u_wtype = '$u_wtype', u_marital = '$u_marital', u_evidence = '$u_evidence', u_child_count = '$u_child_count', u_daily_wage = '$u_daily_wage', u_fix_right = '$u_fix_right', u_fin_contract = '$u_fin_contract' where u_id = $u_id";
 	$res = ex_query($sql);
 	
 	return $res;	

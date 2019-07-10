@@ -128,6 +128,7 @@
 									array_push($array, $_POST['u_child_count']);
 									array_push($array, $_POST['u_daily_wage']);
 									array_push($array, $_POST['u_fix_right']);
+									array_push($array, $_POST['u_fin_contract']);
 
 									update_user($array);
 
@@ -381,6 +382,12 @@
 																		</div>
 																		<input type="text" name="u_fix_right" placeholder="اضافه ثابت حقوق" class="form-control" value="<?php echo $asd[0]['u_fix_right']; ?>">
 																	</div>
+																	<div class="item col-md-4">
+																		<div class="margin-tb input-group-prepend">
+																			<span class="input-group-text">تاریخ انقضای قرارداد</span>
+																		</div>
+																		<input type="text" name="u_fin_contract" placeholder="تاریخ انقضای قرارداد" autocomplete="off" class="form-control pdp-el" id="f_date" value="<?php echo $asd[0]['u_fin_contract']; ?>">
+																	</div>
 																</div>
 																<div class="row">
 																	<div class="item col-md-6">
@@ -393,7 +400,8 @@
 																		<input type="file" name="identify_img" accept="image/*">
 																		<img src="<?php echo user_get_media($u_id, 'identify'); ?>" class="img-responsive list-user-up-img">
 																	</div>
-
+																</div>
+																<div class="row">
 																	<div class="item col-md-6">
 																		<label>تصویر برگ قرارداد</label>
 																		<input type="file" name="u_contract_img" accept="image/*">
@@ -404,6 +412,8 @@
 																		<input type="file" name="u_insurance_img" accept="image/*">
 																		<img src="<?php echo user_get_media($u_id, 'u_insurance'); ?>" class="img-responsive list-user-up-img">
 																	</div>
+																</div>
+																<div class="row">
 																	<div class="item col-md-6">
 																		<label>تصویر صفحه ضمانت انجام کار</label>
 																		<input type="file" name="u_guarantee_img" accept="image/*">
@@ -553,6 +563,10 @@
 																		<td><?php echo per_number(number_format($asd[0]['u_fix_right'])); ?></td>
 																	</tr>
 																	<tr>
+																		<td>تاریخ انقضای قرارداد</td>
+																		<td><?php echo per_number($asd[0]['u_fin_contract']); ?></td>
+																	</tr>
+																	<tr>
 																		<td>کارت ملی</td>
 																		<td>
 																			<a target="_blank" href="<?php echo user_get_media($u_id, 'melicart'); ?>">مشاهده</a>
@@ -562,6 +576,30 @@
 																		<td>شناسنامه</td>
 																		<td>
 																			<a target="_blank" href="<?php echo user_get_media($u_id, 'identify'); ?>">مشاهده</a>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td>تصویر برگ قرارداد</td>
+																		<td>
+																			<a target="_blank" href="<?php echo user_get_media($u_id, 'u_contract'); ?>">مشاهده</a>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td>تصویر دفترچه بیمه</td>
+																		<td>
+																			<a target="_blank" href="<?php echo user_get_media($u_id, 'u_insurance'); ?>">مشاهده</a>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td>تصویر صفحه ضمانت انجام کار</td>
+																		<td>
+																			<a target="_blank" href="<?php echo user_get_media($u_id, 'u_guarantee'); ?>">مشاهده</a>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td>برگ تعهدنامه حسن انجام کار</td>
+																		<td>
+																			<a target="_blank" href="<?php echo user_get_media($u_id, 'u_recognizance'); ?>">مشاهده</a>
 																		</td>
 																	</tr>
 																</table>
