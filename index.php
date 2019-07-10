@@ -2,7 +2,6 @@
 	require_once("customer/functions.php");
 	?>
 	<div class="content-wrapper">
-	<?php echo per_number("1213123"); ?>
         <section class="content-header">
 			<h1>
 				پیشخوان
