@@ -33,6 +33,7 @@
 		$fb_id = $_POST['confirm_bar'];
 		$sql = "update factor_body set fb_exit_bar = '1' where fb_id = $fb_id";
 		ex_query($sql);
+		insert_bar_bring_factor($fb_id);
 	}
 	?>
 	
@@ -55,28 +56,43 @@
 							<tbody>
 							<?php
 							$i = 1;
-							$sql = "select * from factor_body where factor_body.fb_exit_doc = 1";
+							$sql = "select * from factor_body where factor_body.fb_exit_doc = 1 order by fb_id desc";
 							$res = get_select_query($sql);
 							foreach ($res as $row) { ?>
 								<tr>
 									<td><?php echo per_number($i); ?></td>
-									<td><?php echo per_number($row['f_id']); ?></td>
+									<td><?php echo per_number($row['fb_id']); ?></td>
 									<td><?php echo get_product_name($row['p_id']); ?></td>
 									<td><?php echo per_number(number_format($row['fb_quantity'])); ?></td>
 									<td>
+									<?php
+									$driver_choose = driver_choose($row['fb_id']);
+									if($driver_choose > 0) { ?>
+										<button class="btn btn-sm btn-success disabled">راننده انتخاب شده</button>
+									<?php
+									} else { ?>
 										<button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#selectdriver<?php echo $i; ?>">
 											انتخاب راننده
 										</button>
+									<?php
+									}
+									?>
 									</td>
 									<td>
 										<a class="btn btn-info btn-sm" href="print-transfer-form.php?fb_id=<?php echo $row['fb_id']; ?>">چاپ حواله خروج</a>
 										<?php
 										$fb_exit_bar = $row['fb_exit_bar'];
-										if($fb_exit_bar==0){ ?>
+										$fb_id = $row['fb_id'];
+										$dr_id = check_dr($fb_id);
+										if($fb_exit_bar == 0 && $dr_id > 0){ ?>
 										<form style="display: inline-block" onSubmit="if(!confirm('آیا از انجام این عملیات اطمینان دارید؟')){return false;}" action="" method="post">
 											<button value="<?php echo $row['fb_id']; ?>" name="confirm_bar" class="btn btn-success btn-sm">تایید انجام بارگیری</button>
 										</form>
 										<?php
+										} elseif(!$dr_id) {
+											?>
+											<button class="btn btn-danger btn-sm disabled">راننده انتخاب نشده </button>
+											<?php
 										} else {
 											?>
 											<button class="btn btn-danger btn-sm disabled">بار خارج شده</button>

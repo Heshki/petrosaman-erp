@@ -36,7 +36,7 @@
 					<table class="table table-condensed">
 						<tr>
 							<th style="background: #f9f9f9" colspan="2" class="bold">مجوز ترخیص بار</th>
-							<th style="background: #f9f9f9" colspan="2" class="bold">شماره: <?php echo per_number($res[0]['fb_id']); ?></th>
+							<th style="background: #f9f9f9" colspan="2" class="bold">شماره: <?php echo per_number($fb_id); ?></th>
 						</tr>
 						<tr>
 							<td class="bold" colspan="2">مشتری: <?php echo get_customer_name($res[0]['c_id']); ?></td>

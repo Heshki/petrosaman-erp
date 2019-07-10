@@ -67,11 +67,13 @@
 				  		</ul>
 					</li>
 
-					<li class="<?php check_active('list-storage.php'); ?> treeview">
+					<li class="<?php check_active('input-store.php'); check_active('list-storage.php'); check_active('list-checkout.php'); check_active('bar-list.php'); ?> treeview">
 				  		<a href="#"><i class="fa fa-files-o"></i><span>انبار</span></a>
 				  		<ul class="treeview-menu">
 								<li class="<?php check_active('input-store.php'); ?>"><a href="<?php get_url(); ?>storage/input-store.php"><i class="fa fa-circle-o"></i>ورودی انبار</a></li>
 								<li class="<?php check_active('list-storage.php'); ?>"><a href="<?php get_url(); ?>storage/list-storage.php"><i class="fa fa-circle-o"></i>لیست حواله خروج</a></li>
+								<li class="<?php check_active('list-checkout.php'); ?>"><a href="<?php get_url(); ?>storage/list-checkout.php"><i class="fa fa-circle-o"></i>تایید بار</a></li>
+								<li class="<?php check_active('bar-list.php'); ?>"><a href="<?php get_url(); ?>storage/bar-list.php"><i class="fa fa-circle-o"></i>لیست بارها</a></li>
 				  		</ul>
 					</li>
 					<?php

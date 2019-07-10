@@ -212,4 +212,133 @@ function list_factor_log() {
 	return $res;
 }
 
+function list_checkout() {
+	$sql = "select * from bar_bring order by bar_id desc";
+	$res = get_select_query($sql);
+	return $res;
+}
+
+function get_customer_name_fx($fx_id, $fx_type) {
+	if($fx_type == 1) {
+		$table_type = "factor_buy";
+		$id = ".bu_id";
+	} elseif($fx_type == 2) {
+		$table_type = "factor_body";
+		$id = ".fb_id";
+	} else {
+		$table_type = "";
+		$id = "";
+	}
+	$sql = "select c_name, c_family from customer inner join factor on customer.c_id = factor.c_id inner join " . $table_type . " on " . $table_type . ".f_id = factor.f_id inner join bar_bring on bar_bring.fx_id = " . $table_type . $id . " where fx_id = $fx_id";
+	$res = get_select_query($sql);
+	return $res[0]['c_name'] . " " . $res[0]['c_family'];
+}
+
+/*function get_quantity_fx($fx_id, $fx_type) {
+	if($fx_type == 1) {
+		$table_type = "factor_buy";
+		$id = ".bu_id";
+		$quantity = "bu_quantity";
+	} elseif($fx_type == 2) {
+		$table_type = "factor_body";
+		$id = ".fb_id";
+		$quantity = "fb_quantity";
+	} else {
+		$table_type = "";
+		$id = "";
+		$quantity = "";
+	}
+	$sql = "select " . $quantity . " from " . $table_type . " inner join bar_bring on bar_bring.fx_id = " . $table_type . $id . " where fx_id = $fx_id";
+	$res = get_select_query($sql);
+	return $res;
+}*/
+
+function get_driver_name_fx($fx_id, $fx_type) {
+	if($fx_type == 1) {
+		$table_type = "factor_buy";
+		$id = ".bu_id";
+	} elseif($fx_type == 2) {
+		$table_type = "factor_body";
+		$id = ".fb_id";
+	} else {
+		$table_type = "";
+		$id = "";
+	}
+	$sql = "select dr_name, dr_family from driver inner join " . $table_type . " on " . $table_type . ".dr_id = driver.dr_id where " . $table_type . $id . " = $fx_id";
+	$res = get_select_query($sql);
+	return $res[0]['dr_name'] . " " . $res[0]['dr_family'];
+}
+
+function insert_bar_bring_factor($fb_id) {
+	$fx_type = 2;
+	$sql_dr_id = "select dr_id from factor_body where fb_id = $fb_id";
+	$dr_id = get_var_query($sql_dr_id);
+	$sql_bar_quantity = "select fb_quantity from factor_body where fb_id = $fb_id";
+	$bar_quantity = get_var_query($sql_bar_quantity);
+	$bar_time = jdate('Y/m/d H:i');
+	$bar_verify_admin = 0;
+	$sql = "insert into bar_bring (fx_id, fx_type, dr_id, bar_quantity, bar_time, bar_verify_admin) values ($fb_id, $fx_type, $dr_id, '$bar_quantity', '$bar_time', $bar_verify_admin)";
+	$res = ex_query($sql);
+	return $res;
+}
+
+function check_dr($fb_id) {
+	$sql = "select dr_id from factor_body where fb_id = $fb_id";
+	$res = get_var_query($sql);
+	return $res;
+}
+
+function verify_admin_bar($bar_id) {
+	$sql = "update bar_bring set bar_verify_admin = 1 where bar_id = $bar_id";
+	$res = ex_query($sql);
+	$sql_fx_id = "select fx_type from bar_bring where bar_id = $bar_id";
+	$fx_type = get_var_query($sql_fx_id);
+	if($fx_type == 1) {
+		$table_type = "factor_buy";
+		$id = ".bu_id";
+	} elseif($fx_type == 2) {
+		$table_type = "factor_body";
+		$id = ".fb_id";
+	} else {
+		$table_type = "";
+		$id = "";
+	}
+	$sql_p_id_cat_id = "select p_id, cat_id from " . $table_type ." inner join bar_bring on " . $table_type . $id . " = bar_bring.fx_id where bar_id = $bar_id";
+	$res_p = get_select_query($sql_p_id_cat_id);
+	$p_id = $res_p[0]['p_id'];
+	$cat_id = $res_p[0]['cat_id'];
+	$sql_stock = "select s_amount from stock where p_id = $p_id and cat_id = $cat_id";
+	$stock = get_var_query($sql_stock);
+	$sql_bar_quantity = "select bar_quantity from bar_bring where bar_id = $bar_id";
+	$bar_quantity = get_var_query($sql_bar_quantity);
+	if($fx_type == 2) {
+		$bar_quantity = $stock - $bar_quantity;
+	} elseif ($fx_type == 1) {
+		$bar_quantity = $stock + $bar_quantity;
+	} else {
+		$bar_quantity = $stock;
+	}
+	$sql_minus = "update stock set s_amount = $bar_quantity where p_id = $p_id and cat_id = $cat_id";
+	$res_minus = ex_query($sql_minus);
+	return $res;
+}
+
+function driver_choose($fb_id) {
+	$sql = "select dr_id from factor_body where fb_id = $fb_id";
+	$res = get_var_query($sql);
+	return $res;	
+}
+
+function bar_list_sale() {
+	$sql = "select * from bar_bring where fx_type = 2 and bar_verify_admin = 1";
+	$res = get_select_query($sql);
+	return $res;
+}
+
+function bar_list_buy() {
+	$sql = "select * from bar_bring where fx_type = 1 and bar_verify_admin = 1";
+	$res = get_select_query($sql);
+	return $res;
+}
+
 ?>
