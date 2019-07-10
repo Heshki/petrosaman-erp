@@ -1,7 +1,9 @@
 		<div class="control-sidebar-bg"></div>
 		<footer class="main-footer">
-			<div class="pull-right hidden-xs"></div>
-			کلیه حقوق این اتوماسیون متعلق به شرکت پتروسامان آذر تتیس می باشد &copy; 2019
+			<div class="pull-right hidden-xs">
+				<b>نسخه ۱</b>&nbsp;-&nbsp;
+			</div>
+			کلیه حقوق این اتوماسیون متعلق به شرکت <strong>پتروسامان آذر تتیس</strong> می باشد.
 		</footer>
 		<script>
 			$.widget.bridge('uibutton', $.ui.button);
@@ -28,6 +30,7 @@
 		<script src="<?php get_url(); ?>plugins/datatables/dataTables.bootstrap.min.js"></script>
 		<script src="<?php get_url(); ?>plugins/fastclick/fastclick.min.js"></script>
 		<script src="<?php get_url(); ?>dist/js/persianDatepicker.min.js"></script>
+		
 		<script type="text/javascript">
 			$(".select2").select2();
 			$("#f_date, #simpleLabel").persianDatepicker();

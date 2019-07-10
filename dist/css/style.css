@@ -126,3 +126,25 @@
 .group_save_table{
 	background: #fff;
 }
+.calc_modal{
+	height: fit-content;
+    overflow: auto !important;
+    font-size: 12px;
+}
+.rights_modal{
+	height: fit-content;
+    overflow: auto !important;
+    font-size: 12px;
+}
+.modal-raw-rights input[name=rr_modifier]{
+	direction: ltr;
+}
+.payroll-table{
+    background: #fff !important;
+    border: 1px solid #000 !important;
+}
+.payroll-table th, .payroll-table td{
+    background: #fff !important;
+    border: 1px solid #000 !important;
+    text-align: center !important;
+}

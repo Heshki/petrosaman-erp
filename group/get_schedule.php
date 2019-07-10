@@ -202,11 +202,11 @@
 															</tr>
 															<tr>
 																<td>کد ملی</td>
-																<td><?php echo per_number ($asd[0]['u_meli']); ?></td>
+																<td><?php echo per_number( $asd[0]['u_meli'] ); ?></td>
 															</tr>
 															<tr>
 																<td>تاریخ تولد</td>
-																<td><?php echo per_number ($asd[0]['u_birth']); ?></td>
+																<td><?php echo per_number( $asd[0]['u_birth'] ); ?></td>
 															</tr>
 															<tr>
 																<td>شهر محل سکونت</td>
@@ -214,15 +214,15 @@
 															</tr>
 															<tr>
 																<td>مسافت تا کارخانه</td>
-																<td><?php echo per_number ($asd[0]['u_destination']); ?></td>
+																<td><?php echo per_number( $asd[0]['u_destination'] ); ?></td>
 															</tr>
 															<tr>
 																<td>موبایل</td>
-																<td><?php echo per_number ($asd[0]['u_mobile']); ?></td>
+																<td><?php echo per_number( $asd[0]['u_mobile'] ); ?></td>
 															</tr>
 															<tr>
 																<td>تلفن ثابت</td>
-																<td><?php echo per_number ($asd[0]['u_tell']); ?></td>
+																<td><?php echo per_number( $asd[0]['u_tell'] ); ?></td>
 															</tr>
 															<tr>
 																<td>آدرس</td>
@@ -241,23 +241,43 @@
 																<td><?php echo $asd[0]['u_group']; ?></td>
 															</tr>
 															<tr>
-																<td>کد پرسنلی</td>
-																<td><?php echo $asd[0]['u_pcode']; ?></td>
+																<td>شماره پرسنل</td>
+																<td><?php echo per_number($asd[0]['u_pcode']); ?></td>
 															</tr>
 															<tr>
-																<td>منصب</td>
+																<td>سمت</td>
 																<td><?php echo $asd[0]['u_wtype']; ?></td>
+															</tr>
+															<tr>
+																<td>وضعیت تاهل</td>
+																<td><?php echo $asd[0]['u_marital']; ?></td>
+															</tr>
+															<tr>
+																<td>تعداد فرزند</td>
+																<td><?php echo per_number($asd[0]['u_child_count']); ?></td>
+															</tr>
+															<tr>
+																<td>مدرک</td>
+																<td><?php echo $asd[0]['u_evidence']; ?></td>
+															</tr>
+															<tr>
+																<td>دستمزد روزانه</td>
+																<td><?php echo per_number(number_format($asd[0]['u_daily_wage'])); ?></td>
+															</tr>
+															<tr>
+																<td>اضافه ثابت حقوق</td>
+																<td><?php echo per_number(number_format($asd[0]['u_fix_right'])); ?></td>
 															</tr>
 															<tr>
 																<td>کارت ملی</td>
 																<td>
-																	<a target="_blank" href="<?php echo user_get_media($u_id, 'melicart'); ?>"><?php echo user_get_media($u_id, 'melicart'); ?></a>
+																	<a target="_blank" href="<?php echo user_get_media($u_id, 'melicart'); ?>">مشاهده</a>
 																</td>
 															</tr>
 															<tr>
 																<td>شناسنامه</td>
 																<td>
-																	<a target="_blank" href="<?php echo user_get_media($u_id, 'identify'); ?>"><?php echo user_get_media($u_id, 'identify'); ?></a>
+																	<a target="_blank" href="<?php echo user_get_media($u_id, 'identify'); ?>">مشاهده</a>
 																</td>
 															</tr>
 														</table>

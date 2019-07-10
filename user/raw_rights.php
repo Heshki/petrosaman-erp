@@ -7,12 +7,12 @@
 			<ol class="breadcrumb">
 				<li><a href="<?php get_url(); ?>index.php"><i class="fa fa-dashboard"></i> خانه</a></li>
 				<li><a href="#">کاربران</a></li>
-				<li class="active">لیست کاربران</li>
+				<li class="active">محاسبه حقوق</li>
 			</ol>
 		</section>
 
 		<section class="content-header">
-			<h1>لیست کاربران</h1>
+			<h1>محاسبه حقوق</h1>
 		</section>
 
 		<section class="content">
@@ -20,321 +20,638 @@
 				<div class="col-xs-12">
 			  		<div class="box">
 						<div class="box-header">
-				  			<h3 class="box-title">لیست کاربران</h3>
+				  			<h3 class="box-title">محاسبه حقوق<?php if(isset($_GET['uid'])){ $uid = $_GET['uid'] ?> کاربر <?php echo get_select_query("SELECT * FROM user WHERE u_id = $uid")[0]['u_name'] . " " . get_select_query("SELECT * FROM user WHERE u_id = $uid")[0]['u_family']; } ?></h3>
 						</div>
 						<div class="box-body">
-							<form action="" method="post">
-								<div id="details" class="col-xs-12">
+							<form action="" method="get">
+								<div class="col-xs-12">
 									<div class="row">
 										<div class="item col-md-4">
 											<div class="margin-tb input-group-prepend">
-												<span class="input-group-text">نام</span>
+												<span class="input-group-text">انتخاب ماه</span>
+												<select name="month" class="form-control">
+													<?php
+													$myDate = jdate('Y/n/j');
+													$myDataArray = explode('/', $myDate);
+													$myYear = $myDataArray[0];
+													$myMonth = $myDataArray[1];
+
+													$y0 = $myYear;
+													$y1 = $myYear;
+													$y2 = $myYear;
+													$y3 = $myYear;
+													$m1 = $myMonth;
+
+													$scm1 = $y1 . "_" . $m1;
+
+													$m0 = $myMonth -1;
+													$scm0 = $y0 . "_" . $m0;
+													if( $m0 < 1 ){
+														$m0 = 12;
+														$y0 = $y2 - 1;
+														$scm0 = $y0 . "_" . $m0;
+													}
+
+													$m2 = $myMonth +1;
+													$scm2 = $y2 . "_" . $m2;
+													if( $m2 > 12 ){
+														$m2 = $m2 - 12;
+														$y2 = $y2 + 1;
+														$scm2 = $y2 . "_" . $m2;
+													}
+
+													$m3 = $myMonth +2;
+													$scm3 = $y3 . "_" . $m3;
+													if( $m3 > 12 ){
+														$m3 = $m3 - 12;
+														$y3 = $y3 + 1;
+														$scm3 = $y3 . "_" . $m3;
+													}
+													?>
+													<option <?php if(isset($_GET['month']) && $_GET['month']==$scm0){echo "selected";} ?> value="<?php echo $scm0; ?>"><?php echo name_month($m0); ?></option>
+													<option <?php if(isset($_GET['month']) && $_GET['month']==$scm1){echo "selected";} ?> value="<?php echo $scm1; ?>"><?php echo name_month($m1); ?></option>
+													<option <?php if(isset($_GET['month']) && $_GET['month']==$scm2){echo "selected";} ?> value="<?php echo $scm2; ?>"><?php echo name_month($m2); ?></option>
+													<option <?php if(isset($_GET['month']) && $_GET['month']==$scm3){echo "selected";} ?> value="<?php echo $scm3; ?>"><?php echo name_month($m3); ?></option>
+												</select>
+												<?php if( isset ( $_GET['uid'] ) ) { ?><input type="hidden" name="uid" value="<?php echo $_GET['uid']; ?>"> <?php } ?>
 											</div>
-											<input type="text" name="u_name" placeholder="نام" class="form-control">
 										</div>
-										<div class="item col-md-4">
-											<div class="margin-tb input-group-prepend">
-												<span class="input-group-text">نام خانوادگی</span>
-											</div>
-											<input type="text" name="u_family" placeholder="نام خانوادگی" class="form-control">
-										</div>
-										<div class="item col-md-4">
-											<div class="margin-tb input-group-prepend">
-												<span class="input-group-text">سطح دسترسی</span>
-											</div>
-											<select name="u_level" class="form-control">
-												<option></option>
-												<option>مدیر</option>
-												<option>فروش</option>
-												<option>مالی</option>
-												<option>انبار</option>
-											</select>
-										</div>
-										<div class="item col-md-6">
-											<div class="margin-tb input-group-prepend">
-												<span class="input-group-text">نام کاربری</span>
-											</div>
-											<input type="text" name="u_username" placeholder="نام کاربری" class="form-control">
-										</div>
-										<div class="item col-md-6">
-											<div class="margin-tb input-group-prepend">
-												<span class="input-group-text">رمز ورود</span>
-											</div>
-											<input type="password" name="u_password" placeholder="رمز ورود" class="form-control">
-										</div>
-										<div class="item col-md-4">
-											<button type="submit" class="btn btn-success btn-lg" name="u_submit">اضافه کردن</button>
-										<?php 
-										if(isset($_POST['u_submit'])) {
-											include_once"functions.php";
-											$array = array();
-											array_push($array, $_POST['u_name']);
-											array_push($array, $_POST['u_family']);
-											array_push($array, $_POST['u_level']);
-											array_push($array, $_POST['u_username']);
-											array_push($array, $_POST['u_password']);
-											insert_user($array);
-											echo "<meta http-equiv='refresh' content='0'/>";
-										}
-										?>
-										</div>
-									</div>
-								</div>
-							</form>
-
-				  			<table id="example1" class="table table-bordered table-striped">
-								<thead>
-					  				<tr>
-										<th>نام</th>
-										<th>نام خانوادگی</th>
-										<th>نام دسترسی</th>
-										<th>نام کاربری</th>
-										<th>رمز ورود</th>
-										<th>گروه</th>
-										<th>ویرایش</th>
-										<th>حذف</th>
-										<th>مشاهده</th>
-					  				</tr>
-								</thead>
-								<tbody>
-								<?php
-								if(isset($_POST['u_edit'])) {
-									include_once"functions.php";
-									$uid = $_POST['uid'];
-
-									$array = array();
-									array_push($array, $uid);
-									array_push($array, $_POST['u_name']);
-									array_push($array, $_POST['u_family']);
-									array_push($array, $_POST['u_level']);
-									array_push($array, $_POST['u_username']);
-									array_push($array, $_POST['u_password']);
-									array_push($array, $_POST['u_father']);
-									array_push($array, $_POST['u_meli']);
-									array_push($array, $_POST['u_birth']);
-									array_push($array, $_POST['u_live_city']);
-									array_push($array, $_POST['u_destination']);
-									array_push($array, $_POST['u_mobile']);
-									array_push($array, $_POST['u_tell']);
-									array_push($array, $_POST['u_address']);
-									array_push($array, $_POST['u_pre']);
-									array_push($array, $_POST['u_description']);
-									array_push($array, $_POST['u_group']);
-									array_push($array, $_POST['u_pcode']);
-									array_push($array, $_POST['u_wtype']);
-
-									update_user($array);
-
-									$bu_id = $uid;
-
-									if(isset($_FILES['melicart_img']) && $_FILES['melicart_img']['size']>0){
-										$filename = $_FILES['melicart_img']['name'];
-										$tmp_name = $_FILES['melicart_img']['tmp_name'];
-										$size = $_FILES['melicart_img']['size'];
-										$type = "melicart";
-										user_upload_file($filename, $tmp_name, $size, $type, $bu_id);
-									}
-
-									if(isset($_FILES['identify_img']) && $_FILES['identify_img']['size']>0){
-										$filename = $_FILES['identify_img']['name'];
-										$tmp_name = $_FILES['identify_img']['tmp_name'];
-										$size = $_FILES['identify_img']['size'];
-										$type = "identify";
-										user_upload_file($filename, $tmp_name, $size, $type, $bu_id);
-									}
-									
-									echo "<meta http-equiv='refresh' content='0'/>";
-								}
-
-								foreach ($asb as $a ) {
-									$u_id = $a['u_id'];
-									$asd = select_a_user($u_id);
-									?>
-						  			<tr>
-										<td><?php echo $a['u_name']; ?></td>
-										<td><?php echo $a['u_family']; ?></td>
-										<td><?php echo $a['u_level']; ?></td>
-										<td><?php echo $a['u_username']; ?></td>
-										<td>***</td>
-										<td><?php echo $a['u_group']; ?></td>
-										<td>
-											<button class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-keyboard="false" data-target="#edit_modal<?php echo $u_id; ?>">ویرایش</button>
-											<div class="modal fade text-xs-left" id="edit_modal<?php echo $u_id; ?>" tabindex="-1" role="dialog" aria-labelledby="#edit_modal<?php echo $u_id; ?>" style="display: none;" aria-hidden="true">
-												<div class="modal-dialog" role="document" id="user_edit">
-													<form action="" method="post" enctype="multipart/form-data">
-													<input type="hidden" name="uid" value="<?php echo $u_id; ?>">
+										<div class="sch_submit_c item col-md-8">
+											<button type="submit" class="btn btn-success btn-sm">انتخاب</button>
+											<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-keyboard="false" data-target="#calc_modal">جدول خام محاسبه حقوق و مزایای <?php echo name_month(explode('_', $_GET['month'])[1]) . " " . per_number(explode('_', $_GET['month'])[0]); ?></button>
+											<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-keyboard="false" data-target="#rights_modal">جدول حقوق و کارانه <?php echo name_month(explode('_', $_GET['month'])[1]) . " " . per_number(explode('_', $_GET['month'])[0]); ?></button>
+											<button type="button" class="btn btn-warning btn-sm" id="payroll_send">صدور فیش حقوق <?php echo name_month(explode('_', $_GET['month'])[1]) . " " . per_number(explode('_', $_GET['month'])[0]); ?></button>
+											<div class="modal fade text-xs-left" id="calc_modal" tabindex="-1" role="dialog" aria-labelledby="#calc_modal" style="display: none;" aria-hidden="true">
+												<div class="modal-dialog modal-lg" role="document" id="user_edit">
 													<div class="modal-content">
 														<div class="modal-header">
 															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 																<span aria-hidden="true">×</span>
 															</button>
-															<h4 class="modal-title" id="myModalLabel3">ویرایش اطلاعات</h4>
+															<h4 class="modal-title" id="myModalLabel3">جدول خام محاسبه حقوق و مزایای <?php echo name_month(explode('_', $_GET['month'])[1]) . " " . per_number(explode('_', $_GET['month'])[0]); ?></h4>
+														</div>
+														<div class="modal-body calc_modal">
+															<div class="col-xs-12 no-padd">
+																<table id="example1" class="table table-bordered table-striped">
+																	<thead>
+																		<tr>
+																			<th>ردیف</th>
+																			<th>نام و نام خانوادگی</th>
+																			<th>دستمزد روزانه</th>
+																			<th>روزهای کارکرد</th>
+																			<th>حقوق ماهیانه</th>
+																			<th>ساعت اضافه کاری</th>
+																			<th>اضافه کاری</th>
+																			<th>حق مسکن</th>
+																			<th>بن و خواروبار</th>
+																			<th>تعداد فرزند</th>
+																			<th>حق اولاد</th>
+																			<th>شیفت</th>
+																			<th>حق شیفت</th>
+																			<th>ساعت شب</th>
+																			<th>شب کاری</th>
+																			<th>جمع حقوق و مزایا</th>
+																			<th>مشمول بیمه</th>
+																			<th>حق بیمه  7%</th>
+																			<th>مشمول مالیات</th>
+																			<th>قابل پرداخت</th>
+																			<th>23% سهم کار فرما</th>
+																		</tr>
+																	</thead>
+																	<tbody>
+																		<?php
+																		$raw_rights_joined = list_raw_rights_joined();
+																		if($raw_rights_joined){
+																			$row = 1;
+																			foreach ($raw_rights_joined as $raw_right ) {
+																			$uid = $raw_right['rr_uid'];
+																			$fullname = $raw_right['u_name'] . " " . $raw_right['u_family'];
+																			$daily_wage = $raw_right['u_daily_wage'];
+																			$work_days = $raw_right['rr_work_days'];
+																			$monthly_right = $daily_wage * $work_days;
+																			$overtime_hours = $raw_right['rr_overtime_hours'];
+																			$overtime_right = ($daily_wage / 7.33) * $overtime_hours * 1.4;
+																			$home_right = 33333.333 * $work_days + 0.001 - 33333;
+																			$bon = 63333.333 * $work_days - 63333;
+																			$child_count = $raw_right['u_child_count'];
+																			$child_right_ratio = $raw_right['rr_child_right_ratio'];
+																			$child_right = $child_count * (15168810 * 0.1) * $child_right_ratio;
+																			$shift = $raw_right['rr_shift'];
+																			if($shift){
+																				$shift_right = $monthly_right * (22.5/100);
+																			}else{
+																				$shift_right = 0;
+																			}
+																			$night_work_hours = $raw_right['rr_night_work_hours'];
+																			$night_work_right = ($daily_wage/7.33) * $night_work_hours * (35/100);
+																			$sum_rights = $night_work_right + $home_right + $bon + $overtime_right + $monthly_right + $shift_right + $child_right;
+																			$sum_insure = $bon + $home_right + $monthly_right;
+																			$insure = $sum_insure * (7/100);
+																			$sum_taxes = $bon + $home_right + $monthly_right + $child_right;
+																			$to_payment = $sum_rights - $insure;
+																			$employer_right = $sum_insure * (23/100);
+																			?>
+																			<tr>
+																				<td><?php echo per_number($row); ?></td>
+																				<td><?php echo $fullname; ?></td>
+																				<td><?php echo per_number(number_format($daily_wage)); ?></td>
+																				<td><?php echo per_number($work_days); ?></td>
+																				<td><?php echo per_number(number_format($monthly_right)); ?></td>
+																				<td><?php echo per_number($overtime_hours); ?></td>
+																				<td><?php echo per_number(number_format($overtime_right)); ?></td>
+																				<td><?php echo per_number(number_format($home_right)); ?></td>
+																				<td><?php echo per_number(number_format($bon)); ?></td>
+																				<td><?php echo per_number($child_count); ?></td>
+																				<td><?php echo per_number(number_format($child_right)); ?></td>
+																				<td><?php echo per_number($shift); ?></td>
+																				<td><?php echo per_number(number_format($shift_right)); ?></td>
+																				<td><?php echo per_number($night_work_hours); ?></td>
+																				<td><?php echo per_number(number_format($night_work_right)); ?></td>
+																				<td><?php echo per_number(number_format($sum_rights)); ?></td>
+																				<td><?php echo per_number(number_format($sum_insure)); ?></td>
+																				<td><?php echo per_number(number_format($insure)); ?></td>
+																				<td><?php echo per_number(number_format($sum_taxes)); ?></td>
+																				<td><?php echo per_number(number_format($to_payment)); ?></td>
+																				<td><?php echo per_number(number_format($employer_right)); ?></td>
+																			</tr>
+																			<?php
+																			$row++;
+																			}
+																		}else{
+																		?>
+																		<tr>
+																			<th colspan="21">داده ای موجود نیست...</th>
+																		</tr>
+																		<?php
+																		} 
+																		?>
+																	</tbody>
+																	<tfoot>
+																		<tr>
+																			<th>ردیف</th>
+																			<th>نام و نام خانوادگی</th>
+																			<th>دستمزد روزانه</th>
+																			<th>روزهای کارکرد</th>
+																			<th>حقوق ماهیانه</th>
+																			<th>ساعت اضافه کاری</th>
+																			<th>اضافه کاری</th>
+																			<th>حق مسکن</th>
+																			<th>بن و خواروبار</th>
+																			<th>تعداد فرزند</th>
+																			<th>حق اولاد</th>
+																			<th>شیفت</th>
+																			<th>حق شیفت</th>
+																			<th>ساعت شب</th>
+																			<th>شب کاری</th>
+																			<th>جمع حقوق و مزایا</th>
+																			<th>مشمول بیمه</th>
+																			<th>حق بیمه  7%</th>
+																			<th>مشمول مالیات</th>
+																			<th>قابل پرداخت</th>
+																			<th>23% سهم کار فرما</th>
+																		</tr>
+																	</tfoot>
+																</table>
+															</div>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-primary">چاپ</button>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="modal fade text-xs-left" id="rights_modal" tabindex="-1" role="dialog" aria-labelledby="#rights_modal" style="display: none;" aria-hidden="true">
+												<div class="modal-dialog modal-lg" role="document" id="user_edit">
+													<div class="modal-content">
+														<div class="modal-header">
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">×</span>
+															</button>
+															<h4 class="modal-title" id="myModalLabel3">جدول حقوق و کارانه <?php echo name_month(explode('_', $_GET['month'])[1]) . " " . per_number(explode('_', $_GET['month'])[0]); ?></h4>
+														</div>
+														<div class="modal-body rights_modal">
+															<div class="col-xs-12 no-padd">
+																<table id="example1" class="table table-bordered table-striped">
+																	<thead>
+																		<tr>
+																			<th>ردیف</th>
+																			<th>نام و نشان</th>
+																			<th>مرحله ۱ پرداخت</th>
+																			<th>اصلاح حساب</th>
+																			<th>اضافه ثابت</th>
+																			<th>کارانه / جریمه</th>
+																			<th>ایاب و ذهاب</th>
+																			<th>مساعده</th>
+																			<th>قسط وام</th>
+																			<th>اضافه کاری</th>
+																			<th>مرحله ۲ پرداخت</th>
+																			<th>جمع قابل پرداخت</th>
+																		</tr>
+																	</thead>
+																	<tbody>
+																		<?php
+																		$raw_rights_joined = list_raw_rights_joined();
+																		if($raw_rights_joined){
+																			$row = 1;
+																			foreach ($raw_rights_joined as $raw_right ) {
+																			$uid = $raw_right['rr_uid'];
+																			$fullname = $raw_right['u_name'] . " " . $raw_right['u_family'];
+																			$daily_wage = $raw_right['u_daily_wage'];
+																			$work_days = $raw_right['rr_work_days'];
+																			$monthly_right = $daily_wage * $work_days;
+																			$overtime_hours = $raw_right['rr_overtime_hours'];
+																			$overtime_right = ($daily_wage / 7.33) * $overtime_hours * 1.4;
+																			$home_right = 33333.333 * $work_days + 0.001 - 33333;
+																			$bon = 63333.333 * $work_days - 63333;
+																			$child_count = $raw_right['u_child_count'];
+																			$child_right_ratio = $raw_right['rr_child_right_ratio'];
+																			$child_right = $child_count * (15168810 * 0.1) * $child_right_ratio;
+																			$shift = $raw_right['rr_shift'];
+																			if($shift){
+																				$shift_right = $monthly_right * (22.5/100);
+																			}else{
+																				$shift_right = 0;
+																			}
+																			$night_work_hours = $raw_right['rr_night_work_hours'];
+																			$night_work_right = ($daily_wage/7.33) * $night_work_hours * (35/100);
+																			$sum_rights = $night_work_right + $home_right + $bon + $overtime_right + $monthly_right + $shift_right + $child_right;
+																			$sum_insure = $bon + $home_right + $monthly_right;
+																			$insure = $sum_insure * (7/100);
+																			$sum_taxes = $bon + $home_right + $monthly_right + $child_right;
+																			$to_payment = $sum_rights - $insure;
+																			$employer_right = $sum_insure * (23/100);
+
+																			$to_payment_level_1 = $to_payment - $overtime_right;
+																			$modifier = $raw_right['rr_modifier'];
+																			$fix_right = $raw_right['u_fix_right'];
+																			$penalty = $raw_right['rr_penalty'];
+																			$traffic = $raw_right['rr_traffic'];
+																			$help = $raw_right['rr_help'];
+																			$debt = $raw_right['rr_debt'];
+																			$to_payment_final = $to_payment_level_1 + $modifier + $fix_right + $penalty + $traffic + $overtime_right - $help - $debt;
+																			$to_payment_level_2 = $to_payment_final - $to_payment_level_1;
+
+																			$total_income = $monthly_right + $bon + $home_right + $child_right + $overtime_right + $penalty + $shift_right + $night_work_right + $traffic;
+																			$tax = 0;
+																			$deficit = 0;
+																			$saving = 0;
+																			$other = 0;
+																			$total_expends = $insure + $tax + $help + $debt + $deficit + $saving + $other + $modifier;
+																			$total = $total_income - $total_expends;
+																			?>
+
+																			<input type="hidden" id="prl_uid<?php echo $uid; ?>" value="<?php echo $uid; ?>">
+																			<input type="hidden" id="prl_month<?php echo $uid; ?>" value="<?php echo $_GET['month']; ?>">
+																			<input type="hidden" id="prl_monthly_right<?php echo $uid; ?>" value="<?php echo $monthly_right; ?>">
+																			<input type="hidden" id="prl_bon<?php echo $uid; ?>" value="<?php echo $bon; ?>">
+																			<input type="hidden" id="prl_home_right<?php echo $uid; ?>" value="<?php echo $home_right; ?>">
+																			<input type="hidden" id="prl_child_right<?php echo $uid; ?>" value="<?php echo $child_right; ?>">
+																			<input type="hidden" id="prl_overtime_hours<?php echo $uid; ?>" value="<?php echo $overtime_hours; ?>">
+																			<input type="hidden" id="prl_overtime_right<?php echo $uid; ?>" value="<?php echo $overtime_right; ?>">
+																			<input type="hidden" id="prl_penalty<?php echo $uid; ?>" value="<?php echo $penalty; ?>">
+																			<input type="hidden" id="prl_shift_right<?php echo $uid; ?>" value="<?php echo $shift_right; ?>">
+																			<input type="hidden" id="prl_night_work_right<?php echo $uid; ?>" value="<?php echo $night_work_right; ?>">
+																			<input type="hidden" id="prl_traffic<?php echo $uid; ?>" value="<?php echo $traffic; ?>">
+																			<input type="hidden" id="prl_total_income<?php echo $uid; ?>" value="<?php echo $total_income; ?>">
+
+																			<input type="hidden" id="prl_insure<?php echo $uid; ?>" value="<?php echo $insure; ?>">
+																			<input type="hidden" id="prl_tax<?php echo $uid; ?>" value="<?php echo $tax; ?>">
+																			<input type="hidden" id="prl_help<?php echo $uid; ?>" value="<?php echo $help; ?>">
+																			<input type="hidden" id="prl_debt<?php echo $uid; ?>" value="<?php echo $debt; ?>">
+																			<input type="hidden" id="prl_deficit<?php echo $uid; ?>" value="<?php echo $deficit; ?>">
+																			<input type="hidden" id="prl_saving<?php echo $uid; ?>" value="<?php echo $saving; ?>">
+																			<input type="hidden" id="prl_other<?php echo $uid; ?>" value="<?php echo $other; ?>">
+																			<input type="hidden" id="prl_modifier<?php echo $uid; ?>" value="<?php echo $modifier; ?>">
+																			<input type="hidden" id="prl_total_expends<?php echo $uid; ?>" value="<?php echo $total_expends; ?>">
+
+																			<input type="hidden" id="prl_total<?php echo $uid; ?>" value="<?php echo $total; ?>">
+
+																			<tr>
+																				<td><?php echo per_number($row); ?></td>
+																				<td><?php echo $fullname; ?></td>
+																				<td><?php echo per_number(number_format($to_payment_level_1)); ?></td>
+																				<td dir="ltr"><?php echo per_number(number_format($modifier)); ?></td>
+																				<td><?php echo per_number(number_format($fix_right)); ?></td>
+																				<td><?php echo per_number(number_format($penalty)); ?></td>
+																				<td><?php echo per_number(number_format($traffic)); ?></td>
+																				<td><?php echo per_number(number_format($help)); ?></td>
+																				<td><?php echo per_number(number_format($debt)); ?></td>
+																				<td><?php echo per_number(number_format($overtime_right)); ?></td>
+																				<td><?php echo per_number(number_format($to_payment_level_2)); ?></td>
+																				<td><?php echo per_number(number_format($to_payment_final)); ?></td>
+																			</tr>
+																			<?php
+																			$row++;
+																			}
+
+																			?>
+																			<input type="hidden" id="prl_rows" value="<?php echo $row-1; ?>">
+																			<input type="hidden" id="prl_date" value="<?php echo jdate('Y/n/j'); ?>">
+																			<?php
+
+																		}else{
+																		?>
+																		<tr>
+																			<th colspan="12">داده ای موجود نیست...</th>
+																		</tr>
+																		<?php
+																		} 
+																		?>
+																	</tbody>
+																	<tfoot>
+																		<tr>
+																			<th>ردیف</th>
+																			<th>نام و نشان</th>
+																			<th>مرحله ۱ پرداخت</th>
+																			<th>اصلاح حساب</th>
+																			<th>اضافه ثابت</th>
+																			<th>کارانه / جریمه</th>
+																			<th>ایاب و ذهاب</th>
+																			<th>مساعده</th>
+																			<th>قسط وام</th>
+																			<th>اضافه کاری</th>
+																			<th>مرحله ۲ پرداخت</th>
+																			<th>جمع قابل پرداخت</th>
+																		</tr>
+																	</tfoot>
+																</table>
+															</div>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-primary">چاپ</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+							<?php
+							if( isset ( $_GET['uid'] ) && isset ( $_GET['month'] ) ) {
+							?>
+							<form action="" method="post">
+								<input type="hidden" name="rr_uid" value="<?php echo $_GET['uid']; ?>">
+								<input type="hidden" name="rr_month" value="<?php echo $_GET['month']; ?>">
+								<div id="details" class="col-xs-12">
+									<div class="row">
+										<div class="item col-md-4">
+											<div class="margin-tb input-group-prepend">
+												<span class="input-group-text">روزهای کارکرد</span>
+											</div>
+											<input type="text" name="rr_work_days" placeholder="روزهای کارکرد" class="form-control">
+										</div>
+										<div class="item col-md-4">
+											<div class="margin-tb input-group-prepend">
+												<span class="input-group-text">ساعت اضافه کاری</span>
+											</div>
+											<input type="text" name="rr_overtime_hours" placeholder="ساعت اضافه کاری" class="form-control">
+										</div>
+										<div class="item col-md-4">
+											<div class="margin-tb input-group-prepend">
+												<span class="input-group-text">ضریب حق اولاد</span>
+											</div>
+											<input type="text" name="rr_child_right_ratio" placeholder="ضریب حق اولاد" class="form-control">
+										</div>
+									</div>
+									<div class="row">
+										<div class="item col-md-4">
+											<div class="margin-tb input-group-prepend">
+												<span class="input-group-text">شیفت</span>
+											</div>
+											<select name="rr_shift" class="form-control">
+												<option value="0" selected>0</option>
+												<option value="1">1</option>
+											</select>
+										</div>
+										<div class="item col-md-4">
+											<div class="margin-tb input-group-prepend">
+												<span class="input-group-text">ساعت شب</span>
+											</div>
+											<input type="text" name="rr_night_work_hours" placeholder="ساعت شب" class="form-control">
+										</div>
+									</div>
+									<div class="row">
+										<div class="item col-md-4">
+											<button type="submit" class="btn btn-success btn-sm" name="rr_submit">اضافه کردن</button>
+										</div>
+									</div>
+									<?php 
+									if(isset($_POST['rr_submit'])) {
+										$array = array();
+										array_push($array, $_POST['rr_uid']);
+										array_push($array, $_POST['rr_month']);
+										array_push($array, $_POST['rr_work_days']);
+										array_push($array, $_POST['rr_overtime_hours']);
+										array_push($array, $_POST['rr_child_right_ratio']);
+										array_push($array, $_POST['rr_shift']);
+										array_push($array, $_POST['rr_night_work_hours']);
+										insert_raw_rights($array);
+										echo "<meta http-equiv='refresh' content='0'/>";
+									}
+									?>
+								</div>
+							</form>
+							<?php
+							} 
+							if( isset ( $_GET['month'] ) ) {
+							?>
+				  			<table id="example1" class="table table-bordered table-striped">
+								<thead>
+					  				<tr>
+										<th>نام و نام خانوادگی کاربر</th>
+										<th>شماره پرسنل</th>
+										<th>ماه</th>
+										<th>روزهای کارکرد</th>
+										<th>ساعت اضافه کاری</th>
+										<th>ضریب حق اولاد</th>
+										<th>شیفت</th>
+										<th>ساعت شب</th>
+										<th>ویرایش و تکمیل اطلاعات</th>
+										<th>حذف</th>
+					  				</tr>
+								</thead>
+								<tbody>
+								<?php
+								if(isset($_POST['rr_edit'])) {
+									$uid = $_POST['uid'];
+
+									$array = array();
+									array_push($array, $uid);
+									array_push($array, $_POST['rr_month']);
+									array_push($array, $_POST['rr_work_days']);
+									array_push($array, $_POST['rr_overtime_hours']);
+									array_push($array, $_POST['rr_child_right_ratio']);
+									array_push($array, $_POST['rr_shift']);
+									array_push($array, $_POST['rr_night_work_hours']);
+									array_push($array, $_POST['rr_modifier']);
+									array_push($array, $_POST['rr_penalty']);
+									array_push($array, $_POST['rr_traffic']);
+									array_push($array, $_POST['rr_help']);
+									array_push($array, $_POST['rr_debt']);
+									update_raw_rights($array);
+									echo "<meta http-equiv='refresh' content='0'/>";
+								}
+
+								$raw_rights = list_raw_rights();
+								if($raw_rights){
+								foreach ($raw_rights as $raw_right ) {
+									$uid = $raw_right['rr_uid'];
+									?>
+						  			<tr>
+										<td><?php echo get_select_query("SELECT * FROM user WHERE u_id = $uid")[0]['u_name'] . " " . get_select_query("SELECT * FROM user WHERE u_id = $uid")[0]['u_family']; ?></td>
+										<td><?php echo per_number(get_select_query("SELECT * FROM user WHERE u_id = $uid")[0]['u_pcode']); ?></td>
+										<td><?php echo name_month(explode('_', $raw_right['rr_month'])[1]) . " " . per_number(explode('_', $raw_right['rr_month'])[0]); ?></td>
+										<td><?php echo per_number($raw_right['rr_work_days']); ?></td>
+										<td><?php echo per_number($raw_right['rr_overtime_hours']); ?></td>
+										<td><?php echo per_number($raw_right['rr_child_right_ratio']); ?></td>
+										<td><?php echo per_number($raw_right['rr_shift']); ?></td>
+										<td><?php echo per_number($raw_right['rr_night_work_hours']); ?></td>
+										<td>
+											<button class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-keyboard="false" data-target="#edit_modal<?php echo $uid; ?>">ویرایش و تکمیل اطلاعات</button>
+											<div class="modal fade text-xs-left" id="edit_modal<?php echo $uid; ?>" tabindex="-1" role="dialog" aria-labelledby="#edit_modal<?php echo $uid; ?>" style="display: none;" aria-hidden="true">
+												<div class="modal-dialog" role="document" id="user_edit">
+													<form action="" method="post">
+													<input type="hidden" name="uid" value="<?php echo $uid; ?>">
+													<div class="modal-content modal-raw-rights">
+														<div class="modal-header">
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">×</span>
+															</button>
+															<h4 class="modal-title" id="myModalLabel3">ویرایش و تکمیل اطلاعات</h4>
 														</div>
 														<div class="modal-body">
 															<div class="col-xs-12 no-padd">
 																<div class="row">
 																	<div class="item col-md-4">
 																		<div class="margin-tb input-group-prepend">
-																			<span class="input-group-text">نام</span>
+																			<span class="input-group-text">انتخاب ماه</span>
 																		</div>
-																		<input type="text" name="u_name" placeholder="نام" class="form-control" value="<?php echo $asd[0]['u_name']; ?>">
-																	</div>
-																	<div class="item col-md-4">
-																		<div class="margin-tb input-group-prepend">
-																			<span class="input-group-text">نام خانوادگی</span>
-																		</div>
-																		<input type="text" name="u_family" placeholder="نام خانوادگی" class="form-control" value="<?php echo $asd[0]['u_family']; ?>">
-																	</div>
-																	<div class="item col-md-4">
-																		<div class="margin-tb input-group-prepend">
-																			<span class="input-group-text">سطح دسترسی</span>
-																		</div>
-																		<select name="u_level" class="form-control">
-																			<option><?php echo $asd[0]['u_level']; ?></option>
-																			<option>مدیر</option>
-																			<option>فروش</option>
-																			<option>مالی</option>
-																			<option>انبار</option>
-																		</select>
-																	</div>
-																</div>
-																<div class="row">
-																	<div class="item col-md-4">
-																		<div class="margin-tb input-group-prepend">
-																			<span class="input-group-text">نام کاربری</span>
-																		</div>
-																		<input type="text" name="u_username" placeholder="نام کاربری" class="form-control" value="<?php echo $asd[0]['u_username']; ?>">
-																	</div>
-																	<div class="item col-md-4">
-																		<div class="margin-tb input-group-prepend">
-																			<span class="input-group-text">رمز ورود</span>
-																		</div>
-																		<input type="password" name="u_password" placeholder="رمز ورود" class="form-control" value="<?php echo $asd[0]['u_password']; ?>">
-																	</div>
-																	<div class="item col-md-4">
-																		<div class="margin-tb input-group-prepend">
-																			<span class="input-group-text">نام پدر</span>
-																		</div>
-																		<input type="text" name="u_father" placeholder="نام پدر" class="form-control" value="<?php echo $asd[0]['u_father']; ?>">
-																	</div>
-																</div>
-																<div class="row">
-																	<div class="item col-md-4">
-																		<div class="margin-tb input-group-prepend">
-																			<span class="input-group-text">کد ملی</span>
-																		</div>
-																		<input type="text" name="u_meli" placeholder="کد ملی" class="form-control" value="<?php echo $asd[0]['u_meli']; ?>">
-																	</div>
-																	<div class="item col-md-4">
-																		<div class="margin-tb input-group-prepend">
-																			<span class="input-group-text">تاریخ تولد</span>
-																		</div>
-																		<input type="text" name="u_birth" placeholder="تاریخ تولد" autocomplete="off" class="form-control" id="f_date" value="<?php echo $asd[0]['u_birth']; ?>">
-																	</div>
-																	<div class="item col-md-4">
-																		<div class="margin-tb input-group-prepend">
-																			<span class="input-group-text">شهر محل سکونت</span>
-																		</div>
-																		<input type="text" name="u_live_city" placeholder="شهر محل سکونت" class="form-control" value="<?php echo $asd[0]['u_live_city']; ?>">
-																	</div>
-																</div>
-																<div class="row">
-																	<div class="item col-md-4">
-																		<div class="margin-tb input-group-prepend">
-																			<span class="input-group-text">مسافت تا کارخانه</span>
-																		</div>
-																		<input type="text" name="u_destination" placeholder="مسافت تا کارخانه" class="form-control" value="<?php echo $asd[0]['u_destination']; ?>">
-																	</div>
-																	<div class="item col-md-4">
-																		<div class="margin-tb input-group-prepend">
-																			<span class="input-group-text">موبایل</span>
-																		</div>
-																		<input type="text" name="u_mobile" placeholder="موبایل" class="form-control" value="<?php echo $asd[0]['u_mobile']; ?>">
-																	</div>
-																	<div class="item col-md-4">
-																		<div class="margin-tb input-group-prepend">
-																			<span class="input-group-text">تلفن ثابت</span>
-																		</div>
-																		<input type="text" name="u_tell" placeholder="تلفن ثابت" class="form-control" value="<?php echo $asd[0]['u_tell']; ?>">
-																	</div>
-																</div>
-																<div class="row">
-																	<div class="item col-md-4">
-																		<div class="margin-tb input-group-prepend">
-																			<span class="input-group-text">آدرس</span>
-																		</div>
-																		<textarea name="u_address" placeholder="آدرس" class="form-control"><?php echo $asd[0]['u_address']; ?></textarea>
-																	</div>
-																	<div class="item col-md-4">
-																		<div class="margin-tb input-group-prepend">
-																			<span class="input-group-text">سنوات</span>
-																		</div>
-																		<textarea name="u_pre" placeholder="سنوات" class="form-control"><?php echo $asd[0]['u_pre']; ?></textarea>
-																	</div>
-																	<div class="item col-md-4">
-																		<div class="margin-tb input-group-prepend">
-																			<span class="input-group-text">توضیحات</span>
-																		</div>
-																		<textarea name="u_description" placeholder="توضیحات" class="form-control"><?php echo $asd[0]['u_description']; ?></textarea>
-																	</div>
-																</div>
-																<div class="row">
-																	<div class="item col-md-4">
-																		<div class="margin-tb input-group-prepend">
-																			<span class="input-group-text">گروه</span>
-																		</div>
-																		<select name="u_group" class="form-control">
-																			<option><?php echo $asd[0]['u_group']; ?></option>
+																		<select name="rr_month" class="form-control">
 																			<?php
-																			$all_groups = list_group();
-																			foreach ($all_groups as $a_group) {
-																				?>
-																				<option><?php echo $a_group['g_name']; ?></option>
-																				<?php
+																			$myDate = jdate('Y/n/j');
+																			$myDataArray = explode('/', $myDate);
+																			$myYear = $myDataArray[0];
+																			$myMonth = $myDataArray[1];
+
+																			$y0 = $myYear;
+																			$y1 = $myYear;
+																			$y2 = $myYear;
+																			$y3 = $myYear;
+																			$m1 = $myMonth;
+
+																			$scm1 = $y1 . "_" . $m1;
+
+																			$m0 = $myMonth -1;
+																			$scm0 = $y0 . "_" . $m0;
+																			if( $m0 < 1 ){
+																				$m0 = 12;
+																				$y0 = $y2 - 1;
+																				$scm0 = $y0 . "_" . $m0;
+																			}
+
+																			$m2 = $myMonth +1;
+																			$scm2 = $y2 . "_" . $m2;
+																			if( $m2 > 12 ){
+																				$m2 = $m2 - 12;
+																				$y2 = $y2 + 1;
+																				$scm2 = $y2 . "_" . $m2;
+																			}
+
+																			$m3 = $myMonth +2;
+																			$scm3 = $y3 . "_" . $m3;
+																			if( $m3 > 12 ){
+																				$m3 = $m3 - 12;
+																				$y3 = $y3 + 1;
+																				$scm3 = $y3 . "_" . $m3;
 																			}
 																			?>
+																			<option <?php if(isset($_GET['month']) && $_GET['month']==$scm0){echo "selected";} ?> value="<?php echo $scm0; ?>"><?php echo name_month($m0); ?></option>
+																			<option <?php if(isset($_GET['month']) && $_GET['month']==$scm1){echo "selected";} ?> value="<?php echo $scm1; ?>"><?php echo name_month($m1); ?></option>
+																			<option <?php if(isset($_GET['month']) && $_GET['month']==$scm2){echo "selected";} ?> value="<?php echo $scm2; ?>"><?php echo name_month($m2); ?></option>
+																			<option <?php if(isset($_GET['month']) && $_GET['month']==$scm3){echo "selected";} ?> value="<?php echo $scm3; ?>"><?php echo name_month($m3); ?></option>
 																		</select>
 																	</div>
 																	<div class="item col-md-4">
 																		<div class="margin-tb input-group-prepend">
-																			<span class="input-group-text">کد پرسنلی</span>
+																			<span class="input-group-text">روزهای کارکرد</span>
 																		</div>
-																		<input type="text" name="u_pcode" placeholder="کد پرسنلی" class="form-control" value="<?php echo $asd[0]['u_pcode']; ?>">
+																		<input type="text" name="rr_work_days" value="<?php echo $raw_right['rr_work_days']; ?>" placeholder="روزهای کارکرد" class="form-control">
 																	</div>
 																	<div class="item col-md-4">
 																		<div class="margin-tb input-group-prepend">
-																			<span class="input-group-text">منصب</span>
+																			<span class="input-group-text">ساعت اضافه کاری</span>
 																		</div>
-																		<input type="text" name="u_wtype" placeholder="منصب" class="form-control" value="<?php echo $asd[0]['u_wtype']; ?>">
+																		<input type="text" name="rr_overtime_hours" value="<?php echo $raw_right['rr_overtime_hours']; ?>" placeholder="ساعت اضافه کاری" class="form-control">
 																	</div>
 																</div>
 																<div class="row">
-																	<div class="item col-md-6">
-																		<label>کارت ملی</label>
-																		<input type="file" name="melicart_img" accept="image/*" onchange="loadFile1(event)">
-																		<img src="<?php echo user_get_media($u_id, 'melicart'); ?>" class="img-responsive list-user-up-img" id="output1">
+																	<div class="item col-md-4">
+																		<div class="margin-tb input-group-prepend">
+																			<span class="input-group-text">ضریب حق اولاد</span>
+																		</div>
+																		<input type="text" name="rr_child_right_ratio" value="<?php echo $raw_right['rr_child_right_ratio']; ?>" placeholder="ضریب حق اولاد" class="form-control">
 																	</div>
-																	<div class="item col-md-6">
-																		<label>شناسنامه</label>
-																		<input type="file" name="identify_img" accept="image/*" onchange="loadFile2(event)">
-																		<img src="<?php echo user_get_media($u_id, 'identify'); ?>" class="img-responsive list-user-up-img" id="output2">
+																	<div class="item col-md-4">
+																		<div class="margin-tb input-group-prepend">
+																			<span class="input-group-text">شیفت</span>
+																		</div>
+																		<select name="rr_shift" class="form-control">
+																			<option <?php if($raw_right['rr_shift']==0) echo "selected"; ?> value="0">0</option>
+																			<option <?php if($raw_right['rr_shift']==1) echo "selected"; ?> value="1">1</option>
+																		</select>
+																	</div>
+																	<div class="item col-md-4">
+																		<div class="margin-tb input-group-prepend">
+																			<span class="input-group-text">ساعت شب</span>
+																		</div>
+																		<input type="text" name="rr_night_work_hours" value="<?php echo $raw_right['rr_night_work_hours']; ?>" placeholder="ساعت شب" class="form-control">
 																	</div>
 																</div>
-																<script type="text/javascript">
-																	var loadFile1 = function(event) {
-																		var output1 = document.getElementById('output1');
-																		output1.src = URL.createObjectURL(event.target.files[0]);
-																	};
-
-																	var loadFile2 = function(event) {
-																		var output2 = document.getElementById('output2');
-																		output2.src = URL.createObjectURL(event.target.files[0]);
-																	};
-																</script>
+																<div class="row">
+																	<div class="item col-xs-12">
+																		<hr>
+																		<span class="input-group-text"><b>اطلاعات تکمیلی</b></span>
+																	</div>
+																</div>
+																<div class="row">
+																	<div class="item col-md-4">
+																		<div class="margin-tb input-group-prepend">
+																			<span class="input-group-text">اصلاح حساب</span>
+																		</div>
+																		<input type="text" name="rr_modifier" value="<?php echo $raw_right['rr_modifier']; ?>" placeholder="اصلاح حساب" class="form-control">
+																	</div>
+																	<div class="item col-md-4">
+																		<div class="margin-tb input-group-prepend">
+																			<span class="input-group-text">جریمه / کارانه</span>
+																		</div>
+																		<input type="text" name="rr_penalty" value="<?php echo $raw_right['rr_penalty']; ?>" placeholder="جریمه / کارانه" class="form-control">
+																	</div>
+																	<div class="item col-md-4">
+																		<div class="margin-tb input-group-prepend">
+																			<span class="input-group-text">ایاب و ذهاب</span>
+																		</div>
+																		<input type="text" name="rr_traffic" value="<?php echo $raw_right['rr_traffic']; ?>" placeholder="ایاب و ذهاب" class="form-control">
+																	</div>
+																</div>
+																<div class="row">
+																	<div class="item col-md-4">
+																		<div class="margin-tb input-group-prepend">
+																			<span class="input-group-text">مساعده</span>
+																		</div>
+																		<input type="text" name="rr_help" value="<?php echo $raw_right['rr_help']; ?>" placeholder="مساعده" class="form-control">
+																	</div>
+																	<div class="item col-md-4">
+																		<div class="margin-tb input-group-prepend">
+																			<span class="input-group-text">قسط وام</span>
+																		</div>
+																		<input type="text" name="rr_debt" value="<?php echo $raw_right['rr_debt']; ?>" placeholder="قسط وام" class="form-control">
+																	</div>
+																</div>
 															</div>
 														</div>
 														<div class="modal-footer">
-															<button type="submit" class="btn btn-primary" name="u_edit">ویرایش</button>
+															<button type="submit" class="btn btn-primary" name="rr_edit">ویرایش</button>
 														</div>
 													</div>
 													</form>
@@ -343,146 +660,122 @@
 										</td>
 										<td>
 											<form action="" method="post" onSubmit="if(!confirm('آیا از انجام این عملیات اطمینان دارید؟')){return false;}">
-												<button class="btn btn-danger btn-sm" type="submit" name="delete-user">حذف</button>
-												<input class="hidden" type="text" name="delete-text" value="<?php echo $a['u_id']; ?>">
+												<button class="btn btn-danger btn-sm" type="submit" name="rr_delete">حذف</button>
+												<input class="hidden" type="text" name="rr_del_uid" value="<?php echo $uid; ?>">
 												<?php
-												if(isset($_POST['delete-user'])){
-													$u_id = $_POST['delete-text'];
-													delete_user($u_id);
+												if(isset($_POST['rr_delete'])){
+													$u_id = $_POST['rr_del_uid'];
+													delete_raw_rights($u_id);
 													echo "<meta http-equiv='refresh' content='0'/>";
 													exit();
 												}
 												?>
 											</form>
 										</td>
-										<td>
-											<button class="btn btn-info btn-sm" type="button" data-toggle="modal" data-keyboard="false" data-target="#view_modal<?php echo $u_id; ?>">مشاهده</button>
-											<div class="modal fade text-xs-left" id="view_modal<?php echo $u_id; ?>" tabindex="-1" role="dialog" aria-labelledby="#view_modal<?php echo $u_id; ?>" style="display: none;" aria-hidden="true">
-												<div class="modal-dialog" role="document" id="user_view">
-													<form action="" method="post">
-													<div class="modal-content">
-														<div class="modal-header">
-															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-																<span aria-hidden="true">×</span>
-															</button>
-															<h4 class="modal-title" id="myModalLabel3">اطلاعات کاربر</h4>
-														</div>
-														<div class="modal-body">
-															<div class="col-xs-12 no-padd">
-																<table id="example1" class="table table-bordered table-striped">
-																	<tr>
-																		<td>نام</td>
-																		<td><?php echo $asd[0]['u_name']; ?></td>
-																	</tr>
-																	<tr>
-																		<td>نام خانوادگی</td>
-																		<td><?php echo $asd[0]['u_family']; ?></td>
-																	</tr>
-																	<tr>
-																		<td>سطح دسترسی</td>
-																		<td><?php echo $asd[0]['u_level']; ?></td>
-																	</tr>
-																	<tr>
-																		<td>نام کاربری</td>
-																		<td><?php echo $asd[0]['u_username']; ?></td>
-																	</tr>
-																	<tr>
-																		<td>رمز ورود</td>
-																		<td>***</td>
-																	</tr>
-																	<tr>
-																		<td>نام پدر</td>
-																		<td><?php echo $asd[0]['u_father']; ?></td>
-																	</tr>
-																	<tr>
-																		<td>کد ملی</td>
-																		<td><?php echo per_number( $asd[0]['u_meli'] ); ?></td>
-																	</tr>
-																	<tr>
-																		<td>تاریخ تولد</td>
-																		<td><?php echo per_number( $asd[0]['u_birth'] ); ?></td>
-																	</tr>
-																	<tr>
-																		<td>شهر محل سکونت</td>
-																		<td><?php echo $asd[0]['u_live_city']; ?></td>
-																	</tr>
-																	<tr>
-																		<td>مسافت تا کارخانه</td>
-																		<td><?php echo per_number( $asd[0]['u_destination'] ); ?></td>
-																	</tr>
-																	<tr>
-																		<td>موبایل</td>
-																		<td><?php echo per_number( $asd[0]['u_mobile'] ); ?></td>
-																	</tr>
-																	<tr>
-																		<td>تلفن ثابت</td>
-																		<td><?php echo per_number( $asd[0]['u_tell'] ); ?></td>
-																	</tr>
-																	<tr>
-																		<td>آدرس</td>
-																		<td><?php echo $asd[0]['u_address']; ?></td>
-																	</tr>
-																	<tr>
-																		<td>سنوات</td>
-																		<td><?php echo $asd[0]['u_pre']; ?></td>
-																	</tr>
-																	<tr>
-																		<td>توضیحات</td>
-																		<td><?php echo $asd[0]['u_description']; ?></td>
-																	</tr>
-																	<tr>
-																		<td>کد گروه</td>
-																		<td><?php echo $asd[0]['u_group']; ?></td>
-																	</tr>
-																	<tr>
-																		<td>کد پرسنلی</td>
-																		<td><?php echo $asd[0]['u_pcode']; ?></td>
-																	</tr>
-																	<tr>
-																		<td>منصب</td>
-																		<td><?php echo $asd[0]['u_wtype']; ?></td>
-																	</tr>
-																	<tr>
-																		<td>کارت ملی</td>
-																		<td>
-																			<a target="_blank" href="<?php echo user_get_media($u_id, 'melicart'); ?>">مشاهده</a>
-																		</td>
-																	</tr>
-																	<tr>
-																		<td>شناسنامه</td>
-																		<td>
-																			<a target="_blank" href="<?php echo user_get_media($u_id, 'identify'); ?>">مشاهده</a>
-																		</td>
-																	</tr>
-																</table>
-															</div>
-														</div>
-													</div>
-													</form>
-												</div>
-											</div>
-										</td>
 						  			</tr>
+								<?php } }else{ ?>
+									<td colspan="10">داده ای موجود نیست...</td>
 								<?php } ?>
 								</tbody>
 								<tfoot>
 					  				<tr>
-										<th>نام</th>
-										<th>نام خانوادگی</th>
-										<th>نام دسترسی</th>
-										<th>نام کاربری</th>
-										<th>رمز ورود</th>
-										<th>گروه</th>
+										<th>نام و نام خانوادگی کاربر</th>
+										<th>شماره پرسنل</th>
+										<th>ماه</th>
+										<th>روزهای کارکرد</th>
+										<th>ساعت اضافه کاری</th>
+										<th>ضریب حق اولاد</th>
+										<th>شیفت</th>
+										<th>ساعت شب</th>
 										<th>ویرایش</th>
 										<th>حذف</th>
-										<th>مشاهده</th>
 					  				</tr>
 								</tfoot>
 				  			</table>
+				  			<?php } ?>
 						</div>
 			  		</div>
 				</div>
 		  	</div>
 		</section>
 	</div>
+<script type="text/javascript">
+$(document).ready(function(){
+
+	$(document.body).on('click', '#payroll_send' ,function(){
+		var r = confirm("صدور فیش حقوق. آیا مطمین هستید؟");
+		if (r == true) {
+			var prl_rows = $("#prl_rows").val();
+			for (var i = 1; i <= prl_rows; i++) {
+				var prl_uid = $("#prl_uid" + i).val();
+		    	var prl_month = $("#prl_month" + i).val();
+		    	var prl_monthly_right = $("#prl_monthly_right" + i).val();
+		    	var prl_bon = $("#prl_bon" + i).val();
+		    	var prl_home_right = $("#prl_home_right" + i).val();
+		    	var prl_child_right = $("#prl_child_right" + i).val();
+		    	var prl_overtime_hours = $("#prl_overtime_hours" + i).val();
+		    	var prl_overtime_right = $("#prl_overtime_right" + i).val();
+		    	var prl_penalty = $("#prl_penalty" + i).val();
+		    	var prl_shift_right = $("#prl_shift_right" + i).val();
+		    	var prl_night_work_right = $("#prl_night_work_right" + i).val();
+		    	var prl_traffic = $("#prl_traffic" + i).val();
+		    	var prl_total_income = $("#prl_total_income" + i).val();
+		    	var prl_insure = $("#prl_insure" + i).val();
+		    	var prl_tax = $("#prl_tax" + i).val();
+		    	var prl_help = $("#prl_help" + i).val();
+		    	var prl_debt = $("#prl_debt" + i).val();
+		    	var prl_deficit = $("#prl_deficit" + i).val();
+		    	var prl_saving = $("#prl_saving" + i).val();
+		    	var prl_other = $("#prl_other" + i).val();
+		    	var prl_modifier = $("#prl_modifier" + i).val();
+		    	var prl_total_expends = $("#prl_total_expends" + i).val();
+		    	var prl_total = $("#prl_total" + i).val();
+		    	var prl_date = $("#prl_date").val();
+		    	$.post(
+					"",
+					{prl_send:1, prl_uid:prl_uid, prl_month:prl_month, prl_monthly_right:prl_monthly_right, prl_bon:prl_bon, prl_home_right:prl_home_right, prl_child_right:prl_child_right, prl_overtime_hours:prl_overtime_hours, prl_overtime_right:prl_overtime_right, prl_penalty:prl_penalty, prl_shift_right:prl_shift_right, prl_night_work_right:prl_night_work_right, prl_traffic:prl_traffic, prl_total_income:prl_total_income, prl_insure:prl_insure, prl_tax:prl_tax, prl_help:prl_help, prl_debt:prl_debt, prl_deficit:prl_deficit, prl_saving:prl_saving, prl_other:prl_other, prl_modifier:prl_modifier, prl_total_expends:prl_total_expends, prl_total:prl_total, prl_date:prl_date},
+					function(){
+						location.reload();
+					}
+				);
+			}
+	  	}
+	});
+
+});
+</script>
+<?php
+if(isset($_POST['prl_send'])){
+	include_once"functions.php";
+	$array = array();
+	array_push($array, $_POST["prl_uid"]);
+	array_push($array, $_POST["prl_month"]);
+	array_push($array, $_POST["prl_monthly_right"]);
+	array_push($array, $_POST["prl_bon"]);
+	array_push($array, $_POST["prl_home_right"]);
+	array_push($array, $_POST["prl_child_right"]);
+	array_push($array, $_POST["prl_overtime_right"]);
+	array_push($array, $_POST["prl_penalty"]);
+	array_push($array, $_POST["prl_shift_right"]);
+	array_push($array, $_POST["prl_night_work_right"]);
+	array_push($array, $_POST["prl_traffic"]);
+	array_push($array, $_POST["prl_total_income"]);
+	array_push($array, $_POST["prl_insure"]);
+	array_push($array, $_POST["prl_tax"]);
+	array_push($array, $_POST["prl_help"]);
+	array_push($array, $_POST["prl_debt"]);
+	array_push($array, $_POST["prl_deficit"]);
+	array_push($array, $_POST["prl_saving"]);
+	array_push($array, $_POST["prl_other"]);
+	array_push($array, $_POST["prl_modifier"]);
+	array_push($array, $_POST["prl_total_expends"]);
+	array_push($array, $_POST["prl_total"]);
+	array_push($array, $_POST["prl_date"]);
+	array_push($array, $_POST["prl_overtime_hours"]);
+
+	insert_payroll($array);
+	
+	exit();
+}
+?>
 <?php include"../left-nav.php"; include"../footer.php"; ?>

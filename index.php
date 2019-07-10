@@ -2,6 +2,7 @@
 	require_once("customer/functions.php");
 	?>
 	<div class="content-wrapper">
+	<?php echo per_number("1213123"); ?>
         <section class="content-header">
 			<h1>
 				پیشخوان
@@ -12,6 +13,7 @@
 				<li class="active">پیشخوان</li>
 			</ol>
         </section>
+		
         <section class="content">
 			<div class="row">
 				<div class="col-lg-3 col-xs-6">
