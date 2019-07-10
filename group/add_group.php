@@ -19,15 +19,45 @@
 								</div>
 								<div class="item col-md-4">
 									<div class="margin-tb input-group-prepend">
-										<span class="input-group-text">سرپرست کوره</span>
+										<span class="input-group-text">سرپرست ۱</span>
 									</div>
-									<input type="text" name="g_fur_sup" placeholder="سرپرست کوره" class="form-control">
+									<input type="text" name="g_sup_1" placeholder="سرپرست ۱" class="form-control">
 								</div>
 								<div class="item col-md-4">
 									<div class="margin-tb input-group-prepend">
-										<span class="input-group-text">سرپرست دانه بندی</span>
+										<span class="input-group-text">سرپرست ۲</span>
 									</div>
-									<input type="text" name="g_gra_sup" placeholder="سرپرست دانه بندی" class="form-control">
+									<input type="text" name="g_sup_2" placeholder="سرپرست ۲" class="form-control">
+								</div>
+								<div class="item col-md-4">
+									<div class="margin-tb input-group-prepend">
+										<span class="input-group-text">سرپرست ۳</span>
+									</div>
+									<input type="text" name="g_sup_3" placeholder="سرپرست ۳" class="form-control">
+								</div>
+								<div class="item col-md-4">
+									<div class="margin-tb input-group-prepend">
+										<span class="input-group-text">سرپرست ۴</span>
+									</div>
+									<input type="text" name="g_sup_4" placeholder="سرپرست ۴" class="form-control">
+								</div>
+								<div class="item col-md-4">
+									<div class="margin-tb input-group-prepend">
+										<span class="input-group-text">سرپرست ۵</span>
+									</div>
+									<input type="text" name="g_sup_5" placeholder="سرپرست ۵" class="form-control">
+								</div>
+								<div class="item col-md-4">
+									<div class="margin-tb input-group-prepend">
+										<span class="input-group-text">راننده ۱</span>
+									</div>
+									<input type="text" name="g_driver_1" placeholder="راننده ۱" class="form-control">
+								</div>
+								<div class="item col-md-4">
+									<div class="margin-tb input-group-prepend">
+										<span class="input-group-text">راننده ۲</span>
+									</div>
+									<input type="text" name="g_driver_2" placeholder="راننده ۲" class="form-control">
 								</div>
 								<div class="item col-md-4">
 									<button type="submit" class="btn btn-success btn-lg" name="g_submit">اضافه کردن</button>
@@ -35,8 +65,13 @@
 								if(isset($_POST['g_submit'])) {
 									$array = array();
 									array_push($array, $_POST['g_name']);
-									array_push($array, $_POST['g_fur_sup']);
-									array_push($array, $_POST['g_gra_sup']);
+									array_push($array, $_POST['g_sup_1']);
+									array_push($array, $_POST['g_sup_2']);
+									array_push($array, $_POST['g_sup_3']);
+									array_push($array, $_POST['g_sup_4']);
+									array_push($array, $_POST['g_sup_5']);
+									array_push($array, $_POST['g_driver_1']);
+									array_push($array, $_POST['g_driver_2']);
 									insert_group($array);
 									echo "<meta http-equiv='refresh' content='0'/>";
 								}
@@ -50,8 +85,13 @@
 						<thead>
 			  				<tr>
 								<th>نام گروه</th>
-								<th>سرپرس کوره</th>
-								<th>سرپرست دانه بندی</th>
+								<th>سرپرست ۱</th>
+								<th>سرپرست ۲</th>
+								<th>سرپرست ۳</th>
+								<th>سرپرست ۴۲</th>
+								<th>سرپرست ۵</th>
+								<th>راننده ۱</th>
+								<th>راننده ۲</th>
 			  				</tr>
 						</thead>
 						<tbody>
@@ -61,8 +101,13 @@
 							$array = array();
 							array_push($array, $_POST['g_id']);
 							array_push($array, $_POST['g_name']);
-							array_push($array, $_POST['g_fur_sup']);
-							array_push($array, $_POST['g_gra_sup']);
+							array_push($array, $_POST['g_sup_1']);
+							array_push($array, $_POST['g_sup_2']);
+							array_push($array, $_POST['g_sup_3']);
+							array_push($array, $_POST['g_sup_4']);
+							array_push($array, $_POST['g_sup_5']);
+							array_push($array, $_POST['g_driver_1']);
+							array_push($array, $_POST['g_driver_2']);
 
 							update_group($array);
 							
@@ -74,8 +119,13 @@
 							?>
 				  			<tr>
 								<td><?php echo $a['g_name']; ?></td>
-								<td><?php echo $a['g_fur_sup']; ?></td>
-								<td><?php echo $a['g_gra_sup']; ?></td>
+								<td><?php echo $a['g_sup_1']; ?></td>
+								<td><?php echo $a['g_sup_2']; ?></td>
+								<td><?php echo $a['g_sup_3']; ?></td>
+								<td><?php echo $a['g_sup_4']; ?></td>
+								<td><?php echo $a['g_sup_5']; ?></td>
+								<td><?php echo $a['g_driver_1']; ?></td>
+								<td><?php echo $a['g_driver_2']; ?></td>
 								<td>
 									<button class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-keyboard="false" data-target="#edit_modal<?php echo $g_id; ?>">ویرایش</button>
 									<div class="modal fade text-xs-left" id="edit_modal<?php echo $g_id; ?>" tabindex="-1" role="dialog" aria-labelledby="#edit_modal<?php echo $g_id; ?>" style="display: none;" aria-hidden="true">
@@ -100,15 +150,45 @@
 															</div>
 															<div class="item col-md-4">
 																<div class="margin-tb input-group-prepend">
-																	<span class="input-group-text">سرپرست کوره</span>
+																	<span class="input-group-text">سرپرست ۱</span>
 																</div>
-																<input type="text" name="g_fur_sup" placeholder="سرپرست کوره" class="form-control" value="<?php echo $a['g_fur_sup']; ?>">
+																<input type="text" name="g_sup_1" placeholder="سرپرست ۱" class="form-control" value="<?php echo $a['g_sup_1']; ?>">
 															</div>
 															<div class="item col-md-4">
 																<div class="margin-tb input-group-prepend">
-																	<span class="input-group-text">سرپرست دانه بندی</span>
+																	<span class="input-group-text">سرپرست ۲</span>
 																</div>
-																<input type="text" name="g_gra_sup" placeholder="سرپرست دانه بندی" class="form-control" value="<?php echo $a['g_gra_sup']; ?>">
+																<input type="text" name="g_sup_2" placeholder="سرپرست ۲" class="form-control" value="<?php echo $a['g_sup_2']; ?>">
+															</div>
+															<div class="item col-md-4">
+																<div class="margin-tb input-group-prepend">
+																	<span class="input-group-text">سرپرست ۳</span>
+																</div>
+																<input type="text" name="g_sup_3" placeholder="سرپرست ۳" class="form-control" value="<?php echo $a['g_sup_3']; ?>">
+															</div>
+															<div class="item col-md-4">
+																<div class="margin-tb input-group-prepend">
+																	<span class="input-group-text">سرپرست ۴</span>
+																</div>
+																<input type="text" name="g_sup_4" placeholder="سرپرست ۴" class="form-control" value="<?php echo $a['g_sup_4']; ?>">
+															</div>
+															<div class="item col-md-4">
+																<div class="margin-tb input-group-prepend">
+																	<span class="input-group-text">سرپرست ۵</span>
+																</div>
+																<input type="text" name="g_sup_5" placeholder="سرپرست ۵" class="form-control" value="<?php echo $a['g_sup_5']; ?>">
+															</div>
+															<div class="item col-md-4">
+																<div class="margin-tb input-group-prepend">
+																	<span class="input-group-text">راننده ۱</span>
+																</div>
+																<input type="text" name="g_driver_1" placeholder="راننده ۱" class="form-control" value="<?php echo $a['g_driver_1']; ?>">
+															</div>
+															<div class="item col-md-4">
+																<div class="margin-tb input-group-prepend">
+																	<span class="input-group-text">راننده ۲</span>
+																</div>
+																<input type="text" name="g_driver_2" placeholder="راننده ۲" class="form-control" value="<?php echo $a['g_driver_2']; ?>">
 															</div>
 														</div>
 													</div>
@@ -141,8 +221,13 @@
 						<tfoot>
 			  				<tr>
 								<th>نام گروه</th>
-								<th>سرپرس کوره</th>
-								<th>سرپرست دانه بندی</th>
+								<th>سرپرست ۱</th>
+								<th>سرپرست ۲</th>
+								<th>سرپرست ۳</th>
+								<th>سرپرست ۴۲</th>
+								<th>سرپرست ۵</th>
+								<th>راننده ۱</th>
+								<th>راننده ۲</th>
 			  				</tr>
 						</tfoot>
 		  			</table>

@@ -57,10 +57,10 @@
 										     		</tr>
 										     		<tr>
 										     			<?php $group_name = $_GET['group']; ?>
-														<th>سرپرست کوره</th>
-														<th><?php echo get_var_query("SELECT g_fur_sup FROM group_info WHERE g_name = '$group_name'"); ?></th>
-														<th>سرپرست دانه بندی</th>
-														<th><?php echo get_var_query("SELECT g_gra_sup FROM group_info WHERE g_name = '$group_name'"); ?></th>
+														<th>سرپرست ۱(کوره)</th>
+														<th><?php echo get_var_query("SELECT g_sup_1 FROM group_info WHERE g_name = '$group_name'"); ?></th>
+														<th>سرپرست ۲(دانه بندی)</th>
+														<th><?php echo get_var_query("SELECT g_sup_2 FROM group_info WHERE g_name = '$group_name'"); ?></th>
 										     		</tr>
 										     		<tr>
 														<th>تاریخ / شیفت</th>
