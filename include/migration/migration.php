@@ -39,6 +39,25 @@ function migrate_add($table_name, $field_names, $field_types){
     }
 }
 
-//include "user.php";
+include "user.php";
 include "stock_log.php";
+include "bar_bring.php";
+include "category.php";
+include "customer.php";
+include "driver.php";
+include "factor.php";
+include "factor_body.php";
+include "factor_buy.php";
+include "factor_log.php";
+include "group_info.php";
+include "media.php";
+include "partners.php";
+include "partner.php";
+include "payroll.php";
+include "product.php";
+include "raw_rights.php";
+include "schedule.php";
+include "stock.php";
+include "store.php";
+include "transfer_list.php";
 ?>
