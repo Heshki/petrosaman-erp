@@ -14,7 +14,7 @@ require_once"../category/functions.php";
 				<?php
 				if(isset($_POST['del-bu'])){
 					$bu_id = $_POST['del-bu'];
-					delete_factor_buy($bu);
+					delete_factor_buy($bu_id);
 					?>
 					<div class="alert alert-success">
 						مورد با موفقیت حذف شد
@@ -118,7 +118,7 @@ require_once"../category/functions.php";
 												
 												<td>
 													<form onSubmit="if(!confirm('آیا از انجام این عملیات اطمینان دارید؟')){return false;}" action="" method="post">
-														<button name="del-fb" value="<?php echo $l['fb_id']; ?>" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></button>
+														<button name="del-bu" value="<?php echo $l['bu_id']; ?>" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i>X</button>
 													</form>
 												</td>
 											</tr>
@@ -148,12 +148,12 @@ require_once"../category/functions.php";
 							</div>
 							<?php 
 								$res = list_product();?>
-								<select class="form-control">
+								<select class="form-control" name="p_id">
 							<?php
 								foreach($res as $row){
 									$typee = $row['p_type'];
 									if($typee=="Material"){?>
-										<option><?php echo $row['p_name']; ?></option>
+										<option value="<?php echo $row['p_id']; ?>"><?php echo $row['p_name']; ?></option>
 							<?php 
 									}
 								}?>

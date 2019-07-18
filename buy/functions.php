@@ -37,7 +37,9 @@ function insert_factor($array){
 	$u_id = $array[2];
 	$sql = "insert into factor(c_id, f_date, u_id) values($c_id, '$f_date', $u_id)";
 	$res = ex_query($sql);
-	return $res;
+	$sql_f_id = "select f_id from factor order by f_id desc limit 1";
+	$f_id = get_var_query($sql_f_id);
+	return $f_id;
 }
 
 function insert_factor_buy($array){
@@ -50,7 +52,7 @@ function insert_factor_buy($array){
 	return $res;
 }
 
-function delete_factor_buy ($fb_id){
+function delete_factor_buy ($bu_id){
 	$sql = "delete from factor_buy where bu_id = $bu_id";
 	$res = ex_query($sql);
 	return $res;	

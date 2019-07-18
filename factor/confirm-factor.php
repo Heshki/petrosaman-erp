@@ -44,11 +44,12 @@
 		$m_name = upload_file($filename, $tmp_name, $size, $type, $fb_id);
 		$m_type = "pre_invoice_sale";
 		$m_name_file = "no_signed";
-		$sql = "insert into media (m_name, m_type, m_name_file, bu_id) values ('$m_name', '$m_type', '$m_name_file', $fb_id)";
-		echo $sql;
-		ex_query($sql);
-		$sql1 = "update factor_body set fb_pre_invoice_scan = 1 where fb_id = $fb_id";
-		ex_query($sql1);
+		if($m_name) {
+			$sql = "insert into media (m_name, m_type, m_name_file, bu_id) values ('$m_name', '$m_type', '$m_name_file', $fb_id)";
+			ex_query($sql);
+			$sql1 = "update factor_body set fb_pre_invoice_scan = 1 where fb_id = $fb_id";
+			ex_query($sql1);
+		}
 	}
 	if(isset($_POST['up_file_singed'])){
 		$type = $_POST['typee'];
@@ -59,21 +60,23 @@
 		$m_name = upload_file($filename, $tmp_name, $size, $type, $fb_id);
 		$m_type = "pre_invoice_sale";
 		$m_name_file = "signed";
-		$sql = "insert into media (m_name, m_type, m_name_file, bu_id) values ('$m_name', '$m_type', '$m_name_file', $fb_id)";
-		ex_query($sql);
+		if($m_name) {
+			$sql = "insert into media (m_name, m_type, m_name_file, bu_id) values ('$m_name', '$m_type', '$m_name_file', $fb_id)";
+			ex_query($sql);
+		}
 	}
 	if(isset($_POST['delete-img'])){
 		$filename1 = $_POST['filename'];
 		$image_id = $_POST['image_id'];
 		
 		$path = str_replace($_SERVER['DOCUMENT_ROOT'], '', "../uploads/" . $filename1);
-		
+		$sql = "delete from media where m_id = $image_id";
+			ex_query($sql);
 		if(unlink($path)){
 			$sql = "delete from media where m_id = $image_id";
 			ex_query($sql);
 		}
 		$url = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-		echo $url;
 		?>
 		<script type="text/javascript">
 			window.location.href = "<?php echo $url; ?>";

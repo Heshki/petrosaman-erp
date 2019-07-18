@@ -3,6 +3,7 @@ require_once"../include/database.php";
 
 function singed_pre_invoice_scan($fb_id) {
 	$sql = "select m_id, m_name from media where bu_id = $fb_id and m_type = 'pre_invoice_sale' and m_name_file = 'signed'";
+	echo $sql;
 	$out = get_select_query($sql);
 	$c = count($out);
 	if($c>0){
@@ -12,6 +13,7 @@ function singed_pre_invoice_scan($fb_id) {
 		}else{
 			$src = get_the_url() . "dist/img/no-img.jpg";
 		}
+		echo $src;
 		?>
 		<form action="" method="post" onclick="if(!confirm('آیا از انجام این عملیات اطمینان دارید؟')){return false;}">
 			<div style="border: 1px dashed #eee; border-radius: 4px; padding: 10px; text-align: center; background: #f9f9f9">

@@ -13,7 +13,9 @@ require_once"../partner/functions.php";
 		$image_id = $_POST['image_id'];
 		
 		$path = str_replace($_SERVER['DOCUMENT_ROOT'], '', "uploads/" . $filename1);
-		
+		$sql = "delete from media where m_id = $image_id";
+			ex_query($sql);
+			echo $sql;
 		if(unlink($path)){
 			$sql = "delete from media where m_id = $image_id";
 			ex_query($sql);
@@ -33,7 +35,7 @@ require_once"../partner/functions.php";
 		$filename = $_FILES['fileToUpload']['name'];
 		$tmp_name = $_FILES['fileToUpload']['tmp_name'];
 		$size = $_FILES['fileToUpload']['size'];
-		upload_file($filename, $tmp_name, $size, $type, $bu_id);
+		user_upload_file($filename, $tmp_name, $size, $type, $bu_id);
 		if($type=="invoice"){
 			$sql1 = "update factor_buy set bu_scan_invoice = 1 where bu_id = $bu_id";
 		}else if($type=="receipt"){

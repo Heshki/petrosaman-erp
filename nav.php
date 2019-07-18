@@ -72,6 +72,8 @@
 			  		<ul class="treeview-menu">
 						<li class="<?php check_active('input-store.php'); ?>"><a href="<?php get_url(); ?>storage/input-store.php"><i class="fa fa-circle-o"></i>ورودی انبار</a></li>
 						<li class="<?php check_active('list-storage.php'); ?>"><a href="<?php get_url(); ?>storage/list-storage.php"><i class="fa fa-circle-o"></i>لیست حواله خروج</a></li>
+						<li class="<?php check_active('bar-list.php'); ?>"><a href="<?php get_url(); ?>storage/bar-list.php"><i class="fa fa-circle-o"></i>لیست بارهای خارج شده</a></li>
+						<li class="<?php check_active('list-checkout.php'); ?>"><a href="<?php get_url(); ?>storage/list-checkout.php"><i class="fa fa-circle-o"></i>لیست  تایید بار</a></li>
 			  		</ul>
 				</li>
 				<?php
