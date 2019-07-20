@@ -30,6 +30,7 @@
 		<script src="<?php get_url(); ?>plugins/datatables/dataTables.bootstrap.min.js"></script>
 		<script src="<?php get_url(); ?>plugins/fastclick/fastclick.min.js"></script>
 		<script src="<?php get_url(); ?>dist/js/persianDatepicker.min.js"></script>
+		<script src="<?php get_url(); ?>plugins/iCheck/icheck.min.js"></script>
 		
 		<script type="text/javascript">
 			$(".select2").select2();

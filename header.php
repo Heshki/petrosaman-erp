@@ -33,6 +33,7 @@ if(isset($_GET['logout']) || !isset($_SESSION['user_id'])){
         <link rel="stylesheet" href="<?php get_url(); ?>dist/css/style.css">
         <link rel="stylesheet" href="<?php get_url(); ?>dist/css/skins/_all-skins.min.css">
         <link rel="stylesheet" href="<?php get_url(); ?>plugins/iCheck/flat/blue.css">
+        <link rel="stylesheet" href="<?php get_url(); ?>plugins/iCheck/square/blue.css">
         <link rel="stylesheet" href="<?php get_url(); ?>plugins/morris/morris.css">
         <link rel="stylesheet" href="<?php get_url(); ?>plugins/jvectormap/jquery-jvectormap-1.2.2.css">
         <link rel="stylesheet" href="<?php get_url(); ?>plugins/datepicker/datepicker3.css">

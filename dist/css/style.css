@@ -148,3 +148,6 @@
     border: 1px solid #000 !important;
     text-align: center !important;
 }
+.icheck {
+	z-index: 999999999999999999999999999999999999999999999999999999999999999999999999999;
+}

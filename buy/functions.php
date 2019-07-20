@@ -46,8 +46,9 @@ function insert_factor_buy($array){
 	$f_id = $array[0];
 	$p_id = $array[1];
 	$bu_quantity = $array[2];
-	$sql = "insert into factor_buy(f_id, p_id, bu_scan_invoice,bu_quantity, bu_verify_admin1, bu_send_fiscal, bu_send_customer) ";
-	$sql .= "values ($f_id, $p_id,0, $bu_quantity, 0, 0, 0)";
+	$bu_outsourcing = $array[3];
+	$sql = "insert into factor_buy(f_id, p_id, bu_scan_invoice,bu_quantity, bu_verify_admin1, bu_send_fiscal, bu_send_customer, bu_quantity_r, bu_outsourcing) ";
+	$sql .= "values ($f_id, $p_id,0, $bu_quantity, 0, 0, 0, 0, $bu_outsourcing)";
 	$res = ex_query($sql);
 	return $res;
 }

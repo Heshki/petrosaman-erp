@@ -26,10 +26,16 @@ require_once"../category/functions.php";
 					$f_id = $_GET['f_id'];
 					$p_id = $_POST['p_id'];
 					$bu_quantity = $_POST['bu_quantity'];
+					if(isset($_POST['bu_outsourcing'])) {
+						$bu_outsourcing = 1;
+					} else {
+						$bu_outsourcing = 0;
+					}
 					$array = array();
 					array_push($array, $f_id);
 					array_push($array, $p_id);						
 					array_push($array, $bu_quantity);
+					array_push($array, $bu_outsourcing);
 					insert_factor_buy($array);
 					?>
 					<div class="alert alert-success">
@@ -102,6 +108,8 @@ require_once"../category/functions.php";
 											<th>#</th>
 											<th>نام ماده اولیه</th>
 											<th>وزن</th>
+											<th>برون سپاری</th>
+											<th>حذف</th>
 										</tr>
 										<?php
 										$i = 1;
@@ -110,12 +118,21 @@ require_once"../category/functions.php";
 											foreach($list as $l){ ?>
 											<tr>                   
 												<td><?php echo per_number($i); ?></td>
-												<td>
-												<?php echo get_product_type($l['p_id']); ?>
-												</td>
-												<td></td>
+												<td><?php echo get_product_type($l['p_id']); ?></td>
 												<td><?php echo per_number(number_format($l['bu_quantity'])); ?></td>
-												
+												<td>
+												<?php
+												if($l['bu_outsourcing'] == 1) {
+												?>
+												<button class="btn btn-success btn-xs">بله</button>
+												<?php
+												} else {
+												?>
+												<button class="btn btn-danger btn-xs">خیر</button>
+												<?php
+												}
+												?>
+												</td>
 												<td>
 													<form onSubmit="if(!confirm('آیا از انجام این عملیات اطمینان دارید؟')){return false;}" action="" method="post">
 														<button name="del-bu" value="<?php echo $l['bu_id']; ?>" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i>X</button>
@@ -165,7 +182,13 @@ require_once"../category/functions.php";
 							</div>
 							<input type="text" name="bu_quantity" placeholder="وزن" class="form-control" required>
 						</div>
-						
+						<div class="item col-md-3">
+							<div class="checkbox icheck">
+								<label>
+									<input type="checkbox" name="bu_outsourcing">  برون سپاری
+								</label>
+							</div>
+						</div>
 						<div class="col-md-12 text-center">
 							<button type="submit" class="btn btn-success btn-lg" name="set_bu">ثبت ردیف</button>
 						</div>
@@ -176,4 +199,14 @@ require_once"../category/functions.php";
 			</div>
 		</section>
 	</div>
+	
+	<script>
+		$(function () {
+			$('input').iCheck({
+				checkboxClass: 'icheckbox_square-blue',
+				radioClass: 'iradio_square-blue',
+				increaseArea: '20%'
+			});
+		});
+	</script>
 <?php include"../left-nav.php"; include"../footer.php"; ?>

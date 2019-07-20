@@ -13,9 +13,7 @@ require_once"../partner/functions.php";
 		$image_id = $_POST['image_id'];
 		
 		$path = str_replace($_SERVER['DOCUMENT_ROOT'], '', "uploads/" . $filename1);
-		$sql = "delete from media where m_id = $image_id";
-			ex_query($sql);
-			echo $sql;
+		
 		if(unlink($path)){
 			$sql = "delete from media where m_id = $image_id";
 			ex_query($sql);

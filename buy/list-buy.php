@@ -67,9 +67,17 @@
 										?>	
 									</td>
 									<td>
-										<?php
-										show_btn_list($res[$i]['bu_out'], "confirm-buy.php?bu_id=" . $bu_id . "&typee=bu_out");
-										?>	
+									<?php
+									if($res[$i]['bu_outsourcing'] == 1) {
+									?>
+									<button class="btn btn-success btn-xs">بله</button>
+									<?php
+									} else {
+									?>
+									<button class="btn btn-danger btn-xs">خیر</button>
+									<?php
+									}
+									?>	
 									</td>
 								</tr>
 								<?php
