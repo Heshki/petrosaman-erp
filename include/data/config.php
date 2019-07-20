@@ -1,7 +1,7 @@
 <?php
-$src = $_SERVER['DOCUMENT_ROOT'] . "/petrosaman-erp/gt-config.gt";
-$myfile = fopen( $src, "r" ) or die("Unable to open file!");
-$data = fread($myfile,filesize($src));
+$src = "C:/xampp/htdocs/petrosaman-erp/gt-config.gt";
+$myfile = fopen($src, "r") or die("Unable to open file!");
+$data = fread($myfile, filesize($src));
 fclose($myfile);
 
 preg_match('/"([^"]+)"/', explode(",", $data)[0], $hostArray);
@@ -19,4 +19,6 @@ if(!empty($db_user_passArray[1])){
 }else{
 	$GLOBALS['db_user_pass'] = "";
 }
-?>
+
+preg_match('/"([^"]+)"/', explode(",", $data)[4], $site_urlArray);
+$GLOBALS['site_url'] = $site_urlArray[1];
