@@ -1,5 +1,5 @@
 <?php
-require_once"../include/database.php";
+require_once"../include/data/functions.php";
 require_once"../product/functions.php";
 
 function load_factor_buy($f_id){

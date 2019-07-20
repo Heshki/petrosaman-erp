@@ -1,6 +1,5 @@
 <?php include"../header.php"; include"../nav.php"; include"functions.php";
 	if(isset($_POST['edit_customer'])) {
-		include_once"functions.php";
 		$array = array();
 		array_push($array, $_POST['c_id']);
 		array_push($array, $_POST['c_name']);

@@ -92,7 +92,6 @@
 											 <?php } ?>
 										<?php 
 										if(isset($_POST['dr_submit'])) {
-											include_once"functions.php";
 											$array = array();
 											array_push($array, $_POST['dr_name']);
 											array_push($array, $_POST['dr_family']);
@@ -105,7 +104,6 @@
 											echo "<meta http-equiv='refresh' content='0'/>";
 										}
 										if(isset($_POST['dr_edit'])) {
-											include_once"functions.php";
 											$array = array();
 											array_push($array, $_POST['dr_id']);
 											array_push($array, $_POST['dr_name']);

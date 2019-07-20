@@ -19,7 +19,6 @@
 							<button type="submit" class="btn btn-success btn-lg" id="cat_submit" name="cat_submit">اضافه کردن</button>
 							<?php 
 							if(isset($_POST['cat_submit']) && $_POST['cat_name'] != "") {
-								include_once"functions.php";
 								$array = array();
 								if(isset($_POST['cat_name'])){
 									array_push($array, $_POST['cat_name']);

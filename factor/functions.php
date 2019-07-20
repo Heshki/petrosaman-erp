@@ -1,5 +1,5 @@
 <?php
-require_once"../include/database.php";
+require_once"../include/data/functions.php";
 
 function singed_pre_invoice_scan($fb_id) {
 	$sql = "select m_id, m_name from media where bu_id = $fb_id and m_type = 'pre_invoice_sale' and m_name_file = 'signed'";

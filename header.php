@@ -1,6 +1,6 @@
 <?php
 session_start();
-include"include/theme-function.php"; include"include/database.php"; include"include/functions.php";
+include"include/theme/functions.php"; include"include/data/functions.php"; include"include/lib/functions.php";
 if((isset($_GET['login']) && $_GET['login']=="ok")){
     $_SESSION['user_id'] = $_GET['id'];
     $id = $_GET['id'];
