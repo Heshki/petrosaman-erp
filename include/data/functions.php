@@ -1,7 +1,8 @@
 <?php
-include ( "config.php" );
-include ( $_SERVER['DOCUMENT_ROOT'] . "/petrosaman-erp/include/lib/jdf.php" );
-include ( $_SERVER['DOCUMENT_ROOT'] . "/petrosaman-erp/include/media/functions.php" );
+include "config.php";
+include "include/lib/jdf.php";
+include "include/media/functions.php";
+
 function get_connection_string(){
 	$host = $GLOBALS['host'];
 	$db_name = $GLOBALS['db_name'];
