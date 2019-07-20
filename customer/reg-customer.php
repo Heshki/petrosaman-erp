@@ -1,4 +1,4 @@
-<?php $title = "ثبت مشتری"; include"../header.php"; include"../nav.php"; ?>
+<?php $title = "ثبت مشتری"; include"../header.php"; include"../nav.php"; include"functions.php" ?>
 	
 	<div class="content-wrapper">
 		<?php breadcrumb("ثبت مشتری"); ?>
