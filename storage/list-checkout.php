@@ -1,15 +1,15 @@
 <?php include"../header.php"; include"../nav.php"; include"functions.php";
 	require_once"../customer/functions.php";
 	$res = list_checkout();
-	
+
 	if(isset($_POST['verify_admin'])) {
 		$bar_id = $_POST['verify_admin'];
 		verify_admin_bar($bar_id);
 		echo "<meta http-equiv='refresh' content='0'/>";
 	}
-?> 
+?>
 <div class="content-wrapper">
-	
+
 	<?php breadcrumb("تایید بار"); ?>
 
 	<section class="content">
@@ -21,7 +21,7 @@
 							<thead>
 								<tr>
 									<th>#</th>
-									<th>شماره فاکتور</th>
+									<th>شماره ردیف فاکتور</th>
 									<th>نوع فاکتور</th>
 									<th>مشتری</th>
 									<th>راننده</th>
@@ -33,7 +33,7 @@
 							<tbody>
 							<?php
 							$i = 1;
-								
+
 								foreach ($res as $row) {
 									$fb_id = $row['fx_id'];
 									?>

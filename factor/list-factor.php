@@ -1,7 +1,7 @@
 <?php include"../header.php"; include"../nav.php"; include"functions.php";
 	require_once"../customer/functions.php";
 	$res = list_factor_body();
-	
+
 	if(isset($_POST['verify_submit'])) {
 		$verify = $_POST['type_confirm'];
 		$fb_id_verify = $_POST['fb_id'];
@@ -9,7 +9,7 @@
 		update_a_row_fb($verify, $fb_id_verify);
 		update_a_row_log($fb_id_verify, $l_details);
 	}
-	
+
 	if(isset($_POST['f_update'])) {
 		$array = array();
 		array_push($array, $_POST['p_id']);
@@ -19,9 +19,9 @@
 		update_factor($array);
 		echo "<meta http-equiv='refresh' content='0'/>";
 	}
-?> 
+?>
 <div class="content-wrapper">
-	
+
 	<?php breadcrumb("لیست پیشنهادات فروش"); ?>
 
 	<section class="content">
@@ -84,7 +84,7 @@
 										<button class="btn btn-sm btn-dark" disabled>منتظر</button>
 									<?php
 									}
-									
+
 									?>
 									</td>
 									<td>
@@ -143,7 +143,7 @@
 										<button class="btn btn-sm btn-dark" disabled>منتظر</button>
 									<?php
 									}
-									?>	
+									?>
 									</td>
 									<td>
 									<?php
@@ -163,7 +163,7 @@
 										<button class="btn btn-sm btn-dark" disabled>منتظر</button>
 									<?php
 									}
-									?>	
+									?>
 									</td>
 									<td>
 									<?php
@@ -175,7 +175,7 @@
 									}
 									?>
 									</td>
-									<td>	
+									<td>
 									<?php
 									if($row['fb_exit_doc'] == 1) {
 										show_btn_list($row['fb_result_analyze'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_result_analyze");
@@ -183,7 +183,7 @@
 										<button class="btn btn-sm btn-dark" disabled>منتظر</button>
 									<?php
 									}
-									?>	
+									?>
 									</td>
 									<td>
 										<form action="" method="post" onSubmit="if(!confirm('آیا از انجام این عملیات اطمینان دارید؟')){return false;}">
