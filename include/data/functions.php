@@ -1,8 +1,14 @@
 <?php
-include"jdf.php";
-include"media.php";
+include ( "config.php" );
+include ( $_SERVER['DOCUMENT_ROOT'] . "/petrosaman-erp/include/lib/jdf.php" );
+include ( $_SERVER['DOCUMENT_ROOT'] . "/petrosaman-erp/include/media/functions.php" );
 function get_connection_string(){
-    $pdo_conn = new PDO("mysql:host=localhost;dbname=saman;charset=utf8", 'root', '',
+	$host = $GLOBALS['host'];
+	$db_name = $GLOBALS['db_name'];
+	$db_user = $GLOBALS['db_user'];
+	$db_user_pass = $GLOBALS['db_user_pass'];
+	$dsn = "mysql:host=$host;dbname=$db_name;charset=utf8";
+    $pdo_conn = new PDO($dsn, $db_user, $db_user_pass,
 		array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
     return $pdo_conn;
 }
