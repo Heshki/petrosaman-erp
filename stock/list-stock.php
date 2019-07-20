@@ -18,7 +18,6 @@
 	}
 	
 	if(isset($_POST['s_submit']) && $_POST['p_id']!= "" && $_POST['cat_id']!="" && $_POST['s_amount'] != "") {
-		include_once"functions.php";
 		$array = array();
 		array_push($array, $_POST['p_id']);
 		array_push($array, $_POST['cat_id']);

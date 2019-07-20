@@ -746,7 +746,6 @@ $(document).ready(function(){
 </script>
 <?php
 if(isset($_POST['prl_send'])){
-	include_once"functions.php";
 	$array = array();
 	array_push($array, $_POST["prl_uid"]);
 	array_push($array, $_POST["prl_month"]);

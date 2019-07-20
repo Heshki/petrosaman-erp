@@ -68,7 +68,6 @@
 											<button type="submit" class="btn btn-success btn-lg" name="u_sub">ویرایش</button>
 										<?php 
 										if(isset($_POST['u_sub'])) {
-											include_once"functions.php";
 											$array = array();
 											array_push($array, $_GET['u_id']);
 											array_push($array, $_POST['u_name']);

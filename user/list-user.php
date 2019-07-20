@@ -66,7 +66,6 @@
 											<button type="submit" class="btn btn-success btn-lg" name="u_submit">اضافه کردن</button>
 										<?php 
 										if(isset($_POST['u_submit'])) {
-											include_once"functions.php";
 											$array = array();
 											array_push($array, $_POST['u_name']);
 											array_push($array, $_POST['u_family']);
@@ -100,7 +99,6 @@
 								<tbody>
 								<?php
 								if(isset($_POST['u_edit'])) {
-									include_once"functions.php";
 									$uid = $_POST['uid'];
 
 									$array = array();
@@ -425,12 +423,7 @@
 																		<img src="<?php echo user_get_media($u_id, 'u_recognizance'); ?>" class="img-responsive list-user-up-img">
 																	</div>
 																</div>
-																<script type="text/javascript">
-																	$('input[type="file"]').on('change', function () {
-																		var file = this.files[0];
-																		$(this).parent().find('img').attr("src",URL.createObjectURL(file));
-																	});
-																</script>
+																<script src="<?php get_url(); ?>include/media/script.js"></script>
 															</div>
 														</div>
 														<div class="modal-footer">

@@ -34,7 +34,6 @@
 							<button type="submit" class="btn btn-success btn-lg" id="p_submit" name="p_submit">اضافه کردن</button>
 							<?php 
 							if(isset($_POST['p_submit']) && $_POST['p_name'] != "" && $_POST['p_unit'] != "") {
-								include_once"functions.php";
 								$array = array();
 								array_push($array, $_POST['p_name']);
 								array_push($array, $_POST['p_unit']);

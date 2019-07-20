@@ -55,7 +55,6 @@
 									<button type="submit" class="btn btn-success btn-lg" id="p_update" name="p_update">ذخیره</button>
 									<?php 
 										if(isset($_POST['p_update'])) {
-											include_once"functions.php";
 											$array = array();
 											if(isset($_POST['p_name']) && isset($_POST['p_cat']) && isset($_POST['p_unit'])){
 												array_push($array, $p_id);

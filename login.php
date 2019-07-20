@@ -1,4 +1,4 @@
-<?php include"include/theme-function.php"; include"include/database.php"; include"include/functions.php"; ?>
+<?php include"include/theme/functions.php"; include"include/data/functions.php"; include"include/lib/functions.php"; ?>
 <!DOCTYPE html>
 <html>
 	<head>
