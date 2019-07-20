@@ -1,14 +1,14 @@
 <?php
 function get_the_url() {
-	return "http://localhost/petrosaman-erp/";
+	return $GLOBALS['site_url'];
 }
 
 function get_url() {
-	echo "http://localhost/petrosaman-erp/";
+	echo $GLOBALS['site_url'];
 }
 
 function get_view($view){
-	return "http://localhost/petrosaman-erp/" . $view . "/";
+	return $GLOBALS['site_url'] . $view . "/";
 }
 
 function check_active($current){
@@ -16,4 +16,4 @@ function check_active($current){
 	if($filename==$current)
 		echo 'active';
 }
-include ( $_SERVER['DOCUMENT_ROOT'] . "/petrosaman-erp/include/theme/breadcrumb.php" );
+include "include/theme/breadcrumb.php";
