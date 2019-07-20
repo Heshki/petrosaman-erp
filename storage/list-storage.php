@@ -1,4 +1,4 @@
-<?php include"../header.php"; include"../nav.php"; include"functions.php"; ?> 
+<?php include"../header.php"; include"../nav.php"; include"functions.php"; ?>
 <div class="content-wrapper">
 
 	<section class="content-header">
@@ -8,7 +8,7 @@
 			<li class="active">لیست حواله خروج ها</li>
 		</ol>
 	</section>
-	
+
 	<section class="content-header">
 		<div id="page-wrapper">
 			<div class="row">
@@ -18,7 +18,7 @@
 			</div>
 		</div>
 	</section>
-	
+
 	<?php
 	require_once"../product/functions.php";
 	if(isset($_POST['tl_submit'])) {
@@ -28,7 +28,7 @@
 		$sql = "update factor_body set dr_id = $dr_id where fb_id = $fb_id";
 		ex_query($sql);
 	}
-	
+
 	if(isset($_POST['confirm_bar'])) {
 		$fb_id = $_POST['confirm_bar'];
 		$sql = "update factor_body set fb_exit_bar = '1' where fb_id = $fb_id";
@@ -36,7 +36,7 @@
 		insert_bar_bring_factor($fb_id);
 	}
 	?>
-	
+
 	<section class="content">
 		<div class="row">
 			<div class="col-xs-12">
@@ -47,6 +47,7 @@
 								<tr>
 									<th>#</th>
 									<th>شماره فاکتور</th>
+									<th>شماره ردیف</th>
 									<th>نام محصول</th>
 									<th>مقدار</th>
 									<th>نام و نام خانوادگی راننده</th>
@@ -61,6 +62,7 @@
 							foreach ($res as $row) { ?>
 								<tr>
 									<td><?php echo per_number($i); ?></td>
+									<td><?php echo per_number($row['f_id']); ?></td>
 									<td><?php echo per_number($row['fb_id']); ?></td>
 									<td><?php echo get_product_name($row['p_id']); ?></td>
 									<td><?php echo per_number(number_format($row['fb_quantity'])); ?></td>
@@ -156,7 +158,7 @@
 		</div>
 	</section>
 </div>
-	
+
 	<div class="control-sidebar-bg"></div>
 	<script src="<?php get_url(); ?>/plugins/datatables/jquery.dataTables.min.js"></script>
 	<script src="<?php get_url(); ?>/plugins/datatables/dataTables.bootstrap.min.js"></script>
