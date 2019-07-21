@@ -1,4 +1,4 @@
-<?php include"include/theme/functions.php"; include"include/data/functions.php"; include"include/lib/functions.php"; ?>
+<?php include 'includes.php'; ?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -45,7 +45,6 @@
             $username = $_POST['u_username'];
             $password = $_POST['u_password'];
             $st = check_login($username, $password);
-            echo $st;
             if($st==1){
 				$user_id = get_user_id($username);
 				$uid = $user_id[0][0];

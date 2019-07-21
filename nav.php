@@ -77,7 +77,7 @@
 			  		</ul>
 				</li>
 				<?php
-				include_once ( $_SERVER['DOCUMENT_ROOT'] . "/petrosaman-erp/include/lib/jdf.php" );
+				include_once ('includes.php');
 				$myDate = jdate('Y/n/j');
 				$myDataArray = explode('/', $myDate);
 				$myYear = $myDataArray[0];

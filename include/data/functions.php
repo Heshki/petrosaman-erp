@@ -1,8 +1,4 @@
 <?php
-include "config.php";
-include "include/lib/jdf.php";
-include "include/media/functions.php";
-
 function get_connection_string(){
 	$host = $GLOBALS['host'];
 	$db_name = $GLOBALS['db_name'];

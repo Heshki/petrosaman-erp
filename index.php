@@ -1,4 +1,4 @@
-<?php include"header.php"; include"nav.php";
+<?php include 'header.php'; include 'nav.php';
 	require_once("customer/functions.php");
 	?>
 	<div class="content-wrapper">
@@ -97,4 +97,4 @@
         </section>
     </div>
 </div>
-<?php include"left-nav.php"; include"footer.php"; ?>
+<?php include 'left-nav.php'; include 'footer.php'; ?>

@@ -16,4 +16,3 @@ function check_active($current){
 	if($filename==$current)
 		echo 'active';
 }
-include "include/theme/breadcrumb.php";

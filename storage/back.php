@@ -1,6 +1,6 @@
 <?php
 require_once"../include/data/functions.php";
-require_once"../include/functions.php";
+require_once"../include/lib/functions.php";
 if(isset($_POST['get_product_price'])){
 	$p_id = $_POST['p_id'];
 	$cat_id = $_POST['cat_id'];
