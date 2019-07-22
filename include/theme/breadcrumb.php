@@ -9,7 +9,11 @@ function breadcrumb($title){ ?>
 			</div>
 		</div>
 		<?php
-			$_SESSION['user_interactions'][] = $_SERVER['HTTP_REFERER'];
+			if(isset($_SERVER['HTTP_REFERER'])){
+				$_SESSION['user_interactions'][] = $_SERVER['HTTP_REFERER'];
+			} else{
+				$_SESSION['user_interactions'][] = 'index.php';	
+			}
 			$previous_page = end($_SESSION['user_interactions']);
 		?>
 		<ol class="breadcrumb">
