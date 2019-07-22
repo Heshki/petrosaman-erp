@@ -78,6 +78,7 @@ $field_types[23] = "int(11) NOT NULL DEFAULT 0 COMMENT 'مبلغ خالص پرد
 $field_names[24] = "prl_date";
 $field_types[24] = "varchar(12) NOT NULL COMMENT 'تاریخ صدور'";
 
+migrate_drop($table_name);
 migrate_create($table_name, $field_names, $field_types);
 migrate_add($table_name, $field_names, $field_types);
 migrate_remove($table_name, $field_names);

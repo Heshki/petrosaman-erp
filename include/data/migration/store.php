@@ -36,6 +36,7 @@ $field_types[9] = "int(1) DEFAULT NULL";
 $field_names[10] = "s_scan_gh";
 $field_types[10] = "int(11) DEFAULT NULL";
 
+migrate_drop($table_name);
 migrate_create($table_name, $field_names, $field_types);
 migrate_add($table_name, $field_names, $field_types);
 migrate_remove($table_name, $field_names);

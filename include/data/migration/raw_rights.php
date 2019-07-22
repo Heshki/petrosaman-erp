@@ -42,6 +42,7 @@ $field_types[11] = "int(11) DEFAULT 0 COMMENT 'مساعده'";
 $field_names[12] = "rr_debt";
 $field_types[12] = "int(11) DEFAULT 0 COMMENT 'قسط وام'";
 
+migrate_drop($table_name);
 migrate_create($table_name, $field_names, $field_types);
 migrate_add($table_name, $field_names, $field_types);
 migrate_remove($table_name, $field_names);

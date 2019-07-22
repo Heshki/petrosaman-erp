@@ -39,6 +39,11 @@ function migrate_add($table_name, $field_names, $field_types){
     }
 }
 
+function migrate_drop($table_name){
+    $sql_drop = "DROP TABLE " . $table_name;
+    ex_query($sql_drop);
+}
+
 include "user.php";
 include "stock_log.php";
 include "bar_bring.php";
@@ -60,4 +65,3 @@ include "schedule.php";
 include "stock.php";
 include "store.php";
 include "transfer_list.php";
-?>

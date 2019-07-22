@@ -30,6 +30,7 @@ $field_types[7] = "varchar(50) DEFAULT NULL COMMENT 'راننده ۱'";
 $field_names[8] = "g_driver_2";
 $field_types[8] = "varchar(50) DEFAULT NULL COMMENT 'راننده ۲'";
 
+migrate_drop($table_name);
 migrate_create($table_name, $field_names, $field_types);
 migrate_add($table_name, $field_names, $field_types);
 migrate_remove($table_name, $field_names);

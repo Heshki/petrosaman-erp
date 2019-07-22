@@ -33,6 +33,7 @@ $field_types[8] = "float DEFAULT NULL";
 $field_names[9] = "bu_out";
 $field_types[9] = "varchar(10) DEFAULT NULL";
 
+migrate_drop($table_name);
 migrate_create($table_name, $field_names, $field_types);
 migrate_add($table_name, $field_names, $field_types);
 migrate_remove($table_name, $field_names);
