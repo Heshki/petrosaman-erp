@@ -88,7 +88,7 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text">تاریخ انقضاء گواهی ارزش افزوده</span>
 							</div>
-							<input type="text" class="form-control" id="c_date">
+							<input type="text" class="form-control" id="c_date" name="c_expire_vat">
 						</div>
 						<div class="item col-md-4">
 							<div class="input-group-prepend">
@@ -105,7 +105,7 @@
 							if(isset($_POST['c_submit'])) {
 								include_once"functions.php";
 								$array = array();
-								if(isset($_POST['c_name']) && isset($_POST['c_family']) && isset($_POST['c_company']) && isset($_POST['c_national']) && isset($_POST['c_economic']) && isset($_POST['c_phone']) && isset($_POST['c_fax']) && isset($_POST['c_mobile']) && isset($_POST['c_oaddress']) && isset($_POST['c_faddress'])&& isset($_POST['c_email']) && isset($_POST['c_vat']) && isset($_POST['c_dvat']) && isset($_POST['c_mvat']) && isset($_POST['c_yvat']) && isset($_POST['c_customertype'])){
+								if(isset($_POST['c_name']) && isset($_POST['c_family']) && isset($_POST['c_company']) && isset($_POST['c_national']) && isset($_POST['c_economic']) && isset($_POST['c_phone']) && isset($_POST['c_fax']) && isset($_POST['c_mobile']) && isset($_POST['c_oaddress']) && isset($_POST['c_faddress'])&& isset($_POST['c_email']) && isset($_POST['c_vat']) && isset($_POST['c_customertype'])){
 									array_push($array, $_POST['c_name']);
 									array_push($array, $_POST['c_family']);
 									array_push($array, $_POST['c_company']);
@@ -122,9 +122,12 @@
 									array_push($array, $_POST['c_customertype']);
 									$mobile = $_POST['c_mobile'];
 									$mellicode = $_POST['c_national'];
-									insert_customer($array);
+									$res = insert_customer($array);
+									if($res){
+										echo "عملیات با موفقیت انجام شد.";
+									}
 									send_sms($mobile, "حساب کاربری شما در شرکت پتروسامان با موفقیت ایجاد شد \n نام کاربری: $mellicode \n رمز عبور: $mobile \n آدرس سامانه: http://crm.petrocoke.ir");
-									echo "<meta http-equiv='refresh' content='0'/>";
+									echo "<meta http-equiv='refresh' content='2'/>";
 								}
 							}
 							?>
