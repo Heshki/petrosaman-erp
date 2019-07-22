@@ -101,7 +101,14 @@
 											array_push($array, $_POST['dr_mobile']);
 											array_push($array, $_POST['dr_status']);
 											insert_driver($array);
-											echo "<meta http-equiv='refresh' content='0'/>";
+											if(isset($_GET['cycle']) && $_GET['cycle'] == "factor"){
+												$header_url = get_the_url() . "storage/list-storage.php";
+												?><script type="text/javascript">
+													window.location.href = "<?php echo $header_url; ?>";
+												</script><?php
+											} else {
+												echo "<meta http-equiv='refresh' content='0'/>";
+											}
 										}
 										if(isset($_POST['dr_edit'])) {
 											$array = array();
@@ -115,7 +122,14 @@
 											array_push($array, $_POST['dr_status']);
 											echo $_POST['dr_status'];
 											update_driver($array);
-											echo "<meta http-equiv='refresh' content='0'/>";
+											if(isset($_GET['cycle']) && $_GET['cycle'] == "factor"){
+												$header_url = get_the_url() . "storage/list-storage.php";
+												?><script type="text/javascript">
+													window.location.href = "<?php echo $header_url; ?>";
+												</script><?php
+											} else {
+												echo "<meta http-equiv='refresh' content='0'/>";
+											}
 										}
 										?>
 										</div>
