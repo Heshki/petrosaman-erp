@@ -1,5 +1,5 @@
 <?php
-require_once "../functions.php";
+include_once '../../../includes.php';
 
 function migrate_create($table_name, $field_names, $field_types){
     $c = count($field_names);

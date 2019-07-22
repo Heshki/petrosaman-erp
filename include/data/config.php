@@ -1,5 +1,5 @@
 <?php
-$src = "C:/xampp/htdocs/petrosaman-erp/gt-config.gt";
+$src = $_SERVER["DOCUMENT_ROOT"] . "/petrosaman-erp/gt-config.gt";
 $myfile = fopen($src, "r") or die("Unable to open file!");
 $data = fread($myfile, filesize($src));
 fclose($myfile);
