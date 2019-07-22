@@ -30,16 +30,12 @@
 					</li>
 				</li>
 
-				<li class="<?php check_active('reg-customer.php'); check_active('list-customer.php'); ?> treeview">
+				<li class="<?php check_active('list-customer.php'); check_active('new-customer.php'); check_active('show-customer.php'); check_active('list-product.php'); check_active('list-category.php'); ?> treeview">
 			  		<a href="#"><i class="fa fa-files-o"></i><span>تعاریف اولیه</span></a>
 			  		<ul class="treeview-menu">
 							<li class="<?php check_active('list-customer.php'); ?>"><a href="<?php get_url(); ?>customer/list-customer.php"><i class="fa fa-circle-o"></i> لیست مشتریان</a></li>
 							<li class="<?php check_active('list-product.php'); ?>"><a href="<?php get_url(); ?>product/list-product.php"><i class="fa fa-circle-o"></i> مدیریت محصولات</a></li>
 							<li class="<?php check_active('list-category.php'); ?>"><a href="<?php get_url(); ?>category/list-category.php"><i class="fa fa-circle-o"></i> مدیریت دسته بندی ها</a></li>
-							<li class="<?php check_active('list-user.php'); ?>"><a href="<?php get_url(); ?>user/list-user.php"><i class="fa fa-circle-o"></i>لیست کاربران</a></li>
-							<li class="<?php check_active('add_group.php'); ?>"><a href="<?php get_url(); ?>group/add_group.php"><i class="fa fa-circle-o"></i>تعریف گروه</a></li>
-							<li class="<?php check_active('get_schedule.php'); ?>"><a href="<?php get_url(); ?>group/get_schedule.php/?group=A&sch_submit=1"><i class="fa fa-circle-o"></i>مشاهده گروه ها</a></li>
-							<li class="<?php check_active('list-driver.php'); ?>"><a href="<?php get_url(); ?>driver/list-driver.php"><i class="fa fa-circle-o"></i>لیست راننده ها</a></li>
 					</ul>
 				</li>
 
@@ -51,7 +47,7 @@
 				</li>
 
 				<li class="<?php check_active('reg-factor.php'); check_active('list-factor.php'); check_active('log-factor.php'); ?> treeview">
-			  		<a href="#"><i class="fa fa-files-o"></i><span> فاکتور فروش</span></a>
+			  		<a href="#"><i class="fa fa-files-o"></i><span>فاکتور فروش</span></a>
 			  		<ul class="treeview-menu">
 							<li class="<?php check_active('reg-factor.php'); ?>"><a href="<?php get_url(); ?>factor/reg-factor.php"><i class="fa fa-circle-o"></i>ثبت فاکتور</a></li>
 							<li class="<?php check_active('list-factor.php'); ?>"><a href="<?php get_url(); ?>factor/list-factor.php"><i class="fa fa-circle-o"></i>لیست فاکتورها</a></li>
@@ -59,7 +55,7 @@
 			  		</ul>
 				</li>
 
-				<li class="<?php check_active('reg-factor.php'); check_active('list-factor.php'); check_active('log-factor.php'); ?> treeview">
+				<li class="<?php check_active('reg-buy.php'); check_active('list-buy.php'); ?> treeview">
 			  		<a href="#"><i class="fa fa-files-o"></i><span>فاکتور خرید</span></a>
 			  		<ul class="treeview-menu">
 							<li class="<?php check_active('reg-buy.php'); ?>"><a href="<?php get_url(); ?>buy/reg-buy.php"><i class="fa fa-circle-o"></i>ثبت فاکتور</a></li>
@@ -67,7 +63,7 @@
 			  		</ul>
 				</li>
 
-				<li class="<?php check_active('list-storage.php'); ?> treeview">
+				<li class="<?php check_active('input-store.php'); check_active('list-storage.php'); check_active('bar-list.php'); check_active('list-checkout.php'); ?> treeview">
 			  		<a href="#"><i class="fa fa-files-o"></i><span>انبار</span></a>
 			  		<ul class="treeview-menu">
 						<li class="<?php check_active('input-store.php'); ?>"><a href="<?php get_url(); ?>storage/input-store.php"><i class="fa fa-circle-o"></i>ورودی انبار</a></li>
