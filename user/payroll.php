@@ -64,6 +64,7 @@
 						</div>
 						<div class="sch_submit_c item col-md-2">
 							<button type="submit" class="btn btn-success btn-sm">انتخاب</button>
+							<button type="button" class="btn btn-primary btn-sm" id="payrol_printer">چاپ</button>
 						</div>
 					</div>
 				</form>
@@ -81,7 +82,7 @@
 						if ( $payrolls ) {
 						$payroll = $payrolls[0];
 						?>
-			  			<table class="col-xs-12 table table-striped table-bordered table-responsive payroll-table">
+			  			<table class="col-xs-12 table-responsive sch_save_table sc_table_center" id="payrol_print">
 							<thead>
 				  				<tr>
 									<th colspan="8">فیش حقوقی کارکنان شرکت پتروسامان آذر تتیس</th>
@@ -91,27 +92,27 @@
 				  				</tr>
 				  				<tr>
 									<th colspan="2">شماره پرسنل</th>
-									<th colspan="2"><?php echo per_number($_GET['pcode']); ?></th>
+									<td colspan="2"><?php echo per_number($_GET['pcode']); ?></td>
 									<th colspan="2">تاریخ صدور</th>
-									<th colspan="2"><?php echo per_number($payroll['prl_date']); ?></th>
+									<td colspan="2"><?php echo per_number($payroll['prl_date']); ?></td>
 				  				</tr>
 				  				<tr>
 									<th colspan="2">نام و نام خانوادگی</th>
 									<th>سمت</th>
-									<th><?php echo $payroll['u_wtype']; ?></th>
+									<td><?php echo $payroll['u_wtype']; ?></td>
 									<th>وضعیت تاهل</th>
-									<th><?php echo $payroll['u_marital']; ?></th>
+									<td><?php echo $payroll['u_marital']; ?></td>
 									<th>ساعت کاری</th>
-									<th></th>
+									<td></td>
 				  				</tr>
 				  				<tr>
-									<th colspan="2"><?php echo $payroll['u_name'] . " " . $payroll['u_family']; ?></th>
+									<td colspan="2"><?php echo $payroll['u_name'] . " " . $payroll['u_family']; ?></td>
 									<th>مدرک</th>
-									<th><?php echo $payroll['u_evidence']; ?></th>
+									<td><?php echo $payroll['u_evidence']; ?></td>
 									<th>تعداد فرزند</th>
-									<th><?php echo per_number($payroll['u_child_count']); ?></th>
+									<td><?php echo per_number($payroll['u_child_count']); ?></td>
 									<th>ساعت اضافه کار</th>
-									<th><?php echo per_number($payroll['prl_overtime_hours']); ?></th>
+									<td><?php echo per_number($payroll['prl_overtime_hours']); ?></td>
 				  				</tr>
 				  				<tr>
 									<th colspan="4">دریافتی ها :</th>
@@ -121,74 +122,74 @@
 							<tbody>
 								<tr>
 									<th colspan="2">پایه حقوق</th>
-									<th colspan="2"><?php echo per_number($payroll['prl_monthly_right']); ?></th>
+									<td colspan="2"><?php echo per_number($payroll['prl_monthly_right']); ?></td>
 									<th colspan="2">بیمه تامین اجتماعی	</th>
-									<th colspan="2"><?php echo per_number($payroll['prl_insure']); ?></th>
+									<td colspan="2"><?php echo per_number($payroll['prl_insure']); ?></td>
 				  				</tr>
 				  				<tr>
 									<th colspan="2">اضافه ثابت</th>
-									<th colspan="2"><?php echo per_number($payroll['u_fix_right']); ?></th>
+									<td colspan="2"><?php echo per_number($payroll['u_fix_right']); ?></td>
 									<th colspan="2">مالیات</th>
-									<th colspan="2"><?php echo per_number($payroll['prl_tax']); ?></th>
+									<td colspan="2"><?php echo per_number($payroll['prl_tax']); ?></td>
 				  				</tr>
 				  				<tr>
 									<th colspan="2">بن و خوار و بار</th>
-									<th colspan="2"><?php echo per_number($payroll['prl_bon']); ?></th>
+									<td colspan="2"><?php echo per_number($payroll['prl_bon']); ?></td>
 									<th colspan="2">مساعده</th>
-									<th colspan="2"><?php echo per_number($payroll['prl_help']); ?></th>
+									<td colspan="2"><?php echo per_number($payroll['prl_help']); ?></td>
 				  				</tr>
 				  				<tr>
 									<th colspan="2">حق مسکن</th>
-									<th colspan="2"><?php echo per_number($payroll['prl_home_right']); ?></th>
+									<td colspan="2"><?php echo per_number($payroll['prl_home_right']); ?></td>
 									<th colspan="2">قسط وام</th>
-									<th colspan="2"><?php echo per_number($payroll['prl_debt']); ?></th>
+									<td colspan="2"><?php echo per_number($payroll['prl_debt']); ?></td>
 				  				</tr>
 				  				<tr>
 									<th colspan="2">عایله مندی</th>
-									<th colspan="2"><?php echo per_number($payroll['prl_child_right']); ?></th>
+									<td colspan="2"><?php echo per_number($payroll['prl_child_right']); ?></td>
 									<th colspan="2">کسر از حقوق</th>
-									<th colspan="2"><?php echo per_number($payroll['prl_deficit']); ?></th>
+									<td colspan="2"><?php echo per_number($payroll['prl_deficit']); ?></td>
 				  				</tr>
 				  				<tr>
 									<th colspan="2">اضافه کاری</th>
-									<th colspan="2"><?php echo per_number($payroll['prl_overtime_right']); ?></th>
+									<td colspan="2"><?php echo per_number($payroll['prl_overtime_right']); ?></td>
 									<th colspan="2">پس انداز</th>
-									<th colspan="2"><?php echo per_number($payroll['prl_saving']); ?></th>
+									<td colspan="2"><?php echo per_number($payroll['prl_saving']); ?></td>
 				  				</tr>
 				  				<tr>
 									<th colspan="2">کارانه / جریمه</th>
-									<th colspan="2"><?php echo per_number($payroll['prl_penalty']); ?></th>
+									<td colspan="2"><?php echo per_number($payroll['prl_penalty']); ?></td>
 									<th colspan="2">سایر</th>
-									<th colspan="2"><?php echo per_number($payroll['prl_other']); ?></th>
+									<td colspan="2"><?php echo per_number($payroll['prl_other']); ?></td>
 				  				</tr>
 				  				<tr>
 									<th colspan="2">حق شیفت</th>
-									<th colspan="2"><?php echo per_number($payroll['prl_shift_right']); ?></th>
+									<td colspan="2"><?php echo per_number($payroll['prl_shift_right']); ?></td>
 									<th colspan="2">اصلاح حساب</th>
-									<th colspan="2" dir="ltr"><?php echo per_number($payroll['prl_modifier']); ?></th>
+									<td colspan="2" dir="ltr"><?php echo per_number($payroll['prl_modifier']); ?></td>
 				  				</tr>
 				  				<tr>
 									<th colspan="2">شب کاری</th>
-									<th colspan="2"><?php echo per_number($payroll['prl_night_work_right']); ?></th>
+									<td colspan="2"><?php echo per_number($payroll['prl_night_work_right']); ?></td>
 									<th colspan="2">-</th>
-									<th colspan="2"></th>
+									<td colspan="2"></td>
 				  				</tr>
 				  				<tr>
 									<th colspan="2">ایاب و ذهاب</th>
-									<th colspan="2"><?php echo per_number($payroll['prl_traffic']); ?></th>
+									<td colspan="2"><?php echo per_number($payroll['prl_traffic']); ?></td>
 									<th colspan="2">-</th>
-									<th colspan="2"></th>
+									<td colspan="2"></td>
 				  				</tr>
 				  				<tr>
 									<th colspan="2">جمع دریافتی</th>
-									<th colspan="2"><?php echo per_number($payroll['prl_total_income']); ?></th>
+									<td colspan="2"><?php echo per_number($payroll['prl_total_income']); ?></td>
 									<th colspan="2">جمع کسورات</th>
-									<th colspan="2"><?php echo per_number($payroll['prl_total_expends']); ?></th>
+									<td colspan="2"><?php echo per_number($payroll['prl_total_expends']); ?></td>
 				  				</tr>
 				  				<tr>
 									<th colspan="2">جمع دریافتی</th>
-									<th colspan="2"><?php echo per_number($payroll['prl_total']); ?></th>
-									<th colspan="4"></th>
+									<td colspan="2"><?php echo per_number($payroll['prl_total']); ?></td>
+									<td colspan="4"></td>
 				  				</tr>
 							</tbody>
 			  			</table>
@@ -202,4 +203,6 @@
 			</div>
 		</section>
 	</div>
+<script src="<?php get_url(); ?>user/jquery-print.js"></script>
+<script src="<?php get_url(); ?>user/script.js" type="text/javascript"></script>
 <?php include"../left-nav.php"; include"../footer.php"; ?>

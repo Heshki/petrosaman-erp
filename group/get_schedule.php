@@ -96,7 +96,7 @@
 											    		$j = $i-1;
 											    		?>
 											    		<tr>
-															<td><?php echo per_number( $myYear . "/" . $myMonth . "/" . $i ); ?></td>
+															<th><?php echo per_number( $myYear . "/" . $myMonth . "/" . $i ); ?></th>
 															<td><?php if ( !is_null( $mySchedule ) ) { if( $myScheduleArray[$j] == "day" ) { echo "*"; } else { echo "-"; } } ?></td>
 															<td><?php if ( !is_null( $mySchedule ) ) { if( $myScheduleArray[$j] == "night" ) { echo "*"; } else { echo "-"; } } ?></td>
 															<td><?php if ( !is_null( $mySchedule ) ) { if( $myScheduleArray[$j] == "rest" ) { echo "*"; } else { echo "-"; } } ?></td>
@@ -137,6 +137,7 @@
 					<table id="example1" class="table table-striped table-bordered table-responsive sch_save_table">
 						<thead>
 			  				<tr>
+			  					<th>ردیف</th>
 								<th>نام</th>
 								<th>نام خانوادگی</th>
 								<th>نام دسترسی</th>
@@ -150,11 +151,13 @@
 						<?php
 						$asb = list_user($_GET["group"]);
 						if ( $asb ) {
+						$row = 1;
 						foreach ($asb as $a ) {
 							$u_id = $a['u_id'];
 							$asd = select_a_user($u_id);
 							?>
 				  			<tr>
+				  				<td><?php echo $row; ?></td>
 								<td><?php echo $a['u_name']; ?></td>
 								<td><?php echo $a['u_family']; ?></td>
 								<td><?php echo $a['u_level']; ?></td>
@@ -284,15 +287,60 @@
 																</td>
 															</tr>
 															<tr>
-																<td>شناسنامه</td>
+																<td>شناسنامه ۱</td>
 																<td>
 																	<?php
-																	$identify_url = user_get_media($u_id, 'identify');
-																	if($identify_url == ""){
+																	$identify_1_url = user_get_media($u_id, 'identify_1');
+																	if($identify_1_url == ""){
 																		echo "موجود نیست!";
 																	}else{
 																		?>
-																		<a target="_blank" href="<?php echo user_get_media($u_id, 'identify'); ?>">مشاهده</a>
+																		<a target="_blank" href="<?php echo user_get_media($u_id, 'identify_1'); ?>">مشاهده</a>
+																		<?php
+																	}
+																	?>
+																</td>
+															</tr>
+															<tr>
+																<td>شناسنامه ۲</td>
+																<td>
+																	<?php
+																	$identify_2_url = user_get_media($u_id, 'identify_2');
+																	if($identify_2_url == ""){
+																		echo "موجود نیست!";
+																	}else{
+																		?>
+																		<a target="_blank" href="<?php echo user_get_media($u_id, 'identify_2'); ?>">مشاهده</a>
+																		<?php
+																	}
+																	?>
+																</td>
+															</tr>
+															<tr>
+																<td>شناسنامه ۳</td>
+																<td>
+																	<?php
+																	$identify_3_url = user_get_media($u_id, 'identify_3');
+																	if($identify_3_url == ""){
+																		echo "موجود نیست!";
+																	}else{
+																		?>
+																		<a target="_blank" href="<?php echo user_get_media($u_id, 'identify_3'); ?>">مشاهده</a>
+																		<?php
+																	}
+																	?>
+																</td>
+															</tr>
+															<tr>
+																<td>شناسنامه ۴</td>
+																<td>
+																	<?php
+																	$identify_4_url = user_get_media($u_id, 'identify_4');
+																	if($identify_4_url == ""){
+																		echo "موجود نیست!";
+																	}else{
+																		?>
+																		<a target="_blank" href="<?php echo user_get_media($u_id, 'identify_4'); ?>">مشاهده</a>
 																		<?php
 																	}
 																	?>
@@ -367,6 +415,7 @@
 									</div>
 								</td>
 				  			</tr>
+				  		<?php $row++; ?>
 						<?php 
 							}
 						} else {
@@ -380,6 +429,7 @@
 						</tbody>
 						<tfoot>
 			  				<tr>
+			  					<th>ردیف</th>
 								<th>نام</th>
 								<th>نام خانوادگی</th>
 								<th>نام دسترسی</th>

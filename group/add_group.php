@@ -84,6 +84,7 @@
 					<table id="example1" class="table table-striped table-bordered table-responsive group_save_table">
 						<thead>
 			  				<tr>
+			  					<th>ردیف</th>
 								<th>نام گروه</th>
 								<th>سرپرست ۱</th>
 								<th>سرپرست ۲</th>
@@ -115,10 +116,12 @@
 						}
 
 						if($asb){
+						$row = 1;
 						foreach ($asb as $a ) {
 							$g_id = $a['g_id'];
 							?>
 				  			<tr>
+				  				<td><?php echo $row; ?></td>
 								<td><?php echo $a['g_name']; ?></td>
 								<td><?php echo $a['g_sup_1']; ?></td>
 								<td><?php echo $a['g_sup_2']; ?></td>
@@ -217,6 +220,7 @@
 									</form>
 								</td>
 				  			</tr>
+				  		<?php $row++; ?>
 						<?php }
 						} else {
 							?>
@@ -229,6 +233,7 @@
 						</tbody>
 						<tfoot>
 			  				<tr>
+			  					<th>ردیف</th>
 								<th>نام گروه</th>
 								<th>سرپرست ۱</th>
 								<th>سرپرست ۲</th>

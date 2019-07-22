@@ -84,6 +84,7 @@
 				  			<table id="example1" class="table table-bordered table-striped">
 								<thead>
 					  				<tr>
+					  					<th>ردیف</th>
 										<th>نام</th>
 										<th>نام خانوادگی</th>
 										<th>نام دسترسی</th>
@@ -140,11 +141,35 @@
 										user_upload_file($filename, $tmp_name, $size, $type, $bu_id);
 									}
 
-									if(isset($_FILES['identify_img']) && $_FILES['identify_img']['size']>0){
-										$filename = $_FILES['identify_img']['name'];
-										$tmp_name = $_FILES['identify_img']['tmp_name'];
-										$size = $_FILES['identify_img']['size'];
-										$type = "identify";
+									if(isset($_FILES['identify_1_img']) && $_FILES['identify_1_img']['size']>0){
+										$filename = $_FILES['identify_1_img']['name'];
+										$tmp_name = $_FILES['identify_1_img']['tmp_name'];
+										$size = $_FILES['identify_1_img']['size'];
+										$type = "identify_1";
+										user_upload_file($filename, $tmp_name, $size, $type, $bu_id);
+									}
+
+									if(isset($_FILES['identify_2_img']) && $_FILES['identify_2_img']['size']>0){
+										$filename = $_FILES['identify_2_img']['name'];
+										$tmp_name = $_FILES['identify_2_img']['tmp_name'];
+										$size = $_FILES['identify_2_img']['size'];
+										$type = "identify_2";
+										user_upload_file($filename, $tmp_name, $size, $type, $bu_id);
+									}
+
+									if(isset($_FILES['identify_3_img']) && $_FILES['identify_3_img']['size']>0){
+										$filename = $_FILES['identify_3_img']['name'];
+										$tmp_name = $_FILES['identify_3_img']['tmp_name'];
+										$size = $_FILES['identify_3_img']['size'];
+										$type = "identify_3";
+										user_upload_file($filename, $tmp_name, $size, $type, $bu_id);
+									}
+
+									if(isset($_FILES['identify_4_img']) && $_FILES['identify_4_img']['size']>0){
+										$filename = $_FILES['identify_4_img']['name'];
+										$tmp_name = $_FILES['identify_4_img']['tmp_name'];
+										$size = $_FILES['identify_4_img']['size'];
+										$type = "identify_4";
 										user_upload_file($filename, $tmp_name, $size, $type, $bu_id);
 									}
 
@@ -184,11 +209,13 @@
 								}
 
 								if($asb){
+								$row = 1;
 								foreach ($asb as $a ) {
 									$u_id = $a['u_id'];
 									$asd = select_a_user($u_id);
 									?>
 						  			<tr>
+						  				<td><?php echo $row; ?></td>
 										<td><?php echo $a['u_name']; ?></td>
 										<td><?php echo $a['u_family']; ?></td>
 										<td><?php echo $a['u_level']; ?></td>
@@ -395,29 +422,48 @@
 																		<img src="<?php echo user_get_media($u_id, 'melicart'); ?>" class="img-responsive list-user-up-img">
 																	</div>
 																	<div class="item col-md-6">
-																		<label>شناسنامه</label>
-																		<input type="file" name="identify_img" accept="image/*">
-																		<img src="<?php echo user_get_media($u_id, 'identify'); ?>" class="img-responsive list-user-up-img">
+																		<label>شناسنامه ۱</label>
+																		<input type="file" name="identify_1_img" accept="image/*">
+																		<img src="<?php echo user_get_media($u_id, 'identify_1'); ?>" class="img-responsive list-user-up-img">
 																	</div>
 																</div>
 																<div class="row">
+																	<div class="item col-md-6">
+																		<label>شناسنامه ۲</label>
+																		<input type="file" name="identify_2_img" accept="image/*">
+																		<img src="<?php echo user_get_media($u_id, 'identify_2'); ?>" class="img-responsive list-user-up-img">
+																	</div>
+																	<div class="item col-md-6">
+																		<label>شناسنامه ۳</label>
+																		<input type="file" name="identify_3_img" accept="image/*">
+																		<img src="<?php echo user_get_media($u_id, 'identify_3'); ?>" class="img-responsive list-user-up-img">
+																	</div>
+																</div>
+																<div class="row">
+																	<div class="item col-md-6">
+																		<label>شناسنامه ۴</label>
+																		<input type="file" name="identify_4_img" accept="image/*">
+																		<img src="<?php echo user_get_media($u_id, 'identify_4'); ?>" class="img-responsive list-user-up-img">
+																	</div>
 																	<div class="item col-md-6">
 																		<label>تصویر برگ قرارداد</label>
 																		<input type="file" name="u_contract_img" accept="image/*">
 																		<img src="<?php echo user_get_media($u_id, 'u_contract'); ?>" class="img-responsive list-user-up-img">
 																	</div>
+																</div>
+																<div class="row">
 																	<div class="item col-md-6">
 																		<label>تصویر دفترچه بیمه</label>
 																		<input type="file" name="u_insurance_img" accept="image/*">
 																		<img src="<?php echo user_get_media($u_id, 'u_insurance'); ?>" class="img-responsive list-user-up-img">
 																	</div>
-																</div>
-																<div class="row">
 																	<div class="item col-md-6">
 																		<label>تصویر صفحه ضمانت انجام کار</label>
 																		<input type="file" name="u_guarantee_img" accept="image/*">
 																		<img src="<?php echo user_get_media($u_id, 'u_guarantee'); ?>" class="img-responsive list-user-up-img">
 																	</div>
+																</div>
+																<div class="row">
 																	<div class="item col-md-6">
 																		<label>برگ تعهدنامه حسن انجام کار</label>
 																		<input type="file" name="u_recognizance_img" accept="image/*">
@@ -576,15 +622,60 @@
 																		</td>
 																	</tr>
 																	<tr>
-																		<td>شناسنامه</td>
+																		<td>شناسنامه ۱</td>
 																		<td>
 																			<?php
-																			$identify_url = user_get_media($u_id, 'identify');
-																			if($identify_url == ""){
+																			$identify_1_url = user_get_media($u_id, 'identify_1');
+																			if($identify_1_url == ""){
 																				echo "موجود نیست!";
 																			}else{
 																				?>
-																				<a target="_blank" href="<?php echo user_get_media($u_id, 'identify'); ?>">مشاهده</a>
+																				<a target="_blank" href="<?php echo user_get_media($u_id, 'identify_1'); ?>">مشاهده</a>
+																				<?php
+																			}
+																			?>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td>شناسنامه ۲</td>
+																		<td>
+																			<?php
+																			$identify_2_url = user_get_media($u_id, 'identify_2');
+																			if($identify_2_url == ""){
+																				echo "موجود نیست!";
+																			}else{
+																				?>
+																				<a target="_blank" href="<?php echo user_get_media($u_id, 'identify_2'); ?>">مشاهده</a>
+																				<?php
+																			}
+																			?>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td>شناسنامه ۳</td>
+																		<td>
+																			<?php
+																			$identify_3_url = user_get_media($u_id, 'identify_3');
+																			if($identify_3_url == ""){
+																				echo "موجود نیست!";
+																			}else{
+																				?>
+																				<a target="_blank" href="<?php echo user_get_media($u_id, 'identify_3'); ?>">مشاهده</a>
+																				<?php
+																			}
+																			?>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td>شناسنامه ۴</td>
+																		<td>
+																			<?php
+																			$identify_4_url = user_get_media($u_id, 'identify_4');
+																			if($identify_4_url == ""){
+																				echo "موجود نیست!";
+																			}else{
+																				?>
+																				<a target="_blank" href="<?php echo user_get_media($u_id, 'identify_4'); ?>">مشاهده</a>
 																				<?php
 																			}
 																			?>
@@ -662,6 +753,7 @@
 											<a href="<?php echo get_url(); ?>user/raw_rights.php/?uid=<?php echo $u_id; ?>&month=<?php echo $myYear . "_" . $myMonth; ?>"><button class="btn btn-warning btn-sm" type="submit" name="delete-user">محاسبه حقوق</button></a>
 										</td>
 						  			</tr>
+						  		<?php $row++; ?>
 								<?php }
 								} else { ?>
 								<tr>
@@ -673,6 +765,7 @@
 								</tbody>
 								<tfoot>
 					  				<tr>
+					  					<th>ردیف</th>
 										<th>نام</th>
 										<th>نام خانوادگی</th>
 										<th>نام دسترسی</th>

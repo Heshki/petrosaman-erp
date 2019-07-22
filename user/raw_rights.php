@@ -90,7 +90,7 @@
 															</button>
 															<h4 class="modal-title" id="myModalLabel3">جدول خام محاسبه حقوق و مزایای <?php echo name_month(explode('_', $_GET['month'])[1]) . " " . per_number(explode('_', $_GET['month'])[0]); ?></h4>
 														</div>
-														<div class="modal-body calc_modal">
+														<div class="modal-body calc_modal" id="raw_rights_print">
 															<div class="col-xs-12 no-padd">
 																<table id="example1" class="table table-bordered table-striped">
 																	<thead>
@@ -215,7 +215,7 @@
 															</div>
 														</div>
 														<div class="modal-footer">
-															<button type="button" class="btn btn-primary">چاپ</button>
+															<button type="button" class="btn btn-primary" id="raw_rights_printer">چاپ</button>
 														</div>
 													</div>
 												</div>
@@ -229,7 +229,7 @@
 															</button>
 															<h4 class="modal-title" id="myModalLabel3">جدول حقوق و کارانه <?php echo name_month(explode('_', $_GET['month'])[1]) . " " . per_number(explode('_', $_GET['month'])[0]); ?></h4>
 														</div>
-														<div class="modal-body rights_modal">
+														<div class="modal-body rights_modal" id="rights_print">
 															<div class="col-xs-12 no-padd">
 																<table id="example1" class="table table-bordered table-striped">
 																	<thead>
@@ -378,7 +378,7 @@
 															</div>
 														</div>
 														<div class="modal-footer">
-															<button type="button" class="btn btn-primary">چاپ</button>
+															<button type="button" class="btn btn-primary" id="rights_printer">چاپ</button>
 														</div>
 													</div>
 												</div>
@@ -459,6 +459,7 @@
 				  			<table id="example1" class="table table-bordered table-striped">
 								<thead>
 					  				<tr>
+					  					<th>ردیف</th>
 										<th>نام و نام خانوادگی کاربر</th>
 										<th>شماره پرسنل</th>
 										<th>ماه</th>
@@ -495,10 +496,12 @@
 
 								$raw_rights = list_raw_rights();
 								if($raw_rights){
+								$row = 1;
 								foreach ($raw_rights as $raw_right ) {
 									$uid = $raw_right['rr_uid'];
 									?>
 						  			<tr>
+						  				<td><?php echo $row; ?></td>
 										<td><?php echo get_select_query("SELECT * FROM user WHERE u_id = $uid")[0]['u_name'] . " " . get_select_query("SELECT * FROM user WHERE u_id = $uid")[0]['u_family']; ?></td>
 										<td><?php echo per_number(get_select_query("SELECT * FROM user WHERE u_id = $uid")[0]['u_pcode']); ?></td>
 										<td><?php echo name_month(explode('_', $raw_right['rr_month'])[1]) . " " . per_number(explode('_', $raw_right['rr_month'])[0]); ?></td>
@@ -673,12 +676,14 @@
 											</form>
 										</td>
 						  			</tr>
+						  		<?php $row++; ?>
 								<?php } }else{ ?>
 									<td colspan="10">داده ای موجود نیست...</td>
 								<?php } ?>
 								</tbody>
 								<tfoot>
 					  				<tr>
+					  					<th>ردیف</th>
 										<th>نام و نام خانوادگی کاربر</th>
 										<th>شماره پرسنل</th>
 										<th>ماه</th>
@@ -700,5 +705,6 @@
 		  	<input type="hidden" id="prl_url_container" value="<?php echo get_url() . "user/inc/back.php"; ?>">
 		</section>
 	</div>
+<script src="<?php get_url(); ?>user/jquery-print.js"></script>
 <script src="<?php get_url(); ?>user/script.js" type="text/javascript"></script>
 <?php include"../left-nav.php"; include"../footer.php"; ?>

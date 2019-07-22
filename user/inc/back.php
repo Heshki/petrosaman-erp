@@ -31,7 +31,7 @@ if(isset($_POST['prl_send'])){
 		array_push($array, $_POST["prl_overtime_hours"]);
 
 		$res = insert_payroll($array);
-		echo $res;
+		echo "عملیات با موفقیت انجام شد.";
 	} else {
 		echo "ابتدا اطلاعات کاربر در بخش 'لیست کاربران'\n و سپس اطلاعات حقوقی در بخش 'محاسبه حقوق' را تکمیل کنید.\n با تشکر.";
 	}

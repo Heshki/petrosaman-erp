@@ -44,4 +44,16 @@ $(document).ready(function(){
 	  	}
 	});
 
+	$('#raw_rights_printer').on('click', function() {
+	  	$.print('#raw_rights_print');
+	});
+
+	$('#rights_printer').on('click', function() {
+	  	$.print('#rights_print');
+	});
+
+	$('#payrol_printer').on('click', function() {
+	  	$.print('#payrol_print');
+	});
+
 });
