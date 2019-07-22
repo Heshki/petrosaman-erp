@@ -38,8 +38,8 @@
 								<button type="submit" class="btn btn-success btn-lg" id="_submit" name="r_submit">ساخت سر فاکتور</button>
 							</div>
 						</div><br>
-			
-						<div class="row">		
+
+						<div class="row">
 							<div class="col-md-12">
 								<div class="box">
 									<div class="box-header">
@@ -55,7 +55,7 @@
 													<th>مقدار</th>
 													<th>قیمت</th>
 												</tr>
-												<tr>                   
+												<tr>
 													<td>1</td>
 													<td>کک کلسینه شده</td>
 													<td>80 تا 100</td>
@@ -68,8 +68,8 @@
 								</div>
 							</div>
 						</div>
-					
-						
+
+
 						<div class="row">
 							<h3 class="col-md-12">بدنه فاکتور</h3>
 							<div class="item col-md-3">
@@ -104,9 +104,9 @@
 								<button type="submit" class="btn btn-success btn-lg" id="_submit" name="r_submit">ثبت ردیف</button>
 							</div>
 						</div>
-						
+
 						<div style="text-align: center; margin: 20px 0;" class="col-xs-12">
-							<?php 
+							<?php
 								if(isset($_POST['r_submit'])) {
 
 									if(isset($_POST['c_name'])){

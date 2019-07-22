@@ -30,9 +30,9 @@
 	}elseif($type_confirm == 'fb_result_analyze') {
 		$echo_type = "نتیجه آنالیز";
 	}
-	
+
 	breadcrumb("تایید پیشنهاد فروش" . " (" . $echo_type . ")");
-	
+
 	$fb_id = $_GET['fb_id'];
 	$type_confirm = $_GET['typee'];
 	if(isset($_POST['up_file'])){
@@ -51,6 +51,7 @@
 			ex_query($sql1);
 		}
 	}
+
 	if(isset($_POST['up_file_singed'])){
 		$type = $_POST['typee'];
 		$fb_id = $_POST['fb_id'];
@@ -65,10 +66,11 @@
 			ex_query($sql);
 		}
 	}
+
 	if(isset($_POST['delete-img'])){
 		$filename1 = $_POST['filename'];
 		$image_id = $_POST['image_id'];
-		
+
 		$path = str_replace($_SERVER['DOCUMENT_ROOT'], '', "../uploads/" . $filename1);
 		$sql = "delete from media where m_id = $image_id";
 			ex_query($sql);
@@ -85,7 +87,7 @@
 	}
 	?>
 	<section class="content">
-		<div id="details" class="col-xs-12">		
+		<div id="details" class="col-xs-12">
 			<div class="box">
 				<div class="box-body">
 					<?php load_factor_body($fb_id); ?>
