@@ -67,6 +67,69 @@
 					</div>
 				</form>
 
+				<div class="col-xs-12">
+					<?php
+					if ( ( isset( $_GET["group"] ) && $_GET["group"] != ""  ) && ( isset( $_GET["month"] ) && $_GET["month"] != ""  ) ) {
+						$lmonth = explode('_', $_GET["month"])[1];
+						if ( $lmonth == 1 || $lmonth == 2 || $lmonth == 3 || $lmonth == 4 || $lmonth == 5 || $lmonth == 6 ) {
+							$limit = 31;
+						} else if ( $lmonth == 7 || $lmonth == 8 || $lmonth == 9 || $lmonth == 10 || $lmonth == 11 ) {
+							$limit = 30;
+						} else if ( $lmonth == 12 ) {
+							$limit = 29;
+						}
+						$myYear = $myDataArray[0];
+
+						$sc_month = $lmonth;
+						$sc_group = $_GET["group"];
+
+						if ( isset( $_POST["sch_save"] ) ) {
+							$error_flag = 0;
+							for ($i=1; $i <= $limit ; $i++) {
+								if( !isset ( $_POST[ "type" . $i ] ) || $_POST[ "type" . $i ] == "" ) {
+									$error_flag = 1;
+								}
+							}
+
+							if ( $error_flag == 0 ) {
+								$sc_schedule = "";
+								for ($i=1; $i <= $limit ; $i++) {
+									if ( $i == $limit ) {
+										$sc_schedule .= $_POST[ "type" . $i ];
+									} else {
+										$sc_schedule .= ( $_POST[ "type" . $i ] . "." );
+									}
+								}
+
+								$sql1 = "SELECT count(sc_id) FROM schedule WHERE sc_month = '$sc_month' AND sc_group = '$sc_group'";
+								$check = get_var_query($sql1);
+
+								if ( $check > 0 ) {
+									$sql2 = "UPDATE schedule SET sc_schedule = '$sc_schedule' WHERE sc_month = '$sc_month' AND sc_group = '$sc_group'";
+								} else {
+									$sql2 = "INSERT INTO schedule(sc_month, sc_group, sc_schedule) VALUES('$sc_month', '$sc_group', '$sc_schedule')";
+								}
+								$res = ex_query($sql2);
+								?>
+								<div class="sch_save_c col-xs-12 no-padd sch_submit_c_green">
+									عملیات با موفقیت انجام شد.
+								</div>
+								<meta http-equiv='refresh' content='2'/>
+								
+								<?php
+
+							} else {
+								?>
+								<div class="sch_save_c col-xs-12 no-padd sch_submit_c_red">
+									لطفا همه ی فیلد ها را پر کنید.
+								</div>
+								<?php
+							}
+						}
+					}
+					?>
+				</div>
+
 				<?php
 				if ( isset ( $_GET["sch_submit"] ) ) {
 					if ( ( isset( $_GET["group"] ) && $_GET["group"] != ""  ) && ( isset( $_GET["month"] ) && $_GET["month"] != ""  ) ) {
@@ -128,50 +191,6 @@
 							</div>
 						</form>
 						<?php
-						if ( isset( $_POST["sch_save"] ) ) {
-
-							$error_flag = 0;
-							for ($i=1; $i <= $limit ; $i++) {
-								if( !isset ( $_POST[ "type" . $i ] ) || $_POST[ "type" . $i ] == "" ) {
-									$error_flag = 1;
-								}
-							}
-
-							if ( $error_flag == 0 ) {
-								$sc_schedule = "";
-								for ($i=1; $i <= $limit ; $i++) {
-									if ( $i == $limit ) {
-										$sc_schedule .= $_POST[ "type" . $i ];
-									} else {
-										$sc_schedule .= ( $_POST[ "type" . $i ] . "." );
-									}
-								}
-
-								$sql1 = "SELECT count(sc_id) FROM schedule WHERE sc_month = '$sc_month' AND sc_group = '$sc_group'";
-								$check = get_var_query($sql1);
-
-								if ( $check > 0 ) {
-									$sql2 = "UPDATE schedule SET sc_schedule = '$sc_schedule' WHERE sc_month = '$sc_month' AND sc_group = '$sc_group'";
-								} else {
-									$sql2 = "INSERT INTO schedule(sc_month, sc_group, sc_schedule) VALUES('$sc_month', '$sc_group', '$sc_schedule')";
-								}
-								$res = ex_query($sql2);
-
-								?>
-								<div class="sch_save_c col-xs-12 no-padd sch_submit_c_green">
-									عملیات با موفقیت انجام شد.
-								</div>
-								<meta http-equiv='refresh' content='0'/>
-								<?php
-
-							} else {
-								?>
-								<div class="sch_save_c col-xs-12 no-padd sch_submit_c_red">
-									لطفا همه ی فیلد ها را پر کنید.
-								</div>
-								<?php
-							}
-						}
 					}
 				}
 				?>

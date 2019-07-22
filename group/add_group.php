@@ -88,7 +88,7 @@
 								<th>سرپرست ۱</th>
 								<th>سرپرست ۲</th>
 								<th>سرپرست ۳</th>
-								<th>سرپرست ۴۲</th>
+								<th>سرپرست ۴</th>
 								<th>سرپرست ۵</th>
 								<th>راننده ۱</th>
 								<th>راننده ۲</th>
@@ -114,6 +114,7 @@
 							echo "<meta http-equiv='refresh' content='0'/>";
 						}
 
+						if($asb){
 						foreach ($asb as $a ) {
 							$g_id = $a['g_id'];
 							?>
@@ -216,7 +217,15 @@
 									</form>
 								</td>
 				  			</tr>
-						<?php } ?>
+						<?php }
+						} else {
+							?>
+							<tr>
+								<td colspan="8">داده ای موجود نیست!</td>
+			  				</tr>
+							<?php
+						}
+						?>
 						</tbody>
 						<tfoot>
 			  				<tr>
@@ -224,7 +233,7 @@
 								<th>سرپرست ۱</th>
 								<th>سرپرست ۲</th>
 								<th>سرپرست ۳</th>
-								<th>سرپرست ۴۲</th>
+								<th>سرپرست ۴</th>
 								<th>سرپرست ۵</th>
 								<th>راننده ۱</th>
 								<th>راننده ۲</th>

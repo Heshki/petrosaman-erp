@@ -271,13 +271,91 @@
 															<tr>
 																<td>کارت ملی</td>
 																<td>
-																	<a target="_blank" href="<?php echo user_get_media($u_id, 'melicart'); ?>">مشاهده</a>
+																	<?php
+																	$melicart_url = user_get_media($u_id, 'melicart');
+																	if($melicart_url == ""){
+																		echo "موجود نیست!";
+																	}else{
+																		?>
+																		<a target="_blank" href="<?php echo user_get_media($u_id, 'melicart'); ?>">مشاهده</a>
+																		<?php
+																	}
+																	?>
 																</td>
 															</tr>
 															<tr>
 																<td>شناسنامه</td>
 																<td>
-																	<a target="_blank" href="<?php echo user_get_media($u_id, 'identify'); ?>">مشاهده</a>
+																	<?php
+																	$identify_url = user_get_media($u_id, 'identify');
+																	if($identify_url == ""){
+																		echo "موجود نیست!";
+																	}else{
+																		?>
+																		<a target="_blank" href="<?php echo user_get_media($u_id, 'identify'); ?>">مشاهده</a>
+																		<?php
+																	}
+																	?>
+																</td>
+															</tr>
+															<tr>
+																<td>تصویر برگ قرارداد</td>
+																<td>
+																	<?php
+																	$u_contract_url = user_get_media($u_id, 'u_contract');
+																	if($u_contract_url == ""){
+																		echo "موجود نیست!";
+																	}else{
+																		?>
+																		<a target="_blank" href="<?php echo user_get_media($u_id, 'u_contract'); ?>">مشاهده</a>
+																		<?php
+																	}
+																	?>
+																</td>
+															</tr>
+															<tr>
+																<td>تصویر دفترچه بیمه</td>
+																<td>
+																	<?php
+																	$u_insurance_url = user_get_media($u_id, 'u_insurance');
+																	if($u_insurance_url == ""){
+																		echo "موجود نیست!";
+																	}else{
+																		?>
+																		<a target="_blank" href="<?php echo user_get_media($u_id, 'u_insurance'); ?>">مشاهده</a>
+																		<?php
+																	}
+																	?>
+																</td>
+															</tr>
+															<tr>
+																<td>تصویر صفحه ضمانت انجام کار</td>
+																<td>
+																	<?php
+																	$u_guarantee_url = user_get_media($u_id, 'u_guarantee');
+																	if($u_guarantee_url == ""){
+																		echo "موجود نیست!";
+																	}else{
+																		?>
+																		<a target="_blank" href="<?php echo user_get_media($u_id, 'u_guarantee'); ?>">مشاهده</a>
+																		<?php
+																	}
+																	?>
+																</td>
+															</tr>
+															<tr>
+																<td>برگ تعهدنامه حسن انجام کار</td>
+																<td>
+																	<?php
+																	$u_recognizance_url = user_get_media($u_id, 'u_recognizance');
+																	if($u_recognizance_url == ""){
+																		echo "موجود نیست!";
+																	}else{
+																		?>
+																		<a target="_blank" href="<?php echo user_get_media($u_id, 'u_recognizance'); ?>">مشاهده</a>
+																		<?php
+																	}
+																	?>
 																</td>
 															</tr>
 														</table>

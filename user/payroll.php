@@ -76,9 +76,10 @@
 						$array = array();
 						array_push($array, $uid);
 						array_push($array, $month);
-						$payroll = select_payroll_joined($array)[0];
+						$payrolls = select_payroll_joined($array);
 
-						if ( $payroll ) {
+						if ( $payrolls ) {
+						$payroll = $payrolls[0];
 						?>
 			  			<table class="col-xs-12 table table-striped table-bordered table-responsive payroll-table">
 							<thead>
@@ -193,9 +194,7 @@
 			  			</table>
 			  			<?php
 			  			} else {
-						?>
-
-						<?php
+						echo "<div class='col-xs-12'>فیش حقوق هنوز صادر نشده است.</div>";
 						}
 		  			}
 		  			?>

@@ -300,31 +300,31 @@
 																			$total = $total_income - $total_expends;
 																			?>
 
-																			<input type="hidden" id="prl_uid<?php echo $uid; ?>" value="<?php echo $uid; ?>">
-																			<input type="hidden" id="prl_month<?php echo $uid; ?>" value="<?php echo $_GET['month']; ?>">
-																			<input type="hidden" id="prl_monthly_right<?php echo $uid; ?>" value="<?php echo $monthly_right; ?>">
-																			<input type="hidden" id="prl_bon<?php echo $uid; ?>" value="<?php echo $bon; ?>">
-																			<input type="hidden" id="prl_home_right<?php echo $uid; ?>" value="<?php echo $home_right; ?>">
-																			<input type="hidden" id="prl_child_right<?php echo $uid; ?>" value="<?php echo $child_right; ?>">
-																			<input type="hidden" id="prl_overtime_hours<?php echo $uid; ?>" value="<?php echo $overtime_hours; ?>">
-																			<input type="hidden" id="prl_overtime_right<?php echo $uid; ?>" value="<?php echo $overtime_right; ?>">
-																			<input type="hidden" id="prl_penalty<?php echo $uid; ?>" value="<?php echo $penalty; ?>">
-																			<input type="hidden" id="prl_shift_right<?php echo $uid; ?>" value="<?php echo $shift_right; ?>">
-																			<input type="hidden" id="prl_night_work_right<?php echo $uid; ?>" value="<?php echo $night_work_right; ?>">
-																			<input type="hidden" id="prl_traffic<?php echo $uid; ?>" value="<?php echo $traffic; ?>">
-																			<input type="hidden" id="prl_total_income<?php echo $uid; ?>" value="<?php echo $total_income; ?>">
+																			<input type="hidden" id="prl_uid<?php echo $row; ?>" value="<?php echo $uid; ?>">
+																			<input type="hidden" id="prl_month<?php echo $row; ?>" value="<?php echo $_GET['month']; ?>">
+																			<input type="hidden" id="prl_monthly_right<?php echo $row; ?>" value="<?php echo $monthly_right; ?>">
+																			<input type="hidden" id="prl_bon<?php echo $row; ?>" value="<?php echo $bon; ?>">
+																			<input type="hidden" id="prl_home_right<?php echo $row; ?>" value="<?php echo $home_right; ?>">
+																			<input type="hidden" id="prl_child_right<?php echo $row; ?>" value="<?php echo $child_right; ?>">
+																			<input type="hidden" id="prl_overtime_hours<?php echo $row; ?>" value="<?php echo $overtime_hours; ?>">
+																			<input type="hidden" id="prl_overtime_right<?php echo $row; ?>" value="<?php echo $overtime_right; ?>">
+																			<input type="hidden" id="prl_penalty<?php echo $row; ?>" value="<?php echo $penalty; ?>">
+																			<input type="hidden" id="prl_shift_right<?php echo $row; ?>" value="<?php echo $shift_right; ?>">
+																			<input type="hidden" id="prl_night_work_right<?php echo $row; ?>" value="<?php echo $night_work_right; ?>">
+																			<input type="hidden" id="prl_traffic<?php echo $row; ?>" value="<?php echo $traffic; ?>">
+																			<input type="hidden" id="prl_total_income<?php echo $row; ?>" value="<?php echo $total_income; ?>">
 
-																			<input type="hidden" id="prl_insure<?php echo $uid; ?>" value="<?php echo $insure; ?>">
-																			<input type="hidden" id="prl_tax<?php echo $uid; ?>" value="<?php echo $tax; ?>">
-																			<input type="hidden" id="prl_help<?php echo $uid; ?>" value="<?php echo $help; ?>">
-																			<input type="hidden" id="prl_debt<?php echo $uid; ?>" value="<?php echo $debt; ?>">
-																			<input type="hidden" id="prl_deficit<?php echo $uid; ?>" value="<?php echo $deficit; ?>">
-																			<input type="hidden" id="prl_saving<?php echo $uid; ?>" value="<?php echo $saving; ?>">
-																			<input type="hidden" id="prl_other<?php echo $uid; ?>" value="<?php echo $other; ?>">
-																			<input type="hidden" id="prl_modifier<?php echo $uid; ?>" value="<?php echo $modifier; ?>">
-																			<input type="hidden" id="prl_total_expends<?php echo $uid; ?>" value="<?php echo $total_expends; ?>">
+																			<input type="hidden" id="prl_insure<?php echo $row; ?>" value="<?php echo $insure; ?>">
+																			<input type="hidden" id="prl_tax<?php echo $row; ?>" value="<?php echo $tax; ?>">
+																			<input type="hidden" id="prl_help<?php echo $row; ?>" value="<?php echo $help; ?>">
+																			<input type="hidden" id="prl_debt<?php echo $row; ?>" value="<?php echo $debt; ?>">
+																			<input type="hidden" id="prl_deficit<?php echo $row; ?>" value="<?php echo $deficit; ?>">
+																			<input type="hidden" id="prl_saving<?php echo $row; ?>" value="<?php echo $saving; ?>">
+																			<input type="hidden" id="prl_other<?php echo $row; ?>" value="<?php echo $other; ?>">
+																			<input type="hidden" id="prl_modifier<?php echo $row; ?>" value="<?php echo $modifier; ?>">
+																			<input type="hidden" id="prl_total_expends<?php echo $row; ?>" value="<?php echo $total_expends; ?>">
 
-																			<input type="hidden" id="prl_total<?php echo $uid; ?>" value="<?php echo $total; ?>">
+																			<input type="hidden" id="prl_total<?php echo $row; ?>" value="<?php echo $total; ?>">
 
 																			<tr>
 																				<td><?php echo per_number($row); ?></td>
@@ -697,84 +697,8 @@
 			  		</div>
 				</div>
 		  	</div>
+		  	<input type="hidden" id="prl_url_container" value="<?php echo get_url() . "user/inc/back.php"; ?>">
 		</section>
 	</div>
-<script type="text/javascript">
-$(document).ready(function(){
-
-	$(document.body).on('click', '#payroll_send' ,function(){
-		var r = confirm("صدور فیش حقوق. آیا مطمین هستید؟");
-		if (r == true) {
-			var prl_rows = $("#prl_rows").val();
-			for (var i = 1; i <= prl_rows; i++) {
-				var prl_uid = $("#prl_uid" + i).val();
-		    	var prl_month = $("#prl_month" + i).val();
-		    	var prl_monthly_right = $("#prl_monthly_right" + i).val();
-		    	var prl_bon = $("#prl_bon" + i).val();
-		    	var prl_home_right = $("#prl_home_right" + i).val();
-		    	var prl_child_right = $("#prl_child_right" + i).val();
-		    	var prl_overtime_hours = $("#prl_overtime_hours" + i).val();
-		    	var prl_overtime_right = $("#prl_overtime_right" + i).val();
-		    	var prl_penalty = $("#prl_penalty" + i).val();
-		    	var prl_shift_right = $("#prl_shift_right" + i).val();
-		    	var prl_night_work_right = $("#prl_night_work_right" + i).val();
-		    	var prl_traffic = $("#prl_traffic" + i).val();
-		    	var prl_total_income = $("#prl_total_income" + i).val();
-		    	var prl_insure = $("#prl_insure" + i).val();
-		    	var prl_tax = $("#prl_tax" + i).val();
-		    	var prl_help = $("#prl_help" + i).val();
-		    	var prl_debt = $("#prl_debt" + i).val();
-		    	var prl_deficit = $("#prl_deficit" + i).val();
-		    	var prl_saving = $("#prl_saving" + i).val();
-		    	var prl_other = $("#prl_other" + i).val();
-		    	var prl_modifier = $("#prl_modifier" + i).val();
-		    	var prl_total_expends = $("#prl_total_expends" + i).val();
-		    	var prl_total = $("#prl_total" + i).val();
-		    	var prl_date = $("#prl_date").val();
-		    	$.post(
-					"",
-					{prl_send:1, prl_uid:prl_uid, prl_month:prl_month, prl_monthly_right:prl_monthly_right, prl_bon:prl_bon, prl_home_right:prl_home_right, prl_child_right:prl_child_right, prl_overtime_hours:prl_overtime_hours, prl_overtime_right:prl_overtime_right, prl_penalty:prl_penalty, prl_shift_right:prl_shift_right, prl_night_work_right:prl_night_work_right, prl_traffic:prl_traffic, prl_total_income:prl_total_income, prl_insure:prl_insure, prl_tax:prl_tax, prl_help:prl_help, prl_debt:prl_debt, prl_deficit:prl_deficit, prl_saving:prl_saving, prl_other:prl_other, prl_modifier:prl_modifier, prl_total_expends:prl_total_expends, prl_total:prl_total, prl_date:prl_date},
-					function(){
-						location.reload();
-					}
-				);
-			}
-	  	}
-	});
-
-});
-</script>
-<?php
-if(isset($_POST['prl_send'])){
-	$array = array();
-	array_push($array, $_POST["prl_uid"]);
-	array_push($array, $_POST["prl_month"]);
-	array_push($array, $_POST["prl_monthly_right"]);
-	array_push($array, $_POST["prl_bon"]);
-	array_push($array, $_POST["prl_home_right"]);
-	array_push($array, $_POST["prl_child_right"]);
-	array_push($array, $_POST["prl_overtime_right"]);
-	array_push($array, $_POST["prl_penalty"]);
-	array_push($array, $_POST["prl_shift_right"]);
-	array_push($array, $_POST["prl_night_work_right"]);
-	array_push($array, $_POST["prl_traffic"]);
-	array_push($array, $_POST["prl_total_income"]);
-	array_push($array, $_POST["prl_insure"]);
-	array_push($array, $_POST["prl_tax"]);
-	array_push($array, $_POST["prl_help"]);
-	array_push($array, $_POST["prl_debt"]);
-	array_push($array, $_POST["prl_deficit"]);
-	array_push($array, $_POST["prl_saving"]);
-	array_push($array, $_POST["prl_other"]);
-	array_push($array, $_POST["prl_modifier"]);
-	array_push($array, $_POST["prl_total_expends"]);
-	array_push($array, $_POST["prl_total"]);
-	array_push($array, $_POST["prl_date"]);
-	array_push($array, $_POST["prl_overtime_hours"]);
-
-	insert_payroll($array);
-	
-	exit();
-}
-?>
+<script src="<?php get_url(); ?>user/script.js" type="text/javascript"></script>
 <?php include"../left-nav.php"; include"../footer.php"; ?>
