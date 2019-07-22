@@ -24,6 +24,7 @@ $field_types[5] = "varchar(16) DEFAULT NULL COMMENT 'تاریخ بار'";
 $field_names[6] = "bar_verify_admin";
 $field_types[6] = "int(11) DEFAULT '0' COMMENT 'تایید مدیریت'";
 
+migrate_drop($table_name);
 migrate_create($table_name, $field_names, $field_types);
 migrate_add($table_name, $field_names, $field_types);
 migrate_remove($table_name, $field_names);

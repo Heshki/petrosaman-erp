@@ -15,6 +15,7 @@ $field_types[2] = "varchar(16) NOT NULL";
 $field_names[3] = "u_id";
 $field_types[3] = "int(11) NOT NULL";
 
+migrate_drop($table_name);
 migrate_create($table_name, $field_names, $field_types);
 migrate_add($table_name, $field_names, $field_types);
 migrate_remove($table_name, $field_names);

@@ -78,6 +78,7 @@ $field_types[23] = "int(11) DEFAULT 0 COMMENT 'اضافه ثابت'";
 $field_names[24] = "u_fin_contract";
 $field_types[24] = "varchar(11) CHARACTER SET utf8 NOT NULL COMMENT 'تاریخ انقضای قرارداد'";
 
+migrate_drop($table_name);
 migrate_create($table_name, $field_names, $field_types);
 migrate_add($table_name, $field_names, $field_types);
 migrate_remove($table_name, $field_names);

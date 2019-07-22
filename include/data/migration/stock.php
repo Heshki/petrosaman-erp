@@ -21,6 +21,7 @@ $field_types[4] = "double NOT NULL COMMENT 'قیمت تمام شده'";
 $field_names[5] = "s_sprice";
 $field_types[5] = "double NOT NULL COMMENT 'قیمت فروش'";
 
+migrate_drop($table_name);
 migrate_create($table_name, $field_names, $field_types);
 migrate_add($table_name, $field_names, $field_types);
 migrate_remove($table_name, $field_names);

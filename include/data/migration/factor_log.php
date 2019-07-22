@@ -18,6 +18,7 @@ $field_types[3] = "int(11) DEFAULT NULL";
 $field_names[4] = "l_details";
 $field_types[4] = "text CHARACTER SET utf8";
 
+migrate_drop($table_name);
 migrate_create($table_name, $field_names, $field_types);
 migrate_add($table_name, $field_names, $field_types);
 migrate_remove($table_name, $field_names);

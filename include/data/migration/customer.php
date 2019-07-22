@@ -48,6 +48,7 @@ $field_types[13] = "varchar(10) DEFAULT NULL";
 $field_names[14] = "c_customertype";
 $field_types[14] = "varchar(15) DEFAULT NULL";
 
+migrate_drop($table_name);
 migrate_create($table_name, $field_names, $field_types);
 migrate_add($table_name, $field_names, $field_types);
 migrate_remove($table_name, $field_names);

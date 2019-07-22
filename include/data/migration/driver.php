@@ -27,6 +27,7 @@ $field_types[6] = "int(11) DEFAULT NULL COMMENT 'شماره همراه'";
 $field_names[7] = "dr_status";
 $field_types[7] = "int(11) DEFAULT NULL COMMENT 'وضعیت'";
 
+migrate_drop($table_name);
 migrate_create($table_name, $field_names, $field_types);
 migrate_add($table_name, $field_names, $field_types);
 migrate_remove($table_name, $field_names);

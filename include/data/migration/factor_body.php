@@ -66,6 +66,7 @@ $field_types[19] = "text";
 $field_names[20] = "dr_id";
 $field_types[20] = "int(11) DEFAULT NULL COMMENT 'کد راننده'";
 
+migrate_drop($table_name);
 migrate_create($table_name, $field_names, $field_types);
 migrate_add($table_name, $field_names, $field_types);
 migrate_remove($table_name, $field_names);
