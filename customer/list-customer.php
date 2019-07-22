@@ -40,6 +40,9 @@
 						<div class="box-header">
 							<h3 class="box-title">لیست مشتریان</h3>
 						</div>
+						<div class="box-header">
+							<a href="<?php echo get_url(); ?>customer/new-customer.php" class="btn btn-sm btn-primary">ثبت مشتری</a>
+						</div>
 						<div class="box-body">
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
@@ -54,13 +57,14 @@
 								</thead>
 								<tbody>
 								<?php
+								if($asb){
 								foreach($asb as $a){ ?>
 									<tr>
 										<td><?php echo per_number($a['c_id']); ?></td>
 										<td><?php echo $a['c_name'] . " " . $a['c_family']; ?></td>
 										<td><?php echo $a['c_company']; ?></td>
 										<td><?php echo $a['c_customertype']; ?></td>
-										<td><?php echo get_expire_time($a['c_id']); ?></td>
+										<td><?php if($a['c_vat']=="yes") echo get_expire_time($a['c_id']); else echo "انقضا ندارد"; ?></td>
 										<td>
 											<form action="" method="post" onSubmit="if(!confirm('آیا از انجام این عملیات اطمینان دارید؟')){return false;}">
 												<a class="btn btn-warning btn-sm" href="show-customer.php?id=<?php echo $a['c_id']; ?>">مشاهده</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -78,7 +82,9 @@
 										</td>
 									</tr>
 								<?php
-								} ?>
+								}
+								}
+								?>
 								</tbody>
 								<tfoot>
 									<tr>
