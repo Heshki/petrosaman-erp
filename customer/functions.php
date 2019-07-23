@@ -37,7 +37,7 @@ function update_customer($array){
 	$c_customertype = $array[14];
 	$sql = "update customer set c_name = '$c_name', c_family = '$c_family', c_company = '$c_company', c_national = '$c_national', c_economic = '$c_economic', c_phone = '$c_phone', c_fax = '$c_fax', c_mobile = '$c_mobile', c_oaddress = '$c_oaddress', c_faddress = '$c_faddress', c_email = '$c_email', c_vat = '$c_vat', c_expire_vat = '$c_expire_vat', c_customertype = '$c_customertype' where c_id = $c_id";
 	$res = ex_query($sql);
-	return $res;	
+	return $res;
 }
 
 function delete_customer($c_id){
@@ -84,9 +84,9 @@ function show_customer_as_select($c_id){ ?>
 		if(count($res)>0){
 			foreach($res as $row){
 			?>
-			<option <?php if($row['c_id']==$c_id)echo "selected"; ?> value="<?php echo $row['c_id']; ?>"><?php echo $row['c_name'] . " " . $row['c_family']; ?></option>								
+			<option <?php if($row['c_id']==$c_id)echo "selected"; ?> value="<?php echo $row['c_id']; ?>"><?php echo $row['c_name'] . " " . $row['c_family']; ?></option>
 			<?php
-			} 
+			}
 		} ?>
 	</select>
 	<?php
@@ -140,4 +140,9 @@ function customer_count() {
 	$res = get_var_query($sql);
 	return $res;
 }
-?>
+
+function get_customer_mobile($fb_id){
+	$sql = "select c_mobile from customer inner join factor on customer.c_id = factor.c_id inner join factor_body on factor_body.f_id = factor_body.f_id where factor_body.fb_id = $fb_id";
+	$res = get_var_query($sql);
+	return $res;
+}

@@ -1,4 +1,4 @@
-<?php 
+<?php
 function insert_user($array){
 	$u_name = $array[0];
 	$u_family = $array[1];
@@ -38,8 +38,8 @@ function update_user($array){
 	$u_fin_contract = $array[24];
 	$sql = "update user set u_name = '$u_name', u_family = '$u_family', u_level = '$u_level', u_username = '$u_username', u_password = '$u_password', u_father = '$u_father', u_meli = '$u_meli', u_birth = '$u_birth', u_live_city = '$u_live_city', u_destination = '$u_destination', u_mobile = '$u_mobile', u_tell = '$u_tell', u_address = '$u_address', u_pre = '$u_pre', u_group = '$u_group', u_description = '$u_description', u_pcode = '$u_pcode', u_wtype = '$u_wtype', u_marital = '$u_marital', u_evidence = '$u_evidence', u_child_count = '$u_child_count', u_daily_wage = '$u_daily_wage', u_fix_right = '$u_fix_right', u_fin_contract = '$u_fin_contract' where u_id = $u_id";
 	$res = ex_query($sql);
-	
-	return $res;	
+
+	return $res;
 }
 
 function delete_user($u_id){
@@ -146,8 +146,8 @@ function update_raw_rights($array){
 	$rr_debt = $array[11];
 	$sql = "update raw_rights set rr_month = '$rr_month', rr_work_days = $rr_work_days, rr_overtime_hours = $rr_overtime_hours, rr_child_right_ratio = $rr_child_right_ratio, rr_shift = $rr_shift, rr_night_work_hours = $rr_night_work_hours, rr_modifier = $rr_modifier, rr_penalty = $rr_penalty, rr_traffic = $rr_traffic, rr_help = $rr_help, rr_debt = $rr_debt where rr_uid = $rr_uid";
 	$res = ex_query($sql);
-	
-	return $res;	
+
+	return $res;
 }
 
 function delete_raw_rights($u_id){
@@ -185,7 +185,7 @@ function insert_payroll($array){
 	$check = get_var_query($sql_check);
 	if($check < 1){
 		$sql = "INSERT INTO payroll(prl_uid, prl_month, prl_monthly_right, prl_bon, prl_home_right, prl_child_right, prl_overtime_right, prl_penalty, prl_shift_right, prl_night_work_right, prl_traffic, prl_total_income, prl_insure, prl_tax, prl_help, prl_debt, prl_deficit, prl_saving, prl_other, prl_modifier, prl_total_expends, prl_total, prl_date, prl_overtime_hours) VALUES($prl_uid, '$prl_month', $prl_monthly_right, $prl_bon, $prl_home_right, $prl_child_right, $prl_overtime_right, $prl_penalty, $prl_shift_right, $prl_night_work_right, $prl_traffic, $prl_total_income, $prl_insure, $prl_tax, $prl_help, $prl_debt, $prl_deficit, $prl_saving, $prl_other, $prl_modifier, $prl_total_expends, $prl_total, '$prl_date', $prl_overtime_hours)";
-		
+
 	}else{
 		$sql = "UPDATE payroll SET prl_uid = $prl_uid, prl_month = '$prl_month', prl_monthly_right = $prl_monthly_right, prl_bon = $prl_bon, prl_home_right = $prl_home_right, prl_child_right = $prl_child_right, prl_overtime_right = $prl_overtime_right, prl_penalty = $prl_penalty, prl_shift_right = $prl_shift_right, prl_night_work_right = $prl_night_work_right, prl_traffic = $prl_traffic, prl_total_income = $prl_total_income, prl_insure = $prl_insure, prl_tax = $prl_tax, prl_help = $prl_help, prl_debt = $prl_debt, prl_deficit = $prl_deficit, prl_saving = $prl_saving, prl_other = $prl_other, prl_modifier = $prl_modifier, prl_total_expends = $prl_total_expends, prl_total = $prl_total, prl_date = '$prl_date', prl_overtime_hours = $prl_overtime_hours WHERE prl_uid = $prl_uid AND prl_month = '$prl_month'";
 	}
@@ -207,4 +207,12 @@ function select_payroll_joined($array){
 	return $res;
 }
 
-?>
+function get_mobiles_by_type($type){
+	$sql = "select u_mobile from user where u_level = '$type'";
+	$res = get_select_query($sql);
+	$mobile_array = array();
+	foreach($res as $row){
+		array_push($mobile_array, $row['u_mobile']);
+	}
+	return $mobile_array;
+}
