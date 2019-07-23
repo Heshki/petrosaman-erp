@@ -56,7 +56,7 @@
 							<td><?php echo per_number($i); ?></td>
 							<td><?php echo get_product_name($row['p_id']); ?></td>
 							<td><?php echo per_number(number_format($row['fb_quantity'])); ?></td>
-							<td><?php echo get_product_unit($row['p_id']); ?></td>
+							<td><?php echo per_number(number_format(get_product_unit($row['p_id']))); ?></td>
 						</tr>
 						<tr>
 							<th style="background: #f9f9f9" colspan="4">مشخصات تحویل گیرنده</th>
