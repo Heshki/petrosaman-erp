@@ -23,17 +23,19 @@
 				</div>
 			</div>
 		</section>
-		<div class="col-xs-3"></div>
+		<div class="col-xs-3 left">
+			<input type="button" id="trasfer_form_printer" value="چاپ" class="btn btn-sm btn-primary">
+		</div>
 		<section class="col-xs-6" id="trasfer-form">
 			
-			<div class="box">
+			<div class="box" id="trasfer_form_print">
 				<div class="box-header">
 					<h3 class="box-title">
 						<img src="<?php get_url(); ?>/dist/img/azar-logo.png">
 					</h3>
 				</div>
 				<div class="box-body no-padding">
-					<table class="table table-condensed">
+					<table class="col-xs-12 table-responsive sch_save_table sc_table_center">
 						<tr>
 							<th style="background: #f9f9f9" colspan="2" class="bold">مجوز ترخیص بار</th>
 							<th style="background: #f9f9f9" colspan="2" class="bold">شماره: <?php echo per_number($fb_id); ?></th>
@@ -87,7 +89,7 @@
 						</tr>
 					</table>
 					<br>
-					<table class="table">
+					<table class="col-xs-12 table-responsive sch_save_table sc_table_center">
 						<tr>
 							<td>
 								تایید بازرگانی 
@@ -124,4 +126,6 @@
 			});
 	  });
 	</script>
+<script src="<?php get_url(); ?>/storage/js/storage.js"></script>
+<script src="<?php get_url(); ?>/storage/js/jquery-print.js"></script>
 <?php include"../left-nav.php"; include"../footer.php"; ?>
