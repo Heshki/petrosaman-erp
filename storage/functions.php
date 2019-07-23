@@ -1,6 +1,4 @@
 <?php
-require_once"../include/data/functions.php";
-
 function drivers() {
 	$sql = "select * from driver where dr_status = 1 order by dr_id desc";
 	$res = get_select_query($sql);

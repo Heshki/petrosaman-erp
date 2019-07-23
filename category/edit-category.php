@@ -1,4 +1,4 @@
-<?php $title = "ثبت مشتری"; include"../header.php"; include"../nav.php"; include"functions.php";
+<?php $title = "ثبت مشتری"; include"../header.php"; include"../nav.php";
 	$cat_id = $_GET['id'];
 	$cat_name = a_category($cat_id);
 ?>

@@ -1,4 +1,4 @@
-<?php $title = "مشاده فاکتور"; include"../header.php"; include"../nav.php"; include"functions.php";
+<?php $title = "مشاده فاکتور"; include"../header.php"; include"../nav.php";
 	$fb_id = $_GET['fb_id'];
 	$res = select_a_factor($fb_id);
 ?>

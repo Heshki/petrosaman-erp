@@ -1,4 +1,4 @@
-<?php $title = 'ویرایش کاربر'; include"../header.php"; include"../nav.php"; include"functions.php";
+<?php $title = 'ویرایش کاربر'; include"../header.php"; include"../nav.php";
 	$u_id = $_GET['u_id'];
 	$row = select_a_user($u_id);
 ?>  

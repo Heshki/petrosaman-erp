@@ -1,4 +1,4 @@
-<?php $title = "لیست راننده ها"; include"../header.php"; include"../nav.php"; include"functions.php";
+<?php $title = "لیست راننده ها"; include"../header.php"; include"../nav.php";
 	$asb = list_driver();
 	if(isset($_GET['dr_id'])){
 		$dr_id = $_GET['dr_id'];

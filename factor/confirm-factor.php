@@ -1,4 +1,4 @@
-<?php $title = "تایید فاکتور"; include"../header.php"; include"../nav.php"; include"functions.php"; ?>
+<?php $title = "تایید فاکتور"; include"../header.php"; include"../nav.php"; ?>
 <div class="content-wrapper">
 	<?php
 	$fb_id = $_GET['fb_id'];

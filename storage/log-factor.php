@@ -1,4 +1,4 @@
-<?php $title = 'تاریخچه فاکتور ها'; include"../header.php"; include"../nav.php"; include"functions.php";
+<?php $title = 'تاریخچه فاکتور ها'; include"../header.php"; include"../nav.php";
 	
 ?> 
 	<div class="content-wrapper">

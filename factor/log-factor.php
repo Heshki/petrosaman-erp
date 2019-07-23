@@ -1,4 +1,4 @@
-<?php $title = 'تاریخچه فاکتور ها'; include"../header.php"; include"../nav.php"; include"functions.php";
+<?php $title = 'تاریخچه فاکتور ها'; include"../header.php"; include"../nav.php";
 	
 ?> 
 	<div class="content-wrapper">
@@ -40,7 +40,7 @@
 								<tbody>
 									<?php
 									$i = 1;
-									$res = list_factor_log();
+									$res = list_factor_log_factor();
 									foreach ($res as $row) { ?>
 									<tr>
 										<td><?php echo $i; ?></td>
@@ -57,7 +57,7 @@
 												<?php
 												if(isset($_POST['delete-list'])){
 													$l_id = $_POST['delete-text'];
-													delete_factor_log($l_id);
+													delete_factor_log_factor($l_id);
 													echo "<meta http-equiv='refresh' content='0'/>";
 													exit();
 												}

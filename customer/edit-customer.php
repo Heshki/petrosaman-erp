@@ -1,4 +1,4 @@
-<?php $title = "ویرایش مشتری"; include"../header.php"; include"../nav.php"; include"functions.php";
+<?php $title = "ویرایش مشتری"; include"../header.php"; include"../nav.php";
 	$c_id = $_GET['id'];
 	$customer = a_customer($c_id);
 ?>

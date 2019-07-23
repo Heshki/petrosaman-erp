@@ -1,4 +1,4 @@
-<?php $title = "ویرایش موجودی"; include"../header.php"; include"../nav.php"; include"functions.php";
+<?php $title = "ویرایش موجودی"; include"../header.php"; include"../nav.php";
 	$s_id = $_GET['id'];
 	$stock_name = a_stock($s_id);
 ?>

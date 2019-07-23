@@ -1,4 +1,4 @@
-<?php include"../header.php"; include"../nav.php"; include"functions.php";
+<?php include"../header.php"; include"../nav.php";
 	require_once"../customer/functions.php";
 	$res = list_checkout();
 

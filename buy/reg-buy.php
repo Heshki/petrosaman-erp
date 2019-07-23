@@ -1,4 +1,4 @@
-<?php $title = "ثبت فاکتور جدید"; include"../header.php"; include"../nav.php"; include"functions.php";
+<?php $title = "ثبت فاکتور جدید"; include"../header.php"; include"../nav.php";
 include"back.php";
 require_once"../customer/functions.php";
 require_once"../product/functions.php";

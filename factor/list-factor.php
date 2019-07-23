@@ -1,4 +1,4 @@
-<?php include"../header.php"; include"../nav.php"; include"functions.php";
+<?php include"../header.php"; include"../nav.php";
 	require_once"../customer/functions.php";
 	$res = list_factor_body();
 
@@ -6,8 +6,8 @@
 		$verify = $_POST['type_confirm'];
 		$fb_id_verify = $_POST['fb_id'];
 		$l_details = $_POST['l_details'];
-		update_a_row_fb($verify, $fb_id_verify);
-		update_a_row_log($fb_id_verify, $l_details);
+		update_a_row_fb_factor($verify, $fb_id_verify);
+		update_a_row_log_factor($fb_id_verify, $l_details);
 	}
 
 	if(isset($_POST['f_update'])) {
@@ -63,13 +63,13 @@
 									<td><?php echo get_customer_name($row['c_id']); ?></td>
 									<td>
 									<?php
-									show_btn_list($row['fb_pre_invoice_scan'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_pre_invoice_scan");
+									show_btn_list_factor($row['fb_pre_invoice_scan'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_pre_invoice_scan");
 									?>
 									</td>
 									<td>
 									<?php
 									if($row['fb_pre_invoice_scan'] == 1){
-										show_btn_list($row['fb_verify_admin1'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_verify_admin1");
+										show_btn_list_factor($row['fb_verify_admin1'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_verify_admin1");
 									}else { ?>
 										<button class="btn btn-sm btn-dark" disabled>منتظر</button>
 									<?php
@@ -79,7 +79,7 @@
 									<td>
 									<?php
 									if($row['fb_verify_admin1'] == 1) {
-										show_btn_list($row['fb_send_customer'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_send_customer");
+										show_btn_list_factor($row['fb_send_customer'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_send_customer");
 									} else { ?>
 										<button class="btn btn-sm btn-dark" disabled>منتظر</button>
 									<?php
@@ -90,7 +90,7 @@
 									<td>
 									<?php
 									if($row['fb_send_customer'] == 1) {
-										show_btn_list($row['fb_verify_customer'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_verify_customer");
+										show_btn_list_factor($row['fb_verify_customer'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_verify_customer");
 									} else { ?>
 										<button class="btn btn-sm btn-dark" disabled>منتظر</button>
 									<?php
@@ -100,7 +100,7 @@
 									<td>
 									<?php
 									if($row['fb_verify_customer'] == 1) {
-										show_btn_list($row['fb_verify_docs'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_verify_docs");
+										show_btn_list_factor($row['fb_verify_docs'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_verify_docs");
 									} else { ?>
 										<button class="btn btn-sm btn-dark" disabled>منتظر</button>
 									<?php
@@ -115,7 +115,7 @@
 									$sql = "select * from media where bu_id = $fb_id and m_type = '$m_type' and m_name_file = '$m_name_file'";
 									$ok = count(get_select_query($sql));
 									if($row['fb_verify_docs'] == 1 && $ok >= 1) {
-										show_btn_list($row['fb_verify_finan'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_verify_finan");
+										show_btn_list_factor($row['fb_verify_finan'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_verify_finan");
 									}elseif($ok == 0) { ?>
 										<button class="btn btn-sm btn-dark" disabled>اسکن</button>
 									<?php
@@ -128,7 +128,7 @@
 									<td>
 									<?php
 									if($row['fb_verify_finan'] == 1) {
-										show_btn_list($row['fb_verify_admin2'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_verify_admin2");
+										show_btn_list_factor($row['fb_verify_admin2'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_verify_admin2");
 									} else { ?>
 										<button class="btn btn-sm btn-dark" disabled>منتظر</button>
 									<?php
@@ -138,7 +138,7 @@
 									<td>
 									<?php
 									if($row['fb_verify_admin2'] == 1) {
-										show_btn_list($row['fb_ready_bar'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_ready_bar");
+										show_btn_list_factor($row['fb_ready_bar'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_ready_bar");
 									} else { ?>
 										<button class="btn btn-sm btn-dark" disabled>منتظر</button>
 									<?php
@@ -148,7 +148,7 @@
 									<td>
 									<?php
 									if($row['fb_ready_bar'] == 1) {
-										show_btn_list($row['fb_get_sample'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_get_sample");
+										show_btn_list_factor($row['fb_get_sample'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_get_sample");
 									} else { ?>
 										<button class="btn btn-sm btn-dark" disabled>منتظر</button>
 									<?php
@@ -158,7 +158,7 @@
 									<td>
 									<?php
 									if($row['fb_get_sample'] == 1) {
-										show_btn_list($row['fb_verify_bar'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_verify_bar");
+										show_btn_list_factor($row['fb_verify_bar'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_verify_bar");
 									} else { ?>
 										<button class="btn btn-sm btn-dark" disabled>منتظر</button>
 									<?php
@@ -168,7 +168,7 @@
 									<td>
 									<?php
 									if($row['fb_verify_bar'] == 1) {
-										show_btn_list($row['fb_exit_doc'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_exit_doc");
+										show_btn_list_factor($row['fb_exit_doc'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_exit_doc");
 									} else { ?>
 										<button class="btn btn-sm btn-dark" disabled>منتظر</button>
 									<?php
@@ -178,7 +178,7 @@
 									<td>
 									<?php
 									if($row['fb_exit_doc'] == 1) {
-										show_btn_list($row['fb_result_analyze'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_result_analyze");
+										show_btn_list_factor($row['fb_result_analyze'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_result_analyze");
 									} else { ?>
 										<button class="btn btn-sm btn-dark" disabled>منتظر</button>
 									<?php

@@ -1,4 +1,4 @@
-<?php $title = "تایید فاکتور"; include"../header.php"; include"../nav.php"; include"functions.php"; ?>
+<?php $title = "تایید فاکتور"; include"../header.php"; include"../nav.php"; ?>
 <div class="wrapper">
 	<div class="content-wrapper">
 		<div class="container-fluid">

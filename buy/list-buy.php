@@ -1,4 +1,4 @@
-<?php $title = "فاکتور خرید"; include"../header.php"; include"../nav.php"; include"functions.php";
+<?php $title = "فاکتور خرید"; include"../header.php"; include"../nav.php";
 	require_once"../product/functions.php";
 	
 	if(isset($_POST['verify_submit'])) {

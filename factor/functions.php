@@ -104,7 +104,7 @@ function pre_invoice_scan($fb_id){
 }
 
 function load_factor_body($fb_id){
-	$res = get_factor_body_confirm($fb_id);
+	$res = get_factor_body_confirm_factor($fb_id);
 	?>
 	<table class="table table-bordered table-striped">
 		<thead>
@@ -137,7 +137,7 @@ function load_factor_body($fb_id){
 <?php
 }
 
-function insert_factor($array){
+function insert_factor_factor($array){
 	$c_id = $array[0];
 	$f_date = $array[1];
 	$u_id = $array[2];
@@ -158,13 +158,13 @@ function insert_factor_body($array){
 	return $res;
 }
 
-function list_factor_log() {
+function list_factor_log_factor() {
 	$sql = "select * from factor_log inner join factor_body on factor_body.fb_id = factor_log.fb_id inner join user on user.u_id = factor_log.u_id order by factor_log.l_id desc";
 	$res = get_select_query($sql);
 	return $res;
 }
 
-function insert_factor_log($array){
+function insert_factor_log_factor($array){
 	$u_id = $array[0];
 	$l_date = $array[1];
 	$f_id = $array[2];
@@ -174,7 +174,7 @@ function insert_factor_log($array){
 	return $res;	
 }
 
-function delete_factor_log ($l_id){
+function delete_factor_log_factor ($l_id){
 	$sql = "delete from factor_log where l_id = $l_id";
 	$res = ex_query($sql);
 	return $res;	
@@ -194,7 +194,7 @@ function list_factor_body() {
 	return $res;
 }
 
-function get_factor_body($f_id) {
+function get_factor_body_factor($f_id) {
 	$sql = "select * from factor_body inner join factor on factor_body.f_id = factor.f_id where factor_body.f_id = $f_id";
 	$res = get_select_query($sql);
 	return $res;
@@ -206,19 +206,19 @@ function get_factor_log($fb_id) {
 	return $res;
 }
 
-function get_factor_body_confirm($fb_id) {
+function get_factor_body_confirm_factor($fb_id) {
 	$sql = "select * from factor_body inner join factor on factor.f_id = factor_body.f_id inner join customer on customer.c_id = factor.c_id inner join category on category.cat_id = factor_body.cat_id inner join product on product.p_id = factor_body.p_id where fb_id = $fb_id";
 	$res = get_select_query($sql);
 	return $res;
 }
 
-function update_a_row_fb($verify,$fb_id_verify) {
+function update_a_row_fb_factor($verify,$fb_id_verify) {
 	$sql = "update factor_body set $verify = '1' where fb_id = $fb_id_verify";
 	$res = ex_query($sql);
 	return $res;
 }
 
-function update_a_row_log($fb_id, $l_details) {
+function update_a_row_log_factor($fb_id, $l_details) {
 	$date = jdate('Y/m/d H:i');
 	$u_id = $_SESSION['user_id'];
 	$sql = "insert into factor_log(u_id, l_date, fb_id, l_details) values($u_id, '$date', $fb_id, '$l_details')";
@@ -238,7 +238,7 @@ function select_a_factor($fb_id){
 	return $res;
 }
 
-function show_btn_list($st, $url){
+function show_btn_list_factor($st, $url){
 	if($st==0){ ?>
 		<a href="<?php echo $url; ?>" class="btn btn-warning btn-xs">خیر</a>
 	<?php

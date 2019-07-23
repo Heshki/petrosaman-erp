@@ -1,4 +1,4 @@
-<?php include"../header.php"; include"../nav.php"; include"functions.php";
+<?php include"../header.php"; include"../nav.php";
 	if(isset($_POST['edit_customer'])) {
 		$array = array();
 		array_push($array, $_POST['c_id']);

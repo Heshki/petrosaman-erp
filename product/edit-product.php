@@ -1,4 +1,4 @@
-<?php $title = "ویرایش محصول"; include"../header.php"; include"../nav.php"; include"functions.php";
+<?php $title = "ویرایش محصول"; include"../header.php"; include"../nav.php";
 	$p_id = $_GET['id'];
 	$product_name = a_product($p_id);
 ?>

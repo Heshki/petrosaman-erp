@@ -1,4 +1,4 @@
-<?php include"../header.php"; include"../nav.php"; include"functions.php";
+<?php include"../header.php"; include"../nav.php";
 	$asb = list_product();
 	if(isset($_POST['p_update'])) {
 		$array = array();

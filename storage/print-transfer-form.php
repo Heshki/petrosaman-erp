@@ -1,4 +1,4 @@
-<?php include"../header.php"; include"../nav.php"; include"functions.php"; ?> 
+<?php include"../header.php"; include"../nav.php"; ?> 
 	<div class="content-wrapper">
 		<section class="content-header">
 			<ol class="breadcrumb">

@@ -1,4 +1,4 @@
-<?php $title = "ثبت فاکتور جدید"; include"../header.php"; include"../nav.php"; include"functions.php";
+<?php $title = "ثبت فاکتور جدید"; include"../header.php"; include"../nav.php";
 include"back.php";
 require_once"../customer/functions.php";
 require_once"../product/functions.php";
@@ -50,7 +50,7 @@ require_once"../category/functions.php";
 					array_push($list, $c_id);
 					array_push($list, $f_date);
 					array_push($list, $u_id);
-					$f_id = insert_factor($list);
+					$f_id = insert_factor_factor($list);
 					$url = get_url() . "reg-factor.php?f_id=" . $f_id;
 					?>
 					<script type="text/javascript">
@@ -112,7 +112,7 @@ require_once"../category/functions.php";
 										</tr>
 										<?php
 										$i = 1;
-										$list = get_factor_body($f_id);
+										$list = get_factor_body_factor($f_id);
 										if(count($list)){
 											foreach($list as $l){ ?>
 											<tr>                   

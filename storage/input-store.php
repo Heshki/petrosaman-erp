@@ -1,4 +1,4 @@
-<?php include"../header.php"; include"../nav.php"; include"functions.php";
+<?php include"../header.php"; include"../nav.php";
 
 require_once"../driver/functions.php";
 require_once"../buy/functions.php";
