@@ -204,6 +204,14 @@
 										$type = "u_recognizance";
 										user_upload_file($filename, $tmp_name, $size, $type, $bu_id);
 									}
+
+									if(isset($_FILES['u_signature_img']) && $_FILES['u_signature_img']['size']>0){
+										$filename = $_FILES['u_signature_img']['name'];
+										$tmp_name = $_FILES['u_signature_img']['tmp_name'];
+										$size = $_FILES['u_signature_img']['size'];
+										$type = "u_signature";
+										user_upload_file($filename, $tmp_name, $size, $type, $bu_id);
+									}
 									
 									echo "<meta http-equiv='refresh' content='0'/>";
 								}
@@ -468,6 +476,11 @@
 																		<label>برگ تعهدنامه حسن انجام کار</label>
 																		<input type="file" name="u_recognizance_img" accept="image/*">
 																		<img src="<?php echo user_get_media($u_id, 'u_recognizance'); ?>" class="img-responsive list-user-up-img">
+																	</div>
+																	<div class="item col-md-6">
+																		<label>امضای الکترونیکی</label>
+																		<input type="file" name="u_signature_img" accept="image/*">
+																		<img src="<?php echo user_get_media($u_id, 'u_signature'); ?>" class="img-responsive list-user-up-img">
 																	</div>
 																</div>
 																<script src="<?php get_url(); ?>include/media/script.js"></script>
@@ -736,6 +749,21 @@
 																			}else{
 																				?>
 																				<a target="_blank" href="<?php echo user_get_media($u_id, 'u_recognizance'); ?>">مشاهده</a>
+																				<?php
+																			}
+																			?>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td>امضای الکترونیکی</td>
+																		<td>
+																			<?php
+																			$u_signature_url = user_get_media($u_id, 'u_signature');
+																			if($u_signature_url == ""){
+																				echo "موجود نیست!";
+																			}else{
+																				?>
+																				<a target="_blank" href="<?php echo user_get_media($u_id, 'u_signature'); ?>">مشاهده</a>
 																				<?php
 																			}
 																			?>

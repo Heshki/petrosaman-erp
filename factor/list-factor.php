@@ -35,9 +35,9 @@
 									<th>#</th>
 									<th>فاکتور</th>
 									<th>مشتری</th>
-									<th>اسکن پیش فاکتور</th>
+									<th>تایید مسول مالی</th>
 									<th>تایید ۱ مدیر</th>
-									<th>ارسال مشتری</th>
+									<th>تایید مسول فروش</th>
 									<th>تایید مشتری</th>
 									<th>اسناد تایید</th>
 									<th>تایید مالی</th>
@@ -56,6 +56,7 @@
 								$res = list_factor_body();
 								foreach ($res as $row) {
 									$fb_id = $row['fb_id'];
+									$f_id = $row['f_id'];
 									?>
 								<tr>
 									<td><?php echo per_number($i); ?></td>
@@ -63,13 +64,13 @@
 									<td><?php echo get_customer_name($row['c_id']); ?></td>
 									<td>
 									<?php
-									show_btn_list_factor($row['fb_pre_invoice_scan'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_pre_invoice_scan");
+									show_btn_list_factor($row['fb_pre_invoice_scan'], "confirm-factor.php?fb_id=" . $fb_id . "&f_id=" . $f_id . "&typee=fb_pre_invoice_scan");
 									?>
 									</td>
 									<td>
 									<?php
 									if($row['fb_pre_invoice_scan'] == 1){
-										show_btn_list_factor($row['fb_verify_admin1'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_verify_admin1");
+										show_btn_list_factor($row['fb_verify_admin1'], "confirm-factor.php?fb_id=" . $fb_id . "&f_id=" . $f_id . "&typee=fb_verify_admin1");
 									}else { ?>
 										<button class="btn btn-sm btn-dark" disabled>منتظر</button>
 									<?php
@@ -79,7 +80,7 @@
 									<td>
 									<?php
 									if($row['fb_verify_admin1'] == 1) {
-										show_btn_list_factor($row['fb_send_customer'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_send_customer");
+										show_btn_list_factor($row['fb_send_customer'], "confirm-factor.php?fb_id=" . $fb_id . "&f_id=" . $f_id . "&typee=fb_send_customer");
 									} else { ?>
 										<button class="btn btn-sm btn-dark" disabled>منتظر</button>
 									<?php
@@ -90,7 +91,7 @@
 									<td>
 									<?php
 									if($row['fb_send_customer'] == 1) {
-										show_btn_list_factor($row['fb_verify_customer'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_verify_customer");
+										show_btn_list_factor($row['fb_verify_customer'], "confirm-factor.php?fb_id=" . $fb_id . "&f_id=" . $f_id . "&typee=fb_verify_customer");
 									} else { ?>
 										<button class="btn btn-sm btn-dark" disabled>منتظر</button>
 									<?php

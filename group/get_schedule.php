@@ -406,6 +406,21 @@
 																	?>
 																</td>
 															</tr>
+															<tr>
+																<td>امضای الکترونیکی</td>
+																<td>
+																	<?php
+																	$u_signature_url = user_get_media($u_id, 'u_signature');
+																	if($u_signature_url == ""){
+																		echo "موجود نیست!";
+																	}else{
+																		?>
+																		<a target="_blank" href="<?php echo user_get_media($u_id, 'u_signature'); ?>">مشاهده</a>
+																		<?php
+																	}
+																	?>
+																</td>
+															</tr>
 														</table>
 													</div>
 												</div>
