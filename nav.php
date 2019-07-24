@@ -63,7 +63,7 @@
 			  		</ul>
 				</li>
 
-				<li class="<?php check_active('print-transfer-form.php'); check_active('list-storage.php'); check_active('input-store.php'); check_active('list-storage.php'); check_active('bar-list.php'); check_active('list-checkout.php'); ?> treeview">
+				<li class="<?php check_active('print-transfer-form.php'); check_active('input-store.php'); check_active('list-storage.php'); check_active('bar-list.php'); check_active('list-checkout.php'); ?> treeview">
 			  		<a href="#"><i class="fa fa-files-o"></i><span>انبار</span></a>
 			  		<ul class="treeview-menu">
 			  			<li class="<?php check_active('list-storage.php'); ?>"><a href="<?php get_url(); ?>storage/list-storage.php"><i class="fa fa-circle-o"></i>لیست حواله خروج</a></li>
