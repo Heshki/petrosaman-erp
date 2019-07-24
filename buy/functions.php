@@ -1,7 +1,4 @@
 <?php
-require_once"../include/data/functions.php";
-require_once"../product/functions.php";
-
 function load_factor_buy($f_id){
 	$sql = "select * from factor_buy where f_id = $f_id";
 	$res = get_select_query($sql); ?>
