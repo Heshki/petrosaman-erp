@@ -126,9 +126,7 @@
 														}
 														?>
 													</select>
-													<?php if(!(count($res1) > 0)){ ?>
 													<a class="btn btn-primary btn-sm" href="<?php echo get_url(); ?>driver/list-driver.php?cycle=factor">تعریف راننده جدید</a>
-													<?php } ?>
 													<input type="hidden" name="fb_id" id="fb_id" value="<?php echo $row['fb_id']; ?>"/>
 													<input type="submit" class="btn btn-success" name="tl_submit" value="ثبت">
 												</form>

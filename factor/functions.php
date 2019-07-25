@@ -1,6 +1,6 @@
 <?php
 function singed_pre_invoice_scan($fb_id) {
-	$sql = "select m_id, m_name from media where bu_id = $fb_id and m_type = 'pre_invoice_sale' and m_name_file = 'signed'";
+	$sql = "select m_id, m_name from media where bu_id = $fb_id and m_type = 'pre_invoice_sale' and m_name_file = 'check'";
 	$out = get_select_query($sql);
 	$c = count($out);
 	if($c>0){
@@ -23,12 +23,12 @@ function singed_pre_invoice_scan($fb_id) {
 		<?php
 	}
 	}else{
-		echo "<div class='alert alert-danger'>هیچ پیش فاکتوری در سیستم بارگزاری نشده است</div>";
+		echo "<div class='alert alert-danger'>موردی یافت نشد!</div>";
 	}
 }
 
 function show_singed_pre_invoice_scan($fb_id) {
-	$sql = "select m_id, m_name from media where bu_id = $fb_id and m_type = 'pre_invoice_sale' and m_name_file = 'signed'";
+	$sql = "select m_id, m_name from media where bu_id = $fb_id and m_type = 'pre_invoice_sale' and m_name_file = 'check'";
 	$out = get_select_query($sql);
 	$c = count($out);
 	if($c>0){
@@ -46,7 +46,7 @@ function show_singed_pre_invoice_scan($fb_id) {
 			<?php
 		}
 	}else{
-		echo "<div class='alert alert-danger'>هیچ پیش فاکتوری در سیستم بارگزاری نشده است</div>";
+		echo "<div class='alert alert-danger'>موردی یافت نشد!</div>";
 	}
 }
 
@@ -135,49 +135,14 @@ function load_factor_body($fb_id){
 <?php
 }
 
-function load_factor_body_fixer($f_id){
-	$res = get_factor_body_confirm_factor_fixer($f_id);
-	?>
-	<table class="table table-striped">
-		<thead>
-			<tr>
-				<th>ردیف</th>
-				<th>نام محصول</th>
-				<th>دسته بندی</th>
-				<th>مقدار</th>
-				<th>قیمت واحد</th>
-				<th>قیمت کل</th>
-			</tr>
-		</thead>
-		<tbody>
-			<?php
-			$i = 1;
-			foreach($res as $row){ ?>
-				<tr>
-					<td><?php echo per_number($i); ?></td>
-					<td><?php echo per_number($row['p_name']); ?></td>
-					<td><?php echo per_number($row['cat_name']); ?></td>
-					<td><?php echo per_number(number_format($row['fb_quantity'])); ?></td>
-					<td><?php echo per_number(number_format($row['fb_price'])); ?></td>
-					<td><?php echo per_number(number_format($row['fb_quantity'] * $row['fb_price'])); ?></td>
-				</tr>
-			<?php
-			$i++;
-			} ?>
-		</tbody>
-	</table>
-<?php
-}
-
-function load_factor_body_total_tabel($f_id){
-	$res = get_factor_body_confirm_factor_fixer($f_id);
+function load_factor_body_total_tabel($fb_id){
+	$res = get_factor_body_confirm_factor($fb_id);
 	$total = 0;
 	foreach($res as $row){
 		$total += ($row['fb_quantity'] * $row['fb_price']);
 	}
 	$tax = $total * (9/100);
-	$shipping = 10000000;
-	$final_price = $total + $shipping + $tax;
+	$final_price = $total + $tax;
 	?>
 	<div class="table-responsive">
 		<p>جمع</p>
@@ -189,10 +154,6 @@ function load_factor_body_total_tabel($f_id){
 			<tr>
 				<th>مالیات (<?php echo per_number('9'); ?> درصد):</th>
 				<td><?php echo per_number(number_format($tax)); ?> تومان</td>
-			</tr>
-			<tr>
-				<th>هزینه ارسال:</th>
-				<td><?php echo per_number(number_format($shipping)); ?> تومان</td>
 			</tr>
 			<tr>
 				<th>قابل پرداخت:</th>
@@ -278,12 +239,6 @@ function get_factor_body_confirm_factor($fb_id) {
 	return $res;
 }
 
-function get_factor_body_confirm_factor_fixer($f_id) {
-	$sql = "select * from factor_body inner join factor on factor.f_id = factor_body.f_id inner join customer on customer.c_id = factor.c_id inner join category on category.cat_id = factor_body.cat_id inner join product on product.p_id = factor_body.p_id where factor_body.f_id = $f_id";
-	$res = get_select_query($sql);
-	return $res;
-}
-
 function update_a_row_fb_factor($verify,$fb_id_verify) {
 	$sql = "update factor_body set $verify = '1' where fb_id = $fb_id_verify";
 	$res = ex_query($sql);
@@ -318,6 +273,34 @@ function show_btn_list_factor($st, $url){
 		<a href="<?php echo $url; ?>" class="btn btn-success btn-xs">بله</a>
 	<?php
 	}
+}
+
+function pre_factor_v2_header($fb_id){
+	$res = get_factor_body_confirm_factor($fb_id);
+	?>
+	<div class="row">
+		<div class="col-xs-12">
+			<h2 class="page-header">
+				<img src="<?php get_url(); ?>/dist/img/azar-logo.png">
+				<small class="pull-left">تاریخ: <?php if($res && isset($res[0]['f_date'])) echo per_number($res[0]['f_date']); ?></small>
+			</h2>
+		</div>
+	</div>
+	<div class="row invoice-info" dir="rtl">
+		<div class="col-sm-4 invoice-col invoice-col-fixer">
+			<strong>پیش فاکتور فروش شرکت</strong><br>
+			پتروسامان آذرتتیس<br>
+			<strong>آدرس دفتر: </strong><br>
+			<address></address>
+		</div>
+		<div class="col-sm-4 invoice-col invoice-col-fixer">
+			<strong>نام مشتری:‌</strong> <?php if($res && isset($res[0]['c_name']) && isset($res[0]['c_family'])) echo $res[0]['c_name'] . " " . $res[0]['c_family']; ?><br>
+			<strong>نام شرکت:</strong> <?php if($res && isset($res[0]['c_company'])) echo $res[0]['c_company']; ?><br>
+			<strong>آدرس دفتر: </strong><br>
+			<address><?php if($res && isset($res[0]['c_oaddress'])) echo $res[0]['c_oaddress']; ?></address>
+		</div>
+	</div>
+	<?php
 }
 
 ?>

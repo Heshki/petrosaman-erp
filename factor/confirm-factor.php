@@ -2,7 +2,6 @@
 <div class="content-wrapper">
 	<?php
 	if(isset($_GET['fb_id'])) $fb_id = $_GET['fb_id'];
-	if(isset($_GET['f_id'])) $f_id = $_GET['f_id'];
 	$type_confirm = $_GET['typee'];
 	if($type_confirm == 'fb_pre_invoice_scan') {
 		$echo_type = "تایید مسول مالی";
@@ -58,7 +57,7 @@
 
 	// MUST BE DELETED ?! //
 
-	if(isset($_POST['up_file_singed'])){
+	if(isset($_POST['up_file_check'])){
 		$type = $_POST['typee'];
 		$fb_id = $_POST['fb_id'];
 		$filename = $_FILES['fileToUpload']['name'];
@@ -66,11 +65,12 @@
 		$size = $_FILES['fileToUpload']['size'];
 		$m_name = upload_file($filename, $tmp_name, $size, $type, $fb_id);
 		$m_type = "pre_invoice_sale";
-		$m_name_file = "signed";
+		$m_name_file = "check";
 		if($m_name) {
 			$sql = "insert into media (m_name, m_type, m_name_file, bu_id) values ('$m_name', '$m_type', '$m_name_file', $fb_id)";
 			ex_query($sql);
 		}
+		echo "<meta http-equiv='refresh' content='0'/>";
 	}
 
 	if(isset($_POST['delete-img'])){
@@ -99,36 +99,15 @@
 			if($type_confirm == 'fb_pre_invoice_scan') { ?>
 				<form action="list-factor.php" method="post">
 					<section class="invoice" id="confirm-factor-print">
-						<div class="row">
-							<div class="col-xs-12">
-								<h2 class="page-header">
-									<img src="<?php get_url(); ?>/dist/img/azar-logo.png">
-									<small class="pull-left">تاریخ: <?php if($res && isset($res[0]['f_date'])) echo per_number($res[0]['f_date']); ?></small>
-								</h2>
-							</div>
-						</div>
-						<div class="row invoice-info" dir="rtl">
-							<div class="col-sm-4 invoice-col invoice-col-fixer">
-								<strong>پیش فاکتور فروش شرکت</strong><br>
-								پتروسامان آذرتتیس<br>
-								<strong>آدرس دفتر: </strong><br>
-								<address></address>
-							</div>
-							<div class="col-sm-4 invoice-col invoice-col-fixer">
-								<strong>نام مشتری:‌</strong> <?php if($res && isset($res[0]['c_name']) && isset($res[0]['c_family'])) echo $res[0]['c_name'] . " " . $res[0]['c_family']; ?><br>
-								<strong>نام شرکت:</strong> <?php if($res && isset($res[0]['c_company'])) echo $res[0]['c_company']; ?><br>
-								<strong>آدرس دفتر: </strong><br>
-								<address><?php if($res && isset($res[0]['c_oaddress'])) echo $res[0]['c_oaddress']; ?></address>
-							</div>
-						</div>
+						<?php pre_factor_v2_header($fb_id) ?>
 						<div class="row">
 							<div class="col-xs-12 table-responsive">
-								<?php load_factor_body_fixer($f_id); ?>
+								<?php load_factor_body($fb_id); ?>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-xs-4">
-								<?php load_factor_body_total_tabel($f_id); ?>
+								<?php load_factor_body_total_tabel($fb_id); ?>
 							</div>
 							<div class="col-xs-8">
 								<div class="table-responsive">
@@ -170,51 +149,27 @@
 			elseif($type_confirm == 'fb_verify_admin1') { ?>
 				<form action="list-factor.php" method="post">
 					<section class="invoice" id="confirm-factor-print">
-						<div class="row">
-							<div class="col-xs-12">
-								<h2 class="page-header">
-									<img src="<?php get_url(); ?>/dist/img/azar-logo.png">
-									<small class="pull-left">تاریخ: <?php if($res && isset($res[0]['f_date'])) echo per_number($res[0]['f_date']); ?></small>
-								</h2>
-							</div>
-						</div>
-						<div class="row invoice-info" dir="rtl">
-							<div class="col-sm-4 invoice-col invoice-col-fixer">
-								<strong>پیش فاکتور فروش شرکت</strong><br>
-								پتروسامان آذرتتیس<br>
-								<strong>آدرس دفتر: </strong><br>
-								<address></address>
-							</div>
-							<div class="col-sm-4 invoice-col invoice-col-fixer">
-								<strong>نام مشتری:‌</strong> <?php if($res && isset($res[0]['c_name']) && isset($res[0]['c_family'])) echo $res[0]['c_name'] . " " . $res[0]['c_family']; ?><br>
-								<strong>نام شرکت:</strong> <?php if($res && isset($res[0]['c_company'])) echo $res[0]['c_company']; ?><br>
-								<strong>آدرس دفتر: </strong><br>
-								<address><?php if($res && isset($res[0]['c_oaddress'])) echo $res[0]['c_oaddress']; ?></address>
-							</div>
-						</div>
+						<?php pre_factor_v2_header($fb_id) ?>
 						<div class="row">
 							<div class="col-xs-12 table-responsive">
-								<?php load_factor_body_fixer($f_id); ?>
+								<?php load_factor_body($fb_id); ?>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-xs-4">
-								<?php load_factor_body_total_tabel($f_id); ?>
+								<?php load_factor_body_total_tabel($fb_id); ?>
 							</div>
 							<div class="col-xs-8">
 								<div class="table-responsive">
 									<p>امضاها</p>
 									<table class="table table-bordered table-bordered-fixer">
-										<?php
-										$maliID = get_var_query("SELECT u_id FROM user WHERE u_level = 'مالی'");
-										?>
 										<tr>
 											<th style="width:33%">مسول مالی</th>
 											<th style="width:33%">مدیر</th>
 											<th style="width:34%">مسول فروش</th>
 										</tr>
 										<tr>
-											<td style="height:100px"><img src="<?php echo user_get_media($maliID, 'u_signature'); ?>"></td>
+											<td style="height:100px"><?php get_admin_signature(); ?></td>
 											<td style="height:100px"></td>
 											<td style="height:100px"></td>
 										</tr>
@@ -243,53 +198,28 @@
 			}else if($type_confirm=='fb_send_customer') { ?>
 				<form action="list-factor.php" method="post">
 					<section class="invoice" id="confirm-factor-print">
-						<div class="row">
-							<div class="col-xs-12">
-								<h2 class="page-header">
-									<img src="<?php get_url(); ?>/dist/img/azar-logo.png">
-									<small class="pull-left">تاریخ: <?php if($res && isset($res[0]['f_date'])) echo per_number($res[0]['f_date']); ?></small>
-								</h2>
-							</div>
-						</div>
-						<div class="row invoice-info" dir="rtl">
-							<div class="col-sm-4 invoice-col invoice-col-fixer">
-								<strong>پیش فاکتور فروش شرکت</strong><br>
-								پتروسامان آذرتتیس<br>
-								<strong>آدرس دفتر: </strong><br>
-								<address></address>
-							</div>
-							<div class="col-sm-4 invoice-col invoice-col-fixer">
-								<strong>نام مشتری:‌</strong> <?php if($res && isset($res[0]['c_name']) && isset($res[0]['c_family'])) echo $res[0]['c_name'] . " " . $res[0]['c_family']; ?><br>
-								<strong>نام شرکت:</strong> <?php if($res && isset($res[0]['c_company'])) echo $res[0]['c_company']; ?><br>
-								<strong>آدرس دفتر: </strong><br>
-								<address><?php if($res && isset($res[0]['c_oaddress'])) echo $res[0]['c_oaddress']; ?></address>
-							</div>
-						</div>
+						<?php pre_factor_v2_header($fb_id) ?>
 						<div class="row">
 							<div class="col-xs-12 table-responsive">
-								<?php load_factor_body_fixer($f_id); ?>
+								<?php load_factor_body($fb_id);; ?>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-xs-4">
-								<?php load_factor_body_total_tabel($f_id); ?>
+								<?php load_factor_body_total_tabel($fb_id); ?>
 							</div>
 							<div class="col-xs-8">
 								<div class="table-responsive">
 									<p>امضاها</p>
 									<table class="table table-bordered table-bordered-fixer">
-										<?php
-										$maliID = get_var_query("SELECT u_id FROM user WHERE u_level = 'مالی'");
-										$modirID = get_var_query("SELECT u_id FROM user WHERE u_level = 'مالی'");
-										?>
 										<tr>
 											<th style="width:33%">مسول مالی</th>
 											<th style="width:33%">مدیر</th>
 											<th style="width:34%">مسول فروش</th>
 										</tr>
 										<tr>
-											<td style="height:100px"><img src="<?php echo user_get_media($maliID, 'u_signature'); ?>"></td>
-											<td style="height:100px"><img src="<?php echo user_get_media($modirID, 'u_signature'); ?>"></td>
+											<td style="height:100px"><?php get_financial_signature(); ?></td>
+											<td style="height:100px"><?php get_admin_signature(); ?></td>
 											<td style="height:100px"></td>
 										</tr>
 									</table>
@@ -317,55 +247,29 @@
 			}else if($type_confirm == 'fb_verify_customer') { ?>
 				<form action="list-factor.php" method="post">
 					<section class="invoice" id="confirm-factor-print">
-						<div class="row">
-							<div class="col-xs-12">
-								<h2 class="page-header">
-									<img src="<?php get_url(); ?>/dist/img/azar-logo.png">
-									<small class="pull-left">تاریخ: <?php if($res && isset($res[0]['f_date'])) echo per_number($res[0]['f_date']); ?></small>
-								</h2>
-							</div>
-						</div>
-						<div class="row invoice-info" dir="rtl">
-							<div class="col-sm-4 invoice-col invoice-col-fixer">
-								<strong>پیش فاکتور فروش شرکت</strong><br>
-								پتروسامان آذرتتیس<br>
-								<strong>آدرس دفتر: </strong><br>
-								<address></address>
-							</div>
-							<div class="col-sm-4 invoice-col invoice-col-fixer">
-								<strong>نام مشتری:‌</strong> <?php if($res && isset($res[0]['c_name']) && isset($res[0]['c_family'])) echo $res[0]['c_name'] . " " . $res[0]['c_family']; ?><br>
-								<strong>نام شرکت:</strong> <?php if($res && isset($res[0]['c_company'])) echo $res[0]['c_company']; ?><br>
-								<strong>آدرس دفتر: </strong><br>
-								<address><?php if($res && isset($res[0]['c_oaddress'])) echo $res[0]['c_oaddress']; ?></address>
-							</div>
-						</div>
+						<?php pre_factor_v2_header($fb_id) ?>
 						<div class="row">
 							<div class="col-xs-12 table-responsive">
-								<?php load_factor_body_fixer($f_id); ?>
+								<?php load_factor_body($fb_id); ?>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-xs-4">
-								<?php load_factor_body_total_tabel($f_id); ?>
+								<?php load_factor_body_total_tabel($fb_id); ?>
 							</div>
 							<div class="col-xs-8">
 								<div class="table-responsive">
 									<p>امضاها</p>
 									<table class="table table-bordered table-bordered-fixer">
-										<?php
-										$maliID = get_var_query("SELECT u_id FROM user WHERE u_level = 'مالی'");
-										$modirID = get_var_query("SELECT u_id FROM user WHERE u_level = 'مالی'");
-										$foroshID = get_var_query("SELECT u_id FROM user WHERE u_level = 'فروش'");
-										?>
 										<tr>
 											<th style="width:33%">مسول مالی</th>
 											<th style="width:33%">مدیر</th>
 											<th style="width:34%">مسول فروش</th>
 										</tr>
 										<tr>
-											<td style="height:100px"><img src="<?php echo user_get_media($maliID, 'u_signature'); ?>"></td>
-											<td style="height:100px"><img src="<?php echo user_get_media($modirID, 'u_signature'); ?>"></td>
-											<td style="height:100px"><img src="<?php echo user_get_media($foroshID, 'u_signature'); ?>"></td>
+											<td style="height:100px"><?php get_financial_signature(); ?></td>
+											<td style="height:100px"><?php get_admin_signature(); ?></td>
+											<td style="height:100px"><?php get_selling_signature(); ?></td>
 										</tr>
 									</table>
 								</div>
@@ -390,187 +294,378 @@
 				</form>
 			<?php
 			}else if($type_confirm == 'fb_verify_docs') { ?>
-				<form action="" method="post" enctype="multipart/form-data">
+				<section class="invoice" id="confirm-factor-print">
+					<?php pre_factor_v2_header($fb_id) ?>
 					<div class="row">
-						<div class="col-md-6">
-							<h4>بارگزاری پیش فاکتور اسکن شده (امضا شده توسط مشتری و تایید شده توسط واحد اسناد)</h4><br>
-							<input type="file" accept="image/*" onchange="loadFile(event)" name="fileToUpload" id="verify_file"><br>
-							<input type="hidden" name="typee" value="invoice">
-							<input type="hidden" name="fb_id" value="<?php echo $_GET['fb_id']; ?>">
-							<button type="submit" class="btn btn-success" name="up_file_singed">بارگزاری فایل</button>
-						</div>
-						<div class="col-md-6">
-							<img class="img-responsive" id="output">
+						<div class="col-xs-12 table-responsive">
+							<?php load_factor_body($fb_id); ?>
 						</div>
 					</div>
-				</form>
-				<hr>
-				<div class="row">
-					<div class="col-md-12">
-						<h4>نمایش پیش  فاکتور اسکن شده (امضا شده توسط مشتری وتایید شده توسط واحد اسناد)</h4>
-						<?php singed_pre_invoice_scan($fb_id); ?>
+					<div class="row">
+						<div class="col-xs-4">
+							<?php load_factor_body_total_tabel($fb_id); ?>
+						</div>
+						<div class="col-xs-8">
+							<div class="table-responsive">
+								<p>امضاها</p>
+								<table class="table table-bordered table-bordered-fixer">
+									<tr>
+										<th style="width:33%">مسول مالی</th>
+										<th style="width:33%">مدیر</th>
+										<th style="width:34%">مسول فروش</th>
+									</tr>
+									<tr>
+										<td style="height:100px"><?php get_financial_signature(); ?></td>
+										<td style="height:100px"><?php get_admin_signature(); ?></td>
+										<td style="height:100px"><?php get_selling_signature(); ?></td>
+									</tr>
+								</table>
+							</div>
+						</div>
 					</div>
-				</div>
+				</section>
+				<section class="invoice">
+					<div class="row">
+						<form action="" method="post" enctype="multipart/form-data">
+							<div class="col-md-6 invoice-col invoice-col-fixer">
+								<h4>بارگزاری اسکن چک/سفته ها</h4><br>
+								<input type="file" accept="image/*" onchange="loadFile(event)" name="fileToUpload" id="verify_file"><br>
+								<input type="hidden" name="typee" value="invoice">
+								<input type="hidden" name="fb_id" value="<?php echo $_GET['fb_id']; ?>">
+								<button type="submit" class="btn btn-success" name="up_file_check">بارگزاری فایل</button>
+							</div>
+							<div class="col-md-6 invoice-col invoice-col-fixer">
+								<img class="img-responsive" id="output">
+							</div>
+						</form>
+					</div>
+					<div class="row">
+						<div class="col-md-12 invoice-col invoice-col-fixer">
+							<h4>نمایش چک/سفته ها</h4>
+							<?php singed_pre_invoice_scan($fb_id); ?>
+						</div>
+					</div>
+					<div class="row">
+						<form action="list-factor.php" method="post">
+							<div class="col-xs-12 invoice-col invoice-col-fixer">
+								<textarea class="form-control" name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50"></textarea>
+								<input type="hidden" name="fb_id" value="<?php echo $fb_id; ?>">
+								<input type="hidden" name="type_confirm" id="type_confirm" value="<?php echo $type_confirm; ?>">
+							</div>
+							<div class="col-xs-12 invoice-col invoice-col-fixer">
+								<button type="submit" class="btn btn-success" name="verify_submit" id="verify_submit">تایید</button>
+								<a href="list-factor.php" class="btn btn-primary">بازگشت</a>
+							</div>
+						</form>
+					</div>
+				</section>
 				<script>
 					var loadFile = function(event) {
 						var output = document.getElementById('output');
 						output.src = URL.createObjectURL(event.target.files[0]);
 					};
 				</script>
-				<form action="list-factor.php" method="post">
-					<div class="col-xs-12">
-						<textarea class="form-control" name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50"></textarea>
-						<input type="hidden" name="fb_id" value="<?php echo $fb_id; ?>">
-						<input type="hidden" name="type_confirm" id="type_confirm" value="<?php echo $type_confirm; ?>">
-					</div>
-					<div class="col-xs-12">
-						<p>ثبت اسناد عزیز صورتی که فاکتور مورد تایید شما میباشد کلید تایید را بزنید.</p>
-						<button type="submit" class="btn btn-success" name="verify_submit" id="verify_submit">تایید</button>
-						<a href="list-factor.php" class="btn btn-danger">خیر</a>
-					</div>
-				</form>
 			<?php
 			}elseif ($type_confirm == 'fb_verify_finan') { ?>
-				<form action="list-factor.php" method="post">
+				<section class="invoice" id="confirm-factor-print">
+					<?php pre_factor_v2_header($fb_id) ?>
 					<div class="row">
-						<div class="col-md-12">
-							<h4>نمایش پیش  فاکتور اسکن شده</h4>
+						<div class="col-xs-12 table-responsive">
+							<?php load_factor_body($fb_id); ?>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-4">
+							<?php load_factor_body_total_tabel($fb_id); ?>
+						</div>
+						<div class="col-xs-8">
+							<div class="table-responsive">
+								<p>امضاها</p>
+								<table class="table table-bordered table-bordered-fixer">
+									<tr>
+										<th style="width:33%">مسول مالی</th>
+										<th style="width:33%">مدیر</th>
+										<th style="width:34%">مسول فروش</th>
+									</tr>
+									<tr>
+										<td style="height:100px"><?php get_financial_signature(); ?></td>
+										<td style="height:100px"><?php get_admin_signature(); ?></td>
+										<td style="height:100px"><?php get_selling_signature(); ?></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</section>
+				<section class="invoice">
+					<div class="row">
+						<div class="col-md-12 invoice-col invoice-col-fixer">
+							<h4>نمایش چک/سفته ها</h4>
 							<?php show_singed_pre_invoice_scan($fb_id); ?>
 						</div>
 					</div>
-					<div class="col-xs-12">
-						<textarea class="form-control" name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50"></textarea>
-						<input type="hidden" name="fb_id" value="<?php echo $fb_id; ?>">
-						<input type="hidden" name="type_confirm" id="type_confirm" value="<?php echo $type_confirm; ?>">
+					<div class="row">
+						<form action="list-factor.php" method="post">
+							<div class="col-xs-12 invoice-col invoice-col-fixer">
+								<textarea class="form-control" name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50"></textarea>
+								<input type="hidden" name="fb_id" value="<?php echo $fb_id; ?>">
+								<input type="hidden" name="type_confirm" id="type_confirm" value="<?php echo $type_confirm; ?>">
+							</div>
+							<div class="col-xs-12 invoice-col invoice-col-fixer">
+								<button type="submit" class="btn btn-success" name="verify_submit" id="verify_submit">تایید</button>
+								<a href="list-factor.php" class="btn btn-primary">بازگشت</a>
+							</div>
+						</form>
 					</div>
-					<div class="col-xs-12">
-						<p>مسيول مالی عزیز در صورتی که فاکتور مورد تایید شما میباشد کلید تایید را بزنید.</p>
-						<button type="submit" class="btn btn-success" name="verify_submit" id="verify_submit">تایید</button>
-						<a href="list-factor.php" class="btn btn-danger">خیر</a>
-					</div>
-				</form>
+				</section>
 			<?php
 			}elseif ($type_confirm == 'fb_verify_admin2') { ?>
-				<form action="list-factor.php" method="post">
+				<section class="invoice" id="confirm-factor-print">
+					<?php pre_factor_v2_header($fb_id) ?>
 					<div class="row">
-						<div class="col-md-12">
-							<h4>نمایش پیش  فاکتور اسکن شده</h4>
+						<div class="col-xs-12 table-responsive">
+							<?php load_factor_body($fb_id); ?>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-4">
+							<?php load_factor_body_total_tabel($fb_id); ?>
+						</div>
+						<div class="col-xs-8">
+							<div class="table-responsive">
+								<p>امضاها</p>
+								<table class="table table-bordered table-bordered-fixer">
+									<tr>
+										<th style="width:33%">مسول مالی</th>
+										<th style="width:33%">مدیر</th>
+										<th style="width:34%">مسول فروش</th>
+									</tr>
+									<tr>
+										<td style="height:100px"><?php get_financial_signature(); ?></td>
+										<td style="height:100px"><?php get_admin_signature(); ?></td>
+										<td style="height:100px"><?php get_selling_signature(); ?></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</section>
+				<section class="invoice">
+					<div class="row">
+						<div class="col-md-12 invoice-col invoice-col-fixer">
+							<h4>نمایش چک/سفته ها</h4>
 							<?php show_singed_pre_invoice_scan($fb_id); ?>
 						</div>
 					</div>
-					<div class="col-xs-12">
-						<textarea class="form-control" name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50"></textarea>
-						<input type="hidden" name="fb_id" value="<?php echo $fb_id; ?>">
-						<input type="hidden" name="type_confirm" id="type_confirm" value="<?php echo $type_confirm; ?>">
-					</div>
-					<div class="col-xs-12">
-						<p>جناب مدیر در صورتی که فاکتور مورد تایید شما میباشد کلید تایید را بزنید.</p>
-						<button type="submit" class="btn btn-success" name="verify_submit" id="verify_submit">تایید</button>
-						<a href="list-factor.php" class="btn btn-danger">خیر</a>
-					</div>
-				</form>
-			<?php
-			}else if($type_confirm=='fb_wait_bar'){ ?>
-				<form action="list-factor.php" method="post">
 					<div class="row">
-						<div class="col-md-12">
-							<h4>نمایش پیش  فاکتور اسکن شده</h4>
-							<?php show_singed_pre_invoice_scan($fb_id); ?>
-						</div>
+						<form action="list-factor.php" method="post">
+							<div class="col-xs-12 invoice-col invoice-col-fixer">
+								<textarea class="form-control" name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50"></textarea>
+								<input type="hidden" name="fb_id" value="<?php echo $fb_id; ?>">
+								<input type="hidden" name="type_confirm" id="type_confirm" value="<?php echo $type_confirm; ?>">
+							</div>
+							<div class="col-xs-12 invoice-col invoice-col-fixer">
+								<button type="submit" class="btn btn-success" name="verify_submit" id="verify_submit">تایید</button>
+								<a href="list-factor.php" class="btn btn-primary">بازگشت</a>
+							</div>
+						</form>
 					</div>
-					<div class="col-xs-12">
-						<textarea class="form-control" name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50"></textarea>
-						<input type="hidden" name="fb_id" value="<?php echo $fb_id; ?>">
-						<input type="hidden" name="type_confirm" id="type_confirm" value="<?php echo $type_confirm; ?>">
-					</div>
-					<div class="col-xs-12">
-						<p>مسيول انبار عزیز در صورتی که فاکتور مورد تایید شما میباشد کلید تایید را بزنید.</p>
-						<button type="submit" class="btn btn-success" name="verify_submit" id="verify_submit">تایید</button>
-						<a href="list-factor.php" class="btn btn-danger">خیر</a>
-					</div>
-				</form>
+				</section>
 			<?php
 			}elseif ($type_confirm == 'fb_ready_bar') { ?>
 				<form action="list-factor.php" method="post">
-					<div class="row">
-						<div class="col-md-12">
-							<h4>نمایش پیش  فاکتور اسکن شده</h4>
-							<?php show_singed_pre_invoice_scan($fb_id); ?>
+					<section class="invoice" id="confirm-factor-print">
+						<?php pre_factor_v2_header($fb_id) ?>
+						<div class="row">
+							<div class="col-xs-12 table-responsive">
+								<?php load_factor_body($fb_id); ?>
+							</div>
 						</div>
-					</div>
-					<div class="col-xs-12">
-						<textarea class="form-control" name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50"></textarea>
-						<input type="hidden" name="fb_id" value="<?php echo $fb_id; ?>">
-						<input type="hidden" name="type_confirm" id="type_confirm" value="<?php echo $type_confirm; ?>">
-					</div>
-					<div class="col-xs-12">
-						<p>مسيول انبار عزیز در صورتی که فاکتور مورد تایید شما میباشد کلید تایید را بزنید.</p>
-						<input type="text" name="verify"  id="verify" class="hidden">
-						<button type="submit" class="btn btn-success" name="verify_submit" id="verify_submit">تایید</button>
-						<a href="list-factor.php" class="btn btn-danger">خیر</a>
-					</div>
+						<div class="row">
+							<div class="col-xs-4">
+								<?php load_factor_body_total_tabel($fb_id); ?>
+							</div>
+							<div class="col-xs-8">
+								<div class="table-responsive">
+									<p>امضاها</p>
+									<table class="table table-bordered table-bordered-fixer">
+										<tr>
+											<th style="width:33%">مسول مالی</th>
+											<th style="width:33%">مدیر</th>
+											<th style="width:34%">مسول فروش</th>
+										</tr>
+										<tr>
+											<td style="height:100px"><?php get_financial_signature(); ?></td>
+											<td style="height:100px"><?php get_admin_signature(); ?></td>
+											<td style="height:100px"><?php get_selling_signature(); ?></td>
+										</tr>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div class="row no-print">
+							<div class="col-xs-12 invoice-col invoice-col-fixer">
+								<button type="button" class="btn btn-default pull-right" id="confirm-factor-printer"><i class="fa fa-print"></i> چاپ پیش فاکتور</button>
+								<button class="btn btn-warning pull-right" style="margin-right: 5px;"><i class="fa fa-download"></i> ساختن PDF</button>
+							</div>
+							<div class="col-xs-12 invoice-col invoice-col-fixer">
+								<textarea class="form-control" name="l_details" placeholder="توضیحات لازم را اینجا بنویسید..." rows="4" cols="50"></textarea>
+							</div>
+							<div class="col-xs-12 invoice-col invoice-col-fixer">
+								<input type="hidden" name="fb_id" value="<?php echo $fb_id; ?>">
+								<input type="hidden" name="type_confirm" value="<?php echo $type_confirm; ?>">
+								<button type="submit" class="btn btn-success pull-right" name="verify_submit" id="verify_submit">تایید</button>
+								<a href="<?php get_view("factor"); ?>list-factor.php" style="margin-right: 5px;" class="btn btn-primary pull-right">بازگشت</a>
+							</div>
+						</div>
+					</section>
 				</form>
 			<?php
 			}elseif ($type_confirm == 'fb_get_sample') { ?>
 				<form action="list-factor.php" method="post">
-					<div class="row">
-						<div class="col-md-12">
-							<h4>نمایش پیش  فاکتور اسکن شده</h4>
-							<?php show_singed_pre_invoice_scan($fb_id); ?>
+					<section class="invoice" id="confirm-factor-print">
+						<?php pre_factor_v2_header($fb_id) ?>
+						<div class="row">
+							<div class="col-xs-12 table-responsive">
+								<?php load_factor_body($fb_id); ?>
+							</div>
 						</div>
-					</div>
-					<div class="col-xs-12">
-						<textarea class="form-control" name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50"></textarea>
-						<input type="hidden" name="fb_id" value="<?php echo $fb_id; ?>">
-						<input type="hidden" name="type_confirm" id="type_confirm" value="<?php echo $type_confirm; ?>">
-					</div>
-					<div class="col-xs-12">
-						<p>مسيول آزمایشگاه عزیز در صورتی که فاکتور مورد تایید شما میباشد کلید تایید را بزنید.</p>
-						<button type="submit" class="btn btn-success" name="verify_submit" id="verify_submit">تایید</button>
-						<a href="list-factor.php" class="btn btn-danger">خیر</a>
-					</div>
+						<div class="row">
+							<div class="col-xs-4">
+								<?php load_factor_body_total_tabel($fb_id); ?>
+							</div>
+							<div class="col-xs-8">
+								<div class="table-responsive">
+									<p>امضاها</p>
+									<table class="table table-bordered table-bordered-fixer">
+										<tr>
+											<th style="width:33%">مسول مالی</th>
+											<th style="width:33%">مدیر</th>
+											<th style="width:34%">مسول فروش</th>
+										</tr>
+										<tr>
+											<td style="height:100px"><?php get_financial_signature(); ?></td>
+											<td style="height:100px"><?php get_admin_signature(); ?></td>
+											<td style="height:100px"><?php get_selling_signature(); ?></td>
+										</tr>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div class="row no-print">
+							<div class="col-xs-12 invoice-col invoice-col-fixer">
+								<button type="button" class="btn btn-default pull-right" id="confirm-factor-printer"><i class="fa fa-print"></i> چاپ پیش فاکتور</button>
+								<button class="btn btn-warning pull-right" style="margin-right: 5px;"><i class="fa fa-download"></i> ساختن PDF</button>
+							</div>
+							<div class="col-xs-12 invoice-col invoice-col-fixer">
+								<textarea class="form-control" name="l_details" placeholder="توضیحات لازم را اینجا بنویسید..." rows="4" cols="50"></textarea>
+							</div>
+							<div class="col-xs-12 invoice-col invoice-col-fixer">
+								<input type="hidden" name="fb_id" value="<?php echo $fb_id; ?>">
+								<input type="hidden" name="type_confirm" value="<?php echo $type_confirm; ?>">
+								<button type="submit" class="btn btn-success pull-right" name="verify_submit" id="verify_submit">تایید</button>
+								<a href="<?php get_view("factor"); ?>list-factor.php" style="margin-right: 5px;" class="btn btn-primary pull-right">بازگشت</a>
+							</div>
+						</div>
+					</section>
 				</form>
 			<?php
 			}elseif ($type_confirm == 'fb_verify_bar') { ?>
 				<form action="list-factor.php" method="post">
-					<div class="row">
-						<div class="col-md-12">
-							<h4>نمایش پیش  فاکتور اسکن شده</h4>
-							<?php show_singed_pre_invoice_scan($fb_id); ?>
+					<section class="invoice" id="confirm-factor-print">
+						<?php pre_factor_v2_header($fb_id) ?>
+						<div class="row">
+							<div class="col-xs-12 table-responsive">
+								<?php load_factor_body($fb_id); ?>
+							</div>
 						</div>
-					</div>
-					<div class="col-xs-12">
-						<textarea class="form-control" name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50"></textarea>
-						<input type="hidden" name="fb_id" value="<?php echo $fb_id; ?>">
-						<input type="hidden" name="type_confirm" id="type_confirm" value="<?php echo $type_confirm; ?>">
-					</div>
-					<div class="col-xs-12">
-						<p>مسيول انبار عزیز در صورتی که فاکتور مورد تایید شما میباشد کلید تایید را بزنید.</p>
-						<button type="submit" class="btn btn-success" name="verify_submit" id="verify_submit">تایید</button>
-						<a href="list-factor.php" class="btn btn-danger">خیر</a>
-					</div>
+						<div class="row">
+							<div class="col-xs-4">
+								<?php load_factor_body_total_tabel($fb_id); ?>
+							</div>
+							<div class="col-xs-8">
+								<div class="table-responsive">
+									<p>امضاها</p>
+									<table class="table table-bordered table-bordered-fixer">
+										<tr>
+											<th style="width:33%">مسول مالی</th>
+											<th style="width:33%">مدیر</th>
+											<th style="width:34%">مسول فروش</th>
+										</tr>
+										<tr>
+											<td style="height:100px"><?php get_financial_signature(); ?></td>
+											<td style="height:100px"><?php get_admin_signature(); ?></td>
+											<td style="height:100px"><?php get_selling_signature(); ?></td>
+										</tr>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div class="row no-print">
+							<div class="col-xs-12 invoice-col invoice-col-fixer">
+								<button type="button" class="btn btn-default pull-right" id="confirm-factor-printer"><i class="fa fa-print"></i> چاپ پیش فاکتور</button>
+								<button class="btn btn-warning pull-right" style="margin-right: 5px;"><i class="fa fa-download"></i> ساختن PDF</button>
+							</div>
+							<div class="col-xs-12 invoice-col invoice-col-fixer">
+								<textarea class="form-control" name="l_details" placeholder="توضیحات لازم را اینجا بنویسید..." rows="4" cols="50"></textarea>
+							</div>
+							<div class="col-xs-12 invoice-col invoice-col-fixer">
+								<input type="hidden" name="fb_id" value="<?php echo $fb_id; ?>">
+								<input type="hidden" name="type_confirm" value="<?php echo $type_confirm; ?>">
+								<button type="submit" class="btn btn-success pull-right" name="verify_submit" id="verify_submit">تایید</button>
+								<a href="<?php get_view("factor"); ?>list-factor.php" style="margin-right: 5px;" class="btn btn-primary pull-right">بازگشت</a>
+							</div>
+						</div>
+					</section>
 				</form>
 			<?php
 			}elseif ($type_confirm == 'fb_exit_doc') { ?>
 				<form action="list-factor.php" method="post">
-					<div class="row">
-						<div class="col-md-12">
-							<h4>نمایش پیش  فاکتور اسکن شده</h4>
-							<?php show_singed_pre_invoice_scan($fb_id); ?>
+					<section class="invoice" id="confirm-factor-print">
+						<?php pre_factor_v2_header($fb_id) ?>
+						<div class="row">
+							<div class="col-xs-12 table-responsive">
+								<?php load_factor_body($fb_id); ?>
+							</div>
 						</div>
-					</div>
-					<div class="col-xs-12">
-						<textarea class="form-control" name="l_details" id="l_details" placeholder="توضیحات لازم را اینجا بنویسید ..." rows="4" cols="50"></textarea>
-						<input type="hidden" name="fb_id" value="<?php echo $fb_id; ?>">
-						<input type="hidden" name="type_confirm" id="type_confirm" value="<?php echo $type_confirm; ?>">
-					</div>
-					<input type="text" name="verify" id="verify" class="hidden" value="<?php echo $type_confirm; ?>">
-					<input type="text" name="fb_id" class="hidden" value="<?php echo $fb_id; ?>">
-					<div class="col-xs-12">
-						<p>نگهبانی عزیز در صورتی که فاکتور مورد تایید شما میباشد کلید تایید را بزنید.</p>
-						<button type="submit" class="btn btn-success" name="verify_submit" id="verify_submit">تایید</button>
-						<a href="list-factor.php" class="btn btn-danger">خیر</a>
-					</div>
+						<div class="row">
+							<div class="col-xs-4">
+								<?php load_factor_body_total_tabel($fb_id); ?>
+							</div>
+							<div class="col-xs-8">
+								<div class="table-responsive">
+									<p>امضاها</p>
+									<table class="table table-bordered table-bordered-fixer">
+										<tr>
+											<th style="width:33%">مسول مالی</th>
+											<th style="width:33%">مدیر</th>
+											<th style="width:34%">مسول فروش</th>
+										</tr>
+										<tr>
+											<td style="height:100px"><?php get_financial_signature(); ?></td>
+											<td style="height:100px"><?php get_admin_signature(); ?></td>
+											<td style="height:100px"><?php get_selling_signature(); ?></td>
+										</tr>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div class="row no-print">
+							<div class="col-xs-12 invoice-col invoice-col-fixer">
+								<button type="button" class="btn btn-default pull-right" id="confirm-factor-printer"><i class="fa fa-print"></i> چاپ پیش فاکتور</button>
+								<button class="btn btn-warning pull-right" style="margin-right: 5px;"><i class="fa fa-download"></i> ساختن PDF</button>
+							</div>
+							<div class="col-xs-12 invoice-col invoice-col-fixer">
+								<textarea class="form-control" name="l_details" placeholder="توضیحات لازم را اینجا بنویسید..." rows="4" cols="50"></textarea>
+							</div>
+							<div class="col-xs-12 invoice-col invoice-col-fixer">
+								<input type="hidden" name="fb_id" value="<?php echo $fb_id; ?>">
+								<input type="hidden" name="type_confirm" value="<?php echo $type_confirm; ?>">
+								<button type="submit" class="btn btn-success pull-right" name="verify_submit" id="verify_submit">تایید</button>
+								<a href="<?php get_view("factor"); ?>list-factor.php" style="margin-right: 5px;" class="btn btn-primary pull-right">بازگشت</a>
+							</div>
+						</div>
+					</section>
 				</form>
 			<?php
 			}

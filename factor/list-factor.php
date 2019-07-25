@@ -64,13 +64,13 @@
 									<td><?php echo get_customer_name($row['c_id']); ?></td>
 									<td>
 									<?php
-									show_btn_list_factor($row['fb_pre_invoice_scan'], "confirm-factor.php?fb_id=" . $fb_id . "&f_id=" . $f_id . "&typee=fb_pre_invoice_scan");
+									show_btn_list_factor($row['fb_pre_invoice_scan'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_pre_invoice_scan");
 									?>
 									</td>
 									<td>
 									<?php
 									if($row['fb_pre_invoice_scan'] == 1){
-										show_btn_list_factor($row['fb_verify_admin1'], "confirm-factor.php?fb_id=" . $fb_id . "&f_id=" . $f_id . "&typee=fb_verify_admin1");
+										show_btn_list_factor($row['fb_verify_admin1'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_verify_admin1");
 									}else { ?>
 										<button class="btn btn-sm btn-dark" disabled>منتظر</button>
 									<?php
@@ -80,7 +80,7 @@
 									<td>
 									<?php
 									if($row['fb_verify_admin1'] == 1) {
-										show_btn_list_factor($row['fb_send_customer'], "confirm-factor.php?fb_id=" . $fb_id . "&f_id=" . $f_id . "&typee=fb_send_customer");
+										show_btn_list_factor($row['fb_send_customer'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_send_customer");
 									} else { ?>
 										<button class="btn btn-sm btn-dark" disabled>منتظر</button>
 									<?php
@@ -91,7 +91,7 @@
 									<td>
 									<?php
 									if($row['fb_send_customer'] == 1) {
-										show_btn_list_factor($row['fb_verify_customer'], "confirm-factor.php?fb_id=" . $fb_id . "&f_id=" . $f_id . "&typee=fb_verify_customer");
+										show_btn_list_factor($row['fb_verify_customer'], "confirm-factor.php?fb_id=" . $fb_id . "&typee=fb_verify_customer");
 									} else { ?>
 										<button class="btn btn-sm btn-dark" disabled>منتظر</button>
 									<?php
@@ -112,7 +112,7 @@
 									<?php
 									$fb_id = $row['fb_id'];
 									$m_type = "pre_invoice_sale";
-									$m_name_file = "signed";
+									$m_name_file = "check";
 									$sql = "select * from media where bu_id = $fb_id and m_type = '$m_type' and m_name_file = '$m_name_file'";
 									$ok = count(get_select_query($sql));
 									if($row['fb_verify_docs'] == 1 && $ok >= 1) {

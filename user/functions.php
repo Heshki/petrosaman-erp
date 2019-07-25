@@ -169,3 +169,18 @@ function get_mobiles_by_type($type){
 	}
 	return $mobile_array;
 }
+
+function get_financial_signature(){
+	$financialID = get_var_query("SELECT u_id FROM user WHERE u_level = 'مالی'");
+	?><img src="<?php echo user_get_media($financialID, 'u_signature'); ?>"><?php
+}
+
+function get_admin_signature(){
+	$modirID = get_var_query("SELECT u_id FROM user WHERE u_level = 'مدیر'");
+	?><img src="<?php echo user_get_media($modirID, 'u_signature'); ?>"><?php
+}
+
+function get_selling_signature(){
+	$sellingID = get_var_query("SELECT u_id FROM user WHERE u_level = 'فروش'");
+	?><img src="<?php echo user_get_media($sellingID, 'u_signature'); ?>"><?php
+}
